@@ -1,0 +1,44 @@
+
+achaea/__init__.py:
+    change how client connects by changing the connection to a queue
+    make aliases and triggers compiled
+    make triggers check to see if they're multilined
+    make triggers check to see if they should be searched or matched
+
+
+
+
+connection_manager.py:
+
+    connects to server
+    handles I/O
+        stuff from server goes to server_input_queue
+        reads from user_input_queue sends it to the server
+    loop forever until the server disconnected
+
+
+achaea.py:
+
+    goes through supplied list of modules to initialize:
+        aliases
+        triggers
+        timers
+        variables
+    handles I/O on the local side
+        reads stdin
+            checks aliases
+            puts stuff in user_input_queue
+        reads server_input_queue
+            checks triggers
+            dumps output to specified output_file_handle (stdout or some file)
+        reads server_gmcp_input_queue
+
+
+main.py:
+
+    create queues:
+        server_input_queue
+        user_input_queue
+    startup the connection_manager.py I/O stuff
+    startup achaea.py I/O stuff
+
