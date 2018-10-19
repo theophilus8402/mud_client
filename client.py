@@ -6,9 +6,11 @@ import sys
 
 from contextlib import suppress
 
+from achaea import Achaea
+from achaea.client import send
 from telnet_manager import handle_telnet
 
-def reader(file_handle, queue):
+def reader(file_handle, client, queue):
 
     # note!  This is more on the "client" side
     # in that I should be handling aliases and what not
@@ -17,7 +19,9 @@ def reader(file_handle, queue):
     # to send stuff to the server
 
     data = file_handle.readline()
-    queue.put_nowait(data)
+    if not client.handle_aliases(data):
+        send(data)
+    # else assume msgs are sent as needed
 
 
 async def handle_from_server_queue(from_server_queue):
@@ -34,8 +38,10 @@ if __name__ == "__main__":
 
     event_loop = asyncio.get_event_loop()
 
+    client = Achaea()
+
     # handle reading stdin
-    event_loop.add_reader(sys.stdin, reader, sys.stdin, msg_queue)
+    event_loop.add_reader(sys.stdin, reader, sys.stdin, client, msg_queue)
 
     #host = "127.0.0.1"
     #port = 8888
