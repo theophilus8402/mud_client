@@ -1,5 +1,17 @@
 
-testing a change with git stuff
+create a function for adding triggers
+replace a line
+    set_line(new_line)
+delete a line
+    delete_line()
+highlight/color
+do the line stuff for commandline like editing
+print lines to different files
+multiline trigger
+    requeue stuff?
+port over all our commands
+gp 225;buy shirt  - doesn't work, but it should!
+#help should display mo bettah
 
 achaea/__init__.py:
     change how client connects by changing the connection to a queue

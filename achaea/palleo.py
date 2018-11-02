@@ -1,19 +1,13 @@
 
 from .variables import v
+from .basic import eqbal
 from .client import client,send
-
-queue_triggers = [
-    (   "^\[System\]: Running queued eqbal command: (.*)$",
-        # catch lines for system eqbal
-        lambda m: print("Found eqbal: {}".format(m[0]))
-    )
-]
 
 
 spirituality_aliases = [
     (   "^m$",
         "attack",
-        lambda m: send("smite {}".format(v.target))
+        lambda m: eqbal("smite {}".format(v.target))
     ),
 ]
 
@@ -39,5 +33,6 @@ def get_triggers():
 
     triggers = {}
     triggers["queue"] = queue_triggers
+    triggers["intro"] = intro_triggers
     return triggers
 
