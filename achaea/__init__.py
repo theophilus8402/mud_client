@@ -1,11 +1,20 @@
 
 import re
 
-from .client import client, aliases, triggers
-from . import palleo
+from .client import client, aliases, triggers, gmcp_handlers
 from . import basic
 from . import ab_spirituality
+from . import ab_battlerage
+from . import ab_healing
+from . import ab_devotion
+from . import ab_vision
+from . import ab_survival
 from . import aff_healing
+from . import defences
+from . import ratting
+from . import room_info
+from . import status
+from . import tattoos
 
 def compile_aliases(aliases):
 
@@ -13,34 +22,6 @@ def compile_aliases(aliases):
 
 
 class Achaea():
-
-    """
-    def __init__(self):
-
-        self.modules = [ab_spirituality, palleo, basic]
-
-        self.aliases = []
-        self.help_info = {}
-        self.initialize_aliases()
-
-        self.triggers = []
-        self.initialize_triggers()
-
-    def get_base_aliases(self):
-        base_aliases = [
-            (   "#help (.*)",
-                "show help",
-                lambda m: self.show_help(m[0])
-            ),
-        ]
-        return base_aliases
-
-    def initialize_aliases(self):
-        self.help_info[group_name] = []
-        for pattern, desc, func in aliases:
-            self.aliases.append((re.compile(pattern), func))
-            self.help_info[group_name].append((pattern, desc))
-    """
 
     def handle_aliases(self, msg):
 
@@ -58,29 +39,15 @@ class Achaea():
 
         return alias_handled
 
-    """
-    def show_help(self, alias_group):
-
-        print("{}:".format(alias_group), file=client.current_out_handle, flush=True)
-        for pattern, desc in self.help_info[alias_group]:
-            print("{} : {}".format(pattern, desc), file=client.current_out_handle, flush=True)
-
-    def initialize_triggers(self):
-
-        for mod in self.modules:
-            for group, trigs in mod.get_triggers().items():
-                for pattern, action in trigs:
-                    self.triggers.append((re.compile(pattern), action))
-    """
-
     def handle_triggers(self, msg):
 
         trig_handled = False
 
         #for compiled_pattern, action in self.triggers:
-        for compiled_pattern, action in triggers:
+        for search_method, action in triggers:
             #print("handling: <{}> {}".format(msg, compiled_pattern.pattern))
-            match = compiled_pattern.match(msg)
+            #match = compiled_pattern.match(msg)
+            match = search_method(msg)
             if match:
                 #print("got a match!")
                 action(match.groups())
@@ -88,4 +55,12 @@ class Achaea():
                 break
 
         return trig_handled
+
+    def handle_gmcp(self, gmcp_type, gmcp_data):
+        if gmcp_type in gmcp_handlers:
+            for gmcp_handler in gmcp_handlers[gmcp_type]:
+                gmcp_handler(gmcp_data)
+        #else:
+        basic.echo("{} : {}".format(gmcp_type, gmcp_data))
+            #pass
 

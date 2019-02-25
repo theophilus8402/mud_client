@@ -10,7 +10,7 @@ from contextlib import suppress
 from achaea import Achaea
 from achaea.client import send, client
 from multi_queue import MultiQueue
-from telnet_manager import handle_telnet, strip_ansi
+from telnet_manager import handle_telnet, strip_ansi, gmcp_queue
 
 def reader(file_handle, mud_client, queue):
 
@@ -30,23 +30,42 @@ def reader(file_handle, mud_client, queue):
     client.last_command = data
 
     # handle user input
-    if not mud_client.handle_aliases(data):
-        print("sending: {}".format(data))
-        send(data)
-    # else assume msgs are sent as needed
+    for cmd in data.split(";"):
+        if not mud_client.handle_aliases(cmd):
+            send(cmd)
+        # else assume msgs are sent as needed
 
 
 async def handle_from_server_queue(from_server_queue, mud_client):
 
     while True:
         data = await from_server_queue.get()
-        print(data, file=client.current_out_handle, flush=True)
+        client.current_chunk = data
+        output = []
         for line in data.split("\n"):
-            #print(line)
+
+            client.modified_current_line = None
+            client.current_line = line
             stripped_line = strip_ansi(line)
-            #print(stripped_line)
             mud_client.handle_triggers(stripped_line.strip())
+
+            if client.modified_current_line == None:
+                output.append(line)
+            elif client.modified_current_line:
+                output.append(client.modified_current_line)
+            # if client.modified_current_line is not None but "", it's meant to be deleted
+        print("\n".join(output).strip(), file=client.current_out_handle, flush=True)
         from_server_queue.task_done()
+
+
+async def handle_gmcp_queue(gmcp_queue, mud_client):
+
+    while True:
+        gmcp_type, gmcp_data = await gmcp_queue.get()
+
+        mud_client.handle_gmcp(gmcp_type, gmcp_data)
+
+        gmcp_queue.task_done()
 
 
 if __name__ == "__main__":
@@ -67,11 +86,14 @@ if __name__ == "__main__":
     #host = "achaea.com"
     #port = 23
 
-    from_server_queue = MultiQueue()
-    asyncio.ensure_future(handle_telnet(host, port, from_server_queue, msg_queue))
+    client.from_server_queue = MultiQueue()
+    asyncio.ensure_future(handle_telnet(host, port, client.from_server_queue, msg_queue))
 
-    server_reader = from_server_queue.get_receiver("main")
+    server_reader = client.from_server_queue.get_receiver("main")
     asyncio.ensure_future(handle_from_server_queue(server_reader, mud_client))
+
+    # handle gmcp data
+    asyncio.ensure_future(handle_gmcp_queue(gmcp_queue, mud_client))
 
     log = logging.getLogger('EchoClient')
     logging.basicConfig(level=logging.DEBUG)
@@ -86,7 +108,7 @@ if __name__ == "__main__":
     finally:
         log.debug('closing event loop')
 
-        from_server_queue.remove_receiver("main")
+        client.from_server_queue.remove_receiver("main")
 
         # let the client close up connections/file handles
         client.close()

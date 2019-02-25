@@ -1,7 +1,7 @@
 
 from .client import send, add_aliases, add_triggers
 from .variables import v
-from .palleo import eqbal
+from .basic import eqbal
 
 
 def sear(client, matches):
@@ -20,6 +20,11 @@ spirituality_aliases = [
         "smite t",
         lambda matches: eqbal("stand;smite {}".format(v.target))
     ),
+    (   "^shd(?: (.+))?$",
+        "angel aura 'me'/[]",
+        lambda matches: eqbal("stand;angel aura {}".format(
+            matches[0] or ""))
+    ),
     (   "^shine(?: (.+))?$",
         "angel shine []",
         lambda matches: eqbal("angel shine {}".format(matches[0] or ""))
@@ -32,9 +37,13 @@ spirituality_aliases = [
         "smite t chasten t body",
         lambda _: "stand;smite {t} chasten {t} body".format(t=v.target)
     ),
+    (   "^seek(?: (.+))?$",
+        "angel seek t/[]",
+        lambda matches: eqbal("angel seek {}".format(matches[0] or v.target))
+    ),
     (   "^judge(?: (.+))?$",
         "judge t/[]",
-        lambda matches: eqbal("judge {}".format(matches[0] or ""))
+        lambda matches: eqbal("judge {}".format(matches[0] or v.target))
     ),
     (   "^strip(?: (.+))?$",
         "angel strip t/[]",
@@ -86,4 +95,12 @@ spirituality_aliases = [
     ),
 ]
 add_aliases("ab_spirituality", spirituality_aliases)
+
+spirituality_triggers = [
+    (   "^White strands of light weave themselves together before your eyes, and within seconds you hold a spiritual mace within your grasp.$",
+        # you're mace is here! wield it!
+        lambda _: eqbal("wield mace")
+    ),
+]
+add_triggers(spirituality_triggers)
 

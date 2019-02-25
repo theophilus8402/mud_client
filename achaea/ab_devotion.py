@@ -1,6 +1,7 @@
 
 from .variables import v
 from .basic import eqbal
+from .client import add_aliases, add_triggers
 
 
 def pilgrimage(matches):
@@ -12,29 +13,29 @@ def pilgrimage(matches):
 devotion_aliases = [
     (   "^hh(?: (.+))?$",
         "perform hands []",
-        lambda matches: eq_bal("perform hands {}".format(matches[0] or ""))
+        lambda matches: eqbal("perform hands {}".format(matches[0] or ""))
     ),
     (   "^truth$",
         "perform truth",
-        lambda _: eq_bal("perform truth"),
+        lambda _: eqbal("perform truth"),
     ),
     (   "^bliss(?: (.+))?$",
         "perform bliss []/me",
-        lambda matches: eq_bal("perform bliss {}".format(matches[0] or "me"))
+        lambda matches: eqbal("perform bliss {}".format(matches[0] or "me"))
     ),
     (   "^pur(?: (.+))?$",
         "perform purity []/t",
-        lambda matches: eq_bal("perform purity {}".format(matches[0] or v.target))
+        lambda matches: eqbal("perform purity {}".format(matches[0] or v.target))
     ),
     (   "^hell(?: (.+))?$",
         "perform hellsight []/t",
-        lambda matches: eq_bal("perform hellsight {}".format(matches[0] or v.target))
+        lambda matches: eqbal("perform hellsight {}".format(matches[0] or v.target))
     ),
     (   "^pilg(?: (.+))?$",
         "perform pilg [] / perf right of pilg",
         lambda matches: pilgrimage(matches)
     ),
-    (   "^insp$"
+    (   "^insp$",
         "perform inspiration",
         lambda matches: eqbal("perform inspiration")
     ),
@@ -47,19 +48,11 @@ devotion_aliases = [
         lambda matches: eqbal("perform rite of demons")
     ),
 ]
+add_aliases("ab_devotion", devotion_aliases)
 
 def channel_all(client, matches):
     
     for chan in ["air", "fire", "water", "earth", "spirit"]:
-        eq_bal("channel {}".format(chan), mud=client)
+        eqbal("channel {}".format(chan), mud=client)
 
-def get_aliases():
-
-    aliases = {}
-    aliases["ab_devotion"] = devotion_aliases
-    return aliases
-
-def get_triggers():
-    triggers = {}
-    return triggers
 

@@ -1,6 +1,7 @@
 
 import asyncio
 import functools
+import json
 import re
 
 from select import select
@@ -33,12 +34,19 @@ supportables = [
         'group 1',
         'room 1',
         'room.info 1',
-        'redirect.window 1'
+        'redirect.window 1',
+        'comm.channel.text 1',
     ]
 
+compiled_gmcp_pat = re.compile("([.A-Za-z]+) (.*)")
+
+gmcp_queue = asyncio.Queue()
+
 def handle_gmcp(data):
-    #print("handle_gmcp: {}".format(data))
-    pass
+    matches = compiled_gmcp_pat.match(data)
+    gmcp_type, gmcp_data = matches.groups()
+    gmcp_json = json.loads(gmcp_data)
+    gmcp_queue.put_nowait((gmcp_type, gmcp_json))
 
 def iac_cb(telnet_session, sock, cmd, option):
     if cmd == WILL:
@@ -58,7 +66,7 @@ def iac_cb(telnet_session, sock, cmd, option):
     elif cmd == SE:
         data = telnet_session.read_sb_data()
         if data and data[0] == ord(GMCP):
-            # change it to a gmcp queue
+            # change it to a emcp queue
             handle_gmcp(data[1:].decode(mud_encoding))
 
 def telnet_connect(host, port):
