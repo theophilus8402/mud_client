@@ -1,0 +1,35 @@
+
+
+occultism_aliases = {
+    "^ague(?: (.+))?$" : lambda mud, matches: eq_bal("ague {}".format(matches[0] or mud.v.target)),
+    "^agl(?: (.+))?$" : lambda mud, matches: eq_bal("auraglance {}".format(matches[0] or mud.v.target)),
+    "^bwarp$" : eq_bal("bodywarp"),
+    "^att(?: (.+))?$" : lambda mud, matches: eq_bal("attend {}".format(matches[0] or mud.v.target)),
+    "^ene(?: (.+))?$" : lambda mud, matches: eq_bal("enervate {}".format(matches[0] or mud.v.target)),
+    "^qui(?: (.+))?$" : lambda mud, matches: eq_bal("quicken {}".format(matches[0] or mud.v.target)),
+    "^sarm(?: (.+))?$" : lambda mud, matches: eq_bal("shrivel arms {}".format(mud.v.target)),
+    "^sleg(?: (.+))?$" : lambda mud, matches: eq_bal("shrivel legs {}".format(mud.v.target)),
+    "^twarp(?: (.+))?$" : eq_bal("timewarp"),
+    "^daura(?: (.+))?$" : eq_bal("distortaura"),
+    "^pclk(?: (.+))?$" : lambda mud, matches: eq_bal("pinchaura {} cloak".format(matches[0] or mud.v.target)),
+    "^pspe(?: (.+))?$" : lambda mud, matches: eq_bal("pinchaura {} speed".format(mud.v.target)),
+    "^pcalor(?: (.+))?$" : lambda mud, matches: eq_bal("pinchaura {} caloric".format(mud.v.target)),
+    "^pfrost(?: (.+))?$" : lambda mud, matches: eq_bal("pinchaura {} frost".format(mud.v.target)),
+    "^plevi(?: (.+))?$" : lambda mud, matches: eq_bal("pinchaura {} levitation".format(mud.v.target)),
+    "^pinsom(?: (.+))?$" : lambda mud, matches: eq_bal("pinchaura {} insomnia".format(mud.v.target)),
+    "^pkola(?: (.+))?$" : lambda mud, matches: eq_bal("pinchaura {} kola".format(mud.v.target)),
+    "^spe(?: (.+))?$" : eq_bal("unnamable speak"),
+    "^vis(?: (.+))?$" : eq_bal("unnamable vision"),
+    "^devo(?: (.+))?$" : lambda mud, matches: eq_bal("devolve {}".format(mud.v.target)),
+    "^caura(?: (.+))?$" : lambda mud, matches: eq_bal("cleanseaura {}".format(mud.v.target)),
+    "^tent(?: (.+))?$" : eq_bal("tentacles"),
+    "^inst(?: (.+))?$" : lambda mud, matches: instill(matches[0] or mud.v.target),
+    "^whisp$" : lambda mud, matches: eq_bal("whisperingmadness {}".format(mud.v.target)),
+    "^dev$" : eq_bal("devilmark"),
+    "^enl$" : lambda mud, matches: eq_bal("enlighten {}".format(matches[0] or mud.v.target)),
+    "^ast$" : eq_bal("astralform"),
+    "^devo$" : lambda mud, matches: eq_bal("unravel mind of {}".format(mud.v.target)),
+    "^ra$" : lambda mud, matches: eq_bal("readaura {}".format(mud.v.target)),
+}
+
+
