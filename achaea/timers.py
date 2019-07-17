@@ -31,7 +31,6 @@ class Timers():
         # if the named task is in there, cancel the task and remove it
         if name in self.timers:
             self.timers[name].cancel()
-            del(self.timers[name])
 
     async def create_simple_timer(self, name, action, wait_time):
 

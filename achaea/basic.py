@@ -139,10 +139,7 @@ def move(direction):
     send("queue prepend eqbal {}".format(direction))
 
 def handle_says(gmcp_data):
-    #with open(
-    # TODO write stuff!
-    print("<{}>".format(gmcp_data["text"]))
-    #pass
+    print(f"{gmcp_data['text']}", file=v.says_handle, flush=True)
 add_gmcp_handler("Comm.Channel.Text", handle_says)
 
 direction_aliases = [

@@ -1,7 +1,12 @@
 
 import re
 
-from .client import send, add_gmcp_handler, echo
+from datetime import datetime, timedelta
+
+from .basic import eqbal
+from .client import send, add_gmcp_handler, echo, add_aliases
+from .variables import v
+from .timers import timers
 
 def remember_path(on, mud):
     # set it to True/False as dictated by "on"
@@ -27,60 +32,104 @@ def ratting(client, matches):
 
 
 def ratting_move_on(client):
-    client.v.rooms_ratted.add(client.v.room["num"])
-    random_move(client)
+    echo("need to fix ratting_move_on()")
+    #client.v.rooms_ratted.add(client.v.room["num"])
+    #random_move(client)
+    pass
+
+
+def ratting_room_info(gmcp_data):
+    if gmcp_data["num"] != v.ratting_room:
+        echo(f"We changed ratting rooms! old: {v.ratting_room} new: {gmcp_data['num']}")
+add_gmcp_handler("Room.Info", ratting_room_info)
 
 
 def rat(client, matches):
 
-    if datetime.now() < client.v.last_rat_call + timedelta(seconds=1):
+    if datetime.now() < v.last_rat_call + timedelta(seconds=1):
         #print("You've run 'rat' too recently!")
         return
 
     # print("running rat!")
 
     # if it looks like we've been ratting in the room before, move on
-    if client.v.room["num"] in client.v.rooms_ratted:
+    """
+    if v.room["num"] in v.rooms_ratted:
         print("It looks like we've ratted here before, moving on...")
         ratting_move_on(client)
         return
+    """
 
     # if we've been waiting for 15 seconds with no sign of a rat, move on
-    if datetime.now() >= client.v.rat_last_seen + timedelta(seconds=15):
+    if datetime.now() >= v.rat_last_seen + timedelta(seconds=15):
         print("We've been waiting for too long!  It's time to move on!")
         ratting_move_on(client)
         # move on
         return
 
-    client.v.last_rat_call = datetime.now()
-    if len(client.v.players_in_room) >= 1:
+    v.last_rat_call = datetime.now()
+    if len(v.players_in_room) >= 1:
         print("There ARE people in the room!")
         # move on
         ratting_move_on(client)
         return
 
     # check to see if we've killed all the rats in the room
-    if client.v.rats_killed_in_room >= 3:
+    if v.rats_killed_in_room >= 3:
         print("Killed {} rats here!  Moving on...".format(client.v.rats_killed_in_room))
         # move on
         ratting_move_on(client)
         return
 
     rat_in_room = False
-    for mob,mob_id in client.v.mobs_in_room:
+    for mob in v.mobs_in_room:
         print(mob)
-        if "rat" in mob:
+        if "rat" in mob["name"]:
             rat_in_room = True
-            client.v.rat_last_seen = datetime.now()
             break
     if not rat_in_room:
         #print("There's NOT a rat in the room!")
         return
 
-    if not (client.v.bal and client.v.eq):
+    if not (v.bal and v.eq):
         #print("You DON'T have bal/eq!")
         return
-    attack(client, matches)
+    eqbal("stand;smite rat")
+
+
+def handle_rat_command(matches):
+    if not matches[0]:
+        echo(f"handle_rat_command single rat")
+        rat(None, None)
+    elif matches[0] == "on":
+        timers.add("ratting", lambda: rat(None, None), 3, recurring=True)
+        echo(f"handle_rat_command turn on the rat machine!")
+    elif matches[0] == "off":
+        print(timers.timers)
+        timers.remove("ratting")
+        echo(f"handle_rat_command turn it off!!!")
+    else:
+        echo("handle_rat_command ehhh????")
+
+
+def rat_info(matches):
+    echo("Showing rat info!")
+    echo(f"mobs: {v.mobs_in_room}")
+    echo(f"players: {v.players_in_room}")
+    echo(f"rats killed: {v.rats_killed_in_room}")
+    echo(f"now: {datetime.now()}, last_seen: {v.rat_last_seen}")
+
+ratting_aliases = [
+    (   "^rat(?: (.+))?$",
+        "rat on/off//",
+        lambda matches: handle_rat_command(matches)
+    ),
+    (   "^ri$",
+        "rat info",
+        rat_info
+    ),
+]
+add_aliases("ratting", ratting_aliases)
 
 def slain(client, matches):
 
@@ -100,6 +149,7 @@ mapping_aliases = {
     "^showpath$" : show_path,
 }
 
+"""
 def find_rats_in_room(gmcp_data):
     if gmcp_data["location"] != "room":
         return False
@@ -109,6 +159,7 @@ def find_rats_in_room(gmcp_data):
     for rat in rats:
         echo(rat)
 add_gmcp_handler("Char.Items.List", find_rats_in_room)
+"""
 
 """
     def handleGmcp(self, cmd, value):

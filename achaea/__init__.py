@@ -5,10 +5,11 @@ from .client import client, aliases, triggers, gmcp_handlers
 from . import basic
 from . import ab_spirituality
 from . import ab_battlerage
-from . import ab_healing
+#from . import ab_healing
 from . import ab_devotion
 from . import ab_vision
 from . import ab_survival
+from . import ab_zeal
 from . import aff_healing
 from . import defences
 from . import ratting
@@ -61,6 +62,6 @@ class Achaea():
             for gmcp_handler in gmcp_handlers[gmcp_type]:
                 gmcp_handler(gmcp_data)
         #else:
-        basic.echo("{} : {}".format(gmcp_type, gmcp_data))
+        #basic.echo("{} : {}".format(gmcp_type, gmcp_data))
             #pass
 

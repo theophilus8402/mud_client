@@ -22,6 +22,8 @@ def gmcpOut(sock, msg):
 
 supportables = [
         'char 1',
+        'comm 1',
+        'comm.channel 1',
         'char.base 1',
         'char.maxstats 1',
         'char.items 1',
@@ -29,7 +31,6 @@ supportables = [
         'char.statusvars 1',
         'char.vitals 1',
         'char.worth 1',
-        'comm 1',
         'comm.tick 1',
         'group 1',
         'room 1',

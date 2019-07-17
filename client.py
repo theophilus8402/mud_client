@@ -81,10 +81,12 @@ if __name__ == "__main__":
     event_loop.add_reader(sys.stdin, reader, sys.stdin, mud_client, msg_queue)
 
     #host = "192.168.1.156"
-    host = "localhost"
-    port = 4000
+    #host = "localhost"
+    #port = 4000
     #host = "achaea.com"
     #port = 23
+    host = "127.0.0.1"
+    port = 8888
 
     client.from_server_queue = MultiQueue()
     asyncio.ensure_future(handle_telnet(host, port, client.from_server_queue, msg_queue))

@@ -35,7 +35,7 @@ spirituality_aliases = [
     ),
     (   "^chab$",
         "smite t chasten t body",
-        lambda _: "stand;smite {t} chasten {t} body".format(t=v.target)
+        lambda _: eqbal("stand;smite {t} chasten {t} body".format(t=v.target))
     ),
     (   "^seek(?: (.+))?$",
         "angel seek t/[]",

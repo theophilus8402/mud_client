@@ -2,12 +2,13 @@
 import asyncio
 
 from .basic import eqbal, curebal
-from .client import client, send, echo, add_aliases, add_triggers, add_gmcp_handler
+from .client import client, send, echo, add_aliases, add_triggers, add_gmcp_handler, add_temp_trigger, remove_temp_trigger
 from .variables import v
 
 def gmcp_defences(gmcp_data):
     v.defences = [defence["name"] for defence in gmcp_data]
 add_gmcp_handler("Char.Defences.List", gmcp_defences)
+
 
 def defences(matches):
     current_defences = set(v.defences)
@@ -22,43 +23,61 @@ def defences(matches):
     if needed_defences.intersection(bliss_defs):
         eqbal("perform bliss me")
 
-defence_triggers = [
-    (   "^You have the following defences:$",
-        # list of defences
-        defences,
+    remove_temp_trigger("defences_trigger")
+
+
+defences_trigger = ("^You have the following defences:$",
+                    # list of defences
+                    defences,
+                    ),
+
+
+def check_defences(matches):
+    eqbal("def")
+    add_temp_trigger("defences_trigger", defences_trigger[0])
+
+
+defence_aliases = [
+    (   "^cdef$",
+        "list of defences",
+        check_defences,
     ),
 ]
-add_triggers(defence_triggers)
+add_aliases("defences", defence_aliases)
+
 
 def do_nothing():
     pass
 
+
 bliss_defs = {"constitution", "toughness", "resistance"}
+
 
 defence_info = {
     "preachblessing" : lambda: do_nothing,
     "boartattoo" : lambda: eqbal("touch boar"),
     "mosstattoo" : lambda: eqbal("touch moss"),
-    "deathsight" : lambda: send("outr skullcap;eat skullcap"),
+    #"deathsight" : lambda: send("outr skullcap;eat skullcap"),
     "constitution" : lambda: echo("Missing CONSTITUTION"),
     "toughness" : lambda: echo("Missing TOUGHNESS"),
     "resistance" : lambda: echo("Missing RESISTANCE"),
     "mindseye" : lambda: eqbal("touch mindseye"),
-    "deafness" : lambda: curebal("hawthorn"),
-    "blindness" : lambda: curebal("bayberry"),
-    "kola" : lambda: curebal("kola"),
-    "temperance" : lambda: curebal("frost"),
-    "speed" : lambda: curebal("speed"),
-    "levitating" : lambda: curebal("levitation"),
-    "poisonresist" : lambda: curebal("venom"),
-    "insulation" : lambda: curebal("caloric"),
-    "thirdeye" : lambda: curebal("echinacea"),
-    "nightsight" : lambda: eqbal("nightsight"),
-    "selfishness" : lambda: eqbal("selfishness"),
-    "fangbarrier" : lambda: curebal("sileris"),
-    "insomnia" : lambda: curebal("cohosh"),
-    "cloak" : lambda: eqbal("touch cloak"),
+    #"deafness" : lambda: curebal("hawthorn"),
+    #"blindness" : lambda: curebal("bayberry"),
+    #"kola" : lambda: curebal("kola"),
+    #"temperance" : lambda: curebal("frost"),
+    #"speed" : lambda: curebal("speed"),
+    #"levitating" : lambda: curebal("levitation"),
+    #"poisonresist" : lambda: curebal("venom"),
+    #"insulation" : lambda: curebal("caloric"),
+    #"thirdeye" : lambda: curebal("echinacea"),
+    #"nightsight" : lambda: eqbal("nightsight"),
+    #"selfishness" : lambda: eqbal("selfishness"),
+    #"fangbarrier" : lambda: curebal("sileris"),
+    #"insomnia" : lambda: curebal("cohosh"),
+    #"cloak" : lambda: eqbal("touch cloak"),
 }
+
 
 """
 ['preachblessing', 'boartattoo', 'mosstattoo', 'deathsight', 'constitution', 'resistance', 'toughness', 'mindseye', 'deafness', 'blindness', 'kola', 'temperance', 'speed', 'levitating', 'poisonresist', 'insulation', 'thirdeye', 'nightsight', 'selfishness', 'fangbarrier', 'insomnia', 'cloak']

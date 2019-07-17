@@ -47,6 +47,10 @@ devotion_aliases = [
         "perform right of demons",
         lambda matches: eqbal("perform rite of demons")
     ),
+    (   "^piety$",
+        "perform right of piety",
+        lambda matches: eqbal("perform rite of piety")
+    ),
 ]
 add_aliases("ab_devotion", devotion_aliases)
 
