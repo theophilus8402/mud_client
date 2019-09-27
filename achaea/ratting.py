@@ -41,6 +41,7 @@ def ratting_move_on(client):
 def ratting_room_info(gmcp_data):
     if gmcp_data["num"] != v.ratting_room:
         echo(f"We changed ratting rooms! old: {v.ratting_room} new: {gmcp_data['num']}")
+        v.ratting_room = gmcp_data["num"]
 add_gmcp_handler("Room.Info", ratting_room_info)
 
 

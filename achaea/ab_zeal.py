@@ -4,20 +4,21 @@ from .basic import eqbal
 from .variables import v
 
 
-"""
-def channel_all(matches):
-    
-    for chan in ["air", "fire", "water", "earth", "spirit"]:
-        eqbal("channel {}".format(chan))
-"""
-
 zeal_aliases = [
     (   "^att(?: (.+))?$",
         "recite attend */t",
         lambda m: eqbal(f"recite attend {m[0] or v.target}")
     ),
+    (   "^rfire(?: (.+))?$",
+        "recite fire ?/me",
+        lambda m: eqbal(f"recite fire {m[0] or 'me'}")
+    ),
+    (   "^rvoid(?: (.+))?$",
+        "recite void ?/me",
+        lambda m: eqbal(f"recite void {m[0] or 'me'}")
+    ),
     (   "^prot(?: (.+))?$",
-        "recite protection me",
+        "recite protection ?/me",
         lambda m: eqbal(f"recite protection {m[0] or 'me'}")
     ),
 ]
