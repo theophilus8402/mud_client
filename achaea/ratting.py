@@ -38,9 +38,18 @@ def ratting_move_on(client):
     pass
 
 
+def mob_entered_or_left_room(gmcp_data):
+    # this is to check to see if a rat entered or left the room
+    v.rat_last_seen
+add_gmcp_handler("Char.Items.Add", mob_entered_or_left_room)
+add_gmcp_handler("Char.Items.Remove", mob_entered_or_left_room)
+
+
 def ratting_room_info(gmcp_data):
-    if gmcp_data["num"] != v.ratting_room:
-        echo(f"We changed ratting rooms! old: {v.ratting_room} new: {gmcp_data['num']}")
+    room_num = gmcp_data["num"]
+    if room_num != v.ratting_room:
+        echo(f"We changed ratting rooms! old: {v.ratting_room} new: {room_num}")
+        v.ratting_room = room_num
 add_gmcp_handler("Room.Info", ratting_room_info)
 
 
@@ -94,7 +103,7 @@ def rat(client, matches):
     if not (v.bal and v.eq):
         #print("You DON'T have bal/eq!")
         return
-    eqbal("stand;smite rat")
+    eqbal("stand;warp rat")
 
 
 def handle_rat_command(matches):
@@ -120,6 +129,10 @@ def rat_info(matches):
     echo(f"now: {datetime.now()}, last_seen: {v.rat_last_seen}")
 
 ratting_aliases = [
+    (   "^rls$",
+        "rat last seen",
+        lambda matches: echo(f"rat last seen: {v.rat_last_seen}")
+    ),
     (   "^rat(?: (.+))?$",
         "rat on/off//",
         lambda matches: handle_rat_command(matches)

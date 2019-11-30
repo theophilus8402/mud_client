@@ -11,6 +11,10 @@ survival_aliases = [
         "generosity",
         lambda m: eqbal("generosity")
     ),
+    (   "^eg$",
+        "enter grate",
+        lambda m: eqbal("enter grate")
+    ),
 ]
 add_aliases("ab_survival", survival_aliases)
 

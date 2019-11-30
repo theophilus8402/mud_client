@@ -6,22 +6,38 @@ from .client import client, send, echo, add_aliases, add_triggers, add_gmcp_hand
 from .variables import v
 
 def gmcp_defences(gmcp_data):
-    v.defences = [defence["name"] for defence in gmcp_data]
+    v.defences = {defence["name"] for defence in gmcp_data}
 add_gmcp_handler("Char.Defences.List", gmcp_defences)
 
 
+def gmcp_defences_add(gmcp_data):
+    defence = gmcp_data["name"]
+    echo(f"Woo!  We've gained {defence}!")
+    v.defences.add(defence)
+add_gmcp_handler("Char.Defences.Add", gmcp_defences_add)
+
+
+def gmcp_defences_remove(gmcp_data):
+    lost_defences = set(gmcp_data)
+    echo(f"Egads!  We've lost {lost_defences}!")
+    v.defences.difference_update(lost_defences)
+    #defences("")
+add_gmcp_handler("Char.Defences.Remove", gmcp_defences_remove)
+
 def defences(matches):
-    current_defences = set(v.defences)
-    total_defences = set(defence_info.keys())
-    needed_defences = total_defences.difference(current_defences)
+    current_defences = v.defences
+    needed_defences = v.wanted_defences.difference(current_defences)
     echo("Needed defences: {}".format(needed_defences))
 
     # queue up the actions to gain the defences
     for defence in needed_defences:
         defence_info[defence]()
 
+    """
+    # this is for priest
     if needed_defences.intersection(bliss_defs):
         eqbal("perform bliss me")
+    """
 
     remove_temp_trigger("defences_trigger")
 
@@ -52,30 +68,69 @@ def do_nothing():
 
 bliss_defs = {"constitution", "toughness", "resistance"}
 
+# these will be defs we keep on all the time
+basic_defs = {
+    "boartattoo",
+    "mosstattoo",
+    "deathsight",
+    "lifevision",
+    "mindseye",
+    "selfishness",
+    "cloak",
+    "deafness",
+    "blindness",
+    "thirdeye",
+    "nightsight",
+}
+v.wanted_defences.update(basic_defs)
+
+
+# these will be setup and kept up when we need to fight
+fighting_defs = {
+    "kola",
+    "insomnia",
+    "temperance",
+    "speed",
+    "levitating",
+    "poisonresist",
+    "insulation",
+    "fangbarrier",
+}
+
+
+# these will be ones for fighting but not all the time
+auto_def = {
+    # weapon rebounding
+    # hold breath
+    # mass
+}
+
 
 defence_info = {
     "preachblessing" : lambda: do_nothing,
     "boartattoo" : lambda: eqbal("touch boar"),
     "mosstattoo" : lambda: eqbal("touch moss"),
     #"deathsight" : lambda: send("outr skullcap;eat skullcap"),
+    "deathsight" : lambda: eqbal("astralvision"),
+    "lifevision" : lambda: eqbal("astralvision"),
     "constitution" : lambda: echo("Missing CONSTITUTION"),
     "toughness" : lambda: echo("Missing TOUGHNESS"),
     "resistance" : lambda: echo("Missing RESISTANCE"),
     "mindseye" : lambda: eqbal("touch mindseye"),
-    #"deafness" : lambda: curebal("hawthorn"),
-    #"blindness" : lambda: curebal("bayberry"),
-    #"kola" : lambda: curebal("kola"),
-    #"temperance" : lambda: curebal("frost"),
-    #"speed" : lambda: curebal("speed"),
-    #"levitating" : lambda: curebal("levitation"),
-    #"poisonresist" : lambda: curebal("venom"),
-    #"insulation" : lambda: curebal("caloric"),
-    #"thirdeye" : lambda: curebal("echinacea"),
-    #"nightsight" : lambda: eqbal("nightsight"),
-    #"selfishness" : lambda: eqbal("selfishness"),
-    #"fangbarrier" : lambda: curebal("sileris"),
-    #"insomnia" : lambda: curebal("cohosh"),
-    #"cloak" : lambda: eqbal("touch cloak"),
+    "deafness" : lambda: curebal("hawthorn"),
+    "blindness" : lambda: curebal("bayberry"),
+    "kola" : lambda: curebal("kola"),
+    "temperance" : lambda: curebal("frost"),
+    "speed" : lambda: curebal("speed"),
+    "levitating" : lambda: curebal("levitation"),
+    "poisonresist" : lambda: curebal("venom"),
+    "insulation" : lambda: curebal("caloric"),
+    "thirdeye" : lambda: curebal("echinacea"),
+    "nightsight" : lambda: eqbal("nightsight"),
+    "selfishness" : lambda: eqbal("selfishness"),
+    "fangbarrier" : lambda: curebal("sileris"),
+    "insomnia" : lambda: curebal("cohosh"),
+    "cloak" : lambda: eqbal("touch cloak"),
 }
 
 

@@ -3,19 +3,26 @@ import re
 
 from .client import client, aliases, triggers, gmcp_handlers
 from . import basic
-from . import ab_spirituality
 from . import ab_battlerage
 #from . import ab_healing
-from . import ab_devotion
 from . import ab_vision
 from . import ab_survival
-from . import ab_zeal
 from . import aff_healing
 from . import defences
 from . import ratting
 from . import room_info
 from . import status
 from . import tattoos
+# occultist modules
+from . import ab_occultism
+from . import ab_tarot
+from . import ab_domination
+"""
+# cleric modules
+from . import ab_spirituality
+from . import ab_devotion
+from . import ab_zeal
+"""
 
 def compile_aliases(aliases):
 
@@ -33,7 +40,7 @@ class Achaea():
             #print("handling: {}".format(compiled_pattern.pattern))
             match = compiled_pattern.match(msg)
             if match:
-                #print("got a match! msg")
+                #print(f"got a match! {msg}")
                 action(match.groups())
                 alias_handled = True
                 break

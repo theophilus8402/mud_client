@@ -1,0 +1,21 @@
+
+things to log:
+* regular text from server
+* gmcp data from server
+* user input
+* data sent to server?
+
+it will need to be streaming log... so I can't really do json
+
+each entry:
+* type
+    * server_text
+    * gmcp_data
+    * user_input
+    * data_sent
+* time of entry
+* msg
+
+example:
+2016-11-26 21:33:23.23243 //\\ "server_text //\\ something bad happened!!"
+

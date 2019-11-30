@@ -35,6 +35,7 @@ def reader(file_handle, mud_client, queue):
             send(cmd)
         # else assume msgs are sent as needed
 
+    client.main_log(data, "user_input")
 
 async def handle_from_server_queue(from_server_queue, mud_client):
 
@@ -49,6 +50,8 @@ async def handle_from_server_queue(from_server_queue, mud_client):
             stripped_line = strip_ansi(line)
             mud_client.handle_triggers(stripped_line.strip())
 
+            client.main_log(line, "server_text")
+
             if client.modified_current_line == None:
                 output.append(line)
             elif client.modified_current_line:
@@ -62,6 +65,8 @@ async def handle_gmcp_queue(gmcp_queue, mud_client):
 
     while True:
         gmcp_type, gmcp_data = await gmcp_queue.get()
+
+        client.main_log(gmcp_data, "gmcp_data")
 
         mud_client.handle_gmcp(gmcp_type, gmcp_data)
 

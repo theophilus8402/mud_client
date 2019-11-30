@@ -13,6 +13,8 @@ class Variable():
         self.players_in_room = []
         self.rats_killed_in_room = 0
         self.mobs_in_room = []
+        self.defences = set()
+        self.wanted_defences = set()
         add_temp_trigger("target_trigger", ("target_trigger", lambda m: False))
         self.handles = {}
         self.open_handle("says", "says.log")

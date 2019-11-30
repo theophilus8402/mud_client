@@ -1,18 +1,59 @@
 
+from .client import send, add_aliases, add_triggers
+from .variables import v
+from .basic import eqbal
 
-tarot_aliases = {
-    "^sun$" : eq_bal("fling sun at ground"),
-    "^priest(?: (.+))?$" : lambda mud, matches: eq_bal("fling priestess at {}".format(matches[0] or "me")),
-    "^magi(?: (.+))?$" : lambda mud, matches: eq_bal("fling magician at {}".format(matches[0] or "me")),
-    "^fool(?: (.+))?$" : lambda mud, matches: eq_bal("fling fool at {}".format(matches[0] or "me")),
-    "^hang(?: (.+))?$" : lambda mud, matches: eq_bal("fling hangedman at {}".format(matches[0] or mud.v.target)),
-    "^star(?: (.+))?$" : lambda mud, matches: eq_bal("fling star at {}".format(matches[0] or mud.v.target)),
-    "^just(?: (.+))?$" : lambda mud, matches: eq_bal("fling justice at {}".format(matches[0] or mud.v.target)),
-    "^aeon(?: (.+))?$" : lambda mud, matches: eq_bal("fling aeon at {}".format(matches[0] or mud.v.target)),
-    "^lust(?: (.+))?$" : lambda mud, matches: eq_bal("fling lust at {}".format(matches[0] or mud.v.target)),
-    "^moon(?: (.+))?$" : lambda mud, matches: eq_bal("fling moon at {}".format(matches[0] or mud.v.target)),
-    "^devil(?: (.+))?$" : lambda mud, matches: eq_bal("fling devil at ground"),
-    "^univ(?: (.+))?$" : lambda mud, matches: eq_bal("fling universe at ground"),
-}
+
+tarot_aliases = [
+    (   "^sun$",
+        "fling sun at ground",
+        lambda _: eqbal("fling sun at ground")
+    ),
+    (   "^priest(?: (.+))?$",
+        "fling priestess at []/me",
+        lambda matches: eqbal(f"fling priestess at {matches[0] or 'me'}")
+    ),
+    (   "^magi(?: (.+))?$",
+        "fling magician at []/me",
+        lambda matches: eqbal(f"fling magician at {matches[0] or 'me'}")
+    ),
+    (   "^fool(?: (.+))?$",
+        "fling fool at []/me",
+        lambda matches: eqbal(f"fling fool at {matches[0] or 'me'}")
+    ),
+    (   "^hang(?: (.+))?$",
+        "fling hangedman at []/t",
+        lambda matches: eqbal(f"fling hangedman at {matches[0] or v.target}")
+    ),
+    (   "^star(?: (.+))?$",
+        "fling star at []/t",
+        lambda matches: eqbal(f"fling star at {matches[0] or v.target}")
+    ),
+    (   "^just(?: (.+))?$",
+        "fling justice at []/t",
+        lambda matches: eqbal(f"fling justice at {matches[0] or v.target}")
+    ),
+    (   "^aeon(?: (.+))?$",
+        "fling aeon at []/t",
+        lambda matches: eqbal(f"fling aeon at {matches[0] or v.target}")
+    ),
+    (   "^lust(?: (.+))?$",
+        "fling lust at []/t",
+        lambda matches: eqbal(f"fling lust at {matches[0] or v.target}")
+    ),
+    (   "^moon(?: (.+))?$",
+        "fling moon at []/t",
+        lambda matches: eqbal(f"fling moon at {matches[0] or v.target}")
+    ),
+    (   "^devil(?: (.+))?$",
+        "fling devil at ground",
+        lambda matches: eqbal("fling devil at ground")
+    ),
+    (   "^univ(?: (.+))?$",
+        "fling universe at ground",
+        lambda matches: eqbal("fling universe at ground")
+    ),
+]
+add_aliases("ab_tarot", tarot_aliases)
 
 
