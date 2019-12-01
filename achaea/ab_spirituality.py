@@ -18,28 +18,68 @@ def sear(client, matches):
 spirituality_aliases = [
     (   "^m$",
         "smite t",
-        lambda matches: eqbal("stand;smite {}".format(v.target))
+        lambda matches: eqbal(f"stand;smite {v.target}")
+    ),
+    (   "^cham$",
+        "smite t chasten t mind",
+        lambda _: eqbal(f"smite {v.target} chasten mind")
+    ),
+    (   "^chab$",
+        "smite t chasten t body",
+        lambda _: eqbal(f"stand;smite {v.target} chasten body")
+    ),
+    (   "^shine(?: (.+))?$",
+        "angel shine []",
+        lambda matches: eqbal(f"angel shine {matches[0] or ''}")
+    ),
+    (   "^call$",
+        "call mace",
+        lambda matches: eqbal("call mace")
     ),
     (   "^shd(?: (.+))?$",
         "angel aura 'me'/[]",
         lambda matches: eqbal("stand;angel aura {}".format(
             matches[0] or ""))
     ),
-    (   "^shine(?: (.+))?$",
-        "angel shine []",
-        lambda matches: eqbal("angel shine {}".format(matches[0] or ""))
+    (   "^pan(?: (.+))?$",
+        "angel panic t/[]",
+        lambda matches: eqbal(f"angel panic {matches[0] or v.target}")
     ),
-    (   "^cham$",
-        "smite t chasten t mind",
-        lambda _: eqbal("smite {t} chasten {t} mind".format(t=v.target))
+    (   "^watch (.+)$",
+        "angel watch []",
+        lambda matches: eqbal(f"angel watch {matches[0]}")
     ),
-    (   "^chab$",
-        "smite t chasten t body",
-        lambda _: eqbal("stand;smite {t} chasten {t} body".format(t=v.target))
+    (   "^smam$",
+        "smash arms t chasten mind",
+        lambda _: eqbal(f"smash arms {v.target} chasten mind")
+    ),
+    (   "^smlb$",
+        "smash legs t chasten mind",
+        lambda _: eqbal(f"smash legs {v.target} chasten body")
+    ),
+    (   "^her$",
+        "hunt heresy",
+        lambda matches: eqbal("hunt heresy")
     ),
     (   "^seek(?: (.+))?$",
         "angel seek t/[]",
         lambda matches: eqbal("angel seek {}".format(matches[0] or v.target))
+    ),
+    (   "^push (.+)$",
+        "angel seek t",
+        lambda matches: eqbal(f"angel push {matches[0] or v.target}")
+    ),
+    (   "^abeck$",
+        "angel beckon all",
+        lambda matches: eqbal("angel beckon")
+    ),
+    (   "^beck$",
+        "angel beckon t",
+        lambda matches: eqbal(f"angel beckon {matches[0] or v.target}")
+    ),
+    (   "^sear(?: (.+))?$",
+        "sear t/icewalldir",
+        lambda _: sear
     ),
     (   "^judge(?: (.+))?$",
         "judge t/[]",
@@ -49,9 +89,9 @@ spirituality_aliases = [
         "angel strip t/[]",
         lambda matches: eqbal("angel strip {}".format(matches[0] or v.target))
     ),
-    (   "^sear(?: (.+))?$",
-        "sear t/icewalldir",
-        lambda _: sear
+    (   "^ripp$",
+        "angel ripples",
+        lambda matches: eqbal("angel ripples")
     ),
     (   "^ward$",
         "angel ward",
@@ -63,27 +103,27 @@ spirituality_aliases = [
     ),
     (   "^trace(?: (.+))?$",
         "angel trace t/[]",
-        lambda matches: eqbal("angel trace {}".format(matches[0] or v.target))
+        lambda matches: eqbal(f"angel trace {matches[0] or v.target}")
     ),
     (   "^sap(?: (.+))?$",
         "angel sap t/[]",
-        lambda matches: eqbal("angel sap {}".format(matches[0] or v.target))
+        lambda matches: eqbal(f"angel sap {matches[0] or v.target}")
     ),
     (   "^care(?: (.+))?$",
         "angel care []",
-        lambda matches: eqbal("angel care {}".format(matches[0]))
+        lambda matches: eqbal(f"angel care {matches[0]}")
     ),
-    (   "^wra(?: (.+))?$",
-        "angel spiritwrack t/[]",
-        lambda matches: eqbal("angel spiritwrack {}".format(matches[0] or v.target))
+    (   "^refuge$",
+        "angel refuge",
+        lambda _: eqbal("angel refuge")
     ),
     (   "^emp(?: (.+))?$",
         "angel empathy []",
-        lambda mud, matches: eqbal("angel empathy {}".format(matches[0] or ""))
+        lambda matches: eqbal(f"angel empathy {matches[0] or ''}")
     ),
     (   "^cont$",
         "contemplate t",
-        lambda _: eqbal("contemplate {}".format(v.target))
+        lambda _: eqbal(f"contemplate {v.target}")
     ),
     (   "^sacri$",
         "angel sacrifice",
@@ -91,7 +131,7 @@ spirituality_aliases = [
     ),
     (   "^absolve$",
         "angel absolve t",
-        lambda _: eqbal("angel absolve {}".format(v.target))
+        lambda _: eqbal(f"angel absolve {v.target}")
     ),
 ]
 add_aliases("ab_spirituality", spirituality_aliases)

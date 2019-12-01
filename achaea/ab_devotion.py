@@ -6,14 +6,18 @@ from .client import add_aliases, add_triggers
 
 def pilgrimage(matches):
     if matches[0]:
-        eqbal("perform pilgrimage {}".format(matches[0]))
+        eqbal(f"perform pilgrimage {matches[0]}")
     else:
         eqbal("perform rite of pilgrimage")
 
 devotion_aliases = [
     (   "^hh(?: (.+))?$",
         "perform hands []",
-        lambda matches: eqbal("perform hands {}".format(matches[0] or ""))
+        lambda matches: eqbal(f"perform hands {matches[0] or ''}")
+    ),
+    (   "^part (.+)$",
+        "perform truth",
+        lambda m: eqbal(f"perform parting {m[0]}"),
     ),
     (   "^truth$",
         "perform truth",
@@ -21,42 +25,60 @@ devotion_aliases = [
     ),
     (   "^bliss(?: (.+))?$",
         "perform bliss []/me",
-        lambda matches: eqbal("perform bliss {}".format(matches[0] or "me"))
-    ),
-    (   "^pur(?: (.+))?$",
-        "perform purity []/t",
-        lambda matches: eqbal("perform purity {}".format(matches[0] or v.target))
-    ),
-    (   "^hell(?: (.+))?$",
-        "perform hellsight []/t",
-        lambda matches: eqbal("perform hellsight {}".format(matches[0] or v.target))
-    ),
-    (   "^pilg(?: (.+))?$",
-        "perform pilg [] / perf right of pilg",
-        lambda matches: pilgrimage(matches)
+        lambda matches: eqbal(f"perform bliss {matches[0] or 'me'}")
     ),
     (   "^insp$",
         "perform inspiration",
         lambda matches: eqbal("perform inspiration")
     ),
-    (   "^pheal$",
-        "perform rite of healing",
-        lambda matches: eqbal("perform rite of healing")
+    (   "^pilg(?: (.+))?$",
+        "perform pilg [] / perf right of pilg",
+        lambda matches: pilgrimage(matches)
     ),
-    (   "^demons$",
-        "perform right of demons",
-        lambda matches: eqbal("perform rite of demons")
+    (   "^pur(?: (.+))?$",
+        "perform purity []/t",
+        lambda matches: eqbal(f"perform purity {matches[0] or v.target}")
+    ),
+    (   "^vis(?: (.+))?$",
+        "perform visions []/t",
+        lambda matches: eqbal(f"perform visions {matches[0] or v.target}")
+    ),
+    (   "^pward$",
+        "perform rite of warding",
+        lambda matches: eqbal("perform rite of warding")
+    ),
+    (   "^force (.+)$",
+        "perform force stuff",
+        lambda matches: eqbal("perform force matches[0]")
     ),
     (   "^piety$",
         "perform right of piety",
         lambda matches: eqbal("perform rite of piety")
     ),
+    (   "^daz(?: (.+))?$",
+        "perform dazzle t",
+        lambda matches: eqbal(f"perform dazzle {matches[0] or v.target}")
+    ),
+    (   "^demons$",
+        "perform right of demons",
+        lambda matches: eqbal("perform rite of demons")
+    ),
+    (   "^slo(?: (.+))?$",
+        "perform sloth t",
+        lambda matches: eqbal(f"perform sloth {matches[0] or v.target}")
+    ),
+    (   "^alls$",
+        "perform rite of allsight",
+        lambda matches: eqbal("perform rite of allsight")
+    ),
+    (   "^pheal$",
+        "perform rite of healing",
+        lambda matches: eqbal("perform rite of healing")
+    ),
+    (   "^pen(?: (.+))?$",
+        "perform penitence []/t",
+        lambda matches: eqbal(f"perform penitence {matches[0] or v.target}")
+    ),
 ]
 add_aliases("ab_devotion", devotion_aliases)
-
-def channel_all(client, matches):
-    
-    for chan in ["air", "fire", "water", "earth", "spirit"]:
-        eqbal("channel {}".format(chan), mud=client)
-
 

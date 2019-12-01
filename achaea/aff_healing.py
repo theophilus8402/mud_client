@@ -158,7 +158,7 @@ pipes_aliases = {
         "light pipes",
         lambda m: send("light pipes"),
     ),
-    (   "^skull$",
+    (   "^sp$",
         "smoke pipe with skullcap",
         lambda m: send("light pipes;smoke pipe with skullcap"),
     ),
