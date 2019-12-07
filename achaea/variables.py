@@ -19,6 +19,8 @@ class Variable():
         self.handles = {}
         self.open_handle("says", "says.log")
         self.says_handle = self.handles["says"]
+        self.pt_announce = False
+        self.enemies = set()
 
     def open_handle(self, name, file_path):
         self.handles[name] = open(file_path, "a")

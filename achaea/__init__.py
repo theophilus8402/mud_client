@@ -13,6 +13,7 @@ from . import ratting
 from . import room_info
 from . import status
 from . import tattoos
+from . import group_fighting
 # occultist modules
 from . import ab_occultism
 from . import ab_tarot
@@ -60,7 +61,7 @@ class Achaea():
                 #print("got a match!")
                 action(match.groups())
                 trig_handled = True
-                break
+                #break
 
         return trig_handled
 

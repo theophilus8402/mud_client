@@ -1,5 +1,6 @@
 
 import asyncio
+import json
 import re
 
 from collections import defaultdict
@@ -35,9 +36,9 @@ class Client():
         return self.handles["main_log"]
 
     def main_log(self, msg, msg_type):
-        print(f"{datetime.now()} //\\\\ {msg_type} //\\\\ {msg}",
-                file=self.log)
-
+        timestamp = datetime.now().strftime('%Y/%m/%d %H:%M:%S.%f')
+        str_json = json.dumps((timestamp, msg_type, msg))
+        self.log.write(f"{str_json}\n")
 
 client = Client()
 
@@ -141,8 +142,9 @@ def add_temp_trigger(name, trigger, flags=0):
 
 def remove_temp_trigger(name):
     global temp_triggers
-    remove_trigger(temp_triggers[name])
-    del(temp_triggers[name])
+    if name in temp_triggers:
+        remove_trigger(temp_triggers.get(name))
+        del(temp_triggers[name])
 
 
 gmcp_handlers = defaultdict(list)

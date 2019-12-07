@@ -168,3 +168,65 @@ secure the kill. Using tents will increase your chances of hindering
 them long enough. The mind warden trait is useful for this path.
 
 
+-- talk with dalran about city defense and raiding
+- it doesn't take a set number of kills to make a raid sanctioned,
+    it's the people and their rank that matters
+- you don't lose xp while defending, but you do while attacking
+- attackers gain xp if a tank goes off in the city
+- target calling in a party:
+(Party): Dalran says, "TARGET Knight."
+(Party): Dalran says, "Although in smaller groups it's useful to have the ability to announce who you are targetting."
+(Party): Dalran says, "Maybe make a function to announce stuff so you can use one toggle for all announces."
+(Party): Dalran says, "It's what I do so if I end up 1v1ing in a party I don't have to spam everyone else."
+big roles will be aeon and hinder
+    - tentacles - based of enemy list, so make sure it's up-to-date
+(Party): Dalran says, "Tower is useful when the enemy group is rushing you to attempt to split them up."
+(Party): Dalran says, "It's really underrated by a lot of people but def good."
+(Party): Dalran says, "Hangedman is super potent and if you're not aeoning and the group has enough damage thats likely what you'll be spamming the most."
+4rty): Dalran says, "Tower is something referred to generally as room prep."
+(Party): Dalran says, "No need to waste a balance on it during a fight, when you can do it before hand."
+(Party): You say, "But, I shouldn't just throw a tower whenever a fight starts?"
+    - aeon is one of the best things to do in a fight
+    - chaos storm - vertigo is good in a fight to keep guys from flying away
+    - physical/mental affs are so/so
+        - mental is good with:
+            - depthswalker to drain mana (focus) because they have an instakill
+            - bards do more dmg when target has more mental affs
+- defense
+    - orb when taking a lot of hits, makes a big difference
+    - heartstone/simulacrum
+    - distortaura
+    - priestess/fool
+        - can do for others too
+- running away
+    - have universe down before a fight, means I can just touch it
+    - hermit/istria
+        - istria will disappear after you die
+        - stopped by monolith (universe is not)
+- bombs
+    - concussion - most used, stuns, disrupts blocking
+    - web - webs
+    - dust - blackout
+    - butterfly - brings peeps down from the skies
+    - can't go through shields
+- peeps who can beckon
+    - priests, waterlords, depthswalkers, magi
+- line of site strats
+    - LoS
+    - aeon + doppie
+    - lust / empress needs
+        - blackout (monk, dustbomb)
+        - two occies
+    - star stack
+    - other peeps can:
+        - snipe
+        - breathstream (dragons) - can go break shield
+- suicide strats
+    - orb before starting
+    - chaosrays as much as possible
+    - do as much aoe dmg as possible without worrying about friendly fire
+- lust allies
+    - be mutually allied to empress from longer distances
+
+
+

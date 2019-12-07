@@ -20,12 +20,12 @@ v.eqbal_queue = deque()
 
 def eqbal(msg):
 
-    #echo("Adding to internal queue: {}".format(msg))
+    #echo(f"Adding to internal queue: {msg}")
     v.eqbal_queue.append(msg)
 
     if v.eqbal_queue_state == QueueStates.nothing_queued:
         msg = v.eqbal_queue.popleft()
-        send("queue add eqbal {}".format(msg))
+        send(f"queue add eqbal {msg}")
         v.eqbal_queue_state = QueueStates.attempting_queue
 
     # to do a better queueing system than achaea...
@@ -45,18 +45,18 @@ def eqbal(msg):
 
 
 def adding_eqbal_trig(matches):
-    #echo("Adding: {}".format(matches[0]))
+    #echo(f"Adding: {matches[0]}")
     v.eqbal_queue_state = QueueStates.command_queued
     delete_line()
 
 
 def running_eqbal_trig(matches):
-    #echo("Running: {}".format(matches[0]))
-    echo("Queue: {}".format(v.eqbal_queue))
+    #echo(f"Running: {matches[0]}")
+    echo(f"Queue: {v.eqbal_queue}")
     v.eqbal_queue_state = QueueStates.nothing_queued
     try:
         msg = v.eqbal_queue.popleft()
-        send("queue add eqbal {}".format(msg))
+        send(f"queue add eqbal {msg}")
     except IndexError:
         pass
     delete_line()
@@ -75,10 +75,10 @@ queue_triggers = [
 add_triggers(queue_triggers)
 
 def curebal(cure):
-    send("curing queue add {}".format(cure))
+    send(f"curing queue add {cure}")
 
 def eat_herb(herb, mud=None, matches=None):
-    send("outr {herb}\neat {herb}".format(herb=herb))
+    send(f"outr {herb}\neat {herb}")
 
 def highlight_current_line(color, pattern=".*", flags=0):
 
@@ -87,7 +87,8 @@ def highlight_current_line(color, pattern=".*", flags=0):
     def replacer(match):
         return color + match.group() + Style.RESET_ALL
 
-    line = re.sub(pattern, replacer, client.current_line, flags=flags)
+    line_to_highlight = client.modified_current_line or client.current_line
+    line = re.sub(pattern, replacer, line_to_highlight, flags=flags)
     client.modified_current_line = line
 
 def target(matches):
@@ -104,7 +105,10 @@ def target(matches):
         )
     add_temp_trigger("target_trigger", target_trigger, flags=re.IGNORECASE)
 
-    echo("now targeting: {}".format(v.target))
+    echo(f"now targeting: {v.target}")
+
+    if v.pt_announce:
+        send(f"pt Targeting: {v.target}")
 
 
 basic_aliases = [
@@ -113,16 +117,16 @@ basic_aliases = [
         target
     ),
     (   "^gg$",
-        "get gold",
-        lambda m: eqbal("get gold")
+        "get sovereigns",
+        lambda m: eqbal("get sovereigns")
     ),
     (   "^pg$",
-        "put gold in pack",
-        lambda m: eqbal("put gold in pack")
+        "put sovereigns in pack",
+        lambda m: eqbal("put sovereigns in pack")
     ),
     (   "^gp (\d+)$",
-        "get # gold from pack",
-        lambda m: eqbal("get {} gold from pack".format(m[0]))
+        "get # sovereigns from pack",
+        lambda m: eqbal(f"get {m[0]} sovereigns from pack")
     ),
 ]
 add_aliases("basic", basic_aliases)
@@ -136,7 +140,7 @@ def move(direction):
     remember_path = getattr(v, "remember_path", False)
     if remember_path:
         v.path_to_remember.append(direction)
-    send("queue prepend eqbal {}".format(direction))
+    send(f"queue prepend eqbal {direction}")
 
 def handle_says(gmcp_data):
     print(f"{gmcp_data['text']}", file=v.says_handle, flush=True)
