@@ -19,7 +19,7 @@ occultism_aliases = [
     ),
     (   "^m(?: (.+))?$",
         "warp []/t",
-        lambda matches: eqbal(f"warp {matches[0] or v.target}"),
+        lambda matches: eqbal(f"stand;warp {matches[0] or v.target}"),
     ),
     (   "^night$",
         "night",

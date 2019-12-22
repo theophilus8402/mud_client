@@ -9,17 +9,37 @@ tarot_aliases = [
         "fling sun at ground",
         lambda _: eqbal("fling sun at ground")
     ),
-    (   "^priest(?: (.+))?$",
-        "fling priestess at []/me",
-        lambda matches: eqbal(f"fling priestess at {matches[0] or 'me'}")
-    ),
     (   "^magi(?: (.+))?$",
         "fling magician at []/me",
         lambda matches: eqbal(f"fling magician at {matches[0] or 'me'}")
     ),
+    (   "^priest(?: (.+))?$",
+        "fling priestess at []/me",
+        lambda matches: eqbal(f"fling priestess at {matches[0] or 'me'}")
+    ),
     (   "^fool(?: (.+))?$",
         "fling fool at []/me",
         lambda matches: eqbal(f"fling fool at {matches[0] or 'me'}")
+    ),
+    (   "^fchar$",
+        "fling chariot at ground",
+        lambda matches: eqbal(f"fling chariot at ground")
+    ),
+    (   "^bchar$",
+        "board chariot",
+        lambda matches: eqbal(f"board chariot")
+    ),
+    (   "^fly$",
+        "spur chariot skywards",
+        lambda matches: eqbal(f"spur chariot skywards")
+    ),
+    (   "^fher(?: (.+))?$",
+        "fling hermit at ground [tag]",
+        lambda matches: eqbal(f"fling hermit at ground {matches[0] or ''}")
+    ),
+    (   "^aher(?: (.+))?$",
+        "activate hermit [tag]",
+        lambda matches: eqbal(f"outd hermit;activate hermit {matches[0] or ''}")
     ),
     (   "^hang(?: (.+))?$",
         "fling hangedman at []/t",
