@@ -24,7 +24,16 @@ def gmcp_defences_remove(gmcp_data):
     #defences("")
 add_gmcp_handler("Char.Defences.Remove", gmcp_defences_remove)
 
-def defences(matches):
+def fighting_defences(matches):
+
+    if matches == "on":
+        echo("Adding fighting defences!!")
+        v.wanted_defences.update(fighting_defs)
+    elif matches == "off":
+        echo("Removing fighting defences!!")
+        v.wanted_defences.difference_update(fighting_defs)
+
+def defences(matches, fighting=False):
     current_defences = v.defences
     needed_defences = v.wanted_defences.difference(current_defences)
     echo("Needed defences: {}".format(needed_defences))
@@ -57,6 +66,10 @@ defence_aliases = [
     (   "^cdef$",
         "list of defences",
         check_defences,
+    ),
+    (   "^fdef(?: (.+))?$",
+        "fighting defences",
+        lambda matches: fighting_defences(matches[0] or "on"),
     ),
 ]
 add_aliases("defences", defence_aliases)
