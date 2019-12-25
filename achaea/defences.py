@@ -94,6 +94,7 @@ basic_defs = {
     "blindness",
     "thirdeye",
     "nightsight",
+    "shroud",
 }
 v.wanted_defences.update(basic_defs)
 
@@ -144,6 +145,7 @@ defence_info = {
     "fangbarrier" : lambda: curebal("sileris"),
     "insomnia" : lambda: curebal("cohosh"),
     "cloak" : lambda: eqbal("touch cloak"),
+    "shroud" : lambda: eqbal("shroud"),
 }
 
 
