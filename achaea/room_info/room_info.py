@@ -3,8 +3,8 @@ import re
 
 from datetime import datetime
 
-from .client import send, add_gmcp_handler, echo
-from .variables import v
+from ..client import send, add_gmcp_handler, echo
+from ..variables import v
 
 
 def find_mobs_in_room(gmcp_data):

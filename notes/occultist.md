@@ -4,6 +4,16 @@
 * anti-theft stuff
 
 
+
+Thank you for coming to the Aegean Logosmas party.
+
+We hope that it was worth your time to share in camaraderie. This is a
+small gift, as is common tradition for the season.
+
+Akrile, War Priest of Aegis
+
+
+
 Abilities in Occultism:
 -------------------------------------------------------------------------------
 Ague                 A chill that enters from the aura to the body.
