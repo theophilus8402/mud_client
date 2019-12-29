@@ -86,7 +86,7 @@ basic_defs = {
     "boartattoo",
     "mosstattoo",
     "deathsight",
-    "lifevision",
+    #"lifevision",
     "mindseye",
     "selfishness",
     "cloak",

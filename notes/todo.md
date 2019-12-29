@@ -1,6 +1,7 @@
 
 * < > room stuff
-    * < > store every room I enter into a db
+    * storing notes in notes/mapping.md
+    * <x> store every room I enter into a db
     * < > exploring
         * < > find every room in that area
         * < > of those rooms, check all the exits/rooms they touch

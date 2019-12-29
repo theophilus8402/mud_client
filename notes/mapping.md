@@ -1,0 +1,30 @@
+
+* need to figure out how to handle marking the fact that I can't
+    enter a certain room from a certain direction
+    * example: can't go from 1 (e) -> (w) 2 because of a locked door
+    * I might need to mark it on the room I'm trying to leave
+    * maybe have a field: movement_issues
+        * [("e", "locked_door"), ("s", "slow"), ("d", "swim")]
+            * some of these can indicate certain actions to take
+                as well:
+                * swim -> swim
+                * underwater -> eat pear; swim
+                * unlock -> unlock dir;open dir;dir
+                * occultist_house_hall -> kneel;wait 10;enter gate
+            * other words indicate increased movement cost
+                * slow
+            * other words indicate that we can't enter the room
+                that way:
+                * locked_door
+* I want to figure out a way to record the path I take
+    * I might enter a dir incorrectly
+        * notice the dir is wrong automagically
+            * triggers aren't easy, but... doable in an ideal
+                scenario
+                * Running queued eqbal command: N
+                * Running queued eqbal command: U
+                  Room.WrongDir "u"
+                  There is no exit in that direction.
+                * Running queued eqbal command: D\r\nThere is a door in the way, to the down.
+                * Running queued eqbal command: UNLOCK DOOR D\r\nYou are not carrying a key for this door.
+        * manually edit it

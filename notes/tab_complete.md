@@ -1,0 +1,25 @@
+
+* I think I need to have just one big completer function thing
+    * that means I can't have different ones for each of the different aliases
+    * I need to be able to handle em all
+* text=""
+    * don't give any options... that should help cut out some stuff
+* text="a"
+    * for now, don't worry about completing aliases
+    * I store them as compiled regexes
+    * so, I'd have to change things or start storing extra info to do this...
+* text="t r"  # i.e. we have the alias, a space, and something we want to target
+    * we can start super simple by just targetting anything in the room (in priority order)
+        * enemies
+        * mobs (not guards)
+            * I can even choose by mobnum
+        * players
+* future work:
+    * find the appropriate alias (should boil down to one)
+    * the alias should have a way of identifying the target priorities
+        * allies (i.e. fool should prioritize allies)
+        * enemies (i.e. aeon should prioritize enemies)
+    * see if there are area specific priorities
+        * certain mobs over others?
+            * orc child > orc soldier > knight
+
