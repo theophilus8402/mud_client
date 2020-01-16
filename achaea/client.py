@@ -23,7 +23,7 @@ class Client():
         self.last_command = ""
 
     def open_handle(self, name, file_path):
-        self.handles[name] = open(file_path, "w")
+        self.handles[name] = open(file_path, "a")
 
     def close(self):
         for handle in self.handles.values():
@@ -31,14 +31,18 @@ class Client():
 
     def start_main_log(self):
         now = datetime.now()
-        log_name = f"logs/achaea/{now.strftime('%Y-%m-%d_%H:%M:%S.%f.txt')}"
+        log_name = f"logs/achaea/{now.strftime('%Y-%m-%d.txt')}"
         self.open_handle("main_log", log_name)
         return self.handles["main_log"]
 
     def main_log(self, msg, msg_type):
-        timestamp = datetime.now().strftime('%Y/%m/%d %H:%M:%S.%f')
-        str_json = json.dumps((timestamp, msg_type, msg))
-        self.log.write(f"{str_json}\n")
+        try:
+            timestamp = datetime.now().strftime('%Y/%m/%d %H:%M:%S.%f')
+            str_json = json.dumps((timestamp, msg_type, msg)).strip()
+            print(f"{str_json}\n", file=self.log, flush=True)
+            #self.log.write(f"{str_json}\n")
+        except Exception as e:
+            print(f"Exception: {e}")
 
 client = Client()
 

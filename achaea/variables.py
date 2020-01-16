@@ -10,9 +10,9 @@ class Variable():
         self.last_rat_call = datetime.now()
         self._rat_last_seen = datetime.now()
         self.ratting_room = 0
-        self.players_in_room = []
+        self.players_in_room = set()
         self.rats_killed_in_room = 0
-        self.mobs_in_room = []
+        self.mobs_in_room = set()
         self.defences = set()
         self.wanted_defences = set()
         add_temp_trigger("target_trigger", ("target_trigger", lambda m: False))

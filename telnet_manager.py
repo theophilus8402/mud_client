@@ -42,11 +42,13 @@ supportables = [
 compiled_gmcp_pat = re.compile("([.A-Za-z]+) (.*)")
 
 gmcp_queue = asyncio.Queue()
+print(f"gmcp_queue id: {id(gmcp_queue)}")
 
 def handle_gmcp(data):
     matches = compiled_gmcp_pat.match(data)
     gmcp_type, gmcp_data = matches.groups()
     gmcp_json = json.loads(gmcp_data)
+    print(f"telnet handle_gmcp: {gmcp_json}")
     gmcp_queue.put_nowait((gmcp_type, gmcp_json))
 
 def iac_cb(telnet_session, sock, cmd, option):
@@ -105,7 +107,7 @@ async def handle_telnet(host, port, from_server_queue, to_server_queue):
             if to_server_queue.qsize() > 0:
                 data_to_send = await to_server_queue.get()
                 session.write(data_to_send.encode(mud_encoding))
-            await asyncio.sleep(.05)
+            await asyncio.sleep(.01)
     finally:
         session.close()
 

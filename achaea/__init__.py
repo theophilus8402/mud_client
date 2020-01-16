@@ -15,15 +15,15 @@ from . import status
 from . import tattoos
 from . import group_fighting
 # occultist modules
-from . import ab_occultism
-from . import ab_tarot
-from . import ab_domination
-"""
+#from . import ab_occultism
+#from . import ab_tarot
+#from . import ab_domination
+# magi modules
+from achaea import ab_elementalism
 # cleric modules
-from . import ab_spirituality
-from . import ab_devotion
-from . import ab_zeal
-"""
+#from . import ab_spirituality
+#from . import ab_devotion
+#from . import ab_zeal
 
 def compile_aliases(aliases):
 
@@ -70,6 +70,6 @@ class Achaea():
             for gmcp_handler in gmcp_handlers[gmcp_type]:
                 gmcp_handler(gmcp_data)
         #else:
-        #basic.echo("{} : {}".format(gmcp_type, gmcp_data))
+        basic.echo("{} : {}".format(gmcp_type, gmcp_data))
             #pass
 
