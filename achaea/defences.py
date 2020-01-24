@@ -2,41 +2,41 @@
 import asyncio
 
 from .basic import eqbal, curebal
-from .client import client, send, echo, add_aliases, add_triggers, add_gmcp_handler, add_temp_trigger, remove_temp_trigger
-from .variables import v
+from .client import c, send, echo
+from .state import s
 
 def gmcp_defences(gmcp_data):
-    v.defences = {defence["name"] for defence in gmcp_data}
-add_gmcp_handler("Char.Defences.List", gmcp_defences)
+    s.defences = {defence["name"] for defence in gmcp_data}
+c.add_gmcp_handler("Char.Defences.List", gmcp_defences)
 
 
 def gmcp_defences_add(gmcp_data):
     defence = gmcp_data["name"]
     echo(f"Woo!  We've gained {defence}!")
-    v.defences.add(defence)
-add_gmcp_handler("Char.Defences.Add", gmcp_defences_add)
+    s.defences.add(defence)
+c.add_gmcp_handler("Char.Defences.Add", gmcp_defences_add)
 
 
 def gmcp_defences_remove(gmcp_data):
     lost_defences = set(gmcp_data)
     echo(f"Egads!  We've lost {lost_defences}!")
-    v.defences.difference_update(lost_defences)
+    s.defences.difference_update(lost_defences)
     #defences("")
-add_gmcp_handler("Char.Defences.Remove", gmcp_defences_remove)
+c.add_gmcp_handler("Char.Defences.Remove", gmcp_defences_remove)
 
 def fighting_defences(matches):
 
     if matches == "on":
         echo("Adding fighting defences!!")
-        v.wanted_defences.update(fighting_defs)
+        s.wanted_defences.update(fighting_defs)
     elif matches == "off":
         echo("Removing fighting defences!!")
-        v.wanted_defences.difference_update(fighting_defs)
+        s.wanted_defences.difference_update(fighting_defs)
 
 def defences(matches, fighting=False):
-    current_defences = v.defences
-    needed_defences = v.wanted_defences.difference(current_defences)
-    echo("Needed defences: {}".format(needed_defences))
+    current_defences = s.defences
+    needed_defences = s.wanted_defences.difference(current_defences)
+    echo(f"Needed defences: {needed_defences}")
 
     # queue up the actions to gain the defences
     for defence in needed_defences:
@@ -48,7 +48,7 @@ def defences(matches, fighting=False):
         eqbal("perform bliss me")
     """
 
-    remove_temp_trigger("defences_trigger")
+    c.remove_temp_trigger("defences_trigger")
 
 
 defences_trigger = ("^You have the following defences:$",
@@ -59,7 +59,7 @@ defences_trigger = ("^You have the following defences:$",
 
 def check_defences(matches):
     eqbal("def")
-    add_temp_trigger("defences_trigger", defences_trigger[0])
+    c.add_temp_trigger("defences_trigger", defences_trigger[0])
 
 
 defence_aliases = [
@@ -72,7 +72,7 @@ defence_aliases = [
         lambda matches: fighting_defences(matches[0] or "on"),
     ),
 ]
-add_aliases("defences", defence_aliases)
+c.add_aliases("defences", defence_aliases)
 
 
 def do_nothing():
@@ -93,10 +93,10 @@ basic_defs = {
     "deafness",
     "blindness",
     "thirdeye",
-    "nightsight",
-    "shroud",
+    #"nightsight",
+    #"shroud",
 }
-v.wanted_defences.update(basic_defs)
+s.wanted_defences.update(basic_defs)
 
 
 # these will be setup and kept up when we need to fight
@@ -124,9 +124,9 @@ defence_info = {
     "preachblessing" : lambda: do_nothing,
     "boartattoo" : lambda: eqbal("touch boar"),
     "mosstattoo" : lambda: eqbal("touch moss"),
-    #"deathsight" : lambda: send("outr skullcap;eat skullcap"),
-    "deathsight" : lambda: eqbal("astralvision"),
-    "lifevision" : lambda: eqbal("astralvision"),
+    "deathsight" : lambda: send("outr skullcap;eat skullcap"),
+    #"deathsight" : lambda: eqbal("astralvision"),
+    #"lifevision" : lambda: eqbal("astralvision"),
     "constitution" : lambda: echo("Missing CONSTITUTION"),
     "toughness" : lambda: echo("Missing TOUGHNESS"),
     "resistance" : lambda: echo("Missing RESISTANCE"),

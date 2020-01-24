@@ -5,22 +5,22 @@ from colorama import *
 from copy import copy
 
 from .basic import eqbal, highlight_current_line
-from .client import send, add_aliases, add_triggers, echo, add_temp_trigger, remove_temp_trigger
-from .variables import v
+from .client import c, send, echo
+from .state import s
 
 def pton():
     echo("Turning party announcements ON!")
-    v.pt_announce = True
+    s.pt_announce = True
 
 def ptoff():
     echo("Turning party announcements OFF!")
-    v.pt_announce = False
+    s.pt_announce = False
 
 def enemy_person(person):
     if person == "all":
         echo("Why are you trying to enemy all?")
     else:
-        v.enemies.add(person)
+        s.enemies.add(person)
         send(f"enemy {person}")
 
         # set the enemy trigger
@@ -28,20 +28,20 @@ def enemy_person(person):
                 person,
                 lambda m: highlight_current_line(Fore.RED, pattern=person, flags=re.I)
             )
-        add_temp_trigger(f"enemy_trigger_{person}", enemy_trigger, flags=re.IGNORECASE)
+        c.add_temp_trigger(f"enemy_trigger_{person}", enemy_trigger, flags=re.IGNORECASE)
 
 def unenemy_person(person):
     if person == "all":
-        copy_enemies = copy(v.enemies)
+        copy_enemies = copy(s.enemies)
         for enemy in copy_enemies:
             unenemy_person(enemy)
         send("unenemy all")
     else:
-        v.enemies.discard(person)
+        s.enemies.discard(person)
         send(f"unenemy {person}")
 
         # remove the previous target trigger
-        remove_temp_trigger(f"enemy_trigger_{person}")
+        c.remove_temp_trigger(f"enemy_trigger_{person}")
 
 
 def multiple_ally(matches):
@@ -67,7 +67,7 @@ group_fighting_aliases = [
     ),
     (   "^enemy(?: (.+))?$",
         "enemy []/target",
-        lambda matches: enemy_person(matches[0] or v.target)
+        lambda matches: enemy_person(matches[0] or s.target)
     ),
     (   "^unenemy (.+)$",
         "unenemy []",
@@ -82,5 +82,5 @@ group_fighting_aliases = [
         lambda matches: multiple_ally(matches)
     ),
 ]
-add_aliases("group_fighting", group_fighting_aliases)
+c.add_aliases("group_fighting", group_fighting_aliases)
 

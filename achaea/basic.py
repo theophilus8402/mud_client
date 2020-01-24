@@ -7,26 +7,43 @@ from enum import Enum
 from collections import deque
 from queue import Queue, Empty
 
-from .client import client, send, add_aliases, add_triggers, remove_trigger, delete_line, echo, add_temp_trigger, remove_temp_trigger, add_gmcp_handler
-from .variables import v
+from .client import c, send, echo
+from achaea.state import s
+
+
+def show_help(alias_group):
+
+    print("{}:".format(alias_group), file=client.current_out_handle, flush=True)
+    for pattern, desc in help_info.get(alias_group, []):
+        print("{:15.15} : {}".format(pattern, desc), file=client.current_out_handle,
+                                    flush=True)
+
+base_aliases = [
+    (   "#help (.*)",
+        "show help",
+        lambda m: show_help(m[0])
+    ),
+]
+c.add_aliases("base", base_aliases)
+
 
 class QueueStates(Enum):
     nothing_queued = 0
     attempting_queue = 1
     command_queued = 2
 
-v.eqbal_queue_state = QueueStates.nothing_queued
-v.eqbal_queue = deque()
+s.eqbal_queue_state = QueueStates.nothing_queued
+s.eqbal_queue = deque()
 
 def eqbal(msg):
 
     #echo(f"Adding to internal queue: {msg}")
-    v.eqbal_queue.append(msg)
+    s.eqbal_queue.append(msg)
 
-    if v.eqbal_queue_state == QueueStates.nothing_queued:
-        msg = v.eqbal_queue.popleft()
+    if s.eqbal_queue_state == QueueStates.nothing_queued:
+        msg = s.eqbal_queue.popleft()
         send(f"queue add eqbal {msg}")
-        v.eqbal_queue_state = QueueStates.attempting_queue
+        s.eqbal_queue_state = QueueStates.attempting_queue
 
     # to do a better queueing system than achaea...
     # (achaea tries to run everything in the queue all at once... ignoring balance)
@@ -46,20 +63,20 @@ def eqbal(msg):
 
 def adding_eqbal_trig(matches):
     #echo(f"Adding: {matches[0]}")
-    v.eqbal_queue_state = QueueStates.command_queued
-    delete_line()
+    s.eqbal_queue_state = QueueStates.command_queued
+    c.delete_line()
 
 
 def running_eqbal_trig(matches):
     #echo(f"Running: {matches[0]}")
-    echo(f"Queue: {v.eqbal_queue}")
-    v.eqbal_queue_state = QueueStates.nothing_queued
+    echo(f"Queue: {s.eqbal_queue}")
+    s.eqbal_queue_state = QueueStates.nothing_queued
     try:
-        msg = v.eqbal_queue.popleft()
+        msg = s.eqbal_queue.popleft()
         send(f"queue add eqbal {msg}")
     except IndexError:
         pass
-    delete_line()
+    c.delete_line()
 
 
 queue_triggers = [
@@ -72,7 +89,7 @@ queue_triggers = [
         running_eqbal_trig
     )
 ]
-add_triggers(queue_triggers)
+c.add_triggers(queue_triggers)
 
 def curebal(cure):
     send(f"curing queue add {cure}")
@@ -93,22 +110,22 @@ def highlight_current_line(color, pattern=".*", flags=0):
 
 def target(matches):
     # remove the previous target trigger
-    remove_temp_trigger("target_trigger")
+    c.remove_temp_trigger("target_trigger")
 
     # set the target
-    v.target = matches[0]
+    s.target = matches[0]
 
     # set the target trigger
     target_trigger = (
-            v.target,
-            lambda m: highlight_current_line(Fore.RED, pattern=v.target, flags=re.I)
+            s.target,
+            lambda m: highlight_current_line(Fore.RED, pattern=s.target, flags=re.I)
         )
-    add_temp_trigger("target_trigger", target_trigger, flags=re.IGNORECASE)
+    c.add_temp_trigger("target_trigger", target_trigger, flags=re.IGNORECASE)
 
-    echo(f"now targeting: {v.target}")
+    echo(f"now targeting: {s.target}")
 
-    if v.pt_announce:
-        send(f"pt Targeting: {v.target}")
+    if s.pt_announce:
+        send(f"pt Targeting: {s.target}")
 
 
 basic_aliases = [
@@ -129,23 +146,24 @@ basic_aliases = [
         lambda m: eqbal(f"get {m[0]} sovereigns from pack")
     ),
 ]
-add_aliases("basic", basic_aliases)
+c.add_aliases("basic", basic_aliases)
 
 def random_move():
-    exits = list(v.room["exits"].keys())
+    exits = list(s.room["exits"].keys())
     exit = random.choice(exits)
     move(exit)
 
 def move(direction):
-    remember_path = getattr(v, "remember_path", False)
+    print(f"trying to move: {direction}")
+    remember_path = getattr(s, "remember_path", False)
     if remember_path:
-        v.path_to_remember.append(direction)
+        s.path_to_remember.append(direction)
     send(f"queue prepend eqbal {direction}")
 
 def handle_says(gmcp_data):
     print(f"Comm.Channel.Text: {gmcp_data}")
-    print(f"{gmcp_data['text']}", file=v.says_handle, flush=True)
-add_gmcp_handler("Comm.Channel.Text", handle_says)
+    print(f"{gmcp_data['text']}", file=c.says_handle, flush=True)
+c.add_gmcp_handler("Comm.Channel.Text", handle_says)
 
 direction_aliases = [
     (   "^n$",
@@ -205,6 +223,6 @@ direction_aliases = [
         lambda _: random_move(),
     ),
 ]
-add_aliases("moving", direction_aliases)
+c.add_aliases("moving", direction_aliases)
 
 

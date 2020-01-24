@@ -1,6 +1,6 @@
 
 from .basic import eqbal
-from .client import send, add_aliases
+from .client import c, send
 
 vision_aliases = [
     (   "^night$",
@@ -8,5 +8,5 @@ vision_aliases = [
         lambda m: eqbal("nightsight")
     ),
 ]
-add_aliases("ab_vision", vision_aliases)
+c.add_aliases("ab_vision", vision_aliases)
 

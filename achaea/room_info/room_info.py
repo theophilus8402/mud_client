@@ -3,8 +3,8 @@ import re
 
 from datetime import datetime
 
-from ..client import send, add_gmcp_handler, echo
-from ..variables import v
+from ..client import c, send, echo
+from ..state import s
 
 
 def find_mobs_in_room(gmcp_data):
@@ -15,12 +15,13 @@ def find_mobs_in_room(gmcp_data):
         return False
 
     # find all the mobs
-    mobs = {item for item in gmcp_data["items"] if "m" in item.get("attrib", "")}
+    mobs = {item["id"] : item for item in gmcp_data["items"]
+                                if "m" in item.get("attrib", "")}
 
     # update the mobs_in_room set
-    v.mobs_in_room.clear()
-    v.mobs_in_room.update(mobs)
-add_gmcp_handler("Char.Items.List", find_mobs_in_room)
+    s.mobs_in_room.clear()
+    s.mobs_in_room.update(mobs)
+c.add_gmcp_handler("Char.Items.List", find_mobs_in_room)
 
 
 def mob_entered_room(gmcp_data):
@@ -30,10 +31,11 @@ def mob_entered_room(gmcp_data):
     try:
         if (gmcp_data["location"] == "room" and
             "m" in gmcp_data["item"].get("attrib")):
-            v.mobs_in_room.add(gmcp_data["item"])
+            item = gmcp_data["item"]
+            s.mobs_in_room[item["id"]] = item
     except TypeError:
         echo(f"GMCP data, mob_entered_room <{gmcp_data}> None!!")
-add_gmcp_handler("Char.Items.Add", mob_entered_room)
+c.add_gmcp_handler("Char.Items.Add", mob_entered_room)
 
 
 def mob_left_room(gmcp_data):
@@ -46,13 +48,8 @@ def mob_left_room(gmcp_data):
 
     # see if we can find that mob in the list
     item = gmcp_data["item"]
-    mob_to_remove = None
-    for mob in v.mobs_in_room:
-        if mob["id"] == item["id"]:
-            echo(f"found mob to remove: {mob}")
-            mob_to_remove = mob
-            break
-    if mob_to_remove is not None:
-        v.mobs_in_room.remove(mob_to_remove)
-add_gmcp_handler("Char.Items.Remove", mob_left_room)
+    if item["id"] in s.mobs_in_room.keys():
+        echo(f"found mob to remove: {mob}")
+        s.mobs_in_room.pop(item["id"])
+c.add_gmcp_handler("Char.Items.Remove", mob_left_room)
 

@@ -1,7 +1,7 @@
 
 from datetime import datetime
 
-from .client import add_temp_trigger, remove_temp_trigger
+from .client import c
 
 class Variable():
 
@@ -15,7 +15,7 @@ class Variable():
         self.mobs_in_room = set()
         self.defences = set()
         self.wanted_defences = set()
-        add_temp_trigger("target_trigger", ("target_trigger", lambda m: False))
+        c.add_temp_trigger("target_trigger", ("target_trigger", lambda m: False))
         self.handles = {}
         self.open_handle("says", "says.log")
         self.says_handle = self.handles["says"]

@@ -1,6 +1,6 @@
 
 from .basic import eqbal
-from .client import send, add_aliases
+from .client import c, send
 
 survival_aliases = [
     (   "^self$",
@@ -16,5 +16,5 @@ survival_aliases = [
         lambda m: eqbal("enter grate")
     ),
 ]
-add_aliases("ab_survival", survival_aliases)
+c.add_aliases("ab_survival", survival_aliases)
 

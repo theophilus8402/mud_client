@@ -1,12 +1,12 @@
 
 from .basic import eqbal
-from .client import send, add_aliases
+from .client import c, send
 
 tattoo_aliases = [
-    #(   "^shd$",
-    #    "touch shield",
-    #    lambda m: eqbal("touch shield")
-    #),
+    (   "^shd$",
+        "touch shield",
+        lambda m: eqbal("touch shield")
+    ),
     (   "^clk$",
         "touch cloak",
         lambda m: eqbal("touch cloak")
@@ -20,5 +20,5 @@ tattoo_aliases = [
         lambda m: eqbal("touch mindseye")
     ),
 ]
-add_aliases("ab_tattoos", tattoo_aliases)
+c.add_aliases("ab_tattoos", tattoo_aliases)
 

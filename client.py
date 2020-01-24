@@ -1,6 +1,7 @@
 
 import asyncio
 import functools
+import json
 import logging
 import readline
 import sys
@@ -10,7 +11,7 @@ from contextlib import suppress
 
 import achaea.tab_complete
 from achaea import Achaea
-from achaea.client import send, client
+from achaea.client import send, c
 from multi_queue import MultiQueue
 from telnet_manager import handle_telnet, strip_ansi, gmcp_queue
 
@@ -27,10 +28,10 @@ async def handle_input(mud_client):
         # check to see if the user just hit enter
         # if so, send the last command instead
         if data == "\n":
-            data = client.last_command
+            data = c.last_command
 
-        client.main_log(data, "user_input")
-        client.last_command = data
+        c.main_log(data, "user_input")
+        c.last_command = data
 
         # check if we should break out of the loop
         if data == "qdq":
@@ -56,9 +57,9 @@ def reader(file_handle, mud_client, queue):
     # check to see if the user just hit enter
     # if so, send the last command instead
     if data == "\n":
-        data = client.last_command
+        data = c.last_command
 
-    client.last_command = data
+    c.last_command = data
 
     # handle user input
     for cmd in data.split(";"):
@@ -66,30 +67,30 @@ def reader(file_handle, mud_client, queue):
             send(cmd)
         # else assume msgs are sent as needed
 
-    client.main_log(data, "user_input")
+    c.main_log(data, "user_input")
 
 
 async def handle_from_server_queue(from_server_queue, mud_client):
 
     while True:
         data = await from_server_queue.get()
-        client.current_chunk = data
+        c.current_chunk = data
         output = []
         for line in data.split("\n"):
 
-            client.modified_current_line = None
-            client.current_line = line
+            c.modified_current_line = None
+            c.current_line = line
             stripped_line = strip_ansi(line)
             mud_client.handle_triggers(stripped_line.strip())
 
-            client.main_log(line, "server_text")
+            c.main_log(line, "server_text")
 
-            if client.modified_current_line == None:
+            if c.modified_current_line == None:
                 output.append(line)
-            elif client.modified_current_line:
-                output.append(client.modified_current_line)
-            # if client.modified_current_line is not None but "", it's meant to be deleted
-        print("\n".join(output).strip(), file=client.current_out_handle, flush=True)
+            elif c.modified_current_line:
+                output.append(c.modified_current_line)
+            # if c.modified_current_line is not None but "", it's meant to be deleted
+        print("\n".join(output).strip(), file=c.current_out_handle, flush=True)
         from_server_queue.task_done()
 
 
@@ -101,7 +102,10 @@ async def handle_gmcp_queue(gmcp_queue, mud_client):
         gmcp_type, gmcp_data = await gmcp_queue.get()
 
         #print(f"handle_gmcp_queue: gmcp_data: {gmcp_data}")
-        client.main_log(gmcp_data, "gmcp_data")
+        gmcp_msg = json.dumps({"type": gmcp_type, "data": gmcp_data})
+        print(f"gmcp_msg: {gmcp_msg}")
+        c.main_log(gmcp_msg, "gmcp_data")
+        print(f"we survived main_log gmcp_msg")
 
         #try:
         #    mud_client.handle_gmcp(gmcp_type, gmcp_data)
@@ -133,7 +137,7 @@ def start_tab_complete():
 
 def main():
 
-    msg_queue = client.send_queue
+    msg_queue = c.send_queue
 
     event_loop = asyncio.get_event_loop()
 
@@ -149,11 +153,11 @@ def main():
     host = "127.0.0.1"
     port = 8888
 
-    client.from_server_queue = MultiQueue()
+    c.from_server_queue = MultiQueue()
     asyncio.ensure_future(handle_telnet(host, port,
-                         client.from_server_queue, msg_queue))
+                         c.from_server_queue, msg_queue))
 
-    server_reader = client.from_server_queue.get_receiver("main")
+    server_reader = c.from_server_queue.get_receiver("main")
     asyncio.ensure_future(handle_from_server_queue(server_reader, mud_client))
 
     # handle gmcp data
@@ -173,10 +177,10 @@ def main():
         log = logging.getLogger('EchoClient')
         log.debug('closing event loop')
 
-        client.from_server_queue.remove_receiver("main")
+        c.from_server_queue.remove_receiver("main")
 
         # let the client close up connections/file handles
-        client.close()
+        c.close()
 
         # Let's also cancel all running tasks:
         event_loop = asyncio.get_event_loop()

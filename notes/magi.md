@@ -3,10 +3,7 @@ help serversidecuring
 clhelp guidemagi
 gloern will help
 traits
-more vials
-elixers/salves
 make sure I have all my herbs
-pipes/tinderbox
 tasks
 talk with indalecio to join a house
 talk with nephiny about the combat survey
@@ -21,6 +18,11 @@ hhelp welcome:
     
 clhelp targettingscript
 clhelp defencebasics
+
+artificing:
+    scald
+    timeflux
+
 
 
 Lesson Plan: Elementalism to Staffstrike
@@ -156,7 +158,6 @@ AIR/WATER/EARTH/FIRE will close that channel. CHANNELS will list what channels
 you have open.
 -------------------------------------------------------------------------------
 
-3950h, 3832m ex-
 Light (Elementalism)                          Known: Yes
 -------------------------------------------------------------------------------
 Syntax:            CAST LIGHT
@@ -171,7 +172,6 @@ the room who may be hiding.
 
 -------------------------------------------------------------------------------
 
-3950h, 3832m ex-
 Gust (Elementalism)                           Known: Yes
 -------------------------------------------------------------------------------
 Syntax:            CAST GUST
@@ -187,7 +187,6 @@ of the room, or blow an adventurer in a particular direction.
 
 -------------------------------------------------------------------------------
 
-3950h, 3832m ex-
 Reflection (Elementalism)                     Known: Yes
 -------------------------------------------------------------------------------
 Syntax:            CAST REFLECTION AT ME/<target>
@@ -203,7 +202,6 @@ before being destroyed. You may only have one reflection at a time.
 
 -------------------------------------------------------------------------------
 
-3950h, 3832m ex-
 Firelash (Elementalism)                       Known: Yes
 -------------------------------------------------------------------------------
 Syntax:            CAST FIRELASH AT <target>/<icewall>/<totem>/GROUND/VINES
@@ -220,7 +218,6 @@ room.
 
 -------------------------------------------------------------------------------
 
-3950h, 3832m ex-
 Waterweird (Elementalism)                     Known: Yes
 -------------------------------------------------------------------------------
 Syntax:            CAST WATERWEIRD AT ME/<target>
@@ -237,7 +234,6 @@ them back to you by doing: CALL ELEMENTALS
 
 -------------------------------------------------------------------------------
 
-3950h, 3832m ex-
 Stonefist (Elementalism)                      Known: Yes
 -------------------------------------------------------------------------------
 Syntax:            CAST STONEFIST
@@ -252,7 +248,6 @@ damage.
 
 -------------------------------------------------------------------------------
 
-3950h, 3832m ex-
 Stoneskin (Elementalism)                      Known: Yes
 -------------------------------------------------------------------------------
 Syntax:            CAST STONESKIN
@@ -270,7 +265,6 @@ ability affords you.
 
 -------------------------------------------------------------------------------
 
-3950h, 3832m ex-
 Fortification (Elementalism)                  Known: Yes
 -------------------------------------------------------------------------------
 Syntax:            FORTIFY <channel>
@@ -287,10 +281,8 @@ regular willpower cost associated with it.
 If you choose to fortify all, the mana and eq costs will be the cost of
 fortifying a single channel multiplied by the number of channels you have open.
 -------------------------------------------------------------------------------
-[Type MORE if you wish to continue reading. (99% shown)]
-3950h, 3832m ex-
-You know of no such ability.
-3950h, 3832m ex-
+
+
 Freeze (Elementalism)                         Known: Yes
 -------------------------------------------------------------------------------
 Syntax:            CAST FREEZE AT GROUND/<target>
@@ -308,15 +300,8 @@ cover it, causing others to slip occasionally. When casting it at
 another adventurer, you will first strip the insulation defence if the
 target has it, then cause the target to shiver, and finally freeze him.
 
-[Type MORE if you wish to continue reading. (90% shown)]
-3950h, 3832m ex-
-[Info]: Time to vote, Vindiconis! http://www.achaea.com/vote We need 50 votes to
-reach rank 4!
-3950h, 3832m ex-
-[File continued via MORE]
 -------------------------------------------------------------------------------
 
-3950h, 3832m ex-
 Geyser (Elementalism)                         Known: Yes
 -------------------------------------------------------------------------------
 Syntax:            CAST GEYSER AT <target>
@@ -331,7 +316,6 @@ the skies or trees.
 
 -------------------------------------------------------------------------------
 
-3950h, 3832m ex-
 Scry (Elementalism)                           Known: Yes
 -------------------------------------------------------------------------------
 Syntax:            CAST SCRY AT <target>
@@ -346,7 +330,6 @@ adventurer.
 
 -------------------------------------------------------------------------------
 
-3950h, 3832m ex-
 Sandling (Elementalism)                       Known: Yes
 -------------------------------------------------------------------------------
 Syntax:            CAST SANDLING
@@ -365,11 +348,7 @@ burrow laterally so long as the ground is soft enough to permit.
 However, you may not burrow deeper than one level below ground.
 
 -------------------------------------------------------------------------------
-[Type MORE if you wish to continue reading. (99% shown)]
-3950h, 3832m ex-
-[File continued via MORE]
 
-3950h, 3832m ex-
 Chargeshield (Elementalism)                   Known: Yes
 -------------------------------------------------------------------------------
 Syntax:            CAST CHARGESHIELD AT ME/<target>
@@ -384,7 +363,6 @@ protection from electric attacks.
 
 -------------------------------------------------------------------------------
 
-3950h, 3832m ex-
 Erode (Elementalism)                          Known: Yes
 -------------------------------------------------------------------------------
 Syntax:            CAST ERODE AT <target>
@@ -399,7 +377,6 @@ destroy a defence on an opponent.
 
 -------------------------------------------------------------------------------
 
-3950h, 3832m ex-
 Suppression (Elementalism)                    Known: Yes
 -------------------------------------------------------------------------------
 Syntax:            CAST SUPPRESSION
@@ -415,7 +392,6 @@ from the cube sigil. This ability will do just that.
 
 -------------------------------------------------------------------------------
 
-3950h, 3832m ex-
 Bloodboil (Elementalism)                      Known: Yes
 -------------------------------------------------------------------------------
 Syntax:            CAST BLOODBOIL
@@ -432,7 +408,6 @@ this spell to take affect.
 
 -------------------------------------------------------------------------------
 
-3950h, 3832m ex-
 Ring (Elementalism)                           Known: Yes
 -------------------------------------------------------------------------------
 Syntax:            CAST RING
@@ -447,7 +422,6 @@ room, it will extend the life of your vibrations.
 
 -------------------------------------------------------------------------------
 
-3950h, 3832m ex-
 Binding (Elementalism)                        Known: Yes
 -------------------------------------------------------------------------------
 Syntax:            BIND <channel>/ALL
@@ -463,7 +437,6 @@ If you choose to BIND ALL, the mana and equilibrium costs will be what it costs
 for a single channel binding, multiplied by however many channels you have open.
 -------------------------------------------------------------------------------
 
-3950h, 3832m ex-
 Muffle (Elementalism)                         Known: Yes
 -------------------------------------------------------------------------------
 Syntax:            CAST MUFFLE
@@ -478,7 +451,6 @@ into a dormant state in which they will not do anything. However, while
 in this state they will not decay over time.
 -------------------------------------------------------------------------------
 
-3950h, 3832m ex-
 Lightning (Elementalism)                      Known: Yes
 -------------------------------------------------------------------------------
 Syntax:            CAST LIGHTNING AT <target>
@@ -493,7 +465,6 @@ possibly remove a defence as well!
 
 -------------------------------------------------------------------------------
 
-3950h, 3832m ex-
 Firewall (Elementalism)                       Known: Yes
 -------------------------------------------------------------------------------
 Syntax:            CAST FIREWALL <direction>
@@ -508,7 +479,6 @@ flame.
 
 -------------------------------------------------------------------------------
 
-3950h, 3832m ex-
 Fog (Elementalism)                            Known: Yes
 -------------------------------------------------------------------------------
 Syntax:            CAST FOG
@@ -523,7 +493,6 @@ envelop the room.
 
 -------------------------------------------------------------------------------
 
-3950h, 3832m ex-
 Deepfreeze (Elementalism)                     Known: Yes
 -------------------------------------------------------------------------------
 Syntax:            CAST DEEPFREEZE
@@ -538,7 +507,6 @@ not targetable. It will attack all those in the room who are your enemy.
 
 -------------------------------------------------------------------------------
 
-3950h, 3832m ex-
 Hellfumes (Elementalism)                      Known: Yes
 -------------------------------------------------------------------------------
 Syntax:            CAST HELLFUMES
@@ -553,7 +521,6 @@ around you.
 
 -------------------------------------------------------------------------------
 
-3950h, 3832m ex-
 Aerial (Elementalism)                         Known: Yes
 -------------------------------------------------------------------------------
 Syntax:            CAST AERIAL
@@ -568,9 +535,6 @@ into the skies once. LAND will bring you back to earth.
 
 -------------------------------------------------------------------------------
 
-3950h, 3832m ex-
-I know of no skill called 'elementalismab'.
-3950h, 3832m ex-
 Flood (Elementalism)                          Known: Yes
 -------------------------------------------------------------------------------
 Syntax:            CAST FLOOD
@@ -584,9 +548,6 @@ Channel the power of elemental water to flood the room you stand in.
 
 -------------------------------------------------------------------------------
 
-3950h, 3832m ex-
-I know of no skill called 'elementalismab'.
-3950h, 3832m ex-
 Illusion (Elementalism)                       Known: Yes
 -------------------------------------------------------------------------------
 Syntax:            CAST ILLUSION [LETHAL] <illusion>
@@ -604,7 +565,6 @@ refer to HELP ILLUSIONS.
 
 -------------------------------------------------------------------------------
 
-3950h, 3832m ex-
 Quake (Elementalism)                          Known: Yes
 -------------------------------------------------------------------------------
 Syntax:            CAST QUAKE
@@ -618,7 +578,6 @@ By summoning forth a minor earthquake, you are able to drain away any
 water that may be flooding your location.
 -------------------------------------------------------------------------------
 
-3950h, 3832m ex-
 Icewall (Elementalism)                        Known: Yes
 -------------------------------------------------------------------------------
 Syntax:            CAST ICEWALL <direction>
@@ -633,7 +592,6 @@ those who would seek to pass by.
 
 -------------------------------------------------------------------------------
 
-3950h, 3832m ex-
 Simultaneity (Elementalism)                   Known: Yes
 -------------------------------------------------------------------------------
 Syntax:            SIMULTANEITY
@@ -645,7 +603,6 @@ Using this fine ability, you will simultaneously open channels to the Air,
 Water, Earth, and Fire realms.
 -------------------------------------------------------------------------------
 
-3950h, 3832m ex-
 Staff (Elementalism)                          Known: Yes
 -------------------------------------------------------------------------------
 Syntax:            CAST STAFF
@@ -664,12 +621,8 @@ Details:
 
 The elemental staff is perhaps the magi's strongest pure-damage attack.
 
-[Type MORE if you wish to continue reading. (90% shown)]
-3950h, 3832m ex-
-[File continued via MORE]
 -------------------------------------------------------------------------------
 
-3950h, 3832m ex-
 Diamondskin (Elementalism)                    Known: Yes
 -------------------------------------------------------------------------------
 Syntax:            CAST DIAMONDSKIN
@@ -686,7 +639,6 @@ in elementalism.
 
 -------------------------------------------------------------------------------
 
-3950h, 3832m ex-
 Unweave (Elementalism)                        Known: Yes
 -------------------------------------------------------------------------------
 Syntax:            CAST UNWEAVE <number> <Talisman piece name> <piece level>
@@ -698,7 +650,6 @@ TALISMANS) and turn it (or them) into gold.
 
 -------------------------------------------------------------------------------
 
-3950h, 3832m ex-
 Efreeti (Elementalism)                        Known: Yes
 -------------------------------------------------------------------------------
 Syntax:            CAST EFREETI
@@ -712,10 +663,6 @@ spinning about, setting your enemies on fire.
 
 -------------------------------------------------------------------------------
 
-3950h, 3832m ex-
-(Market): Lyndee says, "Lyndee's Boutique: chic fashions for women and men now
-in stock off a quiet terminus off Silverveil Promenade."
-3950h, 3832m ex-
 Transfix (Elementalism)                       Known: Yes
 -------------------------------------------------------------------------------
 Syntax:            CAST TRANSFIX AT <target>
@@ -731,11 +678,6 @@ blindness.
 
 -------------------------------------------------------------------------------
 
-3950h, 3832m ex-
-
-It is now the 2nd of Daedalan, 820 years after the fall of the Seleucarian
-Empire.
-3950h, 3832m ex-
 Staffstrike (Elementalism)                    Known: Yes
 -------------------------------------------------------------------------------
 Syntax:            STAFFSTRIKE <target> WITH <element*> [limb]
@@ -753,9 +695,6 @@ shield defence.
 FIRE - Burn away the frost defense from your foe while setting them
 alight.
 WATER - Increase the level of chill in your opponent's bloodstream.
-[Type MORE if you wish to continue reading. (76% shown)]
-3950h, 3832m ex-
-[File continued via MORE]
 
 Channel the elemental forces, delivering a powerful blow and unleashing
 a portion of the vast energy of the channeled element. Should you have
@@ -763,7 +702,6 @@ TARGETING in weaponry, you may use this to target specific limbs.
 
 -------------------------------------------------------------------------------
 
-3950h, 3832m ex-
 Hailstorm (Elementalism)                      Known: Yes
 -------------------------------------------------------------------------------
 Syntax:            CAST HAILSTORM
@@ -778,7 +716,6 @@ the room.
 
 -------------------------------------------------------------------------------
 
-3950h, 3832m ex-
 Stormhammer (Elementalism)                    Known: No (28 lessons required)
 -------------------------------------------------------------------------------
 Syntax:            CAST STORMHAMMER AT <target> [AND <target> [AND <target>]]
@@ -793,9 +730,6 @@ adventurers or denizens.
 
 -------------------------------------------------------------------------------
 
-3950h, 3832m ex-
-With a squeak, an old rat darts into the room, looking about wildly.
-3950h, 3832m ex-
 Holocaust (Elementalism)                      Known: No (132 lessons required)
 -------------------------------------------------------------------------------
 Syntax:            CAST HOLOCAUST <seconds> (Between 10 and 60)
@@ -811,9 +745,6 @@ holocaust.
 
 -------------------------------------------------------------------------------
 
-3950h, 3832m ex-
-With a squeak, a baby rat darts into the room, looking about wildly.
-3950h, 3832m ex-
 Magmasphere (Elementalism)                    Known: No (132 lessons required)
 -------------------------------------------------------------------------------
 Syntax:            CAST MAGMASPHERE <seconds>

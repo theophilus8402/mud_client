@@ -1,10 +1,9 @@
 
 from copy import copy
 
-from ..client import send, add_gmcp_handler, echo, add_aliases
+from ..client import c, echo
 from .db import Session
 from .models import RoomInfo
-from ..variables import v
 
 session = Session()
 
@@ -25,5 +24,5 @@ def store_room(gmcp_data):
             session.commit()
         except:
             echo("eep!  Something is happening")
-add_gmcp_handler("Room.Info", store_room)
+c.add_gmcp_handler("Room.Info", store_room)
 

@@ -1,7 +1,6 @@
 
-from .client import send, add_aliases, add_triggers
+from .client import c, send
 from .basic import eqbal, eat_herb
-from .variables import v
 
 
 aff_healing_aliases = [
@@ -86,7 +85,7 @@ aff_healing_aliases = [
         lambda m: send("outr sileris;apply sileris"),
     ),
 ]
-add_aliases("healing", aff_healing_aliases)
+c.add_aliases("healing", aff_healing_aliases)
 
 
 elixirs_aliases = {
@@ -111,7 +110,7 @@ elixirs_aliases = {
         lambda m: send("drink venom"),
     ),
 }
-add_aliases("elixirs", elixirs_aliases)
+c.add_aliases("elixirs", elixirs_aliases)
 
 salves_aliases = {
     (   "^calor$",
@@ -151,7 +150,7 @@ salves_aliases = {
         lambda m: send("apply restoration to arms"),
     ),
 }
-add_aliases("salves", salves_aliases)
+c.add_aliases("salves", salves_aliases)
 
 pipes_aliases = {
     (   "^lp$",
@@ -171,5 +170,5 @@ pipes_aliases = {
         lambda m: send("light pipes;smoke pipe with elm"),
     ),
 }
-add_aliases("pipes", pipes_aliases)
+c.add_aliases("pipes", pipes_aliases)
 
