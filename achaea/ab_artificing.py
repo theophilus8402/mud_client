@@ -5,10 +5,14 @@ from .basic import eqbal
 
 
 artificing_aliases = [
-    #(   "^m(?: (.+))?$",
-    #    "staffcast dissolution at []/t",
-    #    lambda matches: eqbal(f"stand;staffcast dissolution at {matches[0] or v.target}"),
-    #),
+    (   "^scald(?: (.+))?$",
+        "golem scald []/t",
+        lambda matches: eqbal(f"stand;golem scald {matches[0] or v.target}"),
+    ),
+    (   "^flux(?: (.+))?$",
+        "golem timeflux []/t",
+        lambda matches: eqbal(f"stand;golem timeflux {matches[0] or v.target}"),
+    ),
 ]
 c.add_aliases("ab_artificing", artificing_aliases)
 

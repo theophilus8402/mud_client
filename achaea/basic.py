@@ -12,11 +12,10 @@ from achaea.state import s
 
 
 def show_help(alias_group):
-
-    print("{}:".format(alias_group), file=client.current_out_handle, flush=True)
-    for pattern, desc in help_info.get(alias_group, []):
-        print("{:15.15} : {}".format(pattern, desc), file=client.current_out_handle,
-                                    flush=True)
+    echo(f"{alias_group}:")
+    for pattern, desc in c.help_info.get(alias_group, []):
+        echo(f"{pattern:15.15} : {desc}")
+    
 
 base_aliases = [
     (   "#help (.*)",
@@ -62,7 +61,7 @@ def eqbal(msg):
 
 
 def adding_eqbal_trig(matches):
-    #echo(f"Adding: {matches[0]}")
+    echo(f"Adding: {matches[0]}")
     s.eqbal_queue_state = QueueStates.command_queued
     c.delete_line()
 
@@ -76,7 +75,10 @@ def running_eqbal_trig(matches):
         send(f"queue add eqbal {msg}")
     except IndexError:
         pass
-    c.delete_line()
+    try:
+        c.delete_line()
+    except Exception as e:
+        print(f"c.delete_line()?: {e}")
 
 
 queue_triggers = [
@@ -104,9 +106,9 @@ def highlight_current_line(color, pattern=".*", flags=0):
     def replacer(match):
         return color + match.group() + Style.RESET_ALL
 
-    line_to_highlight = client.modified_current_line or client.current_line
+    line_to_highlight = c.modified_current_line or c.current_line
     line = re.sub(pattern, replacer, line_to_highlight, flags=flags)
-    client.modified_current_line = line
+    c.modified_current_line = line
 
 def target(matches):
     # remove the previous target trigger
@@ -154,14 +156,13 @@ def random_move():
     move(exit)
 
 def move(direction):
-    print(f"trying to move: {direction}")
     remember_path = getattr(s, "remember_path", False)
     if remember_path:
         s.path_to_remember.append(direction)
     send(f"queue prepend eqbal {direction}")
 
 def handle_says(gmcp_data):
-    print(f"Comm.Channel.Text: {gmcp_data}")
+    #print(f"Comm.Channel.Text: {gmcp_data}")
     print(f"{gmcp_data['text']}", file=c.says_handle, flush=True)
 c.add_gmcp_handler("Comm.Channel.Text", handle_says)
 

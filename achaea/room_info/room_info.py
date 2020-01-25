@@ -49,7 +49,7 @@ def mob_left_room(gmcp_data):
     # see if we can find that mob in the list
     item = gmcp_data["item"]
     if item["id"] in s.mobs_in_room.keys():
-        echo(f"found mob to remove: {mob}")
+        echo(f"found mob to remove: {item['id']}")
         s.mobs_in_room.pop(item["id"])
 c.add_gmcp_handler("Char.Items.Remove", mob_left_room)
 

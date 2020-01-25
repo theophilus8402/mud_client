@@ -16,14 +16,16 @@ def ratting_move_on(client):
 def mob_entered_room(gmcp_data):
     #Char.Items.Add { "location": "room", "item": { "id": "118764", "name": "a young rat", "icon": "animal", "attrib": "m" } }
     # this is to check to see if a rat entered the room
-    s.rat_last_seen
+    #s.rat_last_seen
+    pass
 c.add_gmcp_handler("Char.Items.Add", mob_entered_room)
 
 
 def mob_left_room(gmcp_data):
     # Char.Items.Remove { "location": "room", "item": { "id": "118764", "name": "a young rat" } }
     # this is to check to see if a rat left the room
-    s.rat_last_seen
+    #s.rat_last_seen
+    pass
 c.add_gmcp_handler("Char.Items.Remove", mob_left_room)
 
 

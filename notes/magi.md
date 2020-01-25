@@ -5,10 +5,9 @@ gloern will help
 traits
 make sure I have all my herbs
 tasks
-talk with indalecio to join a house
-talk with nephiny about the combat survey
 chelp antitheft
-
+have triggers to help find shielded people
+get hr2
 hhelp welcome:
     hhelp primer
     hhelp 
@@ -19,13 +18,9 @@ hhelp welcome:
 clhelp targettingscript
 clhelp defencebasics
 
-artificing:
-    scald
-    timeflux
 
 
-
-Lesson Plan: Elementalism to Staffstrike
+Lesson Plan:
              Artificing to Destroy
              Crystalism to Retardation
              Artificing to Transcendent

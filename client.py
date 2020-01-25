@@ -76,44 +76,41 @@ async def handle_from_server_queue(from_server_queue, mud_client):
         data = await from_server_queue.get()
         c.current_chunk = data
         output = []
-        for line in data.split("\n"):
+        try:
+            for line in data.split("\n"):
 
-            c.modified_current_line = None
-            c.current_line = line
-            stripped_line = strip_ansi(line)
-            mud_client.handle_triggers(stripped_line.strip())
+                c.modified_current_line = None
+                c.current_line = line
+                stripped_line = strip_ansi(line)
+                mud_client.handle_triggers(stripped_line.strip())
 
-            c.main_log(line, "server_text")
+                c.main_log(line, "server_text")
 
-            if c.modified_current_line == None:
-                output.append(line)
-            elif c.modified_current_line:
-                output.append(c.modified_current_line)
-            # if c.modified_current_line is not None but "", it's meant to be deleted
-        print("\n".join(output).strip(), file=c.current_out_handle, flush=True)
-        from_server_queue.task_done()
+                if c.modified_current_line == None:
+                    output.append(line)
+                elif c.modified_current_line:
+                    output.append(c.modified_current_line)
+                # if c.modified_current_line is not None but "", it's meant to be deleted
+            print("\n".join(output).strip(), file=c.current_out_handle, flush=True)
+            from_server_queue.task_done()
+        except Exception as e:
+            print(f"Trouble with triggers: {e}")
 
 
 async def handle_gmcp_queue(gmcp_queue, mud_client):
 
     while True:
-        #print("handle_gmcp_queue: awaiting gmcp_data")
-        #print(f"gmcp_queue id: {id(gmcp_queue)}")
         gmcp_type, gmcp_data = await gmcp_queue.get()
 
-        #print(f"handle_gmcp_queue: gmcp_data: {gmcp_data}")
         gmcp_msg = json.dumps({"type": gmcp_type, "data": gmcp_data})
-        print(f"gmcp_msg: {gmcp_msg}")
         c.main_log(gmcp_msg, "gmcp_data")
-        print(f"we survived main_log gmcp_msg")
 
-        #try:
-        #    mud_client.handle_gmcp(gmcp_type, gmcp_data)
-        #except Exception as e:
-        #    printf(f"ERROR! {e}")
+        try:
+            mud_client.handle_gmcp(gmcp_type, gmcp_data)
+        except Exception as e:
+            printf(f"ERROR! {e}")
 
         gmcp_queue.task_done()
-        #print(f"handle_gmcp_queue: done with: {gmcp_data}")
 
 
 def start_tab_complete():

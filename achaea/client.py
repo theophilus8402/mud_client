@@ -13,7 +13,6 @@ class Client():
         self.send_queue = asyncio.Queue()
 
         self.line = None
-        self.delete_line = False
         self.modified_current_line = None
         self.last_command = ""
 
@@ -125,6 +124,7 @@ class Client():
         self.set_line("")
 
     def add_gmcp_handler(self, gmcp_type, action):
+        print(f"adding handler: {gmcp_type} {action}")
         self._gmcp_handlers[gmcp_type].append(action)
 
 

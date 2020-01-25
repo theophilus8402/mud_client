@@ -1,5 +1,7 @@
 
 import re
+import sys
+import traceback
 
 #from .client import client, aliases, triggers, gmcp_handlers
 from .client import c
@@ -44,8 +46,6 @@ class Achaea():
             #print("handling: {}".format(compiled_pattern.pattern))
             match = compiled_pattern.match(msg)
             if match:
-                print(f"got a match! {msg}")
-                print(action)
                 action(match.groups())
                 alias_handled = True
                 break
@@ -62,18 +62,24 @@ class Achaea():
             #match = compiled_pattern.match(msg)
             match = search_method(msg)
             if match:
-                #print("got a match!")
-                action(match.groups())
-                trig_handled = True
-                #break
+                try:
+                    print("got a trigger match!")
+                    print(f"match: {match}")
+                    print(f"action: {action}")
+                    action(match.groups())
+                    trig_handled = True
+                    #break
+                except Exception as e:
+                    print(f"handle_triggers: {e}")
 
         return trig_handled
 
     def handle_gmcp(self, gmcp_type, gmcp_data):
-        if gmcp_type in c._gmcp_handlers:
-            for gmcp_handler in c._gmcp_handlers[gmcp_type]:
+        try:
+            for gmcp_handler in c._gmcp_handlers.get(gmcp_type, []):
                 gmcp_handler(gmcp_data)
-        #else:
-        basic.echo(f"{gmcp_type} : {gmcp_data}")
-            #pass
+            #basic.echo(f"{gmcp_type} : {gmcp_data}")
+        except Exception as e:
+            print(f"problem with __init__.handle_gmcp {e}")
+            traceback.print_exc(file=sys.stdout)
 
