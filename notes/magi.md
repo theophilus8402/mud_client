@@ -7,6 +7,9 @@ make sure I have all my herbs
 tasks
 chelp antitheft
 have triggers to help find shielded people
+A nearly invisible magical shield forms around Ielana.
+A dizzying beam of energy strikes you as your attack rebounds off of Ielana's
+shield.
 get hr2
 hhelp welcome:
     hhelp primer

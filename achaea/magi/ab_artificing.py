@@ -1,7 +1,7 @@
 
-from .client import c, send, echo
-from .state import s
-from .basic import eqbal
+from ..client import c, send, echo
+from ..state import s
+from ..basic import eqbal
 
 
 artificing_aliases = [

@@ -7,6 +7,8 @@ from collections import defaultdict
 from datetime import datetime
 from functools import partial
 
+from .state import DiffState
+
 class Client():
 
     def __init__(self):
@@ -101,8 +103,6 @@ class Client():
         return self._triggers[-1]
     
     def remove_trigger(self, trigger):
-        #for trig in self._triggers:
-        #    self.echo(trig)
         try:
             self._triggers.remove(trigger)
         except ValueError:
@@ -115,7 +115,12 @@ class Client():
         self.send_queue.put_nowait(msg)
     
     def echo(self, msg):
+        # TODO: move this functionality somewhere else
         print(msg, file=self.current_out_handle, flush=True)
+
+        ds = DiffState()
+        ds.echo_lines.append(msg)
+        return ds
 
     def set_line(self, new_line):
         self.modified_current_line = new_line

@@ -22,9 +22,9 @@ from . import group_fighting
 ##from . import ab_tarot
 ##from . import ab_domination
 # magi modules
-from achaea import ab_elementalism
-from achaea import ab_crystalism
-from achaea import ab_artificing
+from achaea.magi import ab_elementalism
+from achaea.magi import ab_crystalism
+from achaea.magi import ab_artificing
 # cleric modules
 #from . import ab_healing
 #from . import ab_spirituality
@@ -63,12 +63,8 @@ class Achaea():
             match = search_method(msg)
             if match:
                 try:
-                    print("got a trigger match!")
-                    print(f"match: {match}")
-                    print(f"action: {action}")
                     action(match.groups())
                     trig_handled = True
-                    #break
                 except Exception as e:
                     print(f"handle_triggers: {e}")
 

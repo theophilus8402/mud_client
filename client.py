@@ -44,7 +44,7 @@ async def handle_input(mud_client):
             # else assume msgs are sent as needed
 
 
-def reader(file_handle, mud_client, queue):
+def reader(file_handle, mud_client):
 
     # note!  This is more on the "client" side
     # in that I should be handling aliases and what not
@@ -134,8 +134,6 @@ def start_tab_complete():
 
 def main():
 
-    msg_queue = c.send_queue
-
     event_loop = asyncio.get_event_loop()
 
     mud_client = Achaea()
@@ -145,14 +143,14 @@ def main():
 
     # handle reading stdin
     #asyncio.ensure_future(handle_input(mud_client))
-    event_loop.add_reader(sys.stdin, reader, sys.stdin, mud_client, msg_queue)
+    event_loop.add_reader(sys.stdin, reader, sys.stdin, mud_client)
 
     host = "127.0.0.1"
     port = 8888
 
     c.from_server_queue = MultiQueue()
     asyncio.ensure_future(handle_telnet(host, port,
-                         c.from_server_queue, msg_queue))
+                         c.from_server_queue, c.send_queue))
 
     server_reader = c.from_server_queue.get_receiver("main")
     asyncio.ensure_future(handle_from_server_queue(server_reader, mud_client))

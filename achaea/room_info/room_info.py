@@ -8,7 +8,7 @@ from ..state import s
 
 
 def find_mobs_in_room(gmcp_data):
-    echo(gmcp_data)
+    #echo(gmcp_data)
 
     # make sure we're getting room info
     if gmcp_data["location"] != "room":
@@ -26,7 +26,7 @@ c.add_gmcp_handler("Char.Items.List", find_mobs_in_room)
 
 def mob_entered_room(gmcp_data):
     #Char.Items.Add { "location": "room", "item": { "id": "118764", "name": "a young rat", "icon": "animal", "attrib": "m" } }
-    echo(gmcp_data)
+    #echo(gmcp_data)
 
     try:
         if (gmcp_data["location"] == "room" and
@@ -49,7 +49,7 @@ def mob_left_room(gmcp_data):
     # see if we can find that mob in the list
     item = gmcp_data["item"]
     if item["id"] in s.mobs_in_room.keys():
-        echo(f"found mob to remove: {item['id']}")
+        #echo(f"found mob to remove: {item['id']}")
         s.mobs_in_room.pop(item["id"])
 c.add_gmcp_handler("Char.Items.Remove", mob_left_room)
 

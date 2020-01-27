@@ -1,8 +1,12 @@
 
-from .client import c, send, echo
-from .state import s
-from .basic import eqbal
+from ..client import c, send, echo
+from ..state import s
+from ..basic import eqbal
 
+
+def stormhammer(matches):
+    peeps = " and ".join([s.target, matches[0].split(" ")])
+    eqbal(f"stand;cast stormhammer at {peeps}")
 
 elementalism_aliases = [
     (   "^light$",
@@ -176,6 +180,10 @@ elementalism_aliases = [
     (   "^hail$",
         "cast hailstorm",
         lambda matches: eqbal(f"stand;cast hailstorm"),
+    ),
+    (   "^ham(?: (.+))?$",
+        "cast stormhammer at [] and [] and []",
+        lambda matches: stormhammer(matches),
     ),
 ]
 c.add_aliases("ab_elementalism", elementalism_aliases)

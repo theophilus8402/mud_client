@@ -3,18 +3,15 @@ import re
 
 from colorama import *
 
-from enum import Enum
-from collections import deque
-from queue import Queue, Empty
-
 from .client import c, send, echo
-from achaea.state import s
+from .state import s, QueueStates
 
 
 def show_help(alias_group):
-    echo(f"{alias_group}:")
-    for pattern, desc in c.help_info.get(alias_group, []):
-        echo(f"{pattern:15.15} : {desc}")
+    lines = [f"{pattern:15.15} : {desc}" for pattern, desc in
+                                            c.help_info.get(alias_group, [])]
+    help_lines = "\n".join(lines)
+    return echo(f"{alias_group}:\n{help_lines}")
     
 
 base_aliases = [
@@ -25,14 +22,6 @@ base_aliases = [
 ]
 c.add_aliases("base", base_aliases)
 
-
-class QueueStates(Enum):
-    nothing_queued = 0
-    attempting_queue = 1
-    command_queued = 2
-
-s.eqbal_queue_state = QueueStates.nothing_queued
-s.eqbal_queue = deque()
 
 def eqbal(msg):
 
@@ -82,11 +71,11 @@ def running_eqbal_trig(matches):
 
 
 queue_triggers = [
-    (   "\[System\]: Added (.*) to your eqbal queue.",
+    (   r"\[System\]: Added (.*) to your eqbal queue.",
         # catch lines for system eqbal
         adding_eqbal_trig
     ),
-    (   "^\[System\]: Running queued eqbal command: (.*)$",
+    (   r"^\[System\]: Running queued eqbal command: (.*)$",
         # catch lines for system eqbal
         running_eqbal_trig
     )
