@@ -1,0 +1,182 @@
+HHELP VOLUNTEER
+
+======== Assistance ========
+
+--IMPORTANT--
+A tome in the briefing hall of the Silver Citadel can guide you through
+almost anything you will need to know on the path to Shieldwarden. It is
+called Forging the Shield.
+
+At this stage, you are learning more about the intricacies of combat, so
+engaging other Shield members in discussions about combat will be quite
+beneficial to you. You should be able to glean most of the information
+you need to learn by interacting with your housemates and retain it by
+recording the things you learn in your journal.
+
+You will find that you are able to keep up on the goings on of the house
+using: READLOG SHIELD
+To see the previous serenade: READLOG SHIELD 1 1
+This can extend for up to 6 serenades: READLOG SHIELD 1 6
+
+HHELP VOLUNTEERADVICE can help with certain decisions such as how to
+spend your lessons, which traits to learn, and which stats are important
+to you.
+
+You are not required to have a mentor, but it is a relationship that can
+benefit you a great deal. For a list of mentors recommended by the
+house, HHELP MENTORS
+
+You can find out who is able to help in specific areas of the house
+using HOUSE STRUCTURE.
+
+
+======== Equipment =========
+
+- Appropriate gear (HELP ARMOUR, runewardens may use fieldplate)
+- A fist sigil for each wielded item.
+- 1 tinderbox
+- 3 pipes with appropriate contents.
+- 10 eye sigils.
+- 1 monolith sigil.
+- 1 Mana, Frost, Immunity, Levitation, Speed, Venom, and Restoration,
+Health, Caloric, Epidermal, Mass, and Mending.
+- Tattoos: Moss, boar, shield, cloak, and tree.
+- A journal in which you will record your discoveries, theories, and
+substantial interactions with housemates, such as promotions and
+ceremonies.
+- 20 of each type of mineral OR herb from the list below.
+
+Curatives come in two categories. You don't need both categories, though
+minerals are -highly- recommended, as they come cheaper.
+
+MINERAL
+Antimony, Argentum, Arsenic, Azurite, Aurum, Bisemutum, Calamine,
+Calcite, Cinnabar, Cuprum, Dolomite, Ferrum, Gypsum, Magnesium,
+Malachite, Plumbum, Potash, Quartz, Quicksilver, Realgar, Stannum.
+
+HERB
+Ash, Bayberry, Bellwort, Bloodroot, Cohosh, Echinacea, Elm, Ginger,
+Ginseng, Goldenseal, Hawthorn, Irid Moss, Kelp, Kola, Lobelia, Myrrh,
+Prickly Pear, Sileris, Skullcap, Valerian.
+
+
+======== Knowledge =========
+
+LOYALS: *Note - Only if you have class loyals
+
+Be able to describe the effects of your loyals and how to use them.
+- How do you summon them?
+- How do you recall them if they're lost?
+- How do you get them to follow you?
+- Can they attack? How?
+- How do you make them stop attacking?
+- What else can they do?
+
+
+DEFENSES:
+
+List the most important defenses you should prepare for combat, and give
+an example of what each defense is used for.
+
+Please refer to HHELP BASICDEFENSES for a list of defenses you should
+focus on. You don't need to have those abilities at the time of your
+exam, but that doesn't mean you can't discuss them on some level.
+
+
+CURING:
+
+List the recovery times of the following:
+- Herb balance
+- Pipe balance
+- Different salve balances
+- Sip balances
+- Focus balance
+
+
+Why are curing priorities important?
+- What will happen if you cure asthma before paralysis?
+- What will happen if you cure slickness before asthma?
+
+
+LIMB DAMAGE:
+
+Explain the three levels of arm and leg damage.
+- What are the steps to repair each stage?
+
+Explain the two levels of head and torso damage.
+- What are their effects?
+- What are the steps to repair each stage?
+
+
+AFFLICTIONS:
+
+What three afflictions constitute a "soft lock"?
+    --- asthma, slickness, anorexia
+Why do we call it a "lock"?
+    --- asthma (can't smoke), slickness (can't apply salves), anorexia (can't eat/drink)
+How does paralysis contribute to a lock?
+    --- can't move (can't touch tree)
+How does impatience contribute to a lock?
+    --- can't focus
+
+What afflictions go into a rift lock, and how does it work?
+
+Be prepared to demonstrate your ability to cure.
+
+
+SIGILS:
+
+Take a look at the different kinds of sigils, and get a sense of how
+they're each used. Most important are eye and monolith sigils. What do
+they do, and how do you use them?
+What is phase? Who can phase? Why is that a concern?
+Which methods of teleportation can you prevent?
+
+
+======== Promotion =========
+
+You may seek advancement, no sooner than level 40, by arranging a
+meeting with an Instructor aide.
+
+After you pass you will be elevated to the third rank, at which point
+you must read HHELP SENTRY.
+
+
+
+
+==========================================================================
+
+HHELP BAISCDEFENSES
+
+The following is a list of basic defenses that every aspiring combatant
+should know about.
+
+=.=.=.=.=.=.=.=.=.=.=.=.=.=.=
+DEFENSIVE HERBS
+
+Cohosh - insomnia
+Kola - wake up quickly
+Hawthorn - deafness
+Bayberry - blindness
+Echinacea - thirdeye
+Sileris - waxy coating
+Skullcap - aura of rebounding
+Skullcap (eaten) - deathsight
+
+=.=.=.=.=.=.=.=.=.=.=.=.=.=.=
+DEFENSIVE SALVES: APPLY
+
+Mass - makes you heavy
+Caloric - protects against cold
+
+=.=.=.=.=.=.=.=.=.=.=.=.=.=.=
+DEFENSIVE ELIXIRS: DRINK
+
+Levitation - float
+Speed - protects against aeon
+Frost - protects against fire damage
+Venom - resist poison dmg
+
+=.=.=.=.=.=.=.=.=.=.=.=.=.=.=
+
+

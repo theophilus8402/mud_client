@@ -14,7 +14,7 @@ def store_room(gmcp_data):
     room_num = gmcp_data["num"]
     if not room_in_db(room_num):
         echo(f"Egads!  {room_num} hasn't been stored!  Adding it now!")
-        echo(f"{gmcp_data}")
+        #echo(f"{gmcp_data}")
         room_info = copy(gmcp_data)
         room_info["details"] = str(gmcp_data["details"])
         room_info["exits"] = str(gmcp_data["exits"])

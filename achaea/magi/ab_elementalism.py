@@ -5,8 +5,16 @@ from ..basic import eqbal
 
 
 def stormhammer(matches):
-    peeps = " and ".join([s.target, matches[0].split(" ")])
-    eqbal(f"stand;cast stormhammer at {peeps}")
+    print(matches)
+    try:
+        if matches is None:
+            peeps = s.target
+        else:
+            peeps = " and ".join([s.target, *matches.split(" ")])
+        print(peeps)
+        eqbal(f"stand;cast stormhammer at {peeps}")
+    except Exception as e:
+        print(f"stormhammer: {e}")
 
 elementalism_aliases = [
     (   "^light$",
@@ -28,6 +36,14 @@ elementalism_aliases = [
     (   "^ww(?: (.+))?$",
         "cast waterweird at me/[]",
         lambda matches: eqbal(f"stand;cast waterweird at {matches[0] or 'me'}"),
+    ),
+    (   "^okill(?: (.+))?$",
+        "order waterweird kill t/[]",
+        lambda matches: eqbal(f"stand;order waterweird kill {matches[0] or s.target}"),
+    ),
+    (   "^opass(?: (.+))?$",
+        "order waterweird passive",
+        lambda matches: eqbal(f"stand;order waterweird passive"),
     ),
     (   "^stone$",
         "cast stoneskin",
@@ -183,7 +199,7 @@ elementalism_aliases = [
     ),
     (   "^ham(?: (.+))?$",
         "cast stormhammer at [] and [] and []",
-        lambda matches: stormhammer(matches),
+        lambda matches: stormhammer(matches[0] or None),
     ),
 ]
 c.add_aliases("ab_elementalism", elementalism_aliases)

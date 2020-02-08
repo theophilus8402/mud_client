@@ -50,14 +50,14 @@ def eqbal(msg):
 
 
 def adding_eqbal_trig(matches):
-    echo(f"Adding: {matches[0]}")
+    #echo(f"Adding: {matches[0]}")
     s.eqbal_queue_state = QueueStates.command_queued
     c.delete_line()
 
 
 def running_eqbal_trig(matches):
     #echo(f"Running: {matches[0]}")
-    echo(f"Queue: {s.eqbal_queue}")
+    #echo(f"Queue: {s.eqbal_queue}")
     s.eqbal_queue_state = QueueStates.nothing_queued
     try:
         msg = s.eqbal_queue.popleft()

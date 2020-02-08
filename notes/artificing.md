@@ -12,12 +12,12 @@ Pummel               Have your golem smash them to pieces.
 Schematics           Efficiently handle your constructs.
 Dehydrate            Make them vulnerable to the consuming flame.
 Timeflux             Disrupt the flow of time about an enemy.
-   -------------------------------------------------------------------------
-                 *** Next ability available in 78 lessons ***
-   -------------------------------------------------------------------------
 Impurity             Introduce impurities into the blood of your opposition.
 Barrier              Raise a protective shield.
 Disfigure            Disfigure their face beyond all recognition.
+   -------------------------------------------------------------------------
+                 *** Next ability available in 78 lessons ***
+   -------------------------------------------------------------------------
 Inferno              Bring forth a raging inferno.
 Firestorm            The very world shall burn at your command.
 Conflagrate          Summon forth a terrible conflagration.
@@ -205,5 +205,200 @@ that they suffer from broken limbs.
 
 -------------------------------------------------------------------------------
 
+
+Impurity (Artificing)                         Known: Yes
+-------------------------------------------------------------------------------
+Syntax:            GOLEM IMPURITY <target> <aff>
+Extra Information: Crystal: egg
+
+Works on/against:  Adventurers
+Cooldown:          2.30 seconds of equilibrium
+Resource:          90 mana
+Details:
+With your knowledge of elemental manipulation combined with your golem
+as a foci, you are able to introduce impurities into the blood of one
+who would dare oppose you.
+
+Valid impurities are: paralysis, anorexia, asthma, slickness, and
+stupidity.
+
+-------------------------------------------------------------------------------
+
+Barrier (Artificing)                          Known: Yes
+-------------------------------------------------------------------------------
+Syntax:            GOLEM BARRIER
+Extra Information: Crystal: spiral
+
+Works on/against:  Adventurers
+Cooldown:          4.00 seconds of equilibrium
+Details:
+Command your golem to summon a protective shield about yourself.
+-------------------------------------------------------------------------------
+
+Disfigure (Artificing)                        Known: Yes
+-------------------------------------------------------------------------------
+Syntax:            GOLEM DISFIGURE <target>
+Extra Information: Crystal: torus
+
+Works on/against:  Adventurers
+Cooldown:          2.35 seconds of equilibrium
+Resource:          20 mana
+Details:
+You may command your golem to send a blast of scalding steam into the
+face of a victim, causing horrific disfigurement.
+-------------------------------------------------------------------------------
+
+Inferno (Artificing)                          Known: No (138 lessons required)
+-------------------------------------------------------------------------------
+Syntax:            GOLEM INFERNO
+Extra Information: Crystal: diamond
+
+Works on/against:  Room
+Cooldown:          2.90 seconds of equilibrium
+Resource:          50 mana
+Details:
+Your golem is now capable of summoning forth a raging inferno. For as
+long as the flames rage, they shall periodically sear the flesh of all
+those in their location.
+
+Be warned. Fire is truly an indiscriminate force. You shall not be
+spared from an inferno, even if you were the one to call it forth.
+-------------------------------------------------------------------------------
+
+Firestorm (Artificing)                        Known: No (276 lessons required)
+-------------------------------------------------------------------------------
+Syntax:            GOLEM FIRESTORM
+Extra Information: Crystal: diamond
+
+Works on/against:  Room
+Cooldown:          4.00 seconds of equilibrium
+Resource:          50 mana
+Details:
+If an inferno rages, you may use your golem as a focus to summon forth a
+truly terrible firestorm. Infernos shall spread to all adjacent rooms.
+-------------------------------------------------------------------------------
+
+Conflagrate (Artificing)                      Known: No (448 lessons required)
+-------------------------------------------------------------------------------
+Syntax:            GOLEM CONFLAGRATE <target>
+Extra Information: Crystal: pyramid
+
+Works on/against:  Adventurers
+Cooldown:          2.35 seconds of equilibrium
+Resource:          150 mana
+Details:
+You are now able to have your golem summon forth a conflagration to
+engulf a suitably vulnerable opponent. This conflagration will deal
+periodic damage until the person is able to extinguish it. The only way
+to do this is to remove all traces of the ablaze affliction from their
+person.
+
+For the purposes of this spell, suitably vulnerable requires that the
+target has two or more stacks of the ablaze affliction.
+-------------------------------------------------------------------------------
+
+Restore (Artificing)                          Known: No (448 lessons required)
+-------------------------------------------------------------------------------
+Syntax:            GOLEM RESTORE
+Cooldown:          1.10 seconds of equilibrium
+Resource:          200 mana
+Details:
+At the cost of some mana, you may restore a portion of the energy that
+sustains your construct.
+
+-------------------------------------------------------------------------------
+
+Hypnotise (Artificing)                        Known: No (552 lessons required)
+-------------------------------------------------------------------------------
+Syntax:            GOLEM HYPNOTISE <target>
+Extra Information: Crystal: pyramid
+
+Works on/against:  Adventurers
+Cooldown:          2.00 seconds of equilibrium
+Resource:          110 mana
+Details:
+Your golem can mesmerise a victim, forcing them to drift off to sleep.
+-------------------------------------------------------------------------------
+
+Destroy (Artificing)                          Known: No (621 lessons required)
+-------------------------------------------------------------------------------
+Syntax:            GOLEM DESTROY <target>
+Extra Information: Crystal: pyramid
+
+Works on/against:  Adventurers
+Cooldown:          3.20 seconds of equilibrium
+Resource:          150 mana
+Details:
+The wrath of Kkractle is truly terrible indeed. If a subject's skin is
+already melting under exposure to heat(*), they will be sufficiently
+vulnerable for you to unleash the wrath of Kkractle against them. Your
+golem is able to direct a sliver of the Primal Flame's power, utterly
+annihilating your foe, denying them even the respite of the star's
+blessing.
+
+(*) This requires that they have been afflicted with ablaze, then had
+the affliction escalate at least 4 times while under the influence of
+the dehydration affliction.
+
+Fewer stacks of the ablaze affliction will be required the lower the
+target's health may be.
+
+-------------------------------------------------------------------------------
+
+Deconstruct (Artificing)                      Known: No (793 lessons required)
+-------------------------------------------------------------------------------
+Syntax:            GOLEM DECONSTRUCT
+Cooldown:          1.50 seconds of equilibrium
+Details:
+You are now capable of deconstructing your golem, receiving back the
+crystals that you used to create it.
+-------------------------------------------------------------------------------
+
+Destabilise (Artificing)                      Known: No (966 lessons required)
+-------------------------------------------------------------------------------
+Syntax:            GOLEM DESTABILISE <vibe>
+Extra Information: Crystal: sphere
+
+Works on/against:  Room
+Cooldown:          Equilibrium
+Resource:          400 mana
+Details:
+Your mastery over your golem allows you to channel various tones through
+the construct, throwing crystalline vibrations into disarray and causing
+them to become unstable. This will inevitably cause the vibration to be
+destroyed, but their instability will cause them to have various potent
+effects upon the location before they expire.
+
+Dissipate: drains mana from everyone in the room.
+Palpitation: deals damage to everyone in the room.
+Heat: deals fire damage and causes ablaze to everyone in the room.
+Alarm: informs you of all people in the local area.
+Tremors: creates rubble to block the exits of the room.
+Reverberation: destroys all monolith, cube, knife, and eye sigils on the
+ground in your location.
+Adduction: will attempt to draw all those in adjacent locations into the
+room.
+Harmony: will restore health to everyone in the room.
+Creeps: afflicts everyone in the room with fear, agoraphobia, and
+claustrophobia.
+Silence: blocks all usage of communication channels for a short time.
+Revelation: strips the phase, astralform, or blackwind defences from
+everyone in the room.
+Grounding: launches everyone in the room into the sky.
+Oscillate: deals minor damage and afflicts everyone in the room with
+both epilepsy and stupidity.
+Disorientation: prones and gives dizziness to everyone in the room.
+Energise: restores some health for each person besides the destabiliser
+in the room.
+Stridulation: disrupts the mental equilibrium of everyone in the room.
+Gravity: forces all those in the sky above back to the ground.
+Dissonance: breaks all magical shields protecting adventurer's in the
+room.
+Plague: breaks the limbs of everyone in the room.
+Lullaby: strips the metawake defence and prevents its reapplication for
+a short time.
+Retardation: afflicts everyone in the room with the curse of Aeon.
+
+-------------------------------------------------------------------------------
 
 
