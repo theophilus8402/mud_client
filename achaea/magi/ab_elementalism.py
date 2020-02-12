@@ -79,7 +79,7 @@ elementalism_aliases = [
     ),
     (   "^charge(?: (.+))?$",
         "cast chargeshield at me/[]",
-        lambda matches: eqbal(f"stand;cast chargeshield at {matches[0] or me}"),
+        lambda matches: eqbal(f"stand;cast chargeshield at {matches[0] or 'me'}"),
     ),
     (   "^supp?$",
         "cast suppression",

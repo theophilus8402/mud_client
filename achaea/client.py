@@ -93,7 +93,7 @@ class Client():
     
     def add_trigger(self, new_trigger, flags=0):
         pattern, action = new_trigger
-        self.echo(f"adding trigger: {pattern}")
+        #self.echo(f"adding trigger: {pattern}")
         compiled_pattern = re.compile(pattern, flags=flags)
         if pattern.startswith("^"):
             search_method = compiled_pattern.match

@@ -86,7 +86,7 @@ def curebal(cure):
     send(f"curing queue add {cure}")
 
 def eat_herb(herb, mud=None, matches=None):
-    send(f"outr {herb}\neat {herb}")
+    send(f"outr {herb};eat {herb}")
 
 def highlight_current_line(color, pattern=".*", flags=0):
 

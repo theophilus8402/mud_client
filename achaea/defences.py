@@ -93,7 +93,7 @@ basic_defs = {
     "deafness",
     "blindness",
     "thirdeye",
-    #"nightsight",
+    "nightsight",
     #"shroud",
 }
 s.wanted_defences.update(basic_defs)

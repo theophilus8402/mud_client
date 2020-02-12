@@ -7,6 +7,7 @@ import traceback
 from .client import c
 from . import state
 from . import basic
+from . import balances
 from . import ab_battlerage
 from . import ab_vision
 from . import ab_survival

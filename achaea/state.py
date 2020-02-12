@@ -24,6 +24,9 @@ class State():
         self.ratting_room = 0
         self.eqbal_queue_state = QueueStates.nothing_queued
         self.eqbal_queue = deque()
+        self.bal = "1"
+        self.eq = "1"
+        self.show_balance_times = False
 
 
 s = State()

@@ -87,9 +87,14 @@ CURING:
 
 List the recovery times of the following:
 - Herb balance
+    1.5s
 - Pipe balance
+    1.5s
 - Different salve balances
+    - mending 1s - 1.5s w/ timeflux
+    - restoration 4s - 6s w/ timeflux
 - Sip balances
+    - 4.5s
 - Focus balance
 
 
