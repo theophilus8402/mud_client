@@ -9,6 +9,15 @@ from .name import long_short_name_map
 from ..state import s
 
 
+room_aliases = [
+    (   "^cir$",
+        "Char.Items.Room",
+        lambda matches: echo("Need to Fix GMCP/Telnet comms...")
+    ),
+]
+c.add_aliases("room_info", room_aliases)
+
+
 def add_unknown_long_name(gmcp_data):
     unknown_file = "unknown_long_names.json"
     with open(unknown_file, "r") as f:

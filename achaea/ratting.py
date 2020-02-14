@@ -109,8 +109,8 @@ def rat_info(matches):
     echo("Showing rat info!")
     echo(f"mobs: {s.mobs_in_room}")
     echo(f"players: {s.players_in_room}")
-    echo(f"rats killed: {s.rats_killed_in_room}")
-    echo(f"now: {datetime.now()}, last_seen: {s.rat_last_seen}")
+    #echo(f"rats killed: {s.rats_killed_in_room}")
+    #echo(f"now: {datetime.now()}, last_seen: {s.rat_last_seen}")
 
 ratting_aliases = [
     (   "^rls$",

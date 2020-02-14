@@ -10,10 +10,24 @@ shield.
 house structure
 eq/balance triggers don't quite work when they are queued back to back
     the char.vitals doesn't update properly
-get tab completion working
+spiffify tab completion
+    be able to say which mobs can be attacked
+    or set a blacklist?
+    figure out a way to highlight stuff without the numbers
+        maybe just strip the numbers when creating the highlights?
 finish up that thing that populates the rat1234
     i might be able to send gmcp info here to get what I need
 better clotting
+fix comms
+    need a way to send gmcp commands
+        have a telnet object we can pass around or a gmcp queue or something
+there's something about falling asleep that screws up my queing system
+    maybe I'm hiding some of the messages and I need to make sure it's
+    all in that current chunk before assuming that I sent the message
+    and it was received well
+setup aliases/triggers for staff + fist sigil
+    attach fist at start
+    detach fist at end
     
 clhelp targettingscript
 clhelp defencebasics
@@ -26,20 +40,10 @@ hunting:
 
 
 to buy:
-    bayberry
-    bloodroot
-    ash
-    skullcap
-    bellwort
-    echinacea
-    goldenseal
-    cohosh
-    ginger
-    hawthorn
-    kola
-    sileris
-    elm
-    valerian
+    ash - azure falcon
+    skullcap - merch emp / falcon
+    sileris - magic shoppe
+    valerian - crimson arsenal
 
 
 Lesson Plan:

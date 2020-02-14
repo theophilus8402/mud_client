@@ -5,15 +5,17 @@ import json
 import logging
 import readline
 import sys
-import threading
 
 from contextlib import suppress
 
-import achaea.tab_complete
+from achaea.tab_complete import TargetCompleter
 from achaea import Achaea
 from achaea.client import send, c
+from achaea.state import s
 from multi_queue import MultiQueue
 from telnet_manager import handle_telnet, strip_ansi, gmcp_queue
+
+from prompt_toolkit.shortcuts import PromptSession
 
 
 async def handle_input(mud_client):
@@ -21,13 +23,19 @@ async def handle_input(mud_client):
     # note!  This is more on the "client" side
     # in that I should be handling aliases and what not
 
-    loop = asyncio.get_event_loop()
+    session = PromptSession("", reserve_space_for_menu=3)
+
+    completer = TargetCompleter(s)
+    # Run echo loop. Read text from stdin, and reply it back.
     while True:
-        data = await loop.run_in_executor(None, input)
+        try:
+            data = await session.prompt_async(completer=completer)
+        except (EOFError, KeyboardInterrupt):
+            return
 
         # check to see if the user just hit enter
         # if so, send the last command instead
-        if data == "\n":
+        if data == "":
             data = c.last_command
 
         c.main_log(data, "user_input")
@@ -42,32 +50,6 @@ async def handle_input(mud_client):
             if not mud_client.handle_aliases(cmd):
                 send(cmd)
             # else assume msgs are sent as needed
-
-
-def reader(file_handle, mud_client):
-
-    # note!  This is more on the "client" side
-    # in that I should be handling aliases and what not
-    # before putting something in the queue
-    # I should also exchange the queue.put_nowait for "send"
-    # to send stuff to the server
-
-    data = file_handle.readline()
-
-    # check to see if the user just hit enter
-    # if so, send the last command instead
-    if data == "\n":
-        data = c.last_command
-
-    c.last_command = data
-
-    # handle user input
-    for cmd in data.split(";"):
-        if not mud_client.handle_aliases(cmd):
-            send(cmd)
-        # else assume msgs are sent as needed
-
-    c.main_log(data, "user_input")
 
 
 async def handle_from_server_queue(from_server_queue, mud_client):
@@ -113,37 +95,14 @@ async def handle_gmcp_queue(gmcp_queue, mud_client):
         gmcp_queue.task_done()
 
 
-def start_tab_complete():
-    from achaea.tab_complete import SimpleCompleter
-    from achaea.variables import v
-    import readline
-
-    # set the completer function
-    print(f"players: {id(v.players_in_room)}")
-    print(f"mobs: {id(v.mobs_in_room)}")
-    print(f"enemies: {id(v.enemies)}")
-    simple_completer = SimpleCompleter(v.players_in_room,
-                                       v.mobs_in_room,
-                                       v.enemies)
-    print("Setting tab completer")
-    readline.set_completer(simple_completer.complete)
-
-    # use the tab key for completion
-    readline.parse_and_bind("tab: complete")
-
-
 def main():
 
     event_loop = asyncio.get_event_loop()
 
     mud_client = Achaea()
 
-    # start tab completer
-    start_tab_complete()
-
     # handle reading stdin
-    #asyncio.ensure_future(handle_input(mud_client))
-    event_loop.add_reader(sys.stdin, reader, sys.stdin, mud_client)
+    asyncio.ensure_future(handle_input(mud_client))
 
     host = "127.0.0.1"
     port = 8888

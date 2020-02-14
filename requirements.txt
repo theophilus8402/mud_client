@@ -1,3 +1,4 @@
 colorama
 sqlalchemy
 pytest
+prompt_toolkit
