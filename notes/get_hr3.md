@@ -62,7 +62,7 @@ Prickly Pear, Sileris, Skullcap, Valerian.
 
 ======== Knowledge =========
 
-LOYALS: *Note - Only if you have class loyals
+LOYALS: Note - Only if you have class loyals
 
 Be able to describe the effects of your loyals and how to use them.
 - How do you summon them?
@@ -92,10 +92,14 @@ List the recovery times of the following:
     1.5s
 - Different salve balances
     - mending 1s - 1.5s w/ timeflux
+        caloric, epidermal
     - restoration 4s - 6s w/ timeflux
 - Sip balances
     - 4.5s
 - Focus balance
+    2.5 after logosian, 5 before
+- tree
+    14s after logosian, 16s before
 
 
 Why are curing priorities important?
@@ -183,5 +187,25 @@ Frost - protects against fire damage
 Venom - resist poison dmg
 
 =.=.=.=.=.=.=.=.=.=.=.=.=.=.=
+
+
+
+   I am the shield against the sword.
+Come one or come many, I stand ready to hold the pass.
+   I am the cloak against the storm.
+Take shelter in my presence, I am the Valley's walls.
+
+   On the blood of my brothers, on the blood of my sisters,
+I swear this oath, to carry you to victory, or lay beside you in defeat.
+   To my comrades, to my countrymen,
+According to my station, I serve you all without exception.
+
+   With unrelenting purpose,
+I bleed and spill blood on your behalf, that you may live in peace.
+   In name of Cyrene and its Senate,
+I will not fail in this.
+
+   Ever loyal,
+Beyond my dying breath.
 
 

@@ -4,6 +4,15 @@ from ..state import s
 from ..basic import eqbal
 
 
+elementalism_triggers = [
+    (   "^You grow still and begin to silently pray for preservation of your soul while",
+        # you're leaving so detach the fist sigil!
+        lambda _: eqbal("detach fist from staff")
+    ),
+]
+c.add_triggers(elementalism_triggers)
+
+
 def stormhammer(matches):
     print(matches)
     try:
@@ -143,7 +152,7 @@ elementalism_aliases = [
     ),
     (   "^simul$",
         "simultaneity",
-        lambda matches: eqbal(f"stand;simultaneity"),
+        lambda matches: eqbal(f"stand;attach fist to staff;simultaneity"),
     ),
     (   "^std(?: (.+))?$",
         "staffcast dissolution at []/t",

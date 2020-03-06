@@ -17,8 +17,11 @@ def strip_ansi(line):
 mud_encoding = 'iso-8859-1'
 
 def gmcpOut(sock, msg):
-    print("gmcpOut: {}".format(msg))
-    sock.sendall(IAC + SB + GMCP + msg.encode(mud_encoding) + IAC + SE)
+    print(f"gmcpOut: {msg}")
+    if isinstance(msg, str):
+        sock.sendall(IAC + SB + GMCP + msg.encode(mud_encoding) + IAC + SE)
+    else:
+        sock.sendall(IAC + SB + GMCP + msg + IAC + SE)
 
 supportables = [
         'char 1',
@@ -104,7 +107,11 @@ async def handle_telnet(host, port, from_server_queue, to_server_queue):
             # handle sending stuff to the server
             if to_server_queue.qsize() > 0:
                 data_to_send = await to_server_queue.get()
-                session.write(data_to_send.encode(mud_encoding))
+                if isinstance(data_to_send, bytes):
+                    gmcpOut(telnet_socket, data_to_send)
+                    #session.write(data_to_send)
+                else:
+                    session.write(data_to_send.encode(mud_encoding))
             await asyncio.sleep(.05)
     finally:
         session.close()

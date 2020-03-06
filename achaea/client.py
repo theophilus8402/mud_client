@@ -5,14 +5,23 @@ import re
 
 from collections import defaultdict
 from datetime import datetime
-from functools import partial
+from functools import singledispatch
+from telnetlib import IAC, SB, SE
+
+GMCP = b'\xc9'
+
 
 from .state import DiffState
 
 class Client():
 
     def __init__(self):
+        # it's a little weird, but to_send is going to be a "prequeue"
+        # I'll use self.send_flush() to actuall send the traffic
+        # with this, I can 
+        self.to_send = []
         self.send_queue = asyncio.Queue()
+        self._delete_line = False
 
         self.line = None
         self.modified_current_line = None
@@ -109,14 +118,23 @@ class Client():
             self.echo("Trying to remove a trigger that doesn't exist!")
 
     def send(self, msg):
-        if not msg.endswith("\n"):
-            msg = f"{msg}\n"
-        self.main_log(msg.strip(), "data_sent")
-        self.send_queue.put_nowait(msg)
+        self.to_send.append(msg)
+
+    def send_flush(self):
+        msg_blob = ";".join(self.to_send)
+        if isinstance(msg_blob, str) and not msg_blob.endswith("\n"):
+            msg_blob = f"{msg_blob}\n"
+            self.main_log(msg_blob.strip(), "data_sent")
+        #echo(f"to_send: {self.to_send} sending: {msg_blob}")
+        self.send_queue.put_nowait(msg_blob)
+        self.to_send.clear()
+
+    def gmcp_send(self, msg):
+        self.send(msg.encode("iso-8859-1"))
     
     def echo(self, msg):
         # TODO: move this functionality somewhere else
-        print(msg, file=self.current_out_handle, flush=True)
+        print(msg.rstrip(), file=self.current_out_handle, flush=True)
 
         ds = DiffState()
         ds.echo_lines.append(msg)
@@ -126,7 +144,7 @@ class Client():
         self.modified_current_line = new_line
     
     def delete_line(self):
-        self.set_line("")
+        self._delete_line = True
 
     def add_gmcp_handler(self, gmcp_type, action):
         print(f"adding handler: {gmcp_type} {action}")

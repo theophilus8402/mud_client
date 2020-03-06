@@ -5,44 +5,18 @@ import re
 from datetime import datetime
 
 from ..client import c, send, echo
-from .name import long_short_name_map
+from .name import get_mob_id, get_mobs_from_items, figure_out_unknown_mobs
 from ..state import s
 
 
 room_aliases = [
     (   "^cir$",
         "Char.Items.Room",
-        lambda matches: echo("Need to Fix GMCP/Telnet comms...")
+        lambda matches: c.gmcp_send("Char.Items.Room \"\"")
     ),
 ]
 c.add_aliases("room_info", room_aliases)
 
-
-def add_unknown_long_name(gmcp_data):
-    unknown_file = "unknown_long_names.json"
-    with open(unknown_file, "r") as f:
-        unknowns = json.load(f)
-    unknowns[gmcp_data["name"]] = gmcp_data
-    with open(unknown_file, "w") as f:
-        json.dump(unknowns, f, indent=2)
-
-
-def get_mobid(gmcp_data):
-    #'106482': {'id': '106482', 'name': 'a young rat', 'icon': 'animal', 'attrib': 'm'}
-    long_name = gmcp_data["name"]
-    mob_id = gmcp_data["id"]
-    if long_name not in long_short_name_map:
-        print(f"didn't find: {long_name}")
-        add_unknown_long_name(gmcp_data)
-        return mob_id
-    short_name = long_short_name_map[long_name]
-    #print(f"{short_name}{mob_id}")
-    return f"{short_name}{mob_id}"
-
-
-def is_alive_mob(gmcp_data):
-    return ("m" in gmcp_data.get("attrib", "")
-            and "d" not in gmcp_data.get("attrib", ""))
 
 def find_mobs_in_room(gmcp_data):
     #echo(gmcp_data)
@@ -53,11 +27,11 @@ def find_mobs_in_room(gmcp_data):
 
     # find all the mobs
     try:
-        # "d" in attrib means it's dead so we don't care
-        mobs = {get_mobid(item) : item for item in gmcp_data["items"]
-                                    if is_alive_mob(item)}
+        items = gmcp_data["items"]
+        mobs = get_mobs_from_items(gmcp_data["items"])
     except Exception as e:
         print(f"find_mobs_in_room: {e}")
+        print(f"gmcp_data: {gmcp_data}")
         return False
 
     # update the mobs_in_room set
@@ -74,7 +48,7 @@ def mob_entered_room(gmcp_data):
         if (gmcp_data["location"] == "room" and
             "m" in gmcp_data["item"].get("attrib")):
             item = gmcp_data["item"]
-            mob_id = get_mobid(item)
+            mob_id = get_mob_id(item)
             s.mobs_in_room[mob_id] = item
     except TypeError:
         echo(f"GMCP data, mob_entered_room <{gmcp_data}> None!!")

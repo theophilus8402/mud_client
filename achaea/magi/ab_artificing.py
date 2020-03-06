@@ -41,6 +41,18 @@ artificing_aliases = [
         "golem timeflux []/t (disc) - slow salve",
         lambda matches: send(f"stand;golem timeflux {matches[0] or s.target}"),
     ),
+    (   "^impur(?: (.+))?$",
+        "golem impurity []/t (egg) - give aff (TODO) paralysis",
+        lambda matches: send(f"stand;golem impurity {matches[0] or s.target} paralysis"),
+    ),
+    (   "^bar$",
+        "golem barrier (spiral) - shield",
+        lambda matches: send(f"stand;golem barrier"),
+    ),
+    (   "^disfig(?: (.+))?$",
+        "golem disfigure []/t (torus) - disfigure",
+        lambda matches: send(f"stand;golem disfigure {matches[0] or s.target}"),
+    ),
 ]
 c.add_aliases("ab_artificing", artificing_aliases)
 

@@ -189,6 +189,10 @@ def lost_salve(matches):
 
 
 balance_triggers = [
+    (   r"^You are not fallen or kneeling.$",
+        # I'm up!
+        lambda m: c.delete_line()
+    ),
     (   r"^You have recovered equilibrium.$",
         # eq back
         recovered_eq

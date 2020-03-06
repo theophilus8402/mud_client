@@ -1,0 +1,133 @@
+Lorei says in Cyrenese, "So a possible killpath as a Magi is to prep a leg, prep
+the torso, break the leg, freeze while breaking torso and then pummel."
+
+
+Lorei says in Cyrenese, "You could try it on me!"
+Lorei says in Cyrenese, "Try freezing me."
+Kaden says in a quiet voice, "I remember it used to."
+Kaden says in a quiet voice, "Not sure now."
+Kaden says in a quiet voice, "I don't really bother with efreeti most days."
+Lorei says in Cyrenese, "I'm frozen and ablaze."
+Kaden says in a quiet voice, "Ahh."
+You say, "Interesting."
+Lorei says in Cyrenese, "Now try the efreeti first."
+You say, "So, do you normally go the freezing and pummel route?"
+Kaden says in a quiet voice, "Umm."
+You say, "And then try freezing you?"
+Kaden says in a quiet voice, "I'm a bit weird."
+Kaden says in a quiet voice, "I use ret sleeplocks into the freezing route."
+Lorei says in Cyrenese, "The ice put the fire out."
+You say, "Ret sleeplocks?"
+You say, "Oh? interesting!"
+Lorei says to you in Cyrenese, "The retardation vibration."
+Kaden says in a quiet voice, "Retardation vibe to enable me to put them to sleep."
+
+
+Lorei says in Cyrenese, "I have the feeling it may just be haemophilia."
+Lorei says in Cyrenese, "Bloodboil is an example of a class active cure."
+Lorei says in Cyrenese, "Depthswalkers like me have um, accelerate."
+A look of relief comes over Lorei as she grows less pale.
+Lorei says in Cyrenese, "In my case, it's stopped by recklessness."
+Edotlina says with a brogue accent, "Alleviate here." (blademaster?)
+Edotlina says with a brogue accent, "But paralysis stops it."
+Edotlina says with a brogue accent, "For Water..."
+Edotlina says with a brogue accent, "Purify, but not sure what stops it."
+Lorei says in Cyrenese, "Blademasters have another way out of locks, too."
+Edotlina says to Lorei with a brogue accent, "Phoenix?"
+
+eye sigil on the ground stops souls from entering a room
+
+taking out the left hand shutsdown a lot of peeps
+
+
+
+Kog says in Cyrenese, "Ama-maalier, when drawn, gives ten seconds of movement
+immunity. Enough time for a Dragon to breathrain twice, after drawing it. So if
+at first you don't succeed, run like hell."
+4050h, 5346m, 15400e, 19900w exdb-
+Lorei raises her hand in the air.
+4050h, 5346m, 15400e, 19900w exdb-
+Kog nods his head at Lorei.
+4050h, 5346m, 15400e, 19900w exdb-
+Lorei says in Cyrenese, "What does movement mean exactly?"
+4050h, 5346m, 15400e, 19900w exdb-
+Kog says in Cyrenese, "Ama-maalier fixes you precisely at that point, at that
+elevation."
+4050h, 5346m, 15400e, 19900w exdb-
+Comprehension flashes across Lorei's face.
+4050h, 5346m, 15400e, 19900w exdb-
+Kog says in Cyrenese, "You cannot fly, you cannot land, you cannot be moved. You
+exist there, and only there."
+4050h, 5346m, 15400e, 19900w exdb-
+Lorei nods her head emphatically.
+4050h, 5346m, 15400e, 19900w exdb-
+Kog says in Cyrenese, "Alright. We will end with the most complicated, then."
+4050h, 5346m, 15400e, 19900w exdb-
+Kog says in Cyrenese, "Unique to Hashani Alchemists is a skill called
+'Radiation'"
+4050h, 5346m, 15400e, 19900w exdb-
+Sphera takes a drink from an elegant diamond vial.
+4050h, 5346m, 15400e, 19900w exdb-
+Kog says in Cyrenese, "It draws from their Wellspring of power, and unleashes
+the raw energy on all around. It requires a great deal of focus, and has several
+unique constraints- however, it is extremely potent."
+4050h, 5346m, 15400e, 19900w exdb-
+Kog says in Cyrenese, "Radiation will strike anyone in the room, at any
+elevation, three times. Each strike will do more damage than the last, and the
+third strike will be so powerful that everyone in the entire area will be
+blinded beyond what a mindseye can help with, for several seconds."
+4050h, 5346m, 15400e, 19900w exdb-
+Kog says in Cyrenese, "From...testing, it is a channel, but it is almost
+impossible to interrupt."
+4050h, 5346m, 15400e, 19900w exdb-
+Kog says in Cyrenese, "Two-Handers can distract, and forcing them to act will
+negate the rest. But, otherwise? Run- they will not care if you hinder them
+otherwise, and racing to kill the Alchemist typically results in the defenders
+losing."
+4050h, 5346m, 15400e, 19900w exdb-
+Sphera takes a drink from an elegant diamond vial.
+4050h, 5346m, 15400e, 19900w exdb-
+Kog says in Cyrenese, "The unique constraints, too, are important. An Alchemist
+can only channel those energies once every two minutes. Just attempting it - not
+completing it - begins this restriction."
+4050h, 5346m, 15400e, 19900w exdb-
+Kog says in Cyrenese, "Second, each ROOM can only sustain such an act every
+five."
+Kog says in Cyrenese, "This means that if Mezghar starts Radiation here, then
+decides against it, he cannot do so again for two minutes. And this room is safe
+from further Radiation- from ANY Alchemist- for five."
+4050h, 5346m, 15400e, 19900w exdb-
+4050h, 5346m, 15400e, 19900w exdb-
+A nearly invisible magical shield forms around Calahan.
+4050h, 5346m, 15400e, 19900w exdb-
+Kog says in Cyrenese, "Once started, the Alchemist cannot take any other
+actions."
+4050h, 5346m, 15400e, 19900w exdb-
+Kog says in Cyrenese, "It will start as such."
+4050h, 5346m, 15400e, 19900w exdb-
+The temperature of the air abruptly begins to rise, a strange glittering haze
+filling the air in the distance.
+4050h, 5346m, 15400e, 19900w exdb-
+Kog says in Cyrenese, "That sensation is your warning. There are no second
+warnings, the damage begins soon after. Each stage has a unique appearance, and
+does more than the last."
+4050h, 5346m, 15400e, 19900w exdb-
+Your skin begins to burn, a rippling fire that courses beyond the surface and
+quests deep within.
+4050h, 5346m, 15400e, 19900w exdb-
+Kog says in Cyrenese, "This stage strikes me for about a quarter of my health.
+Dangerous, but not typically lethal- however, the next two stages come swiftly
+after."
+4050h, 5346m, 15400e, 19900w exdb-
+Sphera takes a drink from an elegant diamond vial.
+4050h, 5346m, 15400e, 19900w exdb-
+Your body feels as though it is catching aflame from within, your skin bubbling
+and flaking away even as the haze that descends upon the location becomes almost
+opaque.
+4050h, 5346m, 15400e, 19900w exdb-
+Kog says in Cyrenese, "The last time that struck me, it did about sixty percent
+of my maximum health."
+4050h, 5346m, 15400e, 19900w exdb-
+The world turns white, a raging force beyond the bounds of mortal control
+unleashed in a cataclysm of destruction.
+

@@ -25,55 +25,51 @@ c.add_aliases("base", base_aliases)
 
 def eqbal(msg):
 
-    #echo(f"Adding to internal queue: {msg}")
+    # TODO: is this even necessary any more?
     s.eqbal_queue.append(msg)
 
-    if s.eqbal_queue_state == QueueStates.nothing_queued:
-        msg = s.eqbal_queue.popleft()
+    for msg in s.eqbal_queue:
         send(f"queue add eqbal {msg}")
-        s.eqbal_queue_state = QueueStates.attempting_queue
-
-    # to do a better queueing system than achaea...
-    # (achaea tries to run everything in the queue all at once... ignoring balance)
-    # I need to keep a queue
-    # three states:
-    #   nothing queued
-    #       if in this state, check my queue for commands to send or wait for one
-    #       ... move to v ... when I send a command to eqbal
-    #   attempting to queue
-    #       if in this state, any commands to eqbal go into my queue
-    #       ... move to v .... when I get the message showing the command has been queued
-    #   command queued
-    #       if in this state, any commands go into my queue
-    #       ... move to v ... when I get the message stating the command has been run
-    #   nothing queued
+    s.eqbal_queue.clear()
 
 
 def adding_eqbal_trig(matches):
-    #echo(f"Adding: {matches[0]}")
-    s.eqbal_queue_state = QueueStates.command_queued
     c.delete_line()
 
 
-def running_eqbal_trig(matches):
-    #echo(f"Running: {matches[0]}")
-    #echo(f"Queue: {s.eqbal_queue}")
-    s.eqbal_queue_state = QueueStates.nothing_queued
-    try:
-        msg = s.eqbal_queue.popleft()
-        send(f"queue add eqbal {msg}")
-    except IndexError:
-        pass
-    try:
+def readding_eqbal_trig(matches):
+    c.delete_line()
+
+
+def running_equilib_trig(matches):
+    c.delete_line()
+
+
+def no_eq_bal_trig(matches):
+    if "Running queued" in c.current_chunk:
         c.delete_line()
-    except Exception as e:
-        print(f"c.delete_line()?: {e}")
+
+
+def running_eqbal_trig(matches):
+    c.delete_line()
 
 
 queue_triggers = [
-    (   r"\[System\]: Added (.*) to your eqbal queue.",
+    (   r"^\[System\]: Added (.*) to your eqbal queue.",
         # catch lines for system eqbal
         adding_eqbal_trig
+    ),
+    (   r"(.*) was added to your equilibrium queue.$",
+        # catch lines for system eqbal
+        readding_eqbal_trig
+    ),
+    (   r"^\[System\]: Running queued equilibrium command: (.*)",
+        # catch lines for system eqbal
+        running_equilib_trig
+    ),
+    (   r"^You must regain equilibrium first.$",
+        # catch lines for system eqbal
+        no_eq_bal_trig
     ),
     (   r"^\[System\]: Running queued eqbal command: (.*)$",
         # catch lines for system eqbal

@@ -46,10 +46,15 @@ async def handle_input(mud_client):
             break
 
         # handle user input
+        #c.echo(f"cmd: {data}")
         for cmd in data.split(";"):
             if not mud_client.handle_aliases(cmd):
                 send(cmd)
             # else assume msgs are sent as needed
+
+        # everything has been queued in c.to_send
+        # use c.send_flush() to actually send it
+        c.send_flush()
 
 
 async def handle_from_server_queue(from_server_queue, mud_client):
@@ -68,11 +73,16 @@ async def handle_from_server_queue(from_server_queue, mud_client):
 
                 c.main_log(line, "server_text")
 
-                if c.modified_current_line == None:
+                if c._delete_line == True:
+                    # "delete" the line by not appending it to the output
+                    c._delete_line = False
+                elif c.modified_current_line == None:
                     output.append(line)
-                elif c.modified_current_line:
+                elif c.modified_current_line != "":
                     output.append(c.modified_current_line)
-                # if c.modified_current_line is not None but "", it's meant to be deleted
+            # some triggers have probably queued stuff to send, so send it
+            if c.to_send:
+                c.send_flush()
             print("\n".join(output).strip(), file=c.current_out_handle, flush=True)
             from_server_queue.task_done()
         except Exception as e:
