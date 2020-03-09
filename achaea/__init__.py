@@ -8,6 +8,7 @@ from .client import c
 from . import state
 from . import basic
 from . import balances
+from . import bleeding
 from . import ab_battlerage
 from . import ab_vision
 from . import ab_survival
@@ -18,6 +19,7 @@ from . import room_info
 from . import status
 from . import tattoos
 from . import group_fighting
+from achaea.triggers import depthswalker
 ## occultist modules
 ##from . import ab_occultism
 ##from . import ab_tarot

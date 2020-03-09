@@ -15,15 +15,11 @@ spiffify tab completion
         maybe just strip the numbers when creating the highlights?
 finish up that thing that populates the rat1234
     figure out why it's screwing up some of the mappings :( :(
-better clotting
 there's something about falling asleep that screws up my queing system
     maybe I'm hiding some of the messages and I need to make sure it's
     all in that current chunk before assuming that I sent the message
     and it was received well
-sip balance is weird... triggering when it shouldn't
-    also printing when it shouldn't
 
-clhelp targettingscript
 clhelp defencebasics
 
 hunting:
@@ -31,6 +27,7 @@ hunting:
     phereklos (has some good stuff for butchering)
         climb down cliff
     rhodestrian (walk to alander)
+
 
 
 Lesson Plan:
@@ -68,28 +65,6 @@ golem create pentagon cylinder disc
 golem return
 
 create a party log
-
-get the logs for grol's dagger thing
-
-Readying an insubstantial dagger, Grouulthuun begins to prowl towards Cassari.
-
-Grouulthuun lowers his dagger, a frown of irritation evident upon his face.
-Readying an insubstantial dagger, Grouulthuun begins to prowl towards you.
-
-As an insubstantial dagger begins to pulse with a sinister glow, Grouulthuun
-begins to close in on you.
-
-Grouulthuun strikes out with incredible speed, the blade of an insubstantial
-dagger hissing scant inches from your face. For a moment you feel nothing, then
-a soul-rending agony pervades every fibre of your being, and your body collapses
-bonelessly to the ground.
-You have been afflicted with prone.
-
-it stuns, drops to 1 hp, prones
-
-
-As you leave the location, you find yourself back where you started.
-is this chrono distort?
 
 
 ================

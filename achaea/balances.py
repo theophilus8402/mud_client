@@ -120,18 +120,10 @@ def recovered_herb(matches):
 
 
 def lost_elixir(matches):
-    sip_loss = [   "The elixir heals and soothes you.",
-                   "Your mind feels stronger and more alert.",
-                    ]
-    for msg in sip_loss:
-        if msg in c.current_chunk:
-            echo("Lost sip balance!!")
-
-            if s.show_balance_times:
-                end_msg = r"^You may drink another health or mana elixir.$"
-                create_end_timer("herb", end_msg)
-
-            break
+    #echo("Lost sip balance!!")
+    if s.show_balance_times:
+        end_msg = r"^You may drink another health or mana elixir.$"
+        create_end_timer("herb", end_msg)
 
 
 def recovered_elixir(matches):
@@ -205,7 +197,11 @@ balance_triggers = [
         # herb back
         recovered_herb
     ),
-    (   r"^You take a drink from (.*) vial.$",
+    (   r"^The elixir heals and soothes you.$",
+        # elixir lost
+        lost_elixir
+    ),
+    (   r"^Your mind feels stronger and more alert.$",
         # elixir lost
         lost_elixir
     ),

@@ -14,6 +14,8 @@ class State():
 
     def __init__(self):
         self.target = "rat"
+        self.hp = 4000
+        self.mp = 5000
         self.players_in_room = set()
         self.mobs_in_room = {}
         self.defences = set()
