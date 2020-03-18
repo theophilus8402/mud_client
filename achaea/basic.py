@@ -125,12 +125,12 @@ basic_aliases = [
         lambda m: eqbal("get sovereigns")
     ),
     (   "^pg$",
-        "put sovereigns in pack",
-        lambda m: eqbal("put sovereigns in pack")
+        "put sovereigns in pouch",
+        lambda m: eqbal("put sovereigns in pouch")
     ),
     (   "^gp (\d+)$",
-        "get # sovereigns from pack",
-        lambda m: eqbal(f"get {m[0]} sovereigns from pack")
+        "get # sovereigns from pouch",
+        lambda m: eqbal(f"get {m[0]} sovereigns from pouch")
     ),
 ]
 c.add_aliases("basic", basic_aliases)

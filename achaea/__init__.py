@@ -6,6 +6,7 @@ import traceback
 #from .client import client, aliases, triggers, gmcp_handlers
 from .client import c
 from . import state
+from . import anti_theft
 from . import basic
 from . import balances
 from . import bleeding

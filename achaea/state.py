@@ -29,6 +29,11 @@ class State():
         self.eq = "1"
         self.show_balance_times = False
 
+        # from afflictions.py
+        self.new_afflictions = set()
+        self.cured_afflictions = set()
+        self.current_afflictions = set()
+
 
 s = State()
 

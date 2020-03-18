@@ -12,6 +12,7 @@ from achaea.tab_complete import TargetCompleter
 from achaea import Achaea
 from achaea.client import send, c
 from achaea.state import s
+from achaea.afflictions import summarize_afflictions
 from multi_queue import MultiQueue
 from telnet_manager import handle_telnet, strip_ansi, gmcp_queue
 
@@ -84,6 +85,7 @@ async def handle_from_server_queue(from_server_queue, mud_client):
             if c.to_send:
                 c.send_flush()
             print("\n".join(output).strip(), file=c.current_out_handle, flush=True)
+            summarize_afflictions()
             from_server_queue.task_done()
         except Exception as e:
             print(f"Trouble with triggers: {e}")
