@@ -21,6 +21,8 @@ from . import status
 from . import tattoos
 from . import group_fighting
 from achaea.triggers import depthswalker
+from achaea.triggers import generic
+from achaea.triggers import serpent
 ## occultist modules
 ##from . import ab_occultism
 ##from . import ab_tarot
@@ -29,6 +31,7 @@ from achaea.triggers import depthswalker
 from achaea.magi import ab_elementalism
 from achaea.magi import ab_crystalism
 from achaea.magi import ab_artificing
+from achaea.magi import fancy_attacks
 # cleric modules
 #from . import ab_healing
 #from . import ab_spirituality

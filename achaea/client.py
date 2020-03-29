@@ -103,7 +103,10 @@ class Client():
     def add_trigger(self, new_trigger, flags=0):
         pattern, action = new_trigger
         #self.echo(f"adding trigger: {pattern}")
-        compiled_pattern = re.compile(pattern, flags=flags)
+        try:
+            compiled_pattern = re.compile(pattern, flags=flags)
+        except Exception as e:
+            print(f"bad pattern? {pattern}")
         if pattern.startswith("^"):
             search_method = compiled_pattern.match
         else:

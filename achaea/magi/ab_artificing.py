@@ -55,4 +55,3 @@ artificing_aliases = [
     ),
 ]
 c.add_aliases("ab_artificing", artificing_aliases)
-

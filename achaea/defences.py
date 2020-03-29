@@ -83,9 +83,10 @@ bliss_defs = {"constitution", "toughness", "resistance"}
 
 # these will be defs we keep on all the time
 basic_defs = {
-    "boartattoo",
+    #"boartattoo",
     "mosstattoo",
     "deathsight",
+    "insomnia",
     #"lifevision",
     "mindseye",
     "selfishness",
@@ -102,7 +103,6 @@ s.wanted_defences.update(basic_defs)
 # these will be setup and kept up when we need to fight
 fighting_defs = {
     "kola",
-    "insomnia",
     "temperance",
     "speed",
     "levitating",
@@ -143,7 +143,7 @@ defence_info = {
     "nightsight" : lambda: eqbal("nightsight"),
     "selfishness" : lambda: eqbal("selfishness"),
     "fangbarrier" : lambda: curebal("sileris"),
-    "insomnia" : lambda: curebal("cohosh"),
+    "insomnia" : lambda: curebal("insomnia"),
     "cloak" : lambda: eqbal("touch cloak"),
     "shroud" : lambda: eqbal("shroud"),
 }

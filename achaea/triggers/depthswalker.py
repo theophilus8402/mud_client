@@ -57,3 +57,4 @@ depthswalker_triggers = [
         lambda m: echo("Eek! Timeloop!")
     ),
 ]
+c.add_triggers(depthswalker_triggers)

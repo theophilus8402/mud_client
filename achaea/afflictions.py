@@ -1,5 +1,6 @@
 
 import json
+import re
 import time
 
 from .client import c, send, echo
@@ -59,6 +60,7 @@ def cured_aff(gmcp_data):
 c.add_gmcp_handler("Char.Afflictions.Remove", cured_aff)
 
 
+AFFLICTION_DETAILS_JSON = "achaea/affliction_details.json"
 def parse_affliction_details():
     affliction_details_path = "notes/affliction_details.txt"
     with open(affliction_details_path) as f:
@@ -78,7 +80,30 @@ def parse_affliction_details():
             detail[key] = value
         affs.append(detail)
 
-    affliction_details_json = "achaea/affliction_details.json"
-    with open(affliction_details_json, "w") as f:
+    with open(AFFLICTION_DETAILS_JSON, "w") as f:
         json.dump(affs, f, indent=2)
-parse_affliction_details()
+#parse_affliction_details()
+
+
+def get_cure_msg(affliction):
+    return affliction["Cured msg"]
+
+
+def get_aff_msg(affliction):
+    return affliction["Afflicted msg"]
+
+
+def setup_suppress_afflictions():
+    with open(AFFLICTION_DETAILS_JSON, "r") as f:
+        aff_details = json.load(f)
+
+    triggers = []
+    for aff in aff_details:
+        cure_msg = get_cure_msg(aff)
+        triggers.append((r"^{}$".format(re.escape(cure_msg)), lambda m: c.delete_line()))
+
+        aff_msg = get_aff_msg(aff)
+        triggers.append((r"^{}$".format(re.escape(aff_msg)), lambda m: c.delete_line()))
+
+    c.add_triggers(triggers)
+setup_suppress_afflictions()
