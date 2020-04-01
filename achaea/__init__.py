@@ -32,6 +32,8 @@ from achaea.magi import ab_elementalism
 from achaea.magi import ab_crystalism
 from achaea.magi import ab_artificing
 from achaea.magi import fancy_attacks
+from achaea.magi import limb_counter
+from achaea.magi import affliction_tracker
 # cleric modules
 #from . import ab_healing
 #from . import ab_spirituality

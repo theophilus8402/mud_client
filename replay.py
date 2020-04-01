@@ -1,5 +1,6 @@
 
 from achaea import Achaea
+from achaea.client import c
 import json
 
 def replay(log_path):
@@ -15,8 +16,10 @@ def replay(log_path):
 
             try:
                 if msg_type == "server_text" and msg.strip() != "":
-                    print(f"> {msg}")
-                    yield achaea.handle_triggers(msg)
+                    c.current_chunk = msg
+                    for msg_line in msg:
+                        print(f"> {msg_line}")
+                        yield achaea.handle_triggers(msg_line)
                 elif msg_type == "gmcp_data":
                     print(f"> {msg}")
                     gmcp_blob = json.loads(msg)

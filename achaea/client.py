@@ -18,7 +18,7 @@ class Client():
     def __init__(self):
         # it's a little weird, but to_send is going to be a "prequeue"
         # I'll use self.send_flush() to actuall send the traffic
-        # with this, I can 
+        # with this, I can group commands together more easily... hopefully
         self.to_send = []
         self.send_queue = asyncio.Queue()
         self._delete_line = False

@@ -63,6 +63,7 @@ async def handle_from_server_queue(from_server_queue, mud_client):
     while True:
         data = await from_server_queue.get()
         c.current_chunk = data
+        c.main_log(data, "server_text")
         output = []
         try:
             for line in data.split("\n"):
@@ -72,7 +73,6 @@ async def handle_from_server_queue(from_server_queue, mud_client):
                 stripped_line = strip_ansi(line)
                 mud_client.handle_triggers(stripped_line.strip())
 
-                c.main_log(line, "server_text")
 
                 if c._delete_line == True:
                     # "delete" the line by not appending it to the output

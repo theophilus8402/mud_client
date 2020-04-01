@@ -1,6 +1,5 @@
 
 clhelp guidemagi
-chelp antitheft
 have triggers to help find shielded people
 eq/balance triggers don't quite work when they are queued back to back
     the char.vitals doesn't update properly
@@ -193,7 +192,13 @@ keep mass and rebounding up
 
 litany?
 golem create pentagon cylinder disc cube torus
+golem create egg pentagon cube cylinder torus polyhedron disc spiral
 golem return
+
+Limea reaches past you, plunging an insubstantial dagger into your shadow.
+A sudden sense of foreboding comes over you.
+... need to run away ... called Attune
+The sense of foreboding abruptly vanishes.
 
 (Party): Keorin says, "Really, everyone should be doing QUEUE PREPEND EQBAL GRAB BODY when you see someone die."
 ["2020/03/24 22:47:43.405603", "server_text", "Kog has been slain by Atalkez.\r"]

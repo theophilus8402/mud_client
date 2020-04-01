@@ -28,20 +28,39 @@ strike_map = {
     "Kkractle" : "fire",
 }
 
-def count_strike(strike_type, matches):
+"""
+class LimbCounter():
+
+    def __init__(self):
+        self._strikes = []
+"""
+
+def count_strike(matches):
+    echo("Calling count_strike")
     strike_type = strike_map[matches[0]]
     person_hit = matches[1]
     limb = matches[2]
     echo(f"{strike_type} strike to {person_hit}'s {limb}")
 
     # need to check to see if I rebounded!
+    echo(f"current_chunk: '{c.current_chunk}'")
     if "The attack rebounds back onto you!" in c.current_chunk:
         echo("You fool!  You rebounded!")
 
+# end of timeflux:
+#Limea appears far less sluggish all of a sudden.
+
+"""
+You call upon Garash and unleash a forceful blow towards Limea's left leg with your trusty staff.
+The attack rebounds onto you!
+The element of earth shakes you to the core, breaking your left arm.
+"""
+
 
 limb_counter_triggers = [
-    (   r"^You call upon (\w+) and unleash a forceful blow towards (\w+)'s (\w+) with your trusty staff.$",
+    (   r"^You call upon (\w+) and unleash a forceful blow towards (\w+)'s (.*) with your trusty staff.$",
         # staffstrike to limb
+        #lambda m:echo("limb_counter")
         lambda m: count_strike(m)
     ),
 ]
