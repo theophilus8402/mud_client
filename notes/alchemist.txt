@@ -1,0 +1,72 @@
+(Sentries): You say, "So... how does one fight or not get dead against an alchemist?"
+(Sentries): Naoko says, "Manually cure tempers."
+(Sentries): You say, "Why manually cure them?"
+(Sentries): Naoko says, "Because if you don't you die."
+(Sentries): Naoko says, "If you cure tempers while actively being afflicted, you spend three quarters of the fight paralyzed completely. Let 'em build, shield, and CURING PRIOAFF TEMPERED<humour>."
+(Sentries): Naoko says, "Fighting an alchemist is a game of chicken. You have to play with their precision."
+(Sentries): You say, "Interesting."
+(Sentries): You say, "They can build up a lot of bleeding real quick."
+(Sentries): Naoko says, "Nah, just don't let them inundate."
+(Sentries): You say, "Oh, so they have different humours?"
+(Sentries): You say, "What do they have to do to inundate?"
+(Sentries): Naoko says, "Inundate consumes humour tempers. Choleric for 9% of max health per temper, melancholic for the same thing but mana, sanguine for 6% of max health as bleed, and phlegmatic for lethargy at 2, lethargy and anorexia at 4, lethargy and anorexia and slickness at 6, and 8 adds weariness."
+(Sentries): You say, "Thanks for the info!"
+(Sentries): Naoko says, "Mind you, 8 is the max. 8 choleric plus sensitivity plus educe iron all in one combo, which yes they can do, is 112% of your max health. Yes, that's more than all of it. Yes this kills you in one hit."
+
+
+
+
+A diminutive homunculus resembling Vinzent stares menacingly at you, its eyes flashing brightly.
+Vinzent glowers at you with a look of repressed disgust before making a slight gesture toward you.
+You feel a sudden wave of malaise as your sanguine humour is tempered.
+Vinzent glowers at you with a look of repressed disgust before making a slight gesture toward you.
+A short convulsion sweeps through your body as Vinzent wracks your sanguine humour.
+A prickly stinging overcomes your body, fading away into numbness.
+
+Its eyes blazing a deep blue, a diminutive homunculus resembling Vinzent turns its gaze towards you and you feel an intruding presence lurking within your mind. Shivers of pain suddenly jolt through your body as your mana is drained away.
+The psychic pain throws your mind into complete disarray.
+
+You remove 1 bloodroot leaf, bringing the total in the rift to 282.
+You eat a bloodroot leaf.
+Your muscles unlock; you are no longer paralysed.
+
+You begin intense concentration to restore your equilibrium.
+
+You may eat another plant or mineral.
+A diminutive homunculus resembling Vinzent stares menacingly at you, its eyes flashing brightly.
+Vinzent glowers at you with a look of repressed disgust before making a slight gesture toward you.
+You feel a sudden wave of malaise as your sanguine humour is tempered.
+Vinzent glowers at you with a look of repressed disgust before making a slight gesture toward you.
+A short convulsion sweeps through your body as Vinzent wracks your sanguine humour.
+A prickly stinging overcomes your body, fading away into numbness.
+
+You remove 1 bloodroot leaf, bringing the total in the rift to 281.
+You eat a bloodroot leaf.
+Your muscles unlock; you are no longer paralysed.
+
+
+Carefully getting your bearings, you set off west toward your goal.
+With astonishing quickness, a diminutive homunculus resembling Vinzent moves to block your egress.
+
+
+
+A diminutive homunculus resembling Vinzent stares intendedly at you, its eyes flashing a deep blue. A strange feeling spreads through your body as your melancholic and sanguine humours become corrupted.
+Vinzent glowers at you with a look of repressed disgust before making a slight gesture toward you.
+Horrifyingly, blood begins to seep from your eyes, ears, and nose.
+Vinzent glowers at you with a look of repressed disgust before making a slight gesture toward you.
+A short convulsion sweeps through your body as Vinzent wracks your sanguine humour.
+You sense a subtle change deep within.
+
+
+With the hint of a smile at his lips, Vinzent stares intently at you. A tingling manifests across your body, but soon passes.
+
+
+The corruption of your humours fades.
+# at this point bleeding mana may switch to bleeding health.. that's not helpful
+(Sentries): Naoko says, "Homunculus corruption wore off."
+(Sentries): Naoko says, "And yes, you can clot yourself to death. Mind you, if you're below 60% in both mana and health at once, they can instantly kill you."
+
+
+(Sentries): You say, "Does the homunculus hinder always work or is it a chance?"
+(Sentries): Naoko says, "60%."
+(Sentries): Naoko says, "However, it cannot stop you from flying."

@@ -54,6 +54,10 @@ ener
 strid
 trem
 
+flesh out the fighting log:
+    moving
+    people not there
+nice way of putting up and down auto defences
 
 You suddenly perceive the vague outline of an aura of rebounding around Kog.
 
@@ -149,6 +153,19 @@ Insomnia, nightsight, speed, insulation, temperance, levitating, cloak, thirdeye
 CURING PRIORITY DEFENCE LIST          - List the defence upkeep priority.
 CURING PRIORITY DEFENCE <name> <1-25> - Move an defence's upkeep priority.
 CURING PRIORITY DEFENCE <name> RESET  - Reset a defence's upkeep priority.
+
+curing priority defence heldbreath 25
+curing priority defence heldbreath reset
+
+(Party): Emiya says, "Target order is: Tesha, Achilles, Avianca, Halos, Jayden, Kaios, Lyndee, Rafaq, Solaine, Sothantos, Ygia, Zachariel, Zandyr."
+
+get some concussion bombs?  But it might be more helpful to use it with alertness
+
+You feel a sudden jerk, and the air immediately surrounding you comes alight with pale, etheric fire as a strange hissing noise fills the air.
+# alchemist displace... need to move to get out
+
+
+men solaine achilles kaios zandyr brythan
 
 see if impatience is up on the priority list (need it for bards)
 
