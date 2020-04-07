@@ -27,6 +27,15 @@ def someone_stopped_rebounding(matches):
         echo("TARGET STOPPED REBOUNDING!!")
 
 
+# ["2020/03/24 22:47:43.405603", "server_text", "Kog has been slain by Atalkez.\r"]
+def someone_died(matches):
+    victim = matches[0]
+    killer = matches[1]
+    echo(f"{killer} killed {victim}!")
+    echo(f"TODO: add this to the fighting log and have it affect targetting!!")
+    send("queue prepend eqbal grab body")
+
+
 #["2020/03/24 22:47:47.882336", "server_text", "You suddenly perceive the vague outline of an aura of rebounding around Iocun.\r"]
 
 generic_triggers = [
@@ -53,6 +62,10 @@ generic_triggers = [
     (   r"inhales and begins holding (\w+) breath.$",
         # don't need to see this!
         lambda m: c.delete_line()
+    ),
+    (   r"(.*) has been slain by (.*).$",
+        # don't need to see this!
+        lambda m: someone_died
     ),
 ]
 c.add_triggers(generic_triggers)

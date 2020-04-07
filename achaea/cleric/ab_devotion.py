@@ -1,7 +1,7 @@
 
-from .variables import v
-from .basic import eqbal
-from .client import add_aliases, add_triggers
+from ..state import s
+from ..basic import eqbal
+from ..client import add_aliases, add_triggers
 
 
 def pilgrimage(matches):

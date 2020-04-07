@@ -5,6 +5,10 @@ from ..basic import eqbal
 
 
 artificing_aliases = [
+    (   "^gcreate$",
+        "golem create egg pentagon cube cylinder torus polyhedron disc spiral",
+        lambda matches: send(f"stand;golem create egg pentagon cube cylinder torus polyhedron disc spiral"),
+    ),
     (   "^club(?: (.+))?$",
         "golem club []/t (egg) - dmg",
         lambda matches: send(f"stand;golem club {matches[0] or s.target}"),

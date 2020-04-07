@@ -70,3 +70,11 @@ The corruption of your humours fades.
 (Sentries): You say, "Does the homunculus hinder always work or is it a chance?"
 (Sentries): Naoko says, "60%."
 (Sentries): Naoko says, "However, it cannot stop you from flying."
+
+
+
+
+You feel a sudden jerk, and the air immediately surrounding you comes alight with pale, etheric fire as a strange hissing noise fills the air.
+# alchemist displace... need to move to get out
+
+

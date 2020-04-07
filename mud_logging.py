@@ -1,0 +1,111 @@
+
+import logging
+
+"""
+verbose logger:
+    this is a very different beast
+    format is different:
+        json.dump the stuff so it's in a good format for me to parse
+    want extra context to know from where we got the message
+    want the time the msg was received
+    this is unmodified data... this helps with running through the triggers/aliases
+        later to test things
+says logger:
+    just says... very simple
+fighting logger:
+    says (so this would be an example of sending a feed to another logger or another level...)
+        maybe I could filter it even more (at times) to just the party channel
+    fighting stuff
+    deaths
+    movement
+    afflictions
+    echos/reminders
+main visual logger:
+    this has all the normal text
+    some stuff will be filtered out / modified
+"""
+
+from logging import getLoggerClass, addLevelName, setLoggerClass, NOTSET
+
+print(f"mud_logging.py __name__: {__name__}")
+
+FIGHTING = 5
+SAYS = 15
+MAIN = 25
+
+class MyLogger(getLoggerClass()):
+    def __init__(self, name, level=NOTSET):
+        super().__init__(name, level)
+
+        addLevelName(FIGHTING, "FIGHTING")
+        addLevelName(SAYS, "SAYS")
+        addLevelName(MAIN, "MAIN")
+
+    def fighting(self, msg, *args, **kwargs):
+        if self.isEnabledFor(FIGHTING):
+            self._log(FIGHTING, msg, args, **kwargs)
+
+    def says(self, msg, *args, **kwargs):
+        if self.isEnabledFor(SAYS):
+            self._log(SAYS, msg, args, **kwargs)
+
+    def main(self, msg, *args, **kwargs):
+        if self.isEnabledFor(MAIN):
+            self._log(MAIN, msg, args, **kwargs)
+
+setLoggerClass(MyLogger)
+
+class SaysFilter(logging.Filter):
+
+    def filter(self, record):
+        if record.levelno == SAYS:
+            return True
+        else:
+            return False
+
+
+class FightingFilter(logging.Filter):
+
+    approved_levels = [FIGHTING, SAYS]
+
+    def filter(self, record):
+        if record.levelno in FightingFilter.approved_levels:
+            return True
+        else:
+            return False
+
+
+says_log_path = "says.log"
+says_handler = logging.FileHandler(says_log_path, mode="a")
+says_handler.setLevel(SAYS)
+says_filter = SaysFilter()
+says_handler.addFilter(says_filter)
+
+fighting_log_path = "fighting.log"
+fighting_handler = logging.FileHandler(fighting_log_path, mode="a")
+fighting_handler.setLevel(FIGHTING)
+fighting_filter = FightingFilter()
+fighting_handler.addFilter(fighting_filter)
+
+main_handler = logging.StreamHandler()
+main_handler.setLevel(MAIN)
+
+#log = logging.getLogger(__name__)
+log = logging.getLogger("achaea")
+log.setLevel(FIGHTING)
+log.addHandler(fighting_handler)
+log.addHandler(says_handler)
+log.addHandler(main_handler)
+
+
+if __name__ == "__main__":
+
+    log.says("Billy said something.")
+    log.fighting("Tim hit Tom!")
+    log.main("Something normal.")
+
+    """
+    logging.addLevelName(60, SAYS)
+    log.warning("Hello, World!")
+    log.says("Tim said something!")
+    """

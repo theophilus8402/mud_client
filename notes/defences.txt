@@ -1,0 +1,15 @@
+
+defences to keep up:
+Insomnia, nightsight, speed, insulation, temperance, levitating, cloak, thirdeye, deafness, kola, poisonresist, deathsight, fangbarrier, blindness, heldbreath
+
+
+CURING PRIORITY DEFENCE LIST          - List the defence upkeep priority.
+CURING PRIORITY DEFENCE <name> <1-25> - Move an defence's upkeep priority.
+CURING PRIORITY DEFENCE <name> RESET  - Reset a defence's upkeep priority.
+
+curing priority defence heldbreath 25
+curing priority defence heldbreath reset
+
+
+keep metawake up
+keep mass and rebounding up

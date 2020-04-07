@@ -1,7 +1,7 @@
 
-from .client import send, add_aliases, add_triggers, echo
-from .variables import v
-from .basic import eqbal
+from ..client import send, add_aliases, add_triggers, echo
+from ..state import s
+from ..basic import eqbal
 
 
 def instill(target):

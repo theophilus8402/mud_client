@@ -17,7 +17,7 @@ def replay(log_path):
             try:
                 if msg_type == "server_text" and msg.strip() != "":
                     c.current_chunk = msg
-                    for msg_line in msg:
+                    for msg_line in msg.split("\n"):
                         print(f"> {msg_line}")
                         yield achaea.handle_triggers(msg_line)
                 elif msg_type == "gmcp_data":

@@ -102,7 +102,7 @@ class Client():
     
     def add_trigger(self, new_trigger, flags=0):
         pattern, action = new_trigger
-        #self.echo(f"adding trigger: {pattern}")
+        print(f"adding trigger: {pattern}")
         try:
             compiled_pattern = re.compile(pattern, flags=flags)
         except Exception as e:

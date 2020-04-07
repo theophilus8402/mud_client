@@ -1,7 +1,7 @@
 
-from .client import send, add_aliases, add_triggers
-from .variables import v
-from .basic import eqbal
+from ..client import send, add_aliases, add_triggers
+from ..state import s
+from ..basic import eqbal
 
 
 def sear(client, matches):

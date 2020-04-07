@@ -1,7 +1,7 @@
 
-from .client import send, add_aliases
-from .basic import eqbal
-from .variables import v
+from ..client import send, add_aliases
+from ..basic import eqbal
+from ..state import s
 
 
 zeal_aliases = [
