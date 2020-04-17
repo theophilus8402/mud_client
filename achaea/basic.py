@@ -1,10 +1,14 @@
 
+import logging
 import re
 
 from colorama import *
 
 from .client import c, send, echo
 from .state import s, QueueStates
+
+
+logger = logging.getLogger("achaea")
 
 
 def show_help(alias_group):
@@ -126,7 +130,7 @@ basic_aliases = [
     ),
     (   "^pg$",
         "put sovereigns in pouch",
-        lambda m: eqbal("put sovereigns in pouch")
+        lambda m: eqbal("put sovereigns in pouch;put sovereigns in pack")
     ),
     (   "^gp (\d+)$",
         "get # sovereigns from pouch",
@@ -148,7 +152,7 @@ def move(direction):
 
 def handle_says(gmcp_data):
     #print(f"Comm.Channel.Text: {gmcp_data}")
-    print(f"{gmcp_data['text']}", file=c.says_handle, flush=True)
+    logger.says(gmcp_data['text'])
 c.add_gmcp_handler("Comm.Channel.Text", handle_says)
 
 direction_aliases = [

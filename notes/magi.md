@@ -68,6 +68,11 @@ ener
 strid
 trem
 
+get limb counting working and in the logs
+get affs in the fighting log
+make an alias to put down the next prioritized vibe
+ask Naoko about a post (grouul mentioned it)
+
 flesh out the fighting log:
     moving
     people not there

@@ -43,7 +43,7 @@ def count_strike(matches):
     echo(f"{strike_type} strike to {person_hit}'s {limb}")
 
     # need to check to see if I rebounded!
-    echo(f"current_chunk: '{c.current_chunk}'")
+    #echo(f"current_chunk: '{c.current_chunk}'")
     if "The attack rebounds back onto you!" in c.current_chunk:
         echo("You fool!  You rebounded!")
 

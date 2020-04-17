@@ -20,6 +20,20 @@ fighting logger:
     movement
     afflictions
     echos/reminders
+    should try to color things appropriately
+party logger:
+    this will be a level and a handler
+    announce things to the party channel
+    I can have an alias that turns this on and off
+    targetting
+    target movement
+    different affs I give
+    this gets fed to the fighting/brief logger
+    party handler:
+        set to NOTHING initially
+        alias can change on and off to PARTY
+        filter will only let PARTY level logs go to the handler
+        will send stuff to the party
 main visual logger:
     this has all the normal text
     some stuff will be filtered out / modified
@@ -30,20 +44,29 @@ from logging import getLoggerClass, addLevelName, setLoggerClass, NOTSET
 print(f"mud_logging.py __name__: {__name__}")
 
 FIGHTING = 5
+PARTY = 7
 SAYS = 15
 MAIN = 25
+ECHO = 27
+NOTHING = 65
 
-class MyLogger(getLoggerClass()):
+class AchaeaLogger(getLoggerClass()):
     def __init__(self, name, level=NOTSET):
         super().__init__(name, level)
 
         addLevelName(FIGHTING, "FIGHTING")
+        addLevelName(PARTY, "PARTY")
         addLevelName(SAYS, "SAYS")
         addLevelName(MAIN, "MAIN")
+        addLevelName(NOTHING, "NOTHING")
 
     def fighting(self, msg, *args, **kwargs):
         if self.isEnabledFor(FIGHTING):
             self._log(FIGHTING, msg, args, **kwargs)
+
+    def party(self, msg, *args, **kwargs):
+        if self.isEnabledFor(PARTY):
+            self._log(PARTY, msg, args, **kwargs)
 
     def says(self, msg, *args, **kwargs):
         if self.isEnabledFor(SAYS):
@@ -53,7 +76,11 @@ class MyLogger(getLoggerClass()):
         if self.isEnabledFor(MAIN):
             self._log(MAIN, msg, args, **kwargs)
 
-setLoggerClass(MyLogger)
+    def echo(self, msg, *args, **kwargs):
+        if self.isEnabledFor(ECHO):
+            self._log(ECHO, msg, args, **kwargs)
+
+setLoggerClass(AchaeaLogger)
 
 class SaysFilter(logging.Filter):
 
@@ -66,7 +93,7 @@ class SaysFilter(logging.Filter):
 
 class FightingFilter(logging.Filter):
 
-    approved_levels = [FIGHTING, SAYS]
+    approved_levels = [FIGHTING, SAYS, PARTY]
 
     def filter(self, record):
         if record.levelno in FightingFilter.approved_levels:
@@ -96,6 +123,14 @@ log.setLevel(FIGHTING)
 log.addHandler(fighting_handler)
 log.addHandler(says_handler)
 log.addHandler(main_handler)
+
+
+def switch_to_fighting_log():
+    pass
+
+
+def switch_from_fighting_log():
+    pass
 
 
 if __name__ == "__main__":

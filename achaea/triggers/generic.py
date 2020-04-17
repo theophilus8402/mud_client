@@ -1,4 +1,6 @@
 
+import logging
+
 from colorama import Fore
 
 from ..basic import highlight_current_line
@@ -6,25 +8,40 @@ from ..client import c, send, echo
 from ..state import s
 
 
+logger = logging.getLogger("achaea")
+
+
 def someone_shielded(matches):
     highlight_current_line(Fore.YELLOW)
+    print(f"{matches[0]} shielded!!")
     if matches[0].lower() == s.target.lower():
         echo("TARGET SHIELDED!!")
         echo("TARGET SHIELDED!!")
+        logger.fighting(f"{s.target} SHIELDED!!")
+    else:
+        logger.fighting(f"{matches[0]} shielded!!")
 
 
 def someone_rebounding(matches):
     highlight_current_line(Fore.YELLOW)
+    print(f"{matches[0]} rebounding!!")
     if matches[0].lower() == s.target.lower():
         echo("TARGET REBOUNDING!!")
         echo("TARGET REBOUNDING!!")
+        logger.fighting(f"{s.target} REBOUNDING!!")
+    else:
+        logger.fighting(f"{matches[0]} rebounding!!")
 
 
 def someone_stopped_rebounding(matches):
     highlight_current_line(Fore.YELLOW)
+    print(f"{matches[0]} stopped rebounding!!")
     if matches[0].lower() == s.target.lower():
         echo("TARGET STOPPED REBOUNDING!!")
         echo("TARGET STOPPED REBOUNDING!!")
+        logger.fighting(f"{s.target} STOPPED REBOUNDING!!")
+    else:
+        logger.fighting(f"{matches[0]} stopped rebounding!!")
 
 
 # ["2020/03/24 22:47:43.405603", "server_text", "Kog has been slain by Atalkez.\r"]
@@ -39,7 +56,7 @@ def someone_died(matches):
 #["2020/03/24 22:47:47.882336", "server_text", "You suddenly perceive the vague outline of an aura of rebounding around Iocun.\r"]
 
 generic_triggers = [
-    (   r"^A nearly invisible magical shield forms around (.*).$",
+    (   r"^A nearly invisible magical shield forms around (.*?).$",
         # someone just shielded!
         someone_shielded
     ),
@@ -47,11 +64,15 @@ generic_triggers = [
         # someone (probably my target) is shielded!
         someone_shielded
     ),
-    (   r"^You suddenly perceive the vague outline of an aura of rebounding around (\w+).$",
+    (   r"^You suddenly perceive the vague outline of an aura of rebounding around (\w+?).$",
         # someone (probably my target) is shielded!
         someone_rebounding
     ),
     (   r"^You call upon Whiirh to empower your staff and strike (\w+), the power of air dispersing \w+ aura of rebounding.$",
+        # someone (probably my target) is shielded!
+        someone_stopped_rebounding
+    ),
+    (   r"^(.*)'s aura of weapons rebounding disappears.$",
         # someone (probably my target) is shielded!
         someone_stopped_rebounding
     ),

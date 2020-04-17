@@ -1,7 +1,7 @@
 
 from ..state import s
 from ..basic import eqbal
-from ..client import add_aliases, add_triggers
+from ..client import c
 
 
 def pilgrimage(matches):
@@ -37,11 +37,11 @@ devotion_aliases = [
     ),
     (   "^pur(?: (.+))?$",
         "perform purity []/t",
-        lambda matches: eqbal(f"perform purity {matches[0] or v.target}")
+        lambda matches: eqbal(f"perform purity {matches[0] or s.target}")
     ),
     (   "^vis(?: (.+))?$",
         "perform visions []/t",
-        lambda matches: eqbal(f"perform visions {matches[0] or v.target}")
+        lambda matches: eqbal(f"perform visions {matches[0] or s.target}")
     ),
     (   "^pward$",
         "perform rite of warding",
@@ -57,7 +57,7 @@ devotion_aliases = [
     ),
     (   "^daz(?: (.+))?$",
         "perform dazzle t",
-        lambda matches: eqbal(f"perform dazzle {matches[0] or v.target}")
+        lambda matches: eqbal(f"perform dazzle {matches[0] or s.target}")
     ),
     (   "^demons$",
         "perform right of demons",
@@ -65,7 +65,7 @@ devotion_aliases = [
     ),
     (   "^slo(?: (.+))?$",
         "perform sloth t",
-        lambda matches: eqbal(f"perform sloth {matches[0] or v.target}")
+        lambda matches: eqbal(f"perform sloth {matches[0] or s.target}")
     ),
     (   "^alls$",
         "perform rite of allsight",
@@ -77,8 +77,8 @@ devotion_aliases = [
     ),
     (   "^pen(?: (.+))?$",
         "perform penitence []/t",
-        lambda matches: eqbal(f"perform penitence {matches[0] or v.target}")
+        lambda matches: eqbal(f"perform penitence {matches[0] or s.target}")
     ),
 ]
-add_aliases("ab_devotion", devotion_aliases)
+c.add_aliases("ab_devotion", devotion_aliases)
 

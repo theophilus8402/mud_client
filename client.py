@@ -5,6 +5,7 @@ import json
 import logging
 import readline
 import sys
+import traceback
 
 from contextlib import suppress
 
@@ -85,10 +86,12 @@ async def handle_from_server_queue(from_server_queue, mud_client):
             if c.to_send:
                 c.send_flush()
             print("\n".join(output).strip(), file=c.current_out_handle, flush=True)
-            summarize_afflictions()
+            affs = summarize_afflictions()
+            if affs:
+                c.echo(f"Affs: {' '.join(affs)}")
             from_server_queue.task_done()
         except Exception as e:
-            print(f"Trouble with triggers: {e}")
+            traceback.print_exc(file=sys.stdout)
 
 
 async def handle_gmcp_queue(gmcp_queue, mud_client):
@@ -130,7 +133,7 @@ def main():
     asyncio.ensure_future(handle_gmcp_queue(gmcp_queue, mud_client))
 
     log = logging.getLogger('EchoClient')
-    logging.basicConfig(level=logging.DEBUG)
+    #logging.basicConfig(level=logging.DEBUG)
 
     log.debug('waiting for client to complete')
     try:

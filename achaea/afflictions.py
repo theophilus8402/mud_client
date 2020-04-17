@@ -1,10 +1,15 @@
 
 import json
+import logging
 import re
 import time
 
 from .client import c, send, echo
 from .state import s
+
+
+logger = logging.getLogger("achaea")
+
 
 aff_aliases = [
     (   "get_all_aff",
@@ -28,7 +33,7 @@ def get_all_aff_info():
 def summarize_afflictions():
 
     if not (s.new_afflictions or s.cured_afflictions):
-        return
+        return []
 
     aff_strs = []
     for aff in s.current_afflictions:
@@ -38,10 +43,11 @@ def summarize_afflictions():
             aff_strs.append(aff)
     for aff in s.cured_afflictions:
         aff_strs.append(f"-{aff}")
-    echo(f"Affs: {' '.join(aff_strs)}")
 
     s.new_afflictions.clear()
     s.cured_afflictions.clear()
+
+    return aff_strs
 
 
 def gained_aff(gmcp_data):
@@ -49,6 +55,7 @@ def gained_aff(gmcp_data):
     echo(f"Gained {new_aff}!")
     s.new_afflictions.add(new_aff)
     s.current_afflictions.add(new_aff)
+    logger.fighting(f"Affs: {' '.join(summarize_afflictions())}")
 c.add_gmcp_handler("Char.Afflictions.Add", gained_aff)
 
 
@@ -57,6 +64,7 @@ def cured_aff(gmcp_data):
     echo(f"Cured {', '.join(cured_affs)}!")
     s.cured_afflictions.update(cured_affs)
     s.current_afflictions.difference_update(set(cured_affs))
+    logger.fighting(f"Affs: {' '.join(summarize_afflictions())}")
 c.add_gmcp_handler("Char.Afflictions.Remove", cured_aff)
 
 

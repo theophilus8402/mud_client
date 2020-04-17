@@ -3,8 +3,8 @@ from .state import s
 from .basic import eqbal
 from .client import c, send
 
-"""
 #cleric battlerage
+"""
 battlerage_aliases = [
     (   "^at(?: (.+))?$",
         "angel torment t/[]",
@@ -23,6 +23,7 @@ battlerage_aliases = [
         lambda matches: send("hammer {}".format(matches[0] or s.target))
     ),
 ]
+c.add_aliases("ab_battlerage", battlerage_aliases)
 """
 
 #occultist battlerage
@@ -93,3 +94,5 @@ battlerage_aliases = [
     ),
 ]
 c.add_aliases("ab_battlerage", battlerage_aliases)
+"""
+"""

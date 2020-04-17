@@ -1,9 +1,12 @@
 
 import asyncio
+import logging
 import time
 
 from .client import c, echo
 from .state import s
+
+logger = logging.getLogger("achaea")
 
 """
 You remove 1 echinacea, bringing the total in the rift to 173.
@@ -106,12 +109,12 @@ def create_end_timer(timer_type, end_msg):
 
 def recovered_eq(matches):
     #echo("Got EQ back!")
-    pass
+    logger.fighting("You have recovered equilibrium")
 
 
 def recovered_bal(matches):
     #echo("Got BAL back!")
-    pass
+    logger.fighting("You have recovered balance on all limbs.")
 
 
 def recovered_herb(matches):

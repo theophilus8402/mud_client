@@ -1,6 +1,6 @@
 
 #from mud_logging import log
-import mud_logging
+import achaea.mud_logging
 import achaea.inner_test
 import logging
 
@@ -9,3 +9,4 @@ log = logging.getLogger("achaea")
 #log.setLevel(logging.DEBUG)
 log.says("peragus says hi")
 log.fighting("vindiconis hits someone")
+log.echo("Am I echoing in the main window?")

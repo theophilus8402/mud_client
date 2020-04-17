@@ -1,5 +1,6 @@
 
 import json
+import logging
 import re
 
 from datetime import datetime
@@ -7,6 +8,9 @@ from datetime import datetime
 from ..client import c, send, echo
 from .name import get_mob_id, get_mobs_from_items, figure_out_unknown_mobs
 from ..state import s
+
+
+logger = logging.getLogger("achaea")
 
 
 room_aliases = [
@@ -77,6 +81,7 @@ def add_player(gmcp_data):
     # {"name": "Adrik", "fullname": "Adrik Bergson, the Crystalline Song"}
     player = gmcp_data["name"]
     echo(f"+{player}")
+    logger.fighting(f"+{player}")
     s.players_in_room.add(player)
 c.add_gmcp_handler("Room.AddPlayer", add_player)
 
@@ -84,6 +89,7 @@ c.add_gmcp_handler("Room.AddPlayer", add_player)
 def remove_player(gmcp_data):
     # "Farrah"
     echo(f"-{gmcp_data}")
+    logger.fighting(f"-{gmcp_data}")
     s.players_in_room.discard(gmcp_data)
 c.add_gmcp_handler("Room.RemovePlayer", remove_player)
 

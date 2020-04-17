@@ -1,5 +1,5 @@
 
-from ..client import send, add_aliases
+from ..client import send, c
 from ..basic import eqbal
 from ..state import s
 
@@ -7,7 +7,7 @@ from ..state import s
 zeal_aliases = [
     (   "^att(?: (.+))?$",
         "recite attend */t",
-        lambda m: eqbal(f"recite attend {m[0] or v.target}")
+        lambda m: eqbal(f"recite attend {m[0] or s.target}")
     ),
     (   "^rfire(?: (.+))?$",
         "recite fire ?/me",
@@ -22,6 +22,6 @@ zeal_aliases = [
         lambda m: eqbal(f"recite protection {m[0] or 'me'}")
     ),
 ]
-add_aliases("ab_zeal", zeal_aliases)
+c.add_aliases("ab_zeal", zeal_aliases)
 
 

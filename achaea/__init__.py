@@ -3,10 +3,12 @@ import re
 import sys
 import traceback
 
-#from .client import client, aliases, triggers, gmcp_handlers
+import achaea.mud_logging
+
 from .client import c
 from . import state
 from . import anti_theft
+from . import afflictions
 from . import basic
 from . import balances
 from . import bleeding
@@ -20,6 +22,7 @@ from . import room_info
 from . import status
 from . import tattoos
 from . import group_fighting
+from . import sigil
 from achaea.triggers import depthswalker
 from achaea.triggers import generic
 from achaea.triggers import serpent
@@ -35,14 +38,10 @@ from achaea.magi import fancy_attacks
 from achaea.magi import limb_counter
 from achaea.magi import affliction_tracker
 # cleric modules
-#from . import ab_healing
-#from . import ab_spirituality
-#from . import ab_devotion
-#from . import ab_zeal
-
-def compile_aliases(aliases):
-
-    compiled_aliases = {}
+#from achaea.cleric import ab_healing
+#from achaea.cleric import ab_spirituality
+#from achaea.cleric import ab_devotion
+#from achaea.cleric import ab_zeal
 
 
 class Achaea():
