@@ -26,22 +26,6 @@ from . import sigil
 from achaea.triggers import depthswalker
 from achaea.triggers import generic
 from achaea.triggers import serpent
-## occultist modules
-##from . import ab_occultism
-##from . import ab_tarot
-##from . import ab_domination
-# magi modules
-from achaea.magi import ab_elementalism
-from achaea.magi import ab_crystalism
-from achaea.magi import ab_artificing
-from achaea.magi import fancy_attacks
-from achaea.magi import limb_counter
-from achaea.magi import affliction_tracker
-# cleric modules
-#from achaea.cleric import ab_healing
-#from achaea.cleric import ab_spirituality
-#from achaea.cleric import ab_devotion
-#from achaea.cleric import ab_zeal
 
 
 class Achaea():

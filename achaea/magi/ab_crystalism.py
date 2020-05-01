@@ -43,6 +43,23 @@ crystal_map = {
 }
 
 
+def next_vibration(matches):
+    vibes = [
+        "dissipate",
+        "palpitation",
+        "harmony",
+        "oscillate",
+        "disorientation",
+        "energise",
+        "stridulation",
+    ]
+    if matches:
+        vibes = vibes[int(matches[0]):]
+
+    for vibe in vibes:
+        yield spin_n_embed(vibe)
+
+
 crystalism_aliases = [
     (   "^diss$",
         "dissipate - attack mana",
@@ -163,6 +180,10 @@ crystalism_aliases = [
     (   "^cataclysm$",
         "cataclysm - whoa",
         lambda matches: spin_n_embed("cataclysm"),
+    ),
+    (   "^vib ?(\d+)?$",
+        "next vibe",
+        lambda matches: next_vibration(matches),
     ),
 ]
 c.add_aliases("ab_crystalism", crystalism_aliases)

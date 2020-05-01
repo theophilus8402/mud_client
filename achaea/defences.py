@@ -12,7 +12,7 @@ c.add_gmcp_handler("Char.Defences.List", gmcp_defences)
 
 def gmcp_defences_add(gmcp_data):
     defence = gmcp_data["name"]
-    echo(f"Woo!  We've gained {defence}!")
+    #echo(f"Woo!  We've gained {defence}!")
     s.defences.add(defence)
 c.add_gmcp_handler("Char.Defences.Add", gmcp_defences_add)
 
@@ -62,6 +62,21 @@ def check_defences(matches):
     c.add_temp_trigger("defences_trigger", defences_trigger[0])
 
 
+def auto_defences(defs, state):
+
+    if state == "on":
+        for defence in defs:
+            echo(f"Auto {defence} on!!!")
+            send(f"CURING PRIORITY DEFENCE {defence} 25")
+    elif state == "off":
+        for defence in defs:
+            echo(f"Auto {defence} off!!!")
+            send(f"CURING PRIORITY DEFENCE {defence} reset")
+
+
+auto_defs = ["mass"]
+
+
 defence_aliases = [
     (   "^cdef$",
         "list of defences",
@@ -70,6 +85,18 @@ defence_aliases = [
     (   "^fdef(?: (.+))?$",
         "fighting defences",
         lambda matches: fighting_defences(matches[0] or "on"),
+    ),
+    (   "^adef on$",
+        "auto defences",
+        lambda matches: auto_defences(auto_defs, "on"),
+    ),
+    (   "^adef off$",
+        "auto defences",
+        lambda matches: auto_defences(auto_defs, "off"),
+    ),
+    (   "^adef (.+) (.+)$",
+        "auto defences",
+        lambda matches: auto_defences([matches[0]], matches[1]),
     ),
 ]
 c.add_aliases("defences", defence_aliases)
@@ -109,14 +136,6 @@ fighting_defs = {
     "poisonresist",
     "insulation",
     "fangbarrier",
-}
-
-
-# these will be ones for fighting but not all the time
-auto_def = {
-    # weapon rebounding
-    # hold breath
-    # mass
 }
 
 

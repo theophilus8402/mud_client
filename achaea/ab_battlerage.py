@@ -4,7 +4,6 @@ from .basic import eqbal
 from .client import c, send
 
 #cleric battlerage
-"""
 battlerage_aliases = [
     (   "^at(?: (.+))?$",
         "angel torment t/[]",
@@ -24,6 +23,7 @@ battlerage_aliases = [
     ),
 ]
 c.add_aliases("ab_battlerage", battlerage_aliases)
+"""
 """
 
 #occultist battlerage
@@ -67,6 +67,7 @@ Squeeze              Order your golem to crush your target.
 Firefall             A mighty blow of earth and flame from the heavens.
 Stormbolt            Sensitise your target with a bolt of lightning.
 """
+"""
 battlerage_aliases = [
     (   "^wl(?: (.+))?$",
         "windlash []/t",
@@ -94,5 +95,4 @@ battlerage_aliases = [
     ),
 ]
 c.add_aliases("ab_battlerage", battlerage_aliases)
-"""
 """

@@ -21,6 +21,10 @@ zeal_aliases = [
         "recite protection ?/me",
         lambda m: eqbal(f"recite protection {m[0] or 'me'}")
     ),
+    (   "^pen$",
+        "recite penance ?/t",
+        lambda m: eqbal(f"recite penance {s.target}")
+    ),
 ]
 c.add_aliases("ab_zeal", zeal_aliases)
 

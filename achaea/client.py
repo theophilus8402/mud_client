@@ -124,12 +124,15 @@ class Client():
         self.to_send.append(msg)
 
     def send_flush(self):
-        msg_blob = ";".join(self.to_send)
-        if isinstance(msg_blob, str) and not msg_blob.endswith("\n"):
-            msg_blob = f"{msg_blob}\n"
-            self.main_log(msg_blob.strip(), "data_sent")
-        #echo(f"to_send: {self.to_send} sending: {msg_blob}")
-        self.send_queue.put_nowait(msg_blob)
+        max_cmd_len = 10
+        for i in range(0, len(self.to_send), max_cmd_len):
+            msg_blob = ";".join(self.to_send[i:max_cmd_len])
+            if isinstance(msg_blob, str) and not msg_blob.endswith("\n"):
+                msg_blob = f"{msg_blob}\n"
+                self.main_log(msg_blob.strip(), "data_sent")
+            #echo(f"to_send: {self.to_send} sending: {msg_blob}")
+            self.send_queue.put_nowait(msg_blob)
+            #
         self.to_send.clear()
 
     def gmcp_send(self, msg):

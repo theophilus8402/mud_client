@@ -10,6 +10,38 @@ from .state import s, QueueStates
 
 logger = logging.getLogger("achaea")
 
+# this will get gmcp info about which player just authenticated
+# it can be used to do a number of different things
+# starting out, we'll use it to load different modules for different chars
+def handle_login_info(gmcp_data):
+    name = gmcp_data["name"]
+
+    if name.lower() == "vindiconis":
+        echo("Loading modules for vindiconis!")
+        # magi modules
+        from achaea.magi import ab_elementalism
+        from achaea.magi import ab_crystalism
+        from achaea.magi import ab_artificing
+        from achaea.magi import fancy_attacks
+        from achaea.magi import limb_counter
+        from achaea.magi import affliction_tracker
+
+    elif name.lower() == "palleo":
+        echo("Loading modules for palleo!")
+        # cleric modules
+        from achaea.cleric import ab_spirituality
+        from achaea.cleric import ab_devotion
+        from achaea.cleric import ab_zeal
+
+    elif name.lower() == "dirus":
+        echo("Loading modules for dirus!")
+        # occultist modules
+        from achaea.occultist import ab_occultism
+        from achaea.occultist import ab_tarot
+        from achaea.occultist import ab_domination
+
+c.add_gmcp_handler("Char.Name", handle_login_info)
+
 
 def show_help(alias_group):
     lines = [f"{pattern:15.15} : {desc}" for pattern, desc in
@@ -134,7 +166,7 @@ basic_aliases = [
     ),
     (   "^gp (\d+)$",
         "get # sovereigns from pouch",
-        lambda m: eqbal(f"get {m[0]} sovereigns from pouch")
+        lambda m: eqbal(f"get {m[0]} sovereigns from pack")
     ),
 ]
 c.add_aliases("basic", basic_aliases)
@@ -218,5 +250,3 @@ direction_aliases = [
     ),
 ]
 c.add_aliases("moving", direction_aliases)
-
-

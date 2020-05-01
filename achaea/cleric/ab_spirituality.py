@@ -26,7 +26,11 @@ spirituality_aliases = [
     ),
     (   "^chab$",
         "smite t chasten t body",
-        lambda _: eqbal(f"stand;smite {s.target} chasten body")
+        lambda _: send(f"stand;smite {s.target} chasten body")
+    ),
+    (   "^pchab$",
+        "penance;smite t chasten t body",
+        lambda _: eqbal(f"stand;recite penance {s.target};smite {s.target} chasten body")
     ),
     (   "^shine(?: (.+))?$",
         "angel shine []",
@@ -138,7 +142,7 @@ c.add_aliases("ab_spirituality", spirituality_aliases)
 spirituality_triggers = [
     (   "^White strands of light weave themselves together before your eyes, and within seconds you hold a spiritual mace within your grasp.$",
         # you're mace is here! wield it!
-        lambda _: eqbal("wield mace")
+        lambda _: eqbal("wield mace;attach fist to mace")
     ),
 ]
 c.add_triggers(spirituality_triggers)

@@ -68,6 +68,16 @@ ener
 strid
 trem
 
+The ominously haunting sound of Elon suddenly fills your head, threatening to drown out all other sound.
+Kyrista begins to tumble towards the northwest.
+Rozette begins to tumble towards the northwest.
+Thaisen begins to tumble towards the northwest.
+Kione begins to tumble towards the northwest.
+Leofrik begins to tumble towards the northwest.
+You obey.
+You begin to tumble agilely to the northwest.
+
+
 get limb counting working and in the logs
 get affs in the fighting log
 make an alias to put down the next prioritized vibe

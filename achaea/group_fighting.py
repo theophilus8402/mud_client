@@ -45,11 +45,11 @@ def unenemy_person(person):
 
 
 def multiple_ally(matches):
-    for person in matches[0].split(" "):
+    for person in matches[0].replace(",", "").split(" "):
         send(f"ally {person}")
 
 def multiple_enemy(matches):
-    for person in matches[0].split(" "):
+    for person in matches[0].replace(",", "").split(" "):
         enemy_person(person)
 
 group_fighting_aliases = [

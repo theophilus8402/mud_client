@@ -1,4 +1,3 @@
-
 * need to figure out how to handle marking the fact that I can't
     enter a certain room from a certain direction
     * example: can't go from 1 (e) -> (w) 2 because of a locked door

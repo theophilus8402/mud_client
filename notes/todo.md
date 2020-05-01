@@ -1,4 +1,3 @@
-
 * < > room stuff
     * storing notes in notes/mapping.md
     * <x> store every room I enter into a db
@@ -21,8 +20,25 @@
         * < > kill stuff
         * < > don't die
             * < > values of dangers for mobs, if too dangerous, move on
-* < > logging
-    * < > combine logs from the same day?
-    * < > zip up logs from a previous month?
-    * < > change log parser? to print to screen
-
+* <x> logging
+    * <x> combine logs from the same day?
+    * <x> zip up logs from a previous month?
+    * <x> change log parser? to print to screen
+* < > clean up todo
+    * < > move things from magi.md to here
+* clean up notes
+    * <x> move magi.md to magi.txt
+    * < > consolidate/move/cleanup triggers.txt
+* <x> make it so that logging in by different characters will load
+    different modules
+    * ["2020/04/17 10:48:00.129817", "gmcp_data", "{\"type\": \"Char.Name\", \"data\": {\"name\": \"Vindiconis\", \"fullname\": \"Sentry Vindiconis\"}}"]
+* < > cleric
+    * < > get penance / stuff working
+    * < > make a fancy attacking system
+    * < > log all cleric attacks and make triggers to:
+        * < > write info to fighting log
+        * < > track affs given / cured
+        * < > track limb damage
+* < > palleo
+    * < > get targeting
+    * < > get parrying

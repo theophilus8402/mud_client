@@ -13,7 +13,6 @@ logger = logging.getLogger("achaea")
 
 def someone_shielded(matches):
     highlight_current_line(Fore.YELLOW)
-    print(f"{matches[0]} shielded!!")
     if matches[0].lower() == s.target.lower():
         echo("TARGET SHIELDED!!")
         echo("TARGET SHIELDED!!")
@@ -24,7 +23,6 @@ def someone_shielded(matches):
 
 def someone_rebounding(matches):
     highlight_current_line(Fore.YELLOW)
-    print(f"{matches[0]} rebounding!!")
     if matches[0].lower() == s.target.lower():
         echo("TARGET REBOUNDING!!")
         echo("TARGET REBOUNDING!!")
@@ -35,7 +33,6 @@ def someone_rebounding(matches):
 
 def someone_stopped_rebounding(matches):
     highlight_current_line(Fore.YELLOW)
-    print(f"{matches[0]} stopped rebounding!!")
     if matches[0].lower() == s.target.lower():
         echo("TARGET STOPPED REBOUNDING!!")
         echo("TARGET STOPPED REBOUNDING!!")
@@ -52,6 +49,12 @@ def someone_died(matches):
     echo(f"TODO: add this to the fighting log and have it affect targetting!!")
     send("queue prepend eqbal grab body")
 
+
+def rakia():
+    echo("STOP STOP STOP!!")
+    echo("STOP STOP STOP!!")
+    echo("STOP STOP STOP!!")
+    echo("STOP STOP STOP!!")
 
 #["2020/03/24 22:47:47.882336", "server_text", "You suddenly perceive the vague outline of an aura of rebounding around Iocun.\r"]
 
@@ -87,6 +90,14 @@ generic_triggers = [
     (   r"(.*) has been slain by (.*).$",
         # don't need to see this!
         lambda m: someone_died
+    ),
+    (   r"You begin to tumble agilely to the (.*).$",
+        # tumbling!
+        lambda m: logger.fighting(f"tumbling {m[0]}")
+    ),
+    (   r"The barrier around Torrid Rakia, the magma wyvern melts through the ground, and she rushes through to attack.$",
+        # tumbling!
+        lambda m: rakia()
     ),
 ]
 c.add_triggers(generic_triggers)
