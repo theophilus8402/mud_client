@@ -40,5 +40,19 @@
         * < > track affs given / cured
         * < > track limb damage
 * < > palleo
+    * <x> get tinderbox and pipes
+    * < > get more kelp
+    * <x> fist sigil for shield
     * < > get targeting
     * < > get parrying
+    * < > get hr2
+    * < > dawnblade mentor?
+    * <x> clhelp combatbasics (it's outdated for priests)
+    * <x> hhelp classbasic (outdated for priests as well)
+    * < > clhelp ranged
+    * <x> clhelp afflictions
+    * < > clhelp survival, trapsandother
+    * < > clhelp basicskills, groupcombatbasics
+    * < > interview with dawnblade master HOUSE STRUCTURE DAWNBLADE
+    * < > 
+    * < > 

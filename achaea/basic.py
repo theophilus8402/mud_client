@@ -42,6 +42,10 @@ def handle_login_info(gmcp_data):
 
 c.add_gmcp_handler("Char.Name", handle_login_info)
 
+#TODO: FIX THIS!!! Should have it as an extra argument when restarting the client?
+# the gmcp isn't sufficient because of stopping and restarting the client
+handle_login_info({"name": "palleo"})
+
 
 def show_help(alias_group):
     lines = [f"{pattern:15.15} : {desc}" for pattern, desc in

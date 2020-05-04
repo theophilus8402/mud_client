@@ -16,8 +16,14 @@ Fendrel says in a deep-toned and grim voice, "Depending on the rebuke will be th
 Fendrel says in a deep-toned and grim voice, "Remember you can beckon adjacent targets with your angel."
 * people who hurt mana: depthswalker, alchemist
 * rites:
-pheal
-demons
 piety
+demons
 pward
-* get targeting?
+pheal
+care
+emp
+daz
+chab
+insp
+her
+
