@@ -7,7 +7,7 @@ from ..state import s
 zeal_aliases = [
     (   "^att(?: (.+))?$",
         "recite attend */t",
-        lambda m: eqbal(f"recite attend {m[0] or s.target}")
+        lambda m: eqbal(f"recite attend {m[0] or '&tar'}")
     ),
     (   "^rfire(?: (.+))?$",
         "recite fire ?/me",
@@ -23,7 +23,7 @@ zeal_aliases = [
     ),
     (   "^pen$",
         "recite penance ?/t",
-        lambda m: eqbal(f"recite penance {s.target}")
+        lambda m: eqbal(f"recite penance &tar")
     ),
 ]
 c.add_aliases("ab_zeal", zeal_aliases)

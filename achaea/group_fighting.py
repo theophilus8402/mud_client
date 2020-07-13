@@ -67,7 +67,7 @@ group_fighting_aliases = [
     ),
     (   "^enemy(?: (.+))?$",
         "enemy []/target",
-        lambda matches: enemy_person(matches[0] or s.target)
+        lambda matches: enemy_person(matches[0] or '&tar')
     ),
     (   "^unenemy (.+)$",
         "unenemy []",

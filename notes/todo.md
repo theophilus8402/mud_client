@@ -41,7 +41,7 @@
         * < > track limb damage
 * < > palleo
     * <x> get tinderbox and pipes
-    * < > get more kelp
+    * <x> get more kelp
     * <x> fist sigil for shield
     * < > get targeting
     * < > get parrying
@@ -49,10 +49,17 @@
     * < > dawnblade mentor?
     * <x> clhelp combatbasics (it's outdated for priests)
     * <x> hhelp classbasic (outdated for priests as well)
-    * < > clhelp ranged
+    * <x> clhelp ranged
     * <x> clhelp afflictions
-    * < > clhelp survival, trapsandother
-    * < > clhelp basicskills, groupcombatbasics
+    * <x> clhelp survival, trapsandother
+    * <x> clhelp basicskills, groupcombatbasics
     * < > interview with dawnblade master HOUSE STRUCTURE DAWNBLADE
-    * < > 
-    * < > 
+    * < > nice to gets:
+        * < > concussion bombs
+        * <x> icewall enchantment
+        * <x> firelash ench
+        * <x> waterwalking ench
+* <x> maybe change how I do targetting?
+    * <x> assist might be working sometimes but not all
+        the time because I'm using the two different 
+        targetting systems

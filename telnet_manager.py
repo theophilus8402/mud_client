@@ -5,7 +5,7 @@ import json
 import re
 
 from select import select
-from telnetlib import IAC, SB, SE, Telnet, DO, TTYPE, BINARY, DONT, WILL
+from telnetlib import IAC, SB, SE, Telnet, DO, TTYPE, BINARY, DONT, WILL, GA
 
 GMCP = b'\xc9'
 
@@ -52,6 +52,11 @@ def handle_gmcp(data):
     gmcp_json = json.loads(gmcp_data)
     gmcp_queue.put_nowait((gmcp_type, gmcp_json))
 
+    #global awkward_msgs
+    #awkward_msgs.append((gmcp_type, gmcp_json))
+
+# awkward_msgs = []
+
 def iac_cb(telnet_session, sock, cmd, option):
     if cmd == WILL:
         if option == GMCP:
@@ -66,6 +71,10 @@ def iac_cb(telnet_session, sock, cmd, option):
 
         else:
             sock.sendall(IAC + DONT + option)
+    #if cmd == GA:
+    #    global awkward_msgs
+    #    print(awkward_msgs)
+    #    awkward_msgs.clear()
 
     elif cmd == SE:
         data = telnet_session.read_sb_data()
@@ -102,6 +111,8 @@ async def handle_telnet(host, port, from_server_queue, to_server_queue):
                     if sb_data != b"":
                         print("sb_data: {}".format(sb_data))
                 else:
+                    #global awkward_msgs
+                    #awkward_msgs.append(data)
                     from_server_queue.put_nowait(data)
 
             # handle sending stuff to the server

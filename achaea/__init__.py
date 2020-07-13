@@ -27,6 +27,9 @@ from achaea.triggers import depthswalker
 from achaea.triggers import generic
 from achaea.triggers import serpent
 
+#TODO: FIX THIS!!! Should have it as an extra argument when restarting the client?
+# the gmcp isn't sufficient because of stopping and restarting the client
+basic.handle_login_info({"name": "palleo"})
 
 class Achaea():
 

@@ -1,0 +1,63 @@
+\xff\xfb\x19\xff\xfb\xc8\xff\xfb\xc9\xff\xfbV\xff\xfd\x18
+Rapture Runtime Environment v2.4.5 -- (c) 2017 -- Iron Realms Entertainment\r\r\nMulti-User License: 100-0000-000\r\r\n\r\r\n
+\x1b[0;37m           \x1b[34m******************************************\x1b[37m\r\n\r\n                 \x1b[32mAchaea, Dreams of Divine Lands\x1b[37m\r\n\r\n                 \x1b[36m"Your fate and fame shall be\r\n               an echo and a light unto eternity."\r\n\r\n           \x1b[34m******************************************\x1b[37m\r\n\r\n           Achaea\'s IP address is 69.65.42.198\r\n           For general questions e-mail support@achaea.com.\r\n           178 adventurers are currently in the realms.\r\n\r\n           \x1b[32m1.\x1b[37m Enter the game.\r\n           \x1b[32m2.\x1b[37m Create a new character.\r\n           \x1b[32m3.\x1b[37m Quit.\r\n\r\nEnter an option or enter your character\'s name. \xff\xf9'
+trying to send: b'\xff\xfc\x19\xff\xfc\xc8\xff\xfc\xc9\xff\xfcV'
+
+\xff - 255 - IAC
+\xfb - 251 - WILL
+\xfc - 252 - WON'T
+\x19 - 25  - TELOPT_EOR end of record
+\xc8 - 200 - ATCP Achaea Telnet Client Protocol (old)
+\xc9 - 201 - GMCP
+\x56 - 86  - MCCP2
+\xfa - 250 - SB (beginning of subnegotiation)
+\x18 - 24  - TELOPT_TTYPE "cizra"
+\xfd - 253 - DO
+\xf9 - 249 - GA go ahead
+\xf0 - 240 - SE (end of subnegotiation parameters)
+
+\xff\xfb\x19    - IAC WILL EOR
+\xff\xfb\xc8    - IAC WILL ATCP
+\xff\xfb\xc9    - IAC WILL GMCP
+\xff\xfb\x56    - IAC WILL MCCP2 Mud Client Compression Protocol v2
+\xff\xfd\x18    - IAC DO TELOPT_TTYPE
+
+
+\xff\xfc\x19    - IAC WON'T EOR
+\xff\xfc\xc8    - IAC WON'T ATCP
+\xff\xfc\xc9    - IAC WON'T GMCP
+\xff\xfc\x56    - IAC WON'T MCCP2
+
+
+#define     TELOPT_ECHO           1   /* used to toggle local echo */
+#define     TELOPT_SGA            3   /* used to toggle character mode */
+#define     TELOPT_TTYPE         24   /* used to send client terminal type */
+#define     TELOPT_EOR           25   /* used to toggle eor mode */
+#define     TELOPT_NAWS          31   /* used to send client window size */
+#define     TELOPT_NEW_ENVIRON   39   /* used to send information */
+#define     TELOPT_CHARSET       42   /* used to detect UTF-8 support */
+#define     TELOPT_MSDP          69   /* used to send mud server data */
+#define     TELOPT_MSSP          70   /* used to send mud server information */
+#define     TELOPT_MCCP2         86   /* used to toggle Mud Client Compression Protocol v2 */
+#define     TELOPT_MCCP3         87   /* used to toggle Mud Client Compression Protocol v3 */
+#define     TELOPT_MSP           90   /* used to toggle Mud Sound Protocol */
+#define     TELOPT_MXP           91   /* used to toggle Mud Extention Protocol */
+#define     TELOPT_GMCP         201
+
+
+
+
+
+
+
+
+
+
+
+trying to send: b"\r\n\x1b[33mPUBLIC NEWS #20746\x1b[37m\x1b[32m                                      \x1b[37m\x1b[33m(06/05/2020 at 22:17)\x1b[37m\x1b[32m  \x1b[37m\r\n\x1b[32mFrom\x1b[37m   : Dawnlord Sothantos de l'Evanoir\r\n\x1b[32mTo\x1b[37m     : The City of Mhaldor\r\n\x1b[32mSubject\x1b[37m: Declaration of War\r\n\x1b[32m-------------------------------------------------------------------------------\r\n\x1b[37mMhaldor:\r\n\r\nThe West has a short memory.\r\n\r\nNot two years have passed since the soldiers of the Dawnspear last stormed the Ziggurat of Malignancy and cut down the Malevolent One's soldiers before Him, presenting Him their heads in open defiance of all that He is and all that He represents.\r\n\r\nAlready, the Lord of Evil presses for clemency, brandishing petty curses in an attempt to coerce Targossian forces into taking oaths against desecrating that which He considers sacred.\r\n\r\nThe Dawnspear is the will of the Bloodsworn made manifest, and Their will is the eradication of Evil from Sapience. No paltry threats, mortal or divine, will ever turn back Their servants from this sacred duty.\r\n\r\nThe only promise we will make to Him is thus: When Your city crumbles and Sapience is shown the truth of Evil's proclaimed strength once again, we will march on Your precious ziggurat and paint the walls with the blood of Your fallen.\r\n\r\nTwice before, our cities have gone to war. Twice before, Evil has been vanquished.\r\n\r\n\x1b[36m[Type \x1b[37mMORE\x1b[36m if you wish to continue reading. (90% shown)]\r\n\x1b[37m\xff\xfa\xc9Ch"
+trying to send: b'ar.Status { "unread_news": "105" }\xff\xf0\xff\xfa\xc9Char.Vitals { "hp": "4784", "maxhp": "4784", "mp": "4000", "maxmp": "4100", "ep": "19020", "maxep": "19020", "wp": "15600", "maxwp": "15600", "nl": "57", "bal": "1", "eq": "1", "vote": "1", "string": "H:4784/4784 M:4000/4100 E:19020/19020 W:15600/15600 NL:57/100 ", "charstats": [ "Bleed: 0", "Rage: 0", "Devotion: 100%", "conviction: 0", "prayer_length: 0", "Prayer: Yes" ] }\xff\xf0\x1b[32m4784h, \x1b[37m\x1b[32m4000m, \x1b[37m\x1b[32m19020e, \x1b[37m\x1b[32m15600w \x1b[37mex-\xff\xf9'
+trying to send: b"\r\n\x1b[33mPUBLIC NEWS #20747\x1b[37m\x1b[32m                                      \x1b[37m\x1b[33m(06/06/2020 at 20:06)\x1b[37m\x1b[32m  \x1b[37m\r\n\x1b[32mFrom\x1b[37m   : Thaisen Vorondil-Lanthe, Discurean Pathwalker\r\n\x1b[32mTo\x1b[37m     : The City of Hashan\r\n\x1b[32mSubject\x1b[37m: Your Leadership\r\n\x1b[32m-------------------------------------------------------------------------------\r\n\x1b[37mCitizens of Hashan,\r\n\r\nThere has no doubt been claims about me from your leadership in recent months. What I have said or what I have done to deserve the status of permanent enemy that I now carry. I am not looking for any sympathy from you as I know the enemying of one Cyrene citizen is hardly a big deal given the bans that have been in place for decades. I simply wanted to tell you my side of the story as you are likely only hearing one side of it.\r\n\r\nI am an avid trader of commodities and as part of my duties as Trade Minister I like to keep tabs on all commodity pricing throughout the land. There are times when a good deal comes around and, as most people would, I do what I can to help benefit my city or my own personal accounts. The other month I noticed that your city's commodity shop was selling wood at a good price and bought some. This transaction's pricing and quantity was specifically set by your Ministry of Trade. I agreed to the terms and paid quite a bit of gold to acquire said commodities.\r\n\r\nI then came to find that your Minister of Security has now made me per"
+trying to send: b'manent enemy without so much as a word to me before taking action. When questioned I was informed my fine was set to an outrageous sum that I would be required to pay to consider having my status changed. Any further attempts to reach out to someone other than your delusional Minister of Security was met with silence.\r\n\r\nThere will also no doubt be people who say, "He has done this before, to other cities."  To that I would encourage you to speak with those involved from Eleusis and they would inform you that they instead took a different approach. They admitted to a mistake and the situation was quickly rectified. Your leadership has chosen a different path and is attempting to make me look like the bad guy.\r\n\r\nOn top of all of this, the person who was ultimately responsible for the entire situation then took my bounty to enrich himself even more. You would think a mistake of such magnitude would be repremanded instead of rewarded, but apparently not.\r\n\r\nLike I said at the beginning Citizens of Hashan. I am not looking for your sympathy or support.\r\n\r\n\x1b[36m[Type \x1b[37mMORE\x1b[36m if you wish to continue reading. (93% shown)]\r\n\x1b[37m\xff\xfa\xc9Char.Status { "unread_news": "104" }\xff\xf0\xff\xfa\xc9Char.Vitals { "hp": "4784", "maxhp": "4784", "mp": "4000", "maxmp": "4100", "ep": "19020", "maxep": "19020", "wp": "15600", "maxwp": "15600", "nl": "57", "bal": "1", "eq": "1", "vote": "1", "string": "H:4784/4784 M:4000/4100 E:19020/19020 W:15600/15600 NL:57/100 ", "charstats": [ "Bleed: 0", "Rage: 0", "Devotion: 100%", "conviction: 0", "prayer_length: 0", "Prayer: Yes" ] }\xff\xf0\x1b[32m4784h, \x1b[37m\x1b[32m4000m, \x1b[37m\x1b[32m19020e, \x1b[37m\x1b[32m15600w \x1b[37mex-\xff\xf9'
+trying to send: b'\x1b[1;32m[\x1b[0;37mSystem\x1b[1;32m]\x1b[0;37m: Prepended N to your eqbal queue.\r\n\x1b[1;32m[\x1b[0;37mSystem\x1b[1;32m]\x1b[0;37m: Running queued eqbal command: N\r\n\xff\xfa\xc9Room.WrongDir "n"\xff\xf0There is no exit in that direction.\r\n\xff\xfa\xc9Char.Vitals { "hp": "4784", "maxhp": "4784", "mp": "4000", "maxmp": "4100", "ep": "19020", "maxep": "19020", "wp": "15600", "maxwp": "15600", "nl": "57", "bal": "1", "eq": "1", "vote": "1", "string": "H:4784/4784 M:4000/4100 E:19020/19020 W:15600/15600 NL:57/100 ", "charstats": [ "Bleed: 0", "Rage: 0", "Devotion: 100%", "conviction: 0", "prayer_length: 0", "Prayer: Yes" ] }\xff\xf0\x1b[32m4784h, \x1b[37m\x1b[32m4000m, \x1b[37m\x1b[32m19020e, \x1b[37m\x1b[32m15600w \x1b[37mex-\xff\xf9'
+trying to send: b'\r\n\x1b[33mPUBLIC NEWS #20748\x1b[37m\x1b[32m                                      \x1b[37m\x1b[33m(06/08/2020 at 01:24)\x1b[37m\x1b[32m  \x1b[37m\r\n\x1b[32mFrom\x1b[37m   : Tyrannus Stheno Aristata\r\n\x1b[32mTo\x1b[37m     : The City of Targossas\r\n\x1b[32mSubject\x1b[37m: War It Is\r\n\x1b[32m-------------------------------------------------------------------------------\r\n\x1b[37mDawnlord,\r\n\r\nBetter men than you have tried to cow the West and failed. The servants of Evil fear no death. We welcome pain, delight in bloodshed, and thrive in the harshest conditions. We have our mission. With or without you, Creation will evolve. Save your paternalistic barking for your rank and file.\r\n\r\nLike the Seven, I hold these truths to be self-evident.\r\n\r\nThe "storming" of His Ziggurat, His temple that welcomes all to its black doors, was your rejection of a fundamental hospitality. Rather than learn or challenge anything, your soldiers desecrated a public space of education and worship. You knew His servants would not spill blood on hallowed ground. Yet even your old priest Halos doesn\'t seem to know better, too sunken in the mire of memories of Shallam. Painting a coward gold does not make him a martyr.\r\n\r\nYou attacked Cyrene for less contempt than you show the Lord Malevolent now. You enjoy the pulpit of the hypocrite.\r\n\r\nYou had the chance to excoriate and speak out against your predecessor, a Dawnlord seduced away from the Bloodsworn by Darkness. Instead you welcomed her back, this traitor and Darkwalker. You remain a mercenary man, with long practice at justifying himself. How bad can slavers and their associates truly be? What is it about Evil that you hate, when it has already crawled inside you and taken hold?\r\n\r\nI am glad you have found your limitless courage and faith now, with your Lady watching. I pray She watches all of it, that She may shine a bright Light on the misery you bring to your door.\r\n\r\n\x1b[36m[Type \x1b[37mMORE\x1b[36m if you wish to continue reading. (89% shown)]\r\n\x1b[37m\xff\xfa\xc9Char.Status { "unread_news": "103" }\xff\xf0\xff\xfa\xc9Char.Vitals { "hp": "4784", "maxhp": "4784", "mp": "4000", "maxmp": "4100", "ep": "19020", "maxep": "19020", "wp": "15600", "maxwp": "15600", "nl": "57", "bal": "1", "eq": "1", "vote": "1", "string": "H:4784/4784 M:4000/4100 E:19020/19020 W:15600/15600 NL:57/100 ", "charstats": [ "Bleed: 0", "Rage: 0", "Devotion: 100%", "conviction: 0", "prayer_length: 0", "Prayer: Yes" ] }\xff\xf0\x1b[32m4784h, \x1b[37m\x1b[32m4000m, \x1b[37m\x1b[32m19020e, \x1b[37m\x1b[32m15600w \x1b[37mex-\xff\xf9'
+trying to send: b'\x1b[33m\r\nIt is now the 7th of Miraman, 834 years after the fall of the Seleucarian Empire.\r\n\x1b[37m\xff\xfa\xc9Char.Vitals { "hp": "4784", "maxhp": "4784", "mp": "4000", "maxmp": "4100", "ep": "19020", "maxep": "19020", "wp": "15600", "maxwp": "15600", "nl": "57", "bal": "1", "eq": "1", "vote": "1", "string": "H:4784/4784 M:4000/4100 E:19020/19020 W:15600/15600 NL:57/100 ", "charstats": [ "Bleed: 0", "Rage: 0", "Devotion: 100%", "conviction: 0", "prayer_length: 0", "Prayer: Yes" ] }\xff\xf0\x1b[32m4784h, \x1b[37m\x1b[32m4000m, \x1b[37m\x1b[32m19020e, \x1b[37m\x1b[32m15600w \x1b[37mex-\xff\xf9'
