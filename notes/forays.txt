@@ -1,0 +1,48 @@
+* doing mirrortower
+    * half to fly to find it
+    * could be in:
+        morindar
+        tenwat
+        pherelkos
+        or ... other places
+
+
+(Party): Vasher says, "So what we're doing is getting this thrall below 20%."
+(Party): Vasher says, "Which will allow Vivena to fight Icosse."
+(Party): Vasher says, "If we kill the thrall though, Vivena dies."
+(Party): Vasher says, "So we get it to 20%, and then just shield ourselves a lot."
+(Party): You say, "Ahh, ok."
+(Party): You say, "Should I be healing people at all?"
+(Party): Vasher says, "Nah."
+(Party): Vasher says, "It'll put threat on you."
+(Party): Vasher says, "Which we want to avoid."
+(Party): Aroan says, "Palleo's health at 5012/5012."
+(Party): Vasher says, "35%."
+(Party): Vasher says, "30."
+(Party): Aroan says, "Ceasing attacks."
+(Party): Vasher says, "You're up, Vivena."
+(Party): Aroan says, "You got this!"
+(Party): You say, "Why were you asking for an attractor earlier?"
+(Party): Vasher says, "Because when you kill Icosse, it immediately teleports you out of the area she's in."
+(Party): Vasher says, "An attractor lets you get the gold Icosse drops."
+(Party): You say, "Ahhh!"
+(Party): Vasher says, "Or at least, in theory, we'll find out this time."
+(Party): Vasher says, "By the way, we'll split gold after this, so don't run off too quick."
+(Party): You say, "Thanks!"
+(Party): Vasher says, "But otherwise, we're done. There are two things that you haven't seen, and one is that the thrall can banish us to the mirror realm or whatever."
+(Party): Vasher says, "If that happens (which it won't now, but might in a later run) You LISTEN, and it'll say you hear the sound of combat from some direction."
+(Party): Vasher says, "And then you go that direction and touch mirror."
+(Party): Vasher says, "The other thing is that whoever is fighting Icosse, Icosse will jump into mirrors when you hit him."
+(Party): Vasher says, "You have to LOOK MIRROR to get him out."
+
+
+
+(Party): You say, "Where does this forray fall in levels of difficulty?"
+(Party): Vasher says, "There are six, and it's the second easiest."
+(Party): Vasher says, "Arankesh is the easiest."
+(Party): You say, "Ahh, ok."
+(Party): Vasher says, "And then fortress gets much harder, and then barrow gets MUCH harder."
+(Party): Vasher says, "And I think Margam is somewhere inbetween fortress and barrow in difficulty."
+(Party): You say, "It would be interesting to see those!"
+(Party): Vasher says, "You could probably do well in aran'kesh too, fortress starts getting harder because the mages hit everyone."
+(Party): Vasher says, "So you might die to just the aoe damage, but if i'm leading one I'll bring you along and we can find out how it goes."
