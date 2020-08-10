@@ -43,8 +43,8 @@
     * <x> get tinderbox and pipes
     * <x> get more kelp
     * <x> fist sigil for shield
-    * < > get targeting
-    * < > get parrying
+    * <x> get targeting
+    * <x> get parrying
     * < > get hr2
     * < > dawnblade mentor?
     * <x> clhelp combatbasics (it's outdated for priests)
@@ -63,3 +63,26 @@
     * <x> assist might be working sometimes but not all
         the time because I'm using the two different 
         targetting systems
+* < > theophilus
+    * < > runelore aliases
+    * <x> fieldplate
+    * < > runicarmour fieldplate
+    * < > some more vials for venoms
+    * < > refill all the things
+    * < > more inks
+    * < > learn:
+        * <x> nightsight in vision 3 lessons
+        * <x> runeblades runelore 211 lessons
+        * <x> moss tattoos 7 lessons
+* < > manara
+    * < > level 1, sell gnolls to bissa
+    * < > level 2, sell gnolls to thriel
+    * < > level 4, sell to ebra
+* runes:
+    jera - 1 str 1 con
+    algiz - 10%
+    gebu/gebo - armor
+    dagaz - heals affs on ground
+    lagua - disembowel dmg
+    berkana - regen
+    laguz - limb dmg

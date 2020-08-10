@@ -40,6 +40,14 @@ def handle_login_info(gmcp_data):
         from achaea.occultist import ab_tarot
         from achaea.occultist import ab_domination
 
+    elif name.lower() == "theophilus":
+        echo("Loading modules for theophilus!")
+        # occultist modules
+        from achaea.runewarden import ab_runelore
+        from achaea.runewarden import ab_chivalry
+        from achaea.runewarden import ab_weaponmastery
+        from achaea.runewarden import ab_battlerage
+
 c.add_gmcp_handler("Char.Name", handle_login_info)
 
 

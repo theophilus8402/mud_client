@@ -1,0 +1,18 @@
+
+* Make sure we can add items
+* items must be immutable
+    * must is a best effort
+        issubclass(TYPE, (MutableSequence, MutableSet, MutableMapping))
+        in collections.abc
+        - and/or -
+        hasattr()
+            __setitem__
+            add
+* with them being immutable,
+    * we can track changes for everything
+* make sure a variable set can't be changed to a different type later
+    i.e. s.x = 3  ...  s.x = (1, 2, 3) is an error
+    * this will help with tracking changes and make sure we don't do silly things
+* keep track of changes
+    s._changes
+    s2 - s1 will show the difference between the two states
