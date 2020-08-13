@@ -37,16 +37,3 @@ class State():
 
 s = State()
 
-
-class DiffState():
-
-    def __init__(self):
-        self.echo_lines = []
-
-    def echo(self, line):
-        self.echo_lines.append(line)
-
-    def __add__(self, other):
-        new_ds = DiffState()
-        new_ds.echo_lines = self.echo_lines.extend(other.echo_lines)
-

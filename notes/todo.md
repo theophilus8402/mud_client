@@ -66,10 +66,28 @@
 * < > theophilus
     * < > runelore aliases
     * <x> fieldplate
-    * < > runicarmour fieldplate
+    * <x> runicarmour fieldplate
+    * < > herbs
+        * < > kelp!
     * < > some more vials for venoms
     * < > refill all the things
+        * < > frost
+        * < > health
+        * < > immunity
+        * < > levitation
+        * < > mana
+        * < > speed
+        * < > venom
+        * < > caloric
+        * < > epidermal
+        * < > mass
+        * < > mending
+        * < > restoration
     * < > more inks
+        * <x> purple
+        * < > green
+        * < > yellow
+        * < > 
     * < > learn:
         * <x> nightsight in vision 3 lessons
         * <x> runeblades runelore 211 lessons

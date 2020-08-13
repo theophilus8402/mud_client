@@ -11,8 +11,6 @@ from telnetlib import IAC, SB, SE
 GMCP = b'\xc9'
 
 
-from .state import DiffState
-
 class Client():
 
     def __init__(self):
@@ -141,10 +139,6 @@ class Client():
     def echo(self, msg):
         # TODO: move this functionality somewhere else
         print(msg.rstrip(), file=self.current_out_handle, flush=True)
-
-        ds = DiffState()
-        ds.echo_lines.append(msg)
-        return ds
 
     def set_line(self, new_line):
         self.modified_current_line = new_line
