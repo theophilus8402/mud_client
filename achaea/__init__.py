@@ -29,7 +29,7 @@ from achaea.triggers import serpent
 
 #TODO: FIX THIS!!! Should have it as an extra argument when restarting the client?
 # the gmcp isn't sufficient because of stopping and restarting the client
-basic.handle_login_info({"name": "theophilus"})
+basic.handle_login_info({"name": "sarmenti"})
 
 class Achaea():
 

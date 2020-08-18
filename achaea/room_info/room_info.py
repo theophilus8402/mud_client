@@ -72,7 +72,7 @@ def mob_left_room(gmcp_data):
     for mob_id in s.mobs_in_room:
         if mob_id.endswith(item["id"]):
             #echo(f"found mob to remove: {item['id']}")
-            s.mobs_in_room.pop(mob_id)
+            s.mobs_in_room.remove(mob_id)
             break
 c.add_gmcp_handler("Char.Items.Remove", mob_left_room)
 
