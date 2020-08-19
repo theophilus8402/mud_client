@@ -17,44 +17,9 @@ from achaea.afflictions import summarize_afflictions
 from multi_queue import MultiQueue
 from telnet_manager import handle_telnet, strip_ansi, gmcp_queue
 
-from prompt_toolkit.shortcuts import PromptSession
-
-
-from prompt_toolkit.application import Application
-from prompt_toolkit.document import Document
-from prompt_toolkit.filters import has_focus
-from prompt_toolkit.key_binding import KeyBindings
-from prompt_toolkit.layout.containers import HSplit, Window
-from prompt_toolkit.layout.layout import Layout
-from prompt_toolkit.styles import Style
-from prompt_toolkit.widgets import SearchToolbar, TextArea
-
+import ui.core
 
 async def handle_input(mud_client):
-
-    # note!  This is more on the "client" side
-    # in that I should be handling aliases and what not
-
-    #session = PromptSession("", reserve_space_for_menu=3)
-
-    search_field = SearchToolbar()  # For reverse search.
-
-    input_field = TextArea(
-        height=1,
-        prompt=">>> ",
-        style="class:input-field",
-        multiline=False,
-        wrap_lines=False,
-        search_field=search_field,
-    )
-
-    container = HSplit(
-        [
-            TextArea(height=1, style="class:output-field", text="10/10 23/23"),
-            input_field,
-            search_field,
-        ]
-    )
 
     # Attach accept handler to the input field. We do this by assigning the
     # handler to the `TextArea` that we created earlier. it is also possible to
@@ -62,8 +27,10 @@ async def handle_input(mud_client):
     # NOTE: It's better to assign an `accept_handler`, rather then adding a
     #       custom ENTER key binding. This will automatically reset the input
     #       field and add the strings to the history.
-    def accept(buff):
-        data = input_field.text
+    def accept(input_buffer):
+
+        data = input_buffer.text
+
         # check to see if the user just hit enter
         # if so, send the last command instead
         if data == "":
@@ -84,69 +51,12 @@ async def handle_input(mud_client):
         c.send_flush()
 
 
-    input_field.accept_handler = accept
-
-    # The key bindings.
-    kb = KeyBindings()
-
-    @kb.add("c-c")
-    @kb.add("c-q")
-    def _(event):
-        " Pressing Ctrl-Q or Ctrl-C will exit the user interface. "
-        event.app.exit()
-
-    # Style.
-    style = Style(
-        [
-            ("output-field", "bg:#000044 #ffffff"),
-            ("input-field", "bg:#000000 #ffffff"),
-            ("line", "#004400"),
-        ]
-    )
-
-    # Run application.
-    application = Application(
-        layout=Layout(container, focused_element=input_field),
-        key_bindings=kb,
-        style=style,
-        mouse_support=True,
-        full_screen=True,
-    )
+    ui.core.input_field.accept_handler = accept
 
     #completer = TargetCompleter(s)
 
-    result = await application.run_async()
+    result = await ui.core.application.run_async()
     print(f"result: {result}")
-
-    # Run echo loop. Read text from stdin, and reply it back.
-    #while True:
-    #    try:
-    #        data = await session.prompt_async(completer=completer)
-    #    except (EOFError, KeyboardInterrupt):
-    #        return
-
-    #    # check to see if the user just hit enter
-    #    # if so, send the last command instead
-    #    if data == "":
-    #        data = c.last_command
-
-    #    c.main_log(data, "user_input")
-    #    c.last_command = data
-
-    #    # check if we should break out of the loop
-    #    if data == "qdq":
-    #        break
-
-    #    # handle user input
-    #    #c.echo(f"cmd: {data}")
-    #    for cmd in data.split(";"):
-    #        if not mud_client.handle_aliases(cmd):
-    #            send(cmd)
-    #        # else assume msgs are sent as needed
-
-    #    # everything has been queued in c.to_send
-    #    # use c.send_flush() to actually send it
-    #    c.send_flush()
 
 
 async def handle_from_server_queue(from_server_queue, mud_client):
