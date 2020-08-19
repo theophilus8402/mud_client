@@ -23,6 +23,7 @@ from . import status
 from . import tattoos
 from . import group_fighting
 from . import sigil
+from . import vitals
 from achaea.triggers import depthswalker
 from achaea.triggers import generic
 from achaea.triggers import serpent
