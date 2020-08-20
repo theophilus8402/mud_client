@@ -21,7 +21,7 @@ setup_session () {
     tmux send-keys -t $session:"client".3 "tail -f fighting.log" C-m
     # notes
     tmux split-window -v -l 50 -t $session:"client".3
-    tmux send-keys -t $session:"client".4 "vim notes/magi.md" C-m
+    tmux send-keys -t $session:"client".4 "vim notes/todo.md" C-m
 
     # make the prompt part
     tmux split-window -v -l 5 -t $session:"client".1

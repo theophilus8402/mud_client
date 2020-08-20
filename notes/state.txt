@@ -1,0 +1,26 @@
+
+I want to try to make stuff stateless.  The state thing is important.
+
+
+#"^t (.*)$"
+t orc
+state:
+    remove temp trigger
+    t.target = orc
+    add temp trigger
+    send message to the server (send)
+    print something to the screen (echo)
+
+
+
+handle_triggers(msg, state, triggers):
+    results = []
+    for search_method, action in [triggers, state.temp_triggers]:
+        match = search_method(msg)
+        if match:
+            new_state = action(state, match.groups())
+            results.append((match.re.pattern, new_state))
+    return results
+
+
+
