@@ -17,23 +17,19 @@ from achaea.afflictions import summarize_afflictions
 from multi_queue import MultiQueue
 from telnet_manager import handle_telnet, strip_ansi, gmcp_queue
 
-from prompt_toolkit.shortcuts import PromptSession
-
+import ui.core
 
 async def handle_input(mud_client):
 
-    # note!  This is more on the "client" side
-    # in that I should be handling aliases and what not
+    # Attach accept handler to the input field. We do this by assigning the
+    # handler to the `TextArea` that we created earlier. it is also possible to
+    # pass it to the constructor of `TextArea`.
+    # NOTE: It's better to assign an `accept_handler`, rather then adding a
+    #       custom ENTER key binding. This will automatically reset the input
+    #       field and add the strings to the history.
+    def accept(input_buffer):
 
-    session = PromptSession("", reserve_space_for_menu=3)
-
-    completer = TargetCompleter(s)
-    # Run echo loop. Read text from stdin, and reply it back.
-    while True:
-        try:
-            data = await session.prompt_async(completer=completer)
-        except (EOFError, KeyboardInterrupt):
-            return
+        data = input_buffer.text
 
         # check to see if the user just hit enter
         # if so, send the last command instead
@@ -42,10 +38,6 @@ async def handle_input(mud_client):
 
         c.main_log(data, "user_input")
         c.last_command = data
-
-        # check if we should break out of the loop
-        if data == "qdq":
-            break
 
         # handle user input
         #c.echo(f"cmd: {data}")
@@ -57,6 +49,14 @@ async def handle_input(mud_client):
         # everything has been queued in c.to_send
         # use c.send_flush() to actually send it
         c.send_flush()
+
+
+    ui.core.input_field.accept_handler = accept
+
+    #completer = TargetCompleter(s)
+
+    result = await ui.core.application.run_async()
+    print(f"result: {result}")
 
 
 async def handle_from_server_queue(from_server_queue, mud_client):

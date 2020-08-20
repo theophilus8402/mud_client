@@ -55,5 +55,9 @@ anti_theft_triggers = [
         # rewear it!
         lambda m: send("wear pouch;put pouch in pouch;put coins in pouch;selfishness")
     ),
+    #(   r"^You remove a simple suit of lightweight field plate.$",
+    #    # rewear it!
+    #    lambda m: send("wear fieldplate;put fieldplate in pack;put coins in pouch;selfishness")
+    #),
 ]
 c.add_triggers(anti_theft_triggers)
