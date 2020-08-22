@@ -62,7 +62,7 @@
         * < > hhelp leviathan
         * receive brand and oath, speak with novice aide
     * < > buy minerals
-        * < > antimony
+        * <x> antimony
         * < > argentum
         * < > arsenic
         * < > aurum
