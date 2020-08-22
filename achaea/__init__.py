@@ -12,6 +12,7 @@ from . import afflictions
 from . import basic
 from . import balances
 from . import bleeding
+from . import bopalopia
 #from . import ab_battlerage
 from . import ab_vision
 from . import ab_survival
@@ -56,6 +57,7 @@ class Achaea():
             #match = compiled_pattern.match(msg)
             match = search_method(msg)
             if match:
+                #c.echo(match.re.pattern)
                 try:
                     action(match.groups())
                     trig_handled = True

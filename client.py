@@ -17,6 +17,9 @@ from achaea.afflictions import summarize_afflictions
 from multi_queue import MultiQueue
 from telnet_manager import handle_telnet, strip_ansi, gmcp_queue
 
+from prompt_toolkit.application import Application
+from prompt_toolkit.layout.layout import Layout
+
 import ui.core
 
 async def handle_input(mud_client):
@@ -53,9 +56,17 @@ async def handle_input(mud_client):
 
     ui.core.input_field.accept_handler = accept
 
+    application = Application(
+        layout=Layout(ui.core.container, focused_element=ui.core.input_field),
+        key_bindings=ui.core.kb,
+        style=ui.core.style,
+        mouse_support=True,
+        full_screen=True,
+    )
+
     #completer = TargetCompleter(s)
 
-    result = await ui.core.application.run_async()
+    result = await application.run_async()
     print(f"result: {result}")
 
 

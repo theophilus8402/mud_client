@@ -137,7 +137,7 @@ class Client():
     
     def echo(self, msg):
         # TODO: move this functionality somewhere else
-        print(msg.rstrip(), file=self.current_out_handle, flush=True)
+        print(msg, file=self.current_out_handle, flush=True)
 
     def set_line(self, new_line):
         self.modified_current_line = new_line
