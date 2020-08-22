@@ -11,10 +11,9 @@ class TargetCompleter(Completer):
 
     def get_completions(self, document, complete_event):
         word = document.get_word_before_cursor()
-        #print(f"word: {word}")
 
-        players = self.state.players_in_room
-        enemies = self.state.enemies
+        players = set(self.state.players_in_room)
+        enemies = set(self.state.enemies)
         mobs = self.state.mobs_in_room
         enemies_in_room = players.intersection(enemies)
         others = players.difference(enemies)

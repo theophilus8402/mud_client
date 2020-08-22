@@ -50,7 +50,7 @@ class Client():
 
     def add_aliases(self, group_name, new_aliases):
         if group_name in self.help_info.keys():
-            print(f"{group_name} already exists!",
+            self.echo(f"{group_name} already exists!",
                   file=self.current_out_handle, flush=True)
             return False
     
@@ -100,7 +100,6 @@ class Client():
     
     def add_trigger(self, new_trigger, flags=0):
         pattern, action = new_trigger
-        #print(f"adding trigger: {pattern}")
         try:
             compiled_pattern = re.compile(pattern, flags=flags)
         except Exception as e:
@@ -147,7 +146,7 @@ class Client():
         self._delete_line = True
 
     def add_gmcp_handler(self, gmcp_type, action):
-        print(f"adding handler: {gmcp_type} {action}")
+        self.echo(f"adding handler: {gmcp_type} {action}")
         self._gmcp_handlers[gmcp_type].append(action)
 
 

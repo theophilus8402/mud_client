@@ -40,52 +40,49 @@ c.add_gmcp_handler("Room.Info", ratting_room_info)
 def rat(client, matches):
 
     if datetime.now() < s.last_rat_call + timedelta(seconds=1):
-        #print("You've run 'rat' too recently!")
         return
-
-    # print("running rat!")
 
     # if it looks like we've been ratting in the room before, move on
     """
     if s.room["num"] in s.rooms_ratted:
-        print("It looks like we've ratted here before, moving on...")
+        echo("It looks like we've ratted here before, moving on...")
         ratting_move_on(client)
         return
     """
 
     # if we've been waiting for 15 seconds with no sign of a rat, move on
     if datetime.now() >= s.rat_last_seen + timedelta(seconds=15):
-        print("We've been waiting for too long!  It's time to move on!")
+        echo("We've been waiting for too long!  It's time to move on!")
         ratting_move_on(client)
         # move on
         return
 
     s.last_rat_call = datetime.now()
     if len(s.players_in_room) >= 1:
-        print("There ARE people in the room!")
+        echo("There ARE people in the room!")
         # move on
         ratting_move_on(client)
         return
 
     # check to see if we've killed all the rats in the room
     if s.rats_killed_in_room >= 3:
-        print(f"Killed {s.rats_killed_in_room} rats here!  Moving on...")
+        echo(f"Killed {s.rats_killed_in_room} rats here!  Moving on...")
         # move on
         ratting_move_on(client)
         return
 
     rat_in_room = False
     for mob in s.mobs_in_room:
-        print(mob)
+        echo(mob)
         if "rat" in mob["name"]:
             rat_in_room = True
             break
     if not rat_in_room:
-        #print("There's NOT a rat in the room!")
+        #echo("There's NOT a rat in the room!")
         return
 
     if not (s.bal and s.eq):
-        #print("You DON'T have bal/eq!")
+        #echo("You DON'T have bal/eq!")
         return
     eqbal("stand;warp rat")
 
@@ -98,7 +95,7 @@ def handle_rat_command(matches):
         timers.add("ratting", lambda: rat(None, None), 3, recurring=True)
         echo(f"handle_rat_command turn on the rat machine!")
     elif matches[0] == "off":
-        print(timers.timers)
+        echo(timers.timers)
         timers.remove("ratting")
         echo(f"handle_rat_command turn it off!!!")
     else:

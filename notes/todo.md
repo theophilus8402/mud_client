@@ -20,15 +20,6 @@
         * < > kill stuff
         * < > don't die
             * < > values of dangers for mobs, if too dangerous, move on
-* <x> logging
-    * <x> combine logs from the same day?
-    * <x> zip up logs from a previous month?
-    * <x> change log parser? to print to screen
-* < > clean up todo
-    * < > move things from magi.md to here
-* clean up notes
-    * <x> move magi.md to magi.txt
-    * < > consolidate/move/cleanup triggers.txt
 * <x> make it so that logging in by different characters will load
     different modules
     * ["2020/04/17 10:48:00.129817", "gmcp_data", "{\"type\": \"Char.Name\", \"data\": {\"name\": \"Vindiconis\", \"fullname\": \"Sentry Vindiconis\"}}"]
@@ -40,67 +31,66 @@
         * < > track affs given / cured
         * < > track limb damage
 * < > palleo
-    * <x> get tinderbox and pipes
-    * <x> get more kelp
-    * <x> fist sigil for shield
-    * <x> get targeting
-    * <x> get parrying
     * < > get hr2
     * < > dawnblade mentor?
-    * <x> clhelp combatbasics (it's outdated for priests)
-    * <x> hhelp classbasic (outdated for priests as well)
-    * <x> clhelp ranged
-    * <x> clhelp afflictions
-    * <x> clhelp survival, trapsandother
-    * <x> clhelp basicskills, groupcombatbasics
     * < > interview with dawnblade master HOUSE STRUCTURE DAWNBLADE
-    * < > nice to gets:
-        * < > concussion bombs
-        * <x> icewall enchantment
-        * <x> firelash ench
-        * <x> waterwalking ench
-* <x> maybe change how I do targetting?
-    * <x> assist might be working sometimes but not all
-        the time because I'm using the two different 
-        targetting systems
 * < > theophilus
     * < > runelore aliases
-    * <x> fieldplate
-    * <x> runicarmour fieldplate
-    * < > herbs
-        * < > kelp!
-    * < > some more vials for venoms
-    * < > refill all the things
-        * < > frost
-        * < > health
-        * < > immunity
-        * < > levitation
-        * < > mana
-        * < > speed
-        * < > venom
-        * < > caloric
-        * < > epidermal
-        * < > mass
-        * < > mending
-        * < > restoration
+    * < > get more kelp
+    * < > more elixirs/salves
     * < > more inks
-        * <x> purple
         * < > green
         * < > yellow
-        * < > 
-    * < > learn:
-        * <x> nightsight in vision 3 lessons
-        * <x> runeblades runelore 211 lessons
-        * <x> moss tattoos 7 lessons
-* < > manara
-    * < > level 1, sell gnolls to bissa
-    * < > level 2, sell gnolls to thriel
-    * < > level 4, sell to ebra
-* runes:
-    jera - 1 str 1 con
-    algiz - 10%
-    gebu/gebo - armor
-    dagaz - heals affs on ground
-    lagua - disembowel dmg
-    berkana - regen
-    laguz - limb dmg
+* sarmenti
+    * <x> describe self
+    * <x> finish tasks
+    * < > house
+        * <x> join legates
+        * <x> hhelp thrall (this is adv. requirements)
+        * < > clhelp antitheft
+            * need serpent test
+        * < > chelp history, historyii, historyiii
+            * how city came to be, crimson fog
+                EVENTS post #60
+        * < > chelp seventruths
+        * < > chelp catechisms
+        * < > help sartan
+        * < > hhelp precepts
+        * < > museum of mhaldor
+            * legate within 'a monstrous auditorium'
+            * touch two exhibits, how am I not the legate
+        * < > hhelp leviathan
+        * receive brand and oath, speak with novice aide
+    * < > buy minerals
+        * < > antimony
+        * < > argentum
+        * < > arsenic
+        * < > aurum
+        * < > azurite
+        * < > bisemutum
+        * < > calamine
+        * < > calcite
+        * < > cinnabar
+        * < > cuprum
+        * < > dolomite
+        * < > ferrum
+        * < > gypsum
+        * < > magnesium
+        * < > malachite
+        * < > plumbum
+        * < > quartz
+        * < > quicksilver
+        * < > realgar
+        * < > stannum
+    * <x> elixirs/salves
+    * <x> pipes/tinderbox
+* state
+    * < > s.mobs_in_room -> tuple
+        * < > write tests
+    * < > s.defences -> tuple
+    * < > s.wanted_defences -> tuple
+    * < > s.enemies -> tuple
+    * < > s.new_afflictions -> tuple
+    * < > s.cured_afflictions -> tuple
+    * < > s.current_afflictions -> tuple
+        * might be able to get rid of new and cured with this tuple stuff

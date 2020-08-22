@@ -1,0 +1,180 @@
+Composed by: Jurixe on or about the 20th of Phaestian, 811 AF.
+
+This scroll covers the basics of how theft works from the viewpoint of
+the victim, empowering you to prevent heathens from taking advantage of
+you.
+
+Theft, fundamentally, is another person getting your gold or another
+object from your inventory without your permission. Several classes are
+able to do this in various ways. Any theft attempt on a novice (below
+level 30) is illegal and should be reported to your superiors.
+
+PICKPOCKETING (Serpent)
+=================================================================
+The ability to pickpocket is a Subterfuge skill available only to the
+Serpent class, and is one of the most common forms of theft.
+
+A Serpent can choose either to pickpocket something random or something
+specific from you.
+
+Untargeted Pickpocket
+----------------------
+If you do not have the Selfishness defense active, a successful
+untargetted pickpocket attempt will always succeed in stealing one of
+the following from your inventory:
+
+- Letter
+- Gold
+- Sigil
+- Key
+- Shard
+
+Groupable items can be stolen in groups, i.e. a group of three monolith
+sigils. The amount of gold stolen per pickpocket attempt depends on the
+amount you are carrying in your inventory: the larger the sum, the more
+will be stolen.
+
+If there is nothing worth stealing, then the pickpocket attempt fails.
+However, thieves can continue attempting to pick your pockets as long as
+the pickpocketing is not targeted.
+
+Targeted Pickpocket
+-------------------
+It is much harder to steal a particular item, and the chance of success
+is virtually nil unless the thief has spent time Casing your inventory.
+This is another Subterfuge ability that increases the chances of a
+successful targeted pickpocket.
+
+There is no limit on the type of item that can be stolen through a
+targeted pickpocket. However, if the attempt fails, no other thief can
+attempt a targeted pickpocket on you for an Achaean day.
+
+The Casing Process
+-------------------
+A Serpent can only Case you roughly once a day, and their chances of
+Casing success improve if they have Mesmerised you first. Each
+successful Case improves their chances of stealing their intended item
+from you.
+
+If you have the Vigilance defense (from Vision), you will be able to
+detect a Casing attempt much earlier.
+
+First Case: You will see nothing if you do not use Vigilance.
+If you do, then you will see a shadowy figure circling you, taking
+inventory of your possessions.
+
+Second Case: Without Vigilance, you will see a shadowy figure circling
+you, taking inventory of your possessions.
+With Vigilance, you will be able to discern the thief's identity.
+
+Third Case: You will see the attempt and the thief's identity with or
+without Vigilance.
+
+While there is no way to prevent being Cased, you can destroy all their
+accumulated casing knowledge on you by slaying them yourself or hiring a
+Mark to slay them on your behalf.
+
+A Casing attempt is reason enough to initiate aggressive activity on
+them, though the young are encouraged to hire Marks instead (HELP MARK).
+
+Most importantly, however, you must be able to defeat the actual
+pickpocket attempt.
+
+The Pickpocketing Process
+-------------------------
+An actual pickpocket attempt, regardless of targeted or untargeted, is
+generally the same.
+
+The thief will HYPNOTISE you, then implant SUGGESTions for you to
+perform actions such as take items or gold out of your containers and
+relax your selfishness defense. They will then SEAL the suggestions and
+snap their fingers in front of you to activate them.
+
+Once you go through the motions (or perhaps even as you perform them),
+the thief will physically attempt to pick your pockets.
+
+The best defense now is to LOSE the thief (they will usually be
+shadowing you) and leave the area quickly, or immediately be selfish. A
+successful pickpocketing requires the thief to be immobile, as any
+movement will disrupt it.
+
+If a soft tug upon your apparel grabs at your attention, and you realise
+in an instant that your inventory is lighter, then you have been
+successfully pickpocketed.
+
+If you have the Vigilance defense, you will be able to spin around
+quickly, just in time to notice who the thief slinking away is.
+
+Counter Measures
+-----------------
+First: Always have the Selfishness defense up. This is vital as it
+completely prevents untargetted pickpocket attempts, forcing a thief to
+hypnotise you to be generous before they can even start pickpocketing.
+
+Second: Hone reflexes such as immediately returning gold to your pack
+when you take it out, and rewearing any items that you are forced to
+remove.
+
+[Note]: Ensure you specifically return 'sovereigns' instead of gold, as
+thieves have been known to secretly slip people nuggets of gold and
+steal your coins while you put the nugget in your pack instead.
+
+Third: Ink and activate a Bell tattoo. This tattoo will alert you to any
+attempts to appraise your inventory, which is how a thief knows what
+items you have and what to steal.
+
+[Note]: This tattoo can be countered by using the Mesmerise ability. If
+Mesmerised, the warning this tattoo provides is delayed well beyond the
+successful appraisal.
+
+Fourth: Keep a shimmering orb in your inventory. This enchanted orb
+disrupts appraisal attempts by preventing the thief from discerning what
+your inventory holds, making item theft much more difficult.
+
+Fifth: Once learned, use the Vigilance defense. This ability enables you
+to detect the identity of a thief casing or stealing from you, as well
+as slightly increases your defense against hypnosis.
+
+Retribution
+------------
+If you notice a successful casing or pickpocket attempt, you should
+immediately LOSE the thief and depart the area. You can seek retribution
+by:
+
+1. Slaying the thief.
+2. Hiring a Mark on the thief.
+
+To retrieve your stolen goods, you must bid on them via a silent auction
+via a fence. See HELP FENCE.
+
+THEFT BY OTHER CLASSES
+=================================================================
+Other classes generally do not have the ability to steal from you,
+besides force abilities that can force you to perform certain actions.
+However, even this is very limited in scope theft-wise and is largely
+combat-related, which will be covered elsewhere.
+
+Other forms of theft include prisming or portalling to you while you are
+in a house or stockroom and picking up anything valuable on the ground.
+To counter this, drop a monolith sigil (for portals) and move out of the
+room (for prisms).
+
+See also HELP THEFT for more information.
+
+SUMMARY
+=================================================================
+For all types of theft, it is important to:
+
+1. Be aware of your surroundings
+2. Keep selfishness up
+3. Store valuable items in containers
+4. Learn reflexive protections.
+
+Being stolen from is merely an example of your failure to adequately
+prepare. Do not fail.
+
+ANTI-THEFT EXAMINATION
+==================================================================
+Once you are prepared and have made the proper reflexes, you will need
+to find a Serpent to conduct an anti-theft examination on
+you.

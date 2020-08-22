@@ -85,7 +85,7 @@ async def handle_from_server_queue(from_server_queue, mud_client):
             # some triggers have probably queued stuff to send, so send it
             if c.to_send:
                 c.send_flush()
-            print("\n".join(output).strip(), file=c.current_out_handle, flush=True)
+            c.echo("\n".join(output).strip())
             affs = summarize_afflictions()
             if affs:
                 c.echo(f"Affs: {' '.join(affs)}")
@@ -105,7 +105,7 @@ async def handle_gmcp_queue(gmcp_queue, mud_client):
         try:
             mud_client.handle_gmcp(gmcp_type, gmcp_data)
         except Exception as e:
-            printf(f"ERROR! {e}")
+            printf(f"handle_gmcp_queue ERROR! {e}")
 
         gmcp_queue.task_done()
 

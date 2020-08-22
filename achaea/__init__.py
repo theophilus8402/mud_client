@@ -39,7 +39,6 @@ class Achaea():
         alias_handled = False
         #for compiled_pattern, action in self.aliases:
         for compiled_pattern, action in c._aliases:
-            #print("handling: {}".format(compiled_pattern.pattern))
             match = compiled_pattern.match(msg)
             if match:
                 action(match.groups())
@@ -54,7 +53,6 @@ class Achaea():
 
         #for compiled_pattern, action in self.triggers:
         for search_method, action in c._triggers:
-            #print("handling: <{}> {}".format(msg, compiled_pattern.pattern))
             #match = compiled_pattern.match(msg)
             match = search_method(msg)
             if match:

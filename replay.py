@@ -9,7 +9,7 @@ def replay(log_path):
     achaea = Achaea()
 
     with open(log_path) as f:
-        for line in f.readlines():
+        for line in f:
             if line.strip() == "":
                 continue
 
@@ -22,7 +22,7 @@ def replay(log_path):
                         if "rebounding" in msg_line:
                             print(msg_line)
                         c.current_line = msg_line
-                        #print(f"> {msg_line}")
+                        print(f"> {msg_line}")
                         stripped_line = strip_ansi(msg_line).strip()
                         yield achaea.handle_triggers(stripped_line)
                 elif msg_type == "server_text" and msg.strip() == "":
@@ -50,7 +50,11 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="replay a log file")
     parser.add_argument("log_path", help="path to log file")
+    parser.add_argument("-p", action="store_true", help="play the log file")
     args = parser.parse_args()
 
     player = replay(args.log_path)
 
+    if args.p:
+        for i in player:
+            pass

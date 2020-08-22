@@ -42,8 +42,8 @@ class State():
         self.target = "rat"
         self.hp = 4000
         self.mp = 5000
-        self.players_in_room = set()
-        self.mobs_in_room = set()
+        self.players_in_room = tuple()
+        self.mobs_in_room = tuple()
         self.defences = set()
         self.wanted_defences = set()
         self.pt_announce = False
@@ -61,7 +61,6 @@ class State():
         self.current_afflictions = set()
 
     def __setattr__(self, name, value):
-        #print(f"{name}: {value}")
 
         # check to see if the name already exists
         if name_exists(self, name):
@@ -82,7 +81,6 @@ class State():
         changes.append((name, value))
 
     def __getattribute__(self, name):
-        #print(f"getting {name}")
         return object.__getattribute__(self, name)
 
 

@@ -6,7 +6,7 @@ import time
 from .client import c, echo
 from .state import s
 
-import ui
+import ui.core
 
 logger = logging.getLogger("achaea")
 

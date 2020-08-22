@@ -1,7 +1,7 @@
 
 import json
 
-from ..client import c, send
+from ..client import c, send, echo
 
 
 DEFAULT_NAME_MAP_PATH = "achaea/room_info/long_short_name_map.json"
@@ -24,21 +24,21 @@ def update_name_map(long_name, short_name):
     if long_name in long_short_name_map:
         old_short_name = long_short_name_map[long_name]
         if old_short_name != short_name:
-            print(f"name_map conflict: {long_name} => {short_name} / {old_short_name}")
+            echo(f"name_map conflict: {long_name} => {short_name} / {old_short_name}")
     else:
-        print(f"Adding: {long_name} -> {short_name}")
+        echo(f"Adding: {long_name} -> {short_name}")
         long_short_name_map[long_name] = short_name
         save_name_map(DEFAULT_NAME_MAP_PATH)
 
 
 def figure_out_unknown_mobs(mobs):
     trigger_names = []
-    print(f"trying to figure out: {mobs}")
+    echo(f"trying to figure out: {mobs}")
     for mob_id, long_name in mobs:
 
         trigger_name = f"mob_id{mob_id}"
         trigger_names.append(trigger_name)
-        print(f"creating trig for: {mob_id} / {long_name}")
+        echo(f"creating trig for: {mob_id} / {long_name}")
 
         mob_trigger = (
             f"^(\w+){mob_id}\s+{long_name}$",
@@ -61,7 +61,7 @@ def get_mob_id(gmcp_data):
     long_name = gmcp_data["name"]
     mob_id = gmcp_data["id"]
     if long_name not in long_short_name_map:
-        print(f"didn't find: {long_name}")
+        echo(f"didn't find: {long_name}")
         return mob_id
     short_name = long_short_name_map[long_name]
     return f"{short_name}{mob_id}"

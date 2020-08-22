@@ -1,6 +1,8 @@
 
 import asyncio
 
+from .client import echo
+
 class Timers():
 
     def __init__(self):
@@ -38,7 +40,7 @@ class Timers():
         action()
 
         # once the action is done, remove it from the timers dict
-        print("removing {}!".format(name))
+        echo(f"removing {name}!")
         del(self.timers[name])
 
     async def create_recurring_timer(self, name, action, wait_time):
@@ -50,7 +52,7 @@ class Timers():
         except:
             pass
         finally:
-            print("removing {}!".format(name))
+            echo(f"removing {name}!")
             # once the action is done, remove it from the timers dict
             del(self.timers[name])
 

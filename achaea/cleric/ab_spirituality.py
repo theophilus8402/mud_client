@@ -5,7 +5,6 @@ from ..basic import eqbal
 
 
 def sear(matches):
-    print("searing!")
     if not matches[0]:
         eqbal(f"angel sear &tar")
     elif matches[0] in {"n", "ne", "e", "se", "s", "sw", "w", "nw", "u",

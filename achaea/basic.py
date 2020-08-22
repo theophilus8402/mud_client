@@ -198,7 +198,6 @@ def move(direction):
     send(f"queue prepend eqbal {direction}")
 
 def handle_says(gmcp_data):
-    #print(f"Comm.Channel.Text: {gmcp_data}")
     logger.says(gmcp_data['text'])
 c.add_gmcp_handler("Comm.Channel.Text", handle_says)
 

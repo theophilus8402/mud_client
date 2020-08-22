@@ -14,16 +14,16 @@ c.add_triggers(elementalism_triggers)
 
 
 def stormhammer(matches):
-    print(matches)
+    echo(matches)
     try:
         if matches is None:
             peeps = s.target
         else:
             peeps = " and ".join([s.target, *matches.split(" ")])
-        print(peeps)
+        echo(peeps)
         eqbal(f"stand;cast stormhammer at {peeps}")
     except Exception as e:
-        print(f"stormhammer: {e}")
+        echo(f"stormhammer: {e}")
 
 elementalism_aliases = [
     (   "^light$",
