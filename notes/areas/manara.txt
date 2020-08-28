@@ -1,3 +1,19 @@
-* level 1, sell gnolls to bissa
-* level 2, sell gnolls to thriel
-* level 4, sell to ebra
+* level 1
+    * sell gnolls to bissa, also wants ala
+    * ilubeth
+        * needed for a quest
+    * weasley - turn him into mawezel
+    * mawezel wants to hear about his grandmother, Ebra
+    * caregiver gives you honey-coated ants to give to kids
+* level 2
+    * sell gnolls to thriel, esp glartharg
+    * vegetables for the farmer
+    * tuomo needs an elixir
+        * give hemlock (he gives it to you) to ilubeth (lvl 1)
+        * give the phial to lirthak on level 4
+* level 3
+    * iofio wants sentries and ograk
+* level 4
+    * sell soldiers to ebra, esp lirthak, vorluck, rarthim
+    * ebra will give a paper to give to mawezel on level 1
+        * then give journal to tuomo on level 2

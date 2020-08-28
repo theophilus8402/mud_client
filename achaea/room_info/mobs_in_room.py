@@ -4,6 +4,8 @@ import logging
 from ..client import c, send, echo
 from .name import figure_out_unknown_mobs, long_short_name_map
 from ..state import s
+from achaea.room_info.room_info import create_frenemies_text
+from ui.core import update_frenemies_info
 
 logger = logging.getLogger("achaea")
 
@@ -27,19 +29,28 @@ def find_mobs_in_room(gmcp_data):
 
     # update the mobs_in_room set
     s.mobs_in_room = tuple(mobs)
-#c.add_gmcp_handler("Char.Items.List", find_mobs_in_room)
+
+    # push to the ui
+    frenemies_text = create_frenemies_text()
+    update_frenemies_info(frenemies_text)
+c.add_gmcp_handler("Char.Items.List", find_mobs_in_room)
 
 
 def mob_entered_room(gmcp_data):
     #Char.Items.Add { "location": "room", "item": { "id": "118764", "name": "a young rat", "icon": "animal", "attrib": "m" } }
-    #echo(gmcp_data)
+
+    #Char.Items.Add {"location": "room", "item": {"id": "31722", "name": "a stirge's egg"}}
 
     if (gmcp_data["location"] == "room" and
-        "m" in gmcp_data["item"].get("attrib")):
+        "m" in gmcp_data.get("item", {}).get("attrib", [])):
         item = gmcp_data["item"]
         mob_id = get_mob_id(item)
         s.mobs_in_room = (*s.mobs_in_room, (mob_id, item))
-#c.add_gmcp_handler("Char.Items.Add", mob_entered_room)
+
+    # push to the ui
+    frenemies_text = create_frenemies_text()
+    update_frenemies_info(frenemies_text)
+c.add_gmcp_handler("Char.Items.Add", mob_entered_room)
 
 
 def mob_left_room(gmcp_data):
@@ -52,14 +63,16 @@ def mob_left_room(gmcp_data):
 
     # see if we can find that mob in the list
     item = gmcp_data["item"]
-    mobs = set(s.mobs_in_room)
-    for mob_info in mobs:
-        mob_id, mob = mob_info
-        if mob_id.endswith(item["id"]):
-            #echo(f"found mob to remove: {item['id']}")
-            s.mobs_in_room = tuple(mobs.remove(mob_id))
-            break
-#c.add_gmcp_handler("Char.Items.Remove", mob_left_room)
+    mobs = []
+    for mob_id, mob_info in s.mobs_in_room:
+        if not mob_id.endswith(item["id"]):
+            mobs.append((mob_id, mob_info))
+    s.mobs_in_room = tuple(mobs)
+
+    # push to the ui
+    frenemies_text = create_frenemies_text()
+    update_frenemies_info(frenemies_text)
+c.add_gmcp_handler("Char.Items.Remove", mob_left_room)
 
 
 def get_mob_id(gmcp_data):

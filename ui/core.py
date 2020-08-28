@@ -7,6 +7,10 @@ from prompt_toolkit.styles import Style
 from prompt_toolkit.widgets import SearchToolbar, TextArea
 
 
+def update_frenemies_info(frenemies_text):
+    frenemies_line.text = frenemies_text
+
+
 def update_prompt_info(prompt_text):
     prompt_line.text = prompt_text
 

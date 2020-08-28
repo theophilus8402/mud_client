@@ -1,15 +1,21 @@
 
 from .basic import eqbal
 from .client import c, send
+from .defences import auto_defences
 
+
+def generosity():
+    auto_defences(["selfishness"], "off")
+    eqbal("generosity")
+    
 survival_aliases = [
     (   "^self$",
         "selfishness",
-        lambda m: eqbal("selfishness")
+        lambda m: auto_defences(["selfishness"], "on")
     ),
     (   "^gener$",
         "generosity",
-        lambda m: eqbal("generosity")
+        lambda m: generosity()
     ),
     (   "^eg$",
         "enter grate",

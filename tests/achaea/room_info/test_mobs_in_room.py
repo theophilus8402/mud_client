@@ -29,3 +29,26 @@ class TestMobsInRoom():
         #changes = get_state_changes(s, changes_index)
         assert len(s.mobs_in_room) == 1
         assert s.mobs_in_room[0][0] == "jodri293949"
+
+    def test_mob_entered_room(self):
+        gmcp_data = {"location": "room", "items": [{"id": "113519", "name": "a runic totem", "icon": "rune"}, {"id": "293949", "name": "Jodri, Shepherd of the Devout", "icon": "humanoid", "attrib": "m"}, {"id": "544262", "name": "a monolith sigil", "icon": "rune", "attrib": "t"}]}
+        find_mobs_in_room(gmcp_data)
+        assert len(s.mobs_in_room) == 1
+        assert s.mobs_in_room[0][0] == "jodri293949"
+
+        gmcp_data = {"location": "room", "item": { "id": "118764", "name": "a young rat", "icon": "animal", "attrib": "m"}}
+        mob_entered_room(gmcp_data)
+        assert len(s.mobs_in_room) == 2
+        assert s.mobs_in_room[1][0] == "rat118764"
+
+    def test_mob_left_room(self):
+        gmcp_data = {"location": "room", "items": [{"id": "113519", "name": "a runic totem", "icon": "rune"}, {"id": "293949", "name": "Jodri, Shepherd of the Devout", "icon": "humanoid", "attrib": "m"}, {"id": "544262", "name": "a monolith sigil", "icon": "rune", "attrib": "t"}]}
+        find_mobs_in_room(gmcp_data)
+        gmcp_data = {"location": "room", "item": { "id": "118764", "name": "a young rat", "icon": "animal", "attrib": "m"}}
+        mob_entered_room(gmcp_data)
+        assert len(s.mobs_in_room) == 2
+        assert s.mobs_in_room[1][0] == "rat118764"
+
+        gmcp_data = {"location": "room", "item": {"id": "118764", "name": "a young rat"}}
+        mob_left_room(gmcp_data)
+        assert len(s.mobs_in_room) == 1

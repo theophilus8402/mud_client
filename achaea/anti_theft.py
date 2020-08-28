@@ -55,6 +55,18 @@ anti_theft_triggers = [
         # rewear it!
         lambda m: send("wear pouch;put pouch in pouch;put coins in pouch;selfishness")
     ),
+    (   r"^You remove a suit of scale mail.$",
+        # rewear it!
+        lambda m: send("wear scalemail;put scalemail in pack;put coins in pack;selfishness")
+    ),
+    (   r"^You cease wielding a small blackjack",
+        # rewear it!
+        lambda m: send("wield blackjack;selfishness")
+    ),
+    (   r"^You cease wielding a Mhaldorian banded shield",
+        # rewear it!
+        lambda m: send("wield shield;put shield in pack;selfishness")
+    ),
     #(   r"^You remove a simple suit of lightweight field plate.$",
     #    # rewear it!
     #    lambda m: send("wear fieldplate;put fieldplate in pack;put coins in pouch;selfishness")

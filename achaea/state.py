@@ -44,7 +44,7 @@ class State():
         self.mp = 5000
         self.players_in_room = tuple()
         self.mobs_in_room = tuple()
-        self.defences = set()
+        self.defences = tuple()
         self.wanted_defences = set()
         self.pt_announce = False
         self.enemies = set()

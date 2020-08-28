@@ -6,47 +6,45 @@ from .client import c, send, echo
 from .state import s
 
 def gmcp_defences(gmcp_data):
-    s.defences = {defence["name"] for defence in gmcp_data}
+    s.defences = tuple(defence["name"] for defence in gmcp_data)
 c.add_gmcp_handler("Char.Defences.List", gmcp_defences)
 
 
 def gmcp_defences_add(gmcp_data):
     defence = gmcp_data["name"]
     #echo(f"Woo!  We've gained {defence}!")
-    s.defences.add(defence)
+    s.defences = (*s.defences, defence)
 c.add_gmcp_handler("Char.Defences.Add", gmcp_defences_add)
 
 
 def gmcp_defences_remove(gmcp_data):
     lost_defences = set(gmcp_data)
     echo(f"Egads!  We've lost {lost_defences}!")
-    s.defences.difference_update(lost_defences)
+    s.defences = tuple(set(s.defences).difference(lost_defences))
     #defences("")
 c.add_gmcp_handler("Char.Defences.Remove", gmcp_defences_remove)
 
-def fighting_defences(matches):
 
+def relax(defence):
+    auto_defences([defence], "off")
+    eqbal(f"relax {defence}")
+
+
+def fighting_defences(matches):
     if matches == "on":
         echo("Adding fighting defences!!")
-        s.wanted_defences.update(fighting_defs)
+        for fdef in fighting_defs:
+            set_defence(fdef, 25, state=s)
     elif matches == "off":
         echo("Removing fighting defences!!")
-        s.wanted_defences.difference_update(fighting_defs)
+        for fdef in fighting_defs:
+            set_defence(fdef, 0, state=s)
+
 
 def defences(matches, fighting=False):
     current_defences = s.defences
     needed_defences = s.wanted_defences.difference(current_defences)
     echo(f"Needed defences: {needed_defences}")
-
-    # queue up the actions to gain the defences
-    for defence in needed_defences:
-        defence_info[defence]()
-
-    """
-    # this is for priest
-    if needed_defences.intersection(bliss_defs):
-        eqbal("perform bliss me")
-    """
 
     c.remove_temp_trigger("defences_trigger")
 
@@ -86,6 +84,10 @@ defence_aliases = [
         "fighting defences",
         lambda matches: fighting_defences(matches[0] or "on"),
     ),
+    (   "^sdef_basic$",
+        "set basic defences to 25",
+        lambda _: [set_defence(bdef, 25, state=s) for bdef in basic_defs],
+    ),
     (   "^adef on$",
         "auto defences",
         lambda matches: auto_defences(auto_defs, "on"),
@@ -97,6 +99,10 @@ defence_aliases = [
     (   "^adef (.+) (.+)$",
         "auto defences",
         lambda matches: auto_defences([matches[0]], matches[1]),
+    ),
+    (   "^relax (.+)$",
+        "relax defence",
+        lambda matches: relax(matches[0]),
     ),
 ]
 c.add_aliases("defences", defence_aliases)
@@ -125,6 +131,11 @@ basic_defs = {
     #"shroud",
 }
 s.wanted_defences.update(basic_defs)
+
+
+def set_defence(defence, priority, state=s):
+    setattr(state, defence, priority)
+    send(f"CURING PRIORITY DEFENCE {defence} {priority}")
 
 
 # these will be setup and kept up when we need to fight

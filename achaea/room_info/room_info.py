@@ -21,6 +21,12 @@ room_aliases = [
 c.add_aliases("room_info", room_aliases)
 
 
+def create_frenemies_text():
+    mobs = " ".join([mid for mid, minfo in s.mobs_in_room])
+    players = " ".join(s.players_in_room)
+    return f"{mobs} {players}"
+
+
 def add_player(gmcp_data):
     # {"name": "Adrik", "fullname": "Adrik Bergson, the Crystalline Song"}
     player = gmcp_data["name"]

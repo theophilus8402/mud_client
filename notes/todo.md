@@ -23,70 +23,46 @@
 * <x> make it so that logging in by different characters will load
     different modules
     * ["2020/04/17 10:48:00.129817", "gmcp_data", "{\"type\": \"Char.Name\", \"data\": {\"name\": \"Vindiconis\", \"fullname\": \"Sentry Vindiconis\"}}"]
-* < > cleric
-    * < > get penance / stuff working
-    * < > make a fancy attacking system
-    * < > log all cleric attacks and make triggers to:
-        * < > write info to fighting log
-        * < > track affs given / cured
-        * < > track limb damage
-* < > palleo
-    * < > get hr2
-    * < > dawnblade mentor?
-    * < > interview with dawnblade master HOUSE STRUCTURE DAWNBLADE
-* < > theophilus
-    * < > runelore aliases
-    * < > get more kelp
-    * < > more elixirs/salves
-    * < > more inks
-        * < > green
-        * < > yellow
 * sarmenti
-    * <x> describe self
     * <x> finish tasks
-    * < > house
-        * <x> join legates
-        * <x> hhelp thrall (this is adv. requirements)
-        * < > clhelp antitheft
-            * need serpent test
-        * < > chelp history, historyii, historyiii
-            * how city came to be, crimson fog
-                EVENTS post #60
-        * < > chelp seventruths
-        * < > chelp catechisms
-        * < > help sartan
-        * < > hhelp precepts
-        * < > museum of mhaldor
-            * legate within 'a monstrous auditorium'
-            * touch two exhibits, how am I not the legate
-        * < > hhelp leviathan
-        * receive brand and oath, speak with novice aide
-    * < > buy minerals
-        * <x> antimony
-        * < > argentum
-        * < > arsenic
-        * < > aurum
-        * < > azurite
-        * < > bisemutum
-        * < > calamine
-        * < > calcite
-        * < > cinnabar
-        * < > cuprum
-        * < > dolomite
-        * < > ferrum
-        * < > gypsum
-        * < > magnesium
-        * < > malachite
-        * < > plumbum
-        * < > quartz
-        * < > quicksilver
-        * < > realgar
-        * < > stannum
-    * <x> elixirs/salves
-    * <x> pipes/tinderbox
+    * < > hr3
+        * <x> join the army (lord marshal or aide to war)
+        * < > hhelp mentors (mizik?)
+                saibel, davok, umaiar, nbige, syndra
+        * < > allies to mhaldor
+        * < > chelp eidolons, help font
+        * < > refill the font some
+        * < > learn about distrinnith sect (rituals, sermons...)
+        * < > jagganeth sect, class skills
+        * < > khovroth sect
+        * < > intro to combat
+    * <x> get shimmering orb
+    * < > more minerals
+    * <x> fix defence for deathsight
+    * <x> learning
+        * <x> tarot hangedman
+    * < > pranks
+        * < > make aliases
+        * < > get materials for bombs
+        * <x> get daggers
+        * < > try things!
+    * < > hunting
+        * < > greatrock, bopalopia, xhaiden dale wildlife + monks
+                ganeve hidden in xhaiden dale's grotto
+        * < > creville
+        * < > 4k hp tomacula, bitterfork, darkenwood,
+                rhodestrian, aeraithean (walk to lordar)
+        * < > 5k hp meropis
+* fix logging being printed to the screen sometimes
+* clean up defences.py
+    * might be able to change it so achaea's auto curing
+        can keep up my defences
+    * so my aliases would be to just add and remove defs to the
+        list of defences the curing system should keep up
+* fix up tab completing
+    * prioritize targets at least a lil better
 * state
-    * < > s.mobs_in_room -> tuple
-        * < > write tests
+    * <x> s.mobs_in_room -> tuple
     * < > s.defences -> tuple
     * < > s.wanted_defences -> tuple
     * < > s.enemies -> tuple

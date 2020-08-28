@@ -84,6 +84,10 @@ aff_healing_aliases = [
         "apply sileris",
         lambda m: send("outr sileris;apply sileris"),
     ),
+    (   "^cal$",
+        "eat calcite",
+        lambda m: eat_herb("calcite"),
+    ),
 ]
 c.add_aliases("healing", aff_healing_aliases)
 
