@@ -41,7 +41,6 @@ main visual logger:
 
 from logging import getLoggerClass, addLevelName, setLoggerClass, NOTSET
 
-print(f"mud_logging.py __name__: {__name__}")
 
 FIGHTING = 5
 PARTY = 7
@@ -114,15 +113,15 @@ fighting_handler.setLevel(FIGHTING)
 fighting_filter = FightingFilter()
 fighting_handler.addFilter(fighting_filter)
 
-main_handler = logging.StreamHandler()
-main_handler.setLevel(MAIN)
+#main_handler = logging.StreamHandler()
+#main_handler.setLevel(MAIN)
 
 #log = logging.getLogger(__name__)
 log = logging.getLogger("achaea")
 log.setLevel(FIGHTING)
 log.addHandler(fighting_handler)
 log.addHandler(says_handler)
-log.addHandler(main_handler)
+#log.addHandler(main_handler)
 
 
 def switch_to_fighting_log():

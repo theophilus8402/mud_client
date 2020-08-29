@@ -7,6 +7,32 @@ from ..defences import basic_defs
 pranks_basic_defs = {"slippery"}
 basic_defs.update(pranks_basic_defs)
 
+
+BOMB_HELP = """
+BOMB INFO
+con concussion - stuns, 1 iron
+but butterfly - knock out of trees/sky, 1 iron
+smo smoke - makes hungry, 1 iron
+web web - web, 1 rope
+dus dust - "knockout"?, 1 diamond dust
+"""
+
+
+def make_bomb(bomb_type=""):
+
+    if bomb_type == "":
+        c.echo(BOMB_HELP)
+    elif "concussion".startswith(bomb_type.lower()):
+        eqbal(f"stand;outr 1 iron;construct concussion bomb")
+    elif "butterfly".startswith(bomb_type.lower()):
+        eqbal(f"stand;outr 1 iron;construct butterfly bomb")
+    elif "smoke".startswith(bomb_type.lower()):
+        eqbal(f"stand;outr 1 iron;construct smoke bomb")
+    elif "web".startswith(bomb_type.lower()):
+        eqbal(f"stand;outr 1 rope;construct web bomb")
+    elif "dust".startswith(bomb_type.lower()):
+        eqbal(f"stand;outr 1 diamonddust;construct dust bomb")
+
 pranks_aliases = [
     (   "^m$",
         "bop t",
@@ -23,6 +49,10 @@ pranks_aliases = [
     (   "^bf (.+)?$",
         "backflip dir",
         lambda matches: eqbal(f"stand;backflip {matches[0]}")
+    ),
+    (   "^mb(?: (.+))?$",
+        "make bombs!",
+        lambda matches: make_bomb(matches[0] or "")
     ),
 ]
 c.add_aliases("ab_pranks", pranks_aliases)

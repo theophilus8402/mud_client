@@ -2,11 +2,14 @@
 from .basic import eqbal
 from .client import c, send
 
+# note: if I play someone who can shield differently again
+# I can make a function that checks the current class and does different things
+
 tattoo_aliases = [
-    #(   "^shd$",
-    #    "touch shield",
-    #    lambda m: eqbal("touch shield")
-    #),
+    (   "^shd$",
+        "touch shield",
+        lambda m: eqbal("touch shield")
+    ),
     (   "^clk$",
         "touch cloak",
         lambda m: eqbal("touch cloak")

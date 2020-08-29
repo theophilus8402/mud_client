@@ -3,7 +3,7 @@ import re
 import sys
 import traceback
 
-import achaea.mud_logging
+#import achaea.mud_logging
 
 from .client import c
 from . import state

@@ -28,47 +28,47 @@ Sticky Stirrups      - harder to get forced off mount
 
 Minor Traits
 --------------
-Master angler        - 
-Master enchanter     - 
-Master gatherer      - 
-Master harvester     - 
-Master extractor     - 
-Life of the party    - 
-Seasoned drinker     - 
-Soothsayer           - 
-Devout               - 
-Truth seeker         - 
-Green tender         - 
-Eclectic             - 
-Master contemplator  - 
-Fully fit            - 
-Easy rider           - 
-Blissful ignorance   - 
-Wild walker          - 
-Improved metabolism  - 
-Marksman             - 
-Master crafter       - 
-Unsocial             - 
-Clean freak          - 
-Humble               - 
-Spice merchant       - 
-Barter               - 
-Decorated            - 
-Pack rat             - 
-Silver tongued       - 
-Marketeer            - 
-In service           - 
-Beloved              - 
-Super diver          - 
-Airborne             - 
-Harpooner            - 
-Admiral              - 
-Salty                - 
-Death's boon         - 
-Glass shatterer      - 
-Knife thrower        - 
-Meticulous Care      - 
-Island Trader        - 
-Traveller            - 
-Braggart             - 
-Bottom of the Barrel - 
+Master angler        - +chance to catch larger fish
+Master enchanter     - faster enchanting
+Master gatherer      - +chance for additional cooking comms
+Master harvester     - +herbs when harvesting
+Master extractor     - +minerals when extracting
+Life of the party    - speech is slurred
+Seasoned drinker     - +alcohol tolerance
+Soothsayer           - +karma when studying
+Devout               - +devotion regen
+Truth seeker         - +necro essence
+Green tender         - +grove energy
+Eclectic             - +lifespan for crafted clothes and jewelry
+Master contemplator  - +will regen when meditating
+Fully fit            - +endurance regen whilst sleeping
+Easy rider           - half price ferry trips
+Blissful ignorance   - +chance to resist forced commands
+Wild walker          - +move in wilderness
+Improved metabolism  - +satiation from food
+Marksman             - +accuracy with bow
+Master crafter       - +faster making clothing, jewelry, and cooking
+Unsocial             - never get ashma from smoking cigars
+Clean freak          - never get stinky
+Humble               - accomplishments are hidden
+Spice merchant       - refine cooking ingredients more quickly
+Barter               - discount at Rurins shops
+Decorated            - wear extra jewelry
+Pack rat             - can wear two backpacks
+Silver tongued       - cheaper refills with seasone
+Marketeer            - discount on ads
+In service           - may walk to any housemates
+Beloved              - walk to mutual friends
+Super diver          - less damage whilst drowning
+Airborne             - lower chance of getting blown around in the air
+Harpooner            - +accuracy with ship weapons
+Admiral              - faster crew balance
+Salty                - lower seaspell power cost
+Death's boon         - lose less exp when dying to denizens
+Glass shatterer      - whistle will bring mount from anywhere
+Knife thrower        - throw items faster
+Meticulous Care      - lower chance for tattoos to fade
+Island Trader        - discount to docking fees
+Traveller            - faster travel between landmarks
+Braggart             - can shout more
+Bottom of the Barrel - better at hiding being drunk

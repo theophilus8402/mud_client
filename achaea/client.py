@@ -8,6 +8,8 @@ from datetime import datetime
 from functools import singledispatch
 from telnetlib import IAC, SB, SE
 
+import achaea.mud_logging
+
 GMCP = b'\xc9'
 
 
