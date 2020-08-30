@@ -1,4 +1,6 @@
 
+import random
+
 from ..client import send, c
 from ..state import s
 from ..basic import eqbal
@@ -33,6 +35,15 @@ def make_bomb(bomb_type=""):
     elif "dust".startswith(bomb_type.lower()):
         eqbal(f"stand;outr 1 diamonddust;construct dust bomb")
 
+
+def somersault(direction):
+    if direction == "":
+        direction = random.choice(["n", "e", "s", "w",
+                                   "ne", "se", "sw", "nw",
+                                   "in", "out"])
+    eqbal(f"stand;somersault {direction}")
+
+
 pranks_aliases = [
     (   "^m$",
         "bop t",
@@ -53,6 +64,26 @@ pranks_aliases = [
     (   "^mb(?: (.+))?$",
         "make bombs!",
         lambda matches: make_bomb(matches[0] or "")
+    ),
+    (   "^vent(?: (.+))?$",
+        "vent t/[]",
+        lambda matches: eqbal(f"vent {matches[0] or s.target}")
+    ),
+    (   "^bad$",
+        "badjoke",
+        lambda matches: eqbal(f"badjoke")
+    ),
+    (   "^mic(?: (.+))?$",
+        "slip t/[] mickey",
+        lambda matches: eqbal(f"slip {matches[0] or s.target} mickey")
+    ),
+    (   "^som(?: (.+))?$",
+        "somersault dir/randomdir",
+        lambda matches: somersault(matches[0] or "")
+    ),
+    (   "^arrow(?: (.+))?$",
+        "arrowcatch []/on",
+        lambda matches: eqbal(f"stand;arrowcatch {matches[0] or 'on'}")
     ),
 ]
 c.add_aliases("ab_pranks", pranks_aliases)

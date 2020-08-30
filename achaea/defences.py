@@ -4,6 +4,7 @@ import asyncio
 from .basic import eqbal, curebal
 from .client import c, send, echo
 from .state import s
+from .timers import timers
 
 def gmcp_defences(gmcp_data):
     s.defences = tuple(defence["name"] for defence in gmcp_data)
@@ -25,25 +26,47 @@ def gmcp_defences_remove(gmcp_data):
 c.add_gmcp_handler("Char.Defences.Remove", gmcp_defences_remove)
 
 
-def relax(defence):
+def add_wanted_defence(wanted_defences, defence):
+    return tuple(set(wanted_defences).union({defence}))
+
+
+def add_wanted_defences(wanted_defences, new_defences):
+    return tuple(set(wanted_defences).union(set(new_defences)))
+
+
+def remove_wanted_defence(wanted_defences, defence):
+    return tuple(set(wanted_defences).difference({defence}))
+
+
+def remove_wanted_defences(wanted_defences, remove_defences):
+    return tuple(set(wanted_defences).difference(set(remove_defences)))
+
+
+def relax(defence, delay=5):
     auto_defences([defence], "off")
+    timers.add(f"turnon_{defence}", lambda: auto_defences([defence], "on"), 5)
     eqbal(f"relax {defence}")
 
 
 def fighting_defences(matches):
     if matches == "on":
         echo("Adding fighting defences!!")
+        s.wanted_defences = add_wanted_defences(s.wanted_defences, fighting_defs)
         for fdef in fighting_defs:
             set_defence(fdef, 25, state=s)
     elif matches == "off":
         echo("Removing fighting defences!!")
+        s.wanted_defences = remove_wanted_defences(s.wanted_defences, fighting_defs)
         for fdef in fighting_defs:
             set_defence(fdef, 0, state=s)
 
 
+def get_needed_defences(current_defences, wanted_defences):
+    return tuple(set(wanted_defences).difference(set(current_defences)))
+
+
 def defences(matches, fighting=False):
-    current_defences = s.defences
-    needed_defences = s.wanted_defences.difference(current_defences)
+    needed_defences = get_needed_defences(s.defences, s.wanted_defences)
     echo(f"Needed defences: {needed_defences}")
 
     c.remove_temp_trigger("defences_trigger")
@@ -52,12 +75,12 @@ def defences(matches, fighting=False):
 defences_trigger = ("^You have the following defences:$",
                     # list of defences
                     defences,
-                    ),
+                    )
 
 
 def check_defences(matches):
     eqbal("def")
-    c.add_temp_trigger("defences_trigger", defences_trigger[0])
+    c.add_temp_trigger("defences_trigger", defences_trigger)
 
 
 def auto_defences(defs, state):
@@ -100,9 +123,9 @@ defence_aliases = [
         "auto defences",
         lambda matches: auto_defences([matches[0]], matches[1]),
     ),
-    (   "^relax (.+)$",
-        "relax defence",
-        lambda matches: relax(matches[0]),
+    (   "^relax (.+)(?: (.+))$",
+        "relax defence #sec/5",
+        lambda matches: relax(matches[0], matches[1] or "5"),
     ),
 ]
 c.add_aliases("defences", defence_aliases)
@@ -130,11 +153,13 @@ basic_defs = {
     "nightsight",
     #"shroud",
 }
-s.wanted_defences.update(basic_defs)
+s.wanted_defences = tuple(basic_defs)
 
 
 def set_defence(defence, priority, state=s):
     setattr(state, defence, priority)
+    if priority == 0:
+        priority = "reset"
     send(f"CURING PRIORITY DEFENCE {defence} {priority}")
 
 

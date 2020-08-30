@@ -1,4 +1,6 @@
 
+import achaea.mud_logging
+
 import asyncio
 import functools
 import json
@@ -8,6 +10,7 @@ import sys
 import traceback
 
 from contextlib import suppress
+
 
 from achaea.tab_complete import TargetCompleter
 from achaea import Achaea
@@ -143,7 +146,7 @@ def main():
     # handle gmcp data
     asyncio.ensure_future(handle_gmcp_queue(gmcp_queue, mud_client))
 
-    log = logging.getLogger('EchoClient')
+    log = logging.getLogger("achaea")
     #logging.basicConfig(level=logging.DEBUG)
 
     log.debug('waiting for client to complete')
@@ -154,7 +157,6 @@ def main():
     except Exception as e:
         print(f"Other exception! {e}")
     finally:
-        log = logging.getLogger('EchoClient')
         log.debug('closing event loop')
 
         c.from_server_queue.remove_receiver("main")

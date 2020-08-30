@@ -24,5 +24,3 @@ def store_room(gmcp_data):
             session.commit()
         except:
             echo("eep!  Something is happening")
-c.add_gmcp_handler("Room.Info", store_room)
-

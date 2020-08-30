@@ -18,11 +18,7 @@
     * < > bashing
         * < > follow route
         * < > kill stuff
-        * < > don't die
-            * < > values of dangers for mobs, if too dangerous, move on
-* <x> make it so that logging in by different characters will load
-    different modules
-    * ["2020/04/17 10:48:00.129817", "gmcp_data", "{\"type\": \"Char.Name\", \"data\": {\"name\": \"Vindiconis\", \"fullname\": \"Sentry Vindiconis\"}}"]
+        * < > values of dangers for mobs, if too dangerous, move
 * < > change loaded modules based on class
     * < > have something that tracks class being used between restarts
         * < > probably a file that keeps track of some of the state
@@ -41,37 +37,33 @@
         * < > jagganeth sect, class skills
         * < > khovroth sect
         * < > intro to combat
-    * <x> get shimmering orb
     * < > more minerals
-    * <x> fix defence for deathsight
-    * <x> learning
-        * <x> tarot hangedman
+    * < > get venoms
+    * < > learning
+        * < > pranks (at least itchpowder)
     * < > pranks
         * < > make aliases
             * <x> mb con, mb web, mb ...
             * <x> mb (shows a quick summary of all bombs)
-        * < > get materials for bombs
-        * <x> get daggers
-        * < > try things!
-    * < > hunting
-        * < > greatrock, bopalopia, xhaiden dale wildlife + monks
-                ganeve hidden in xhaiden dale's grotto
-        * < > creville
-        * < > 4k hp tomacula, bitterfork, darkenwood,
-                rhodestrian, aeraithean (walk to lordar)
-        * < > 5k hp meropis
-* fix logging being printed to the screen sometimes
-* < > clean up defences.py
+* < > fix logging being printed to the screen sometimes
+* <x> clean up defences.py
     * <x> might be able to change it so achaea's auto curing
         can keep up my defences
     * <x> so my aliases would be to just add and remove defs to the
         list of defences the curing system should keep up
-* fix up tab completing
-    * prioritize targets at least a lil better
+* < > fix up tab completing
+    * < > prioritize targets at least a lil better
+* < > ui
+    * < > get exits showing in prompt
+    * < > show people in the room
+    * < > show people/mobs by priorities
+    * < > show afflictions
+    * < > integrate the main screen into the ui
+    * < > make it so pageup/down will scroll the main screen
 * state
     * <x> s.mobs_in_room -> tuple
     * <x> s.defences -> tuple
-    * < > s.wanted_defences -> tuple
+    * <x> s.wanted_defences -> tuple
     * < > s.enemies -> tuple
     * < > s.new_afflictions -> tuple
     * < > s.cured_afflictions -> tuple

@@ -1,4 +1,5 @@
 
+import collections
 import json
 import logging
 import re
@@ -7,9 +8,14 @@ from datetime import datetime
 
 from ..client import c, send, echo
 from ..state import s
+from ..room_info.mapping import store_room
 
 
 logger = logging.getLogger("achaea")
+
+
+StateRoomInfo = collections.namedtuple("StateRoomInfo",
+                    "num name desc area environment coords map details exits")
 
 
 room_aliases = [
@@ -19,6 +25,18 @@ room_aliases = [
     ),
 ]
 c.add_aliases("room_info", room_aliases)
+
+
+def get_room_info(gmcp_data):
+    # store the info in the db
+    store_room(gmcp_data)
+
+    # store it in the state
+    s.room_info = StateRoomInfo(**gmcp_data)
+c.add_gmcp_handler("Room.Info", get_room_info)
+
+# set default room info for when we first load up
+s.room_info = StateRoomInfo(**{f: "???" for f in StateRoomInfo._fields})
 
 
 def create_frenemies_text():

@@ -2,10 +2,12 @@
 from .basic import eqbal
 from .client import c, send
 from .defences import auto_defences
+from .timers import timers
 
 
 def generosity():
     auto_defences(["selfishness"], "off")
+    timers.add(f"turnon_selfish", lambda: auto_defences("selfishness", "on"), 5)
     eqbal("generosity")
     
 survival_aliases = [

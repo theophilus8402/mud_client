@@ -37,6 +37,7 @@ def create_prompt_text(prompt_info):
     max_mp = prompt_info.get("maxmp", "???")
     rage = get_char_stat(prompt_info, "Rage")
     bleed = get_char_stat(prompt_info, "Bleed")
-    return f"HP:{hp}/{max_hp} MP:{mp}/{max_mp} Rage:{rage} Bleed:{bleed}"
+    exits = ", ".join(s.room_info.exits.keys())
+    return f"HP:{hp}/{max_hp} MP:{mp}/{max_mp} Rage:{rage} Bleed:{bleed} Exits: {exits}"
 
 
