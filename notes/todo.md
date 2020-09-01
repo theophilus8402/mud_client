@@ -45,12 +45,10 @@
         * < > make aliases
             * <x> mb con, mb web, mb ...
             * <x> mb (shows a quick summary of all bombs)
+    * < > resolves
+        * < > get sailing marque attested
+        * < > be there for a tank disarm
 * < > fix logging being printed to the screen sometimes
-* <x> clean up defences.py
-    * <x> might be able to change it so achaea's auto curing
-        can keep up my defences
-    * <x> so my aliases would be to just add and remove defs to the
-        list of defences the curing system should keep up
 * < > fix up tab completing
     * < > prioritize targets at least a lil better
 * < > ui
@@ -61,9 +59,6 @@
     * < > integrate the main screen into the ui
     * < > make it so pageup/down will scroll the main screen
 * state
-    * <x> s.mobs_in_room -> tuple
-    * <x> s.defences -> tuple
-    * <x> s.wanted_defences -> tuple
     * < > s.enemies -> tuple
     * < > s.new_afflictions -> tuple
     * < > s.cured_afflictions -> tuple

@@ -84,7 +84,6 @@ def check_defences(matches):
 
 
 def auto_defences(defs, state):
-
     if state == "on":
         for defence in defs:
             echo(f"Auto {defence} on!!!")
@@ -123,9 +122,13 @@ defence_aliases = [
         "auto defences",
         lambda matches: auto_defences([matches[0]], matches[1]),
     ),
-    (   "^relax (.+)(?: (.+))$",
-        "relax defence #sec/5",
-        lambda matches: relax(matches[0], matches[1] or "5"),
+    (   "^relax (\w+)$",
+        "relax defence 5",
+        lambda matches: relax(matches[0], "5"),
+    ),
+    (   "^relax (\w+) (\d+)$",
+        "relax defence #sec",
+        lambda matches: relax(matches[0], matches[1]),
     ),
 ]
 c.add_aliases("defences", defence_aliases)

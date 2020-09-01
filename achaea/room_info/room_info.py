@@ -36,7 +36,15 @@ def get_room_info(gmcp_data):
 c.add_gmcp_handler("Room.Info", get_room_info)
 
 # set default room info for when we first load up
-s.room_info = StateRoomInfo(**{f: "???" for f in StateRoomInfo._fields})
+s.room_info = StateRoomInfo(num="???",
+                            name="???",
+                            desc="???",
+                            area="???",
+                            environment="???",
+                            coords="???",
+                            map="???",
+                            details="???",
+                            exits={})
 
 
 def create_frenemies_text():
