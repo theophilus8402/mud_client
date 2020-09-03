@@ -9,6 +9,10 @@ tarot_aliases = [
         "fling sun at ground",
         lambda _: eqbal("fling sun at ground")
     ),
+    (   "^emp(?: (.+))?$",
+        "fling emperor at []/t",
+        lambda matches: eqbal(f"fling magician at {matches[0] or s.target}")
+    ),
     (   "^magi(?: (.+))?$",
         "fling magician at []/me",
         lambda matches: eqbal(f"fling magician at {matches[0] or 'me'}")
@@ -29,10 +33,10 @@ tarot_aliases = [
         "board chariot",
         lambda matches: eqbal(f"board chariot")
     ),
-    #(   "^fly$",
-    #    "spur chariot skywards",
-    #    lambda matches: eqbal(f"spur chariot skywards")
-    #),
+    (   "^cfly$",
+        "spur chariot skywards",
+        lambda matches: eqbal(f"spur chariot skywards")
+    ),
     (   "^fher(?: (.+))?$",
         "fling hermit at ground [tag]",
         lambda matches: eqbal(f"fling hermit at ground {matches[0] or ''}")
