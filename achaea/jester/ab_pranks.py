@@ -85,5 +85,25 @@ pranks_aliases = [
         "arrowcatch []/on",
         lambda matches: eqbal(f"stand;arrowcatch {matches[0] or 'on'}")
     ),
+    (   "^jd$",
+        "get daggers;juggle daggers",
+        lambda matches: eqbal(f"stand;get dagger;get dagger;get dagger;unwield left;juggle dagger dagger")
+    ),
+    (   "^tdc$",
+        "throw dagger curare",
+        lambda matches: eqbal(f"stand;throw dagger at {s.target} curare")
+    ),
+    (   "^tdk$",
+        "throw dagger kalmia",
+        lambda matches: eqbal(f"stand;throw dagger at {s.target} kalmia")
+    ),
+    (   "^tdg$",
+        "throw dagger gecko",
+        lambda matches: eqbal(f"stand;throw dagger at {s.target} gecko")
+    ),
+    (   "^wb$",
+        "wield blackjack",
+        lambda matches: eqbal(f"stand;unwield left;wield blackjack")
+    ),
 ]
 c.add_aliases("ab_pranks", pranks_aliases)
