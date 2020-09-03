@@ -58,6 +58,7 @@ async def handle_input(mud_client):
 
 
     ui.core.input_field.accept_handler = accept
+    ui.core.input_field.completer = TargetCompleter(s)
 
     application = Application(
         layout=Layout(ui.core.container, focused_element=ui.core.input_field),

@@ -14,7 +14,7 @@ class TargetCompleter(Completer):
 
         players = set(self.state.players_in_room)
         enemies = set(self.state.enemies)
-        mobs = self.state.mobs_in_room
+        mobs = {name for name,info in self.state.mobs_in_room}
         enemies_in_room = players.intersection(enemies)
         others = players.difference(enemies)
 

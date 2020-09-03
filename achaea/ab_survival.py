@@ -7,7 +7,7 @@ from .timers import timers
 
 def generosity():
     auto_defences(["selfishness"], "off")
-    timers.add(f"turnon_selfish", lambda: auto_defences(["selfishness"], "on"), 5)
+    timers.add(f"turnon_selfish", lambda: auto_defences(["selfishness"], "on"), 10)
     eqbal("generosity")
     
 survival_aliases = [
