@@ -54,6 +54,7 @@ def handle_login_info(gmcp_data):
         from achaea.jester import ab_pranks
         from achaea.jester import ab_tarot
         from achaea.jester import ab_battlerage
+        from achaea.jester import misc
 
 c.add_gmcp_handler("Char.Name", handle_login_info)
 

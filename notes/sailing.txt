@@ -1,0 +1,19 @@
+* always carry rope, bucket, ship axe
+* fill bucket with water
+* douse room
+board ship tlsi
+* disembark
+* # are chops... some you can pass through, others you cant
+* wind changes based on your latitude
+* three types of crew:
+    * crewmates
+    * shipmates
+    * swashbucklers
+* strongboxes
+    * can be plundered by enemy ships
+    * holds gold for:
+        * trade
+        * docking fees
+        * crew
+* ab seafaring fireweapon
+    * 67 lessons

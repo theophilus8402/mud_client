@@ -24,40 +24,40 @@
         * < > probably a file that keeps track of some of the state
     * < > be able to load and unload triggers/aliases/timers...
         without having to restart the program
+* trigger off tumble and walk in that direction
 * sarmenti
     * <x> finish tasks
-    * < > hr3
-        * <x> join the army (lord marshal or aide to war)
-        * <x> hhelp mentors (mizik?)
-                saibel, davok, umaiar, nbige, syndra
-        * < > allies to mhaldor
-        * < > chelp eidolons, help font
-        * < > refill the font some
-        * < > learn about distrinnith sect (rituals, sermons...)
-        * < > jagganeth sect, class skills
-        * < > khovroth sect
-        * < > intro to combat
-    * < > more minerals
-    * < > get venoms
-    * < > learning
-        * < > pranks (at least itchpowder)
+    * <x> learning
+        * < > tarot aeon
     * < > pranks
         * < > make aliases
-            * <x> mb con, mb web, mb ...
-            * <x> mb (shows a quick summary of all bombs)
+    * < > hr4
+        * < > go to another plane with open pk
+        * skip around circle in aurelian forest
+        * < > work as a team with someone for combat
+    * < > get
+        * < > aconite, slike, vernalius
     * < > resolves
-        * < > get sailing marque attested
+        * <x> get sailing marque attested
         * < > be there for a tank disarm
+* < > redirecting map
+    * <x> capture the map lines and don't delete the lines
+    * < > actually redirect the map to a file?
+    * < > integrate it into the ui
 * < > fix logging being printed to the screen sometimes
 * < > fix up tab completing
     * < > prioritize targets at least a lil better
 * < > ui
-    * < > get exits showing in prompt
+    * <x> get exits showing in prompt
     * < > show people in the room
     * < > show people/mobs by priorities
     * < > show afflictions
     * < > integrate the main screen into the ui
     * < > make it so pageup/down will scroll the main screen
+* < > need to fix this:
+  File "/home/veredus/mud_client/achaea/room_info/room_info.py", line 37, in get_room_info
+    s.room_info = StateRoomInfo(**gmcp_data)
+TypeError: __new__() got an unexpected keyword argument 'ohmap'
 * state
     * < > s.enemies -> tuple
     * < > s.new_afflictions -> tuple

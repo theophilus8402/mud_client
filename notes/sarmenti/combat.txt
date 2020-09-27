@@ -1,2 +1,88 @@
 * mickey gives vomiting (ginseng/ferrum)
-* <x> Throw curare dagger, kalmia dagger, gecko dagger
+* Throw curare dagger, kalmia dagger, gecko dagger
+* you can give bombs to people when they are:
+    paralyzed
+    webbed
+    off balance
+    stunned
+    * that will make it more difficult for them to react
+
+You tell Omi, "I was hoping it would only affect you and not the whole room."
+Omi tells you in Human, "I'm pretty sure it varies though."
+Omi tells you in Human, "Come northeast."
+Omi tells you in Human, "Try another."
+You tell Omi, "But, it looks like it hits the whole room."
+Omi tells you in Human, "Yes, good for raid defence/offense."
+Omi tells you in Human, "Best, if you can pull it off right, and want to be a badass."
+Omi tells you in Human, "Is to empress whoever we think is leading their group, and doll back to our group with a propper."
+Omi tells you in Human, "Puppet."
+You tell Omi, "Ha, that would be nice! I'm a ways away from that, however."
+Omi tells you in Human, "Sorry, been used to shaman dolls."
+Omi tells you in Human, "Use that to help out."
+You tell Omi, "Thank you!"
+You tell Omi, "Do you know if it would be better to learn more of Tarot or spend some time learning puppetry? I'm not far in either."
+Omi tells you in Human, "Tarot."
+You tell Omi, "Thanks!"
+Omi tells you in Human, "Death is one of your best kill options as an unartied, lower level."
+Omi tells you in Human, "Since you can just do a bunch of tricks with it and hope for the best."
+You tell Omi, "I'll work on that!"
+Omi tells you in Human, "Eventually you'll catch them if you're able to stay alive. Learning to stay alive is key to fashioning. Until you can stay alive long enough to earn fashions, puppetry is useless."
+Omi tells you in Human, "Get to bind maybe."
+You tell Omi, "Thank you! I'll keep practising. For now, I must get going."
+Omi tells you in Human, "But tarot gives you quick travel so you don't need wings, death for instakill, aeon, hangedman for teamfights. Priestess for bashing. It's a great skillset."
+Archdeacon Maljer yells, "Through Strength is His will expanded!"
+You tell Omi, "Yes! With the credits you sent, I'll be much closer to learning aeon."
+Omi tells you in Human, "Hierophant you can do silly things that only work once. Force put pipe in pack and throw aeon."
+You tell Omi, "That's creative!"
+Omi tells you in Human, "Force eat bloodroot, throws off herb balance. Force apply salve to arms, same thing."
+Omi tells you in Human, "Hierophant is balanceless from what I remember."
+You tell Omi, "Do you have to be able to hear for me to order you to do something?"
+Omi tells you in Mhaldorian, "No."
+Omi tells you in Mhaldorian, "Well, with tarot yes."
+Omi tells you in Mhaldorian, "Not with puppetry."
+You tell Omi, "Ahh, I'm trying to order you to do something after throwing hierophant at you and it says that you're deaf to my commands."
+Omi tells you in Mhaldorian, "You use juggling."
+Omi tells you in Mhaldorian, "To throw prefarar."
+You tell Omi, "Ah."
+
+
+
+* in a raid:
+    * juggle daggers
+    * mickey
+    * throw
+    * hangedman
+* important venoms: curare, kalmia, slike
+    gecko, vernaius
+* prevents tree: paralyzed, broken arms
+* paralysis to prevent tree
+    * bloodroot/magnesium
+* anorexia prevents eating/drinking
+    * epidermal / focusing
+* slickness prevents salves
+    * bloodroot/magnesium // smoke valerian/realgar
+* asthma prevents smoking
+    * kelp / aurum
+* impatience prevents focus
+    * goldenseal / plumbum
+* focus can cure anorexia
+* weariness stops shrugging (serpent curing)
+    * kelp/aurum
+
+* lock afflictions:
+    asthma, slickness, anorexia, impatience, paralysis
+    * serpents need +weariness
+mickey
+itchingpowder       impatience      goldenseal/plumbum
+Gecko               slickness       broot/magnesium // smoke val/realgar
+Slike               anorexia        epidermal/focusing
+Kalmia              asthma          kelp/aurum
+Curare              paralysis       bloodroot/magnesium
+Vernalius           weariness       kelp/aurum
+
+
+* use paralysis to help stack afflictions
+    * cheap and annoying, but may be worthwhile sometimes
+
+* kelp venoms:
+    * xentio, kalmia, vernalius, prefarar

@@ -89,14 +89,17 @@ async def handle_from_server_queue(from_server_queue, mud_client):
                 stripped_line = strip_ansi(line)
                 mud_client.handle_triggers(stripped_line.strip())
 
-
-                if c._delete_line == True:
+                if c._delete_line == True or line in c._delete_lines:
                     # "delete" the line by not appending it to the output
                     c._delete_line = False
                 elif c.modified_current_line == None:
                     output.append(line)
                 elif c.modified_current_line != "":
                     output.append(c.modified_current_line)
+
+            # clear the delete_lines
+            c._delete_lines.clear()
+
             # some triggers have probably queued stuff to send, so send it
             if c.to_send:
                 c.send_flush()
@@ -104,7 +107,9 @@ async def handle_from_server_queue(from_server_queue, mud_client):
             affs = summarize_afflictions()
             if affs:
                 c.echo(f"Affs: {' '.join(affs)}")
+
             from_server_queue.task_done()
+
         except Exception as e:
             traceback.print_exc(file=sys.stdout)
 

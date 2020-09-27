@@ -60,6 +60,10 @@ class State():
         self.cured_afflictions = set()
         self.current_afflictions = set()
 
+    @property
+    def enemies_in_room(self):
+        return set(self.enemies).intersection(set(self.players_in_room))
+
     def __setattr__(self, name, value):
 
         # check to see if the name already exists

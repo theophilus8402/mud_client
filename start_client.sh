@@ -15,10 +15,10 @@ setup_session () {
     # make the right side
     # the proxy
     tmux split-window -h -l 5 -t $session:"client"
-    tmux send-keys -t $session:"client".2 "python3 proxy.py -L 127.0.0.1:8888:67.202.114.4:23"
+    tmux send-keys -t $session:"client".2 "python3.8 proxy.py -L 127.0.0.1:8888:67.202.114.4:23"
     # fighting log
     tmux split-window -v -l 80 -t $session:"client".2
-    tmux send-keys -t $session:"client".3 "tail -f fighting.log" C-m
+    tmux send-keys -t $session:"client".3 "tail -f says.log" C-m
     # notes
     tmux split-window -v -l 50 -t $session:"client".3
     tmux send-keys -t $session:"client".4 "vim notes/todo.md" C-m

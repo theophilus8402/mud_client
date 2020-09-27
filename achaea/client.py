@@ -22,6 +22,7 @@ class Client():
         self.to_send = []
         self.send_queue = asyncio.Queue()
         self._delete_line = False
+        self._delete_lines = set()
 
         self.line = None
         self.modified_current_line = None
@@ -147,6 +148,10 @@ class Client():
     def delete_line(self):
         self._delete_line = True
 
+    def delete_lines(self, lines):
+        # these must be unstripped lines (i.e. lines from c.current_chunk)
+        self._delete_lines.update(set(lines))
+
     def add_gmcp_handler(self, gmcp_type, action):
         self.echo(f"adding handler: {gmcp_type} {action}")
         self._gmcp_handlers[gmcp_type].append(action)
@@ -159,5 +164,3 @@ send = c.send
 echo = c.echo
 set_line = c.set_line
 delete_line = c.delete_line
-
-
