@@ -1,4 +1,5 @@
 from ..client import send, c
+from ..basic import eqbal
 
 
 """

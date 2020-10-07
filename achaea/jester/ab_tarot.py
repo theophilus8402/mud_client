@@ -33,7 +33,7 @@ tarot_aliases = [
         "board chariot",
         lambda matches: eqbal(f"board chariot")
     ),
-    (   "^cfly$",
+    (   "^fly$",
         "spur chariot skywards",
         lambda matches: eqbal(f"spur chariot skywards")
     ),
@@ -48,6 +48,10 @@ tarot_aliases = [
     (   "^hang(?: (.+))?$",
         "fling hangedman at []/t",
         lambda matches: eqbal(f"fling hangedman at {matches[0] or s.target}")
+    ),
+    (   "^tower$",
+        "fling tower at ground",
+        lambda matches: eqbal(f"fling tower at ground")
     ),
     (   "^star(?: (.+))?$",
         "fling star at []/t",

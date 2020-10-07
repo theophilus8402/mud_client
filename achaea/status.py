@@ -1,5 +1,5 @@
 
-from .client import c
+from .client import c, send, echo
 from .state import s
 
 """
@@ -13,3 +13,35 @@ def gmcp_bal_eq(gmcp_data):
     s.hp = int(gmcp_data.get("hp", s.hp))
     s.mp = int(gmcp_data.get("mp", s.mp))
 c.add_gmcp_handler("Char.Vitals", gmcp_bal_eq)
+
+
+class CharStatus():
+    def __init__(self):
+        # this is just meant to hold data from Char.Status
+        # when we get a Char.Status, we never know what all
+        # will come in (as far as info goes)
+        # so this will just get updated as the info comes in
+        pass
+
+s.char_status = CharStatus()
+
+
+def gmcp_char_status(gmcp_data):
+    for key, value in gmcp_data.items():
+        setattr(s.char_status, key, value)
+c.add_gmcp_handler("Char.Status", gmcp_char_status)
+
+
+def show_char_status(char_status):
+    echo("=== Char Status ===")
+    for key, value in char_status.__dict__.items():
+        echo(f"{key} = {value}")
+
+
+char_status_aliases = [
+    (   "^cs$",
+        "show char status",
+        lambda _: show_char_status(s.char_status)
+    ),
+]
+c.add_aliases("char_status", char_status_aliases)

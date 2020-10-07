@@ -33,13 +33,11 @@
         * < > make aliases
     * < > hr4
         * < > go to another plane with open pk
-        * skip around circle in aurelian forest
         * < > work as a team with someone for combat
     * < > get
         * < > aconite, slike, vernalius
     * < > resolves
-        * <x> get sailing marque attested
-        * < > be there for a tank disarm
+        * < > 10 seamonsters?
 * < > redirecting map
     * <x> capture the map lines and don't delete the lines
     * < > actually redirect the map to a file?
@@ -48,8 +46,9 @@
 * < > fix up tab completing
     * < > prioritize targets at least a lil better
 * < > ui
-    * <x> get exits showing in prompt
     * < > show people in the room
+        * < > people in the room get cleared when
+                someone leaves
     * < > show people/mobs by priorities
     * < > show afflictions
     * < > integrate the main screen into the ui
@@ -64,3 +63,11 @@ TypeError: __new__() got an unexpected keyword argument 'ohmap'
     * < > s.cured_afflictions -> tuple
     * < > s.current_afflictions -> tuple
         * might be able to get rid of new and cured with this tuple stuff
+* meropis
+    * mirror caves (walk to mirrorcaves... awesome money! not that hard)
+    * chaghut
+    * orilla
+    * outside sirocco fortress
+    * ulsyndar
+    * help geography
+
