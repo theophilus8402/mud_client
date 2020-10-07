@@ -1,7 +1,7 @@
 
 from ..state import s
 from ..basic import eqbal
-from ..client import c
+from client import c
 
 
 def pilgrimage(matches):

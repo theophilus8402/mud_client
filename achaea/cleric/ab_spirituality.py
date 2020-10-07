@@ -1,5 +1,5 @@
 
-from ..client import send, c
+from client import send, c
 from ..state import s
 from ..basic import eqbal
 

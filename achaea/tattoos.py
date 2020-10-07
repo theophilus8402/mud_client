@@ -1,6 +1,6 @@
 
 from .basic import eqbal
-from .client import c, send
+from client import c, send
 
 # note: if I play someone who can shield differently again
 # I can make a function that checks the current class and does different things

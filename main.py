@@ -13,8 +13,7 @@ from contextlib import suppress
 
 
 from achaea.tab_complete import TargetCompleter
-from achaea import Achaea
-from achaea.client import send, c
+from client import send, c, Brain
 from achaea.state import s
 from achaea.afflictions import summarize_afflictions
 from multi_queue import MultiQueue
@@ -134,7 +133,7 @@ def main():
 
     event_loop = asyncio.get_event_loop()
 
-    mud_client = Achaea()
+    mud_client = Brain(c)
 
     # handle reading stdin
     asyncio.ensure_future(handle_input(mud_client))

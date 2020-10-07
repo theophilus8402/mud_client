@@ -3,7 +3,7 @@ import asyncio
 import logging
 import time
 
-from .client import c, echo
+from client import c, echo
 from .state import s
 
 import ui.core

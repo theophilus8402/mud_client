@@ -1,5 +1,5 @@
 
-from .client import c, send, echo
+from client import c, send, echo
 
 def bopalopia_mult(matches):
     echo("mult")

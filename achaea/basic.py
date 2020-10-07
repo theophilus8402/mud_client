@@ -4,7 +4,7 @@ import re
 
 from colorama import *
 
-from .client import c, send, echo
+from client import c, send, echo
 from .state import s, QueueStates
 
 

@@ -1,5 +1,5 @@
 
-from .client import c
+from client import c
 from .state import s
 
 

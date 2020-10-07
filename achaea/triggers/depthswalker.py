@@ -1,7 +1,7 @@
 
 import logging
 
-from ..client import c, send, echo
+from client import c, send, echo
 
 logger = logging.getLogger("achaea")
 

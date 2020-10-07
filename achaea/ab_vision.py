@@ -1,6 +1,6 @@
 
 from .basic import eqbal
-from .client import c, send
+from client import c, send
 
 vision_aliases = [
     (   "^night$",

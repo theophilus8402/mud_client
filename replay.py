@@ -1,6 +1,6 @@
 
 from achaea import Achaea
-from achaea.client import c
+from client import c
 from telnet_manager import strip_ansi
 import json
 

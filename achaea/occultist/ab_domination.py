@@ -1,5 +1,5 @@
 
-from ..client import send, add_aliases, add_triggers, echo
+from client import send, add_aliases, add_triggers, echo
 from ..state import s
 from ..basic import eqbal
 

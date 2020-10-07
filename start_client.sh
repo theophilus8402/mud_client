@@ -25,7 +25,7 @@ setup_session () {
 
     # make the prompt part
     tmux split-window -v -l 5 -t $session:"client".1
-    tmux send-keys -t $session:"client".2 "python3 client.py"
+    tmux send-keys -t $session:"client".2 "python3 main.py"
 
 }
 

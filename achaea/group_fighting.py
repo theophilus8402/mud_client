@@ -5,7 +5,7 @@ from colorama import *
 from copy import copy
 
 from .basic import eqbal, highlight_current_line
-from .client import c, send, echo
+from client import c, send, echo
 from .state import s
 
 def pton():

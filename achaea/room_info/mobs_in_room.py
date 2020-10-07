@@ -1,7 +1,7 @@
 
 import logging
 
-from ..client import c, send, echo
+from client import c, send, echo
 from .name import figure_out_unknown_mobs, long_short_name_map
 from ..state import s
 from achaea.room_info.room_info import create_frenemies_text

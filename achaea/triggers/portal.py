@@ -1,5 +1,5 @@
 
-from ..client import c, send, echo
+from client import c, send, echo
 from ..timers import timers
 from ..room_info.room_info import monolith_in_room
 

@@ -1,7 +1,9 @@
 
 import asyncio
 
-from .client import echo
+from client import echo
+
+#TODO: move to client/
 
 class Timers():
 

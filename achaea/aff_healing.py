@@ -1,5 +1,5 @@
 
-from .client import c, send
+from client import c, send
 from .basic import eqbal, eat_herb
 
 

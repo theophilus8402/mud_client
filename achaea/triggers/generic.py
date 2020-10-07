@@ -4,7 +4,7 @@ import logging
 from colorama import Fore
 
 from ..basic import highlight_current_line
-from ..client import c, send, echo
+from client import c, send, echo
 from ..state import s
 
 

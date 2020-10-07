@@ -7,7 +7,7 @@ import re
 
 from datetime import datetime
 
-from ..client import c, send, echo
+from client import c, send, echo
 from ..state import s
 from ..room_info.mapping import store_room
 from ui.core import update_frenemies_info

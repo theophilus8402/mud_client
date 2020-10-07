@@ -1,5 +1,5 @@
 
-from ..client import send, c
+from client import send, c
 
 
 misc_aliases = [

@@ -1,7 +1,7 @@
 
 from collections import namedtuple
 
-from ..client import c, send, echo
+from client import c, send, echo
 
 
 """

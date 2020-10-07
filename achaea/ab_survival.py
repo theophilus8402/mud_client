@@ -1,6 +1,6 @@
 
 from .basic import eqbal
-from .client import c, send
+from client import c, send
 from .defences import auto_defences
 from .timers import timers
 

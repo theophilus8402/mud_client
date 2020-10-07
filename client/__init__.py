@@ -1,0 +1,10 @@
+from client.client import Client
+from client.brain import Brain
+
+c = Client()
+
+# making these functions just to typing them shorter/easier
+send = c.send
+echo = c.echo
+set_line = c.set_line
+delete_line = c.delete_line

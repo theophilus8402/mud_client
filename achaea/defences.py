@@ -2,7 +2,7 @@
 import asyncio
 
 from .basic import eqbal, curebal
-from .client import c, send, echo
+from client import c, send, echo
 from .state import s
 from .timers import timers
 

@@ -1,6 +1,6 @@
 
 from ..basic import eqbal
-from ..client import send, c
+from client import send, c
 from ..state import s
 
 THROW_DAGGER_HELP = """

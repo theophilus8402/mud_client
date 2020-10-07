@@ -1,7 +1,7 @@
 
 import json
 
-from ..client import c, send, echo
+from client import c, send, echo
 
 
 DEFAULT_NAME_MAP_PATH = "achaea/room_info/long_short_name_map.json"

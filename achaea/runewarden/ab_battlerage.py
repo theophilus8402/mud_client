@@ -1,7 +1,7 @@
 
 from ..state import s
 from ..basic import eqbal
-from ..client import c, send
+from client import c, send
 
 #cleric battlerage
 runewarden_battlerage_aliases = [

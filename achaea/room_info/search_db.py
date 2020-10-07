@@ -1,7 +1,6 @@
 
 from copy import copy
 
-from ..client import c, echo
 from .db import Session
 from .models import RoomInfo
 

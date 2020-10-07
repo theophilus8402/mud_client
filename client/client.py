@@ -5,12 +5,8 @@ import re
 
 from collections import defaultdict
 from datetime import datetime
-from functools import singledispatch
-from telnetlib import IAC, SB, SE
 
 import achaea.mud_logging
-
-GMCP = b'\xc9'
 
 
 class Client():
@@ -155,12 +151,3 @@ class Client():
     def add_gmcp_handler(self, gmcp_type, action):
         self.echo(f"adding handler: {gmcp_type} {action}")
         self._gmcp_handlers[gmcp_type].append(action)
-
-
-c = Client()
-
-# making these functions just to typing them shorter/easier
-send = c.send
-echo = c.echo
-set_line = c.set_line
-delete_line = c.delete_line
