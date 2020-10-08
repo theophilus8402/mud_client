@@ -20,12 +20,11 @@ class ServerConnectProtocol(asyncio.Protocol):
             msg = await self.to_server_queue.get()
             try:
                 self.transport.write(msg)
-            except e:
+            except Exception as e:
                 print(f"Egads!  Couldn't send: {msg}")
                 print(e)
 
     def data_received(self, data):
-        #print("Received from server:", data.decode())
         self.from_server_queue.put_nowait(data)
 
     def connection_lost(self, exc):
@@ -35,8 +34,12 @@ class ServerConnectProtocol(asyncio.Protocol):
 
 class LocalServerProtocol(asyncio.Protocol):
 
-    def __init__(self, from_server_queue, to_server_queue, connect_to_server,
-                    host, host_port):
+    def __init__(self,
+                 from_server_queue,
+                 to_server_queue,
+                 connect_to_server,
+                 host,
+                 host_port):
         print("creating the local server")
         self.from_server_queue = from_server_queue
         self.to_server_queue = to_server_queue
@@ -50,7 +53,8 @@ class LocalServerProtocol(asyncio.Protocol):
         peername = transport.get_extra_info('peername')
         print('Connection from {}'.format(peername))
         self.transport = transport
-        self.server_reader = asyncio.ensure_future(self.read_from_server_queue())
+        reader_queue = self.read_from_server_queue()
+        self.server_reader = asyncio.ensure_future(reader_queue)
 
         print(id(self.connect_to_server), self.connect_to_server)
         if not self.connect_to_server.done():
@@ -63,11 +67,11 @@ class LocalServerProtocol(asyncio.Protocol):
         print("Connecting to remote server...")
         loop = asyncio.get_running_loop()
 
-        self.server_transport, self.server_protocol = await loop.create_connection(
-            lambda: ServerConnectProtocol(
-                        self.from_server_queue,
-                        self.to_server_queue),
+        connection_info = await loop.create_connection(
+            lambda: ServerConnectProtocol(self.from_server_queue,
+                                          self.to_server_queue),
             self.host, self.host_port)
+        self.server_transport, self.server_protocol = connection_info
 
     def connection_lost(self, exc):
         self.server_reader.cancel()
@@ -78,7 +82,7 @@ class LocalServerProtocol(asyncio.Protocol):
         while True:
             msg = await self.from_server_queue.get()
             # need to send it to the local socket
-            #TODO don't print to screen, send to the socket
+            # TODO don't print to screen, send to the socket
             print(f"trying to send: {msg}")
             self.transport.write(msg)
 
@@ -124,7 +128,7 @@ def parse_address(address):
         port = pieces[1]
         host = pieces[2]
         host_port = pieces[3]
-        
+
     else:
         print("Ack!  You did not provide an appropriate address!")
         print("It should look like this: [bind_address]:port:host:host_port")
@@ -145,7 +149,7 @@ if __name__ == "__main__":
     if args.L:
         bind_address, port, host, host_port = parse_address(args.L)
     else:
-        bind_address, port, host, host_port = parse_address("127.0.0.1:8888:127.0.01:9999")
+        default_proxy = "127.0.0.1:8888:127.0.01:9999"
+        bind_address, port, host, host_port = parse_address(default_proxy)
 
     asyncio.run(main(bind_address, port, host, host_port))
-

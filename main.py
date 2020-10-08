@@ -1,17 +1,14 @@
 
-import achaea.mud_logging
-
 import asyncio
-import functools
 import json
 import logging
-import readline
 import sys
 import traceback
 
 from contextlib import suppress
 
 
+from achaea.mud_logging import initialize_logging
 from achaea.tab_complete import TargetCompleter
 from client import send, c, Brain
 from achaea.state import s
@@ -23,6 +20,10 @@ from prompt_toolkit.application import Application
 from prompt_toolkit.layout.layout import Layout
 
 import ui.core
+
+
+initialize_logging()
+
 
 async def handle_input(mud_client):
 
@@ -45,7 +46,6 @@ async def handle_input(mud_client):
         c.last_command = data
 
         # handle user input
-        #c.echo(f"cmd: {data}")
         for cmd in data.split(";"):
             if not mud_client.handle_aliases(cmd):
                 send(cmd)
@@ -54,7 +54,6 @@ async def handle_input(mud_client):
         # everything has been queued in c.to_send
         # use c.send_flush() to actually send it
         c.send_flush()
-
 
     ui.core.input_field.accept_handler = accept
     ui.core.input_field.completer = TargetCompleter(s)
@@ -66,8 +65,6 @@ async def handle_input(mud_client):
         mouse_support=True,
         full_screen=True,
     )
-
-    #completer = TargetCompleter(s)
 
     result = await application.run_async()
     print(f"result: {result}")
@@ -88,10 +85,10 @@ async def handle_from_server_queue(from_server_queue, mud_client):
                 stripped_line = strip_ansi(line)
                 mud_client.handle_triggers(stripped_line.strip())
 
-                if c._delete_line == True or line in c._delete_lines:
+                if c._delete_line is True or line in c._delete_lines:
                     # "delete" the line by not appending it to the output
                     c._delete_line = False
-                elif c.modified_current_line == None:
+                elif c.modified_current_line is None:
                     output.append(line)
                 elif c.modified_current_line != "":
                     output.append(c.modified_current_line)
@@ -109,7 +106,7 @@ async def handle_from_server_queue(from_server_queue, mud_client):
 
             from_server_queue.task_done()
 
-        except Exception as e:
+        except Exception:
             traceback.print_exc(file=sys.stdout)
 
 
@@ -124,7 +121,7 @@ async def handle_gmcp_queue(gmcp_queue, mud_client):
         try:
             mud_client.handle_gmcp(gmcp_type, gmcp_data)
         except Exception as e:
-            printf(f"handle_gmcp_queue ERROR! {e}")
+            print(f"handle_gmcp_queue ERROR! {e}")
 
         gmcp_queue.task_done()
 
@@ -143,7 +140,7 @@ def main():
 
     c.from_server_queue = MultiQueue()
     asyncio.ensure_future(handle_telnet(host, port,
-                         c.from_server_queue, c.send_queue))
+                                        c.from_server_queue, c.send_queue))
 
     server_reader = c.from_server_queue.get_receiver("main")
     asyncio.ensure_future(handle_from_server_queue(server_reader, mud_client))
@@ -152,7 +149,6 @@ def main():
     asyncio.ensure_future(handle_gmcp_queue(gmcp_queue, mud_client))
 
     log = logging.getLogger("achaea")
-    #logging.basicConfig(level=logging.DEBUG)
 
     log.debug('waiting for client to complete')
     try:
@@ -175,7 +171,7 @@ def main():
         for task in pending:
             task.cancel()
             # Now we should await task to execute it's cancellation.
-            # Cancelled task raises asyncio.CancelledError that we can suppress:
+            # Cancelled task raises asyncio.CancelledError suppress it
             with suppress(asyncio.CancelledError):
                 event_loop.run_until_complete(task)
 
@@ -187,4 +183,3 @@ if __name__ == "__main__":
         main()
     except KeyboardInterrupt:
         print("__main__: Got a Keyboard Interrupt!!")
-

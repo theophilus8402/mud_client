@@ -4,6 +4,7 @@ from client import c
 from telnet_manager import strip_ansi
 import json
 
+
 def replay(log_path):
 
     achaea = Achaea()
@@ -28,13 +29,13 @@ def replay(log_path):
                 elif msg_type == "server_text" and msg.strip() == "":
                     pass
                 elif msg_type == "gmcp_data":
-                    #print(f"> {msg}")
+                    # print(f"> {msg}")
                     gmcp_blob = json.loads(msg)
                     gmcp_type = gmcp_blob["type"]
                     gmcp_data = gmcp_blob["data"]
                     yield achaea.handle_gmcp(gmcp_type, gmcp_data)
                 elif msg_type in ["data_sent", "user_input"]:
-                    #print(f"< {msg}")
+                    # print(f"< {msg}")
                     yield achaea.handle_aliases(msg)
                 else:
                     print(f"Don't know what this msg type is: {msg_type}.")

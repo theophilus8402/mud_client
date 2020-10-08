@@ -101,27 +101,24 @@ class FightingFilter(logging.Filter):
             return False
 
 
-says_log_path = "says.log"
-says_handler = logging.FileHandler(says_log_path, mode="a")
-says_handler.setLevel(SAYS)
-says_filter = SaysFilter()
-says_handler.addFilter(says_filter)
+def initialize_logging():
 
-fighting_log_path = "fighting.log"
-fighting_handler = logging.FileHandler(fighting_log_path, mode="a")
-fighting_handler.setLevel(FIGHTING)
-fighting_filter = FightingFilter()
-fighting_handler.addFilter(fighting_filter)
-
-#main_handler = logging.StreamHandler()
-#main_handler.setLevel(MAIN)
-
-#log = logging.getLogger(__name__)
-log = logging.getLogger("achaea")
-log.setLevel(FIGHTING)
-log.addHandler(fighting_handler)
-log.addHandler(says_handler)
-#log.addHandler(main_handler)
+    says_log_path = "says.log"
+    says_handler = logging.FileHandler(says_log_path, mode="a")
+    says_handler.setLevel(SAYS)
+    says_filter = SaysFilter()
+    says_handler.addFilter(says_filter)
+    
+    fighting_log_path = "fighting.log"
+    fighting_handler = logging.FileHandler(fighting_log_path, mode="a")
+    fighting_handler.setLevel(FIGHTING)
+    fighting_filter = FightingFilter()
+    fighting_handler.addFilter(fighting_filter)
+    
+    log = logging.getLogger("achaea")
+    log.setLevel(FIGHTING)
+    log.addHandler(fighting_handler)
+    log.addHandler(says_handler)
 
 
 def switch_to_fighting_log():

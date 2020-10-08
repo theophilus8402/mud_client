@@ -6,16 +6,16 @@ import logging
 import re
 
 from select import select
-from telnetlib import IAC, SB, SE, Telnet, DO, TTYPE, BINARY, DONT, WILL, GA
+from telnetlib import IAC, SB, SE, Telnet, DO, TTYPE, BINARY, DONT, WILL
 
 GMCP = b'\xc9'
+mud_encoding = 'iso-8859-1'
 
 
 def strip_ansi(line):
     # TODO compile this
     return re.sub(r'(\x9B|\x1B\[)[0-?]*[ -\/]*[@-~]', '', line)
 
-mud_encoding = 'iso-8859-1'
 
 def gmcpOut(sock, msg):
     logging.debug(f"gmcpOut: {msg}")
@@ -23,6 +23,7 @@ def gmcpOut(sock, msg):
         sock.sendall(IAC + SB + GMCP + msg.encode(mud_encoding) + IAC + SE)
     else:
         sock.sendall(IAC + SB + GMCP + msg + IAC + SE)
+
 
 supportables = [
         'char 1',
@@ -47,6 +48,7 @@ compiled_gmcp_pat = re.compile("([.A-Za-z]+) (.*)")
 
 gmcp_queue = asyncio.Queue()
 
+
 def handle_gmcp(data):
     matches = compiled_gmcp_pat.match(data)
     gmcp_type, gmcp_data = matches.groups()
@@ -60,11 +62,12 @@ def iac_cb(telnet_session, sock, cmd, option):
             logging.debug("Enabling GMCP")
             sock.sendall(IAC + DO + option)
             gmcpOut(sock, 'Core.Hello { "client": "Cizra", "version": "1" }')
-            gmcpOut(sock, 'Core.Supports.Set ' + str(supportables).replace("'", '"'))
+            supportables_str = str(supportables).replace("'", '"')
+            gmcpOut(sock, 'Core.Supports.Set ' + supportables_str)
         elif option == TTYPE:
-            log("Sending terminal type 'Cizra'")
+            logging.debug("Sending terminal type 'PyMudClient'")
             sock.sendall(IAC + DO + option +
-                    IAC + SB + TTYPE + BINARY + b'Cizra' + IAC + SE)
+                         IAC + SB + TTYPE + BINARY + b'PyMudClient' + IAC + SE)
 
         else:
             sock.sendall(IAC + DONT + option)
@@ -75,12 +78,14 @@ def iac_cb(telnet_session, sock, cmd, option):
             # change it to a emcp queue
             handle_gmcp(data[1:].decode(mud_encoding))
 
+
 def telnet_connect(host, port):
     t = Telnet()
     new_iac_cb = functools.partial(iac_cb, t)
     t.set_option_negotiation_callback(new_iac_cb)
     t.open(host, port)
     return t
+
 
 async def handle_telnet(host, port, from_server_queue, to_server_queue):
 
@@ -111,10 +116,8 @@ async def handle_telnet(host, port, from_server_queue, to_server_queue):
                 data_to_send = await to_server_queue.get()
                 if isinstance(data_to_send, bytes):
                     gmcpOut(telnet_socket, data_to_send)
-                    #session.write(data_to_send)
                 else:
                     session.write(data_to_send.encode(mud_encoding))
             await asyncio.sleep(.05)
     finally:
         session.close()
-

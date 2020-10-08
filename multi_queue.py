@@ -1,6 +1,7 @@
 
 import asyncio
 
+
 class MultiQueue():
 
     def __init__(self):
@@ -33,4 +34,3 @@ if __name__ == "__main__":
     r2 = mqueue.get_receiver("r2")
 
     mqueue.put_nowait("test")
-
