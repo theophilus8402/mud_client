@@ -29,6 +29,10 @@ Char.Items.List {"location": "room", "items": [{"id": "176739", "name": "a sewer
 # a lightwall
 """
 
+ROOM_HINDRANCE_NAMES = [
+    "a large wall of ice"
+]
+
 RoomHindrance = namedtuple("RoomHindrance", "name short_name id direction")
 
 def add_room_hindrance(gmcp_data):
@@ -51,4 +55,7 @@ def add_room_hindrance(gmcp_data):
 
         # store it in the state
         s.room_hindrance = (*s.room_hindrance, new_hindrance)
+
+    #TODO: other things to look for: gravehands, occultist tentacles, stone walls,
+    # piety
 c.add_gmcp_handler("Char.Items.Add", add_room_hindrance)

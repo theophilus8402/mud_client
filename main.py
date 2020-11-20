@@ -2,13 +2,14 @@
 import asyncio
 import json
 import logging
+import signal
 import sys
 import traceback
 
 from contextlib import suppress
 
 
-from achaea.mud_logging import initialize_logging
+from achaea import initialize_logging
 from achaea.tab_complete import TargetCompleter
 from client import send, c, Brain
 from achaea.state import s
@@ -66,8 +67,7 @@ async def handle_input(mud_client):
         full_screen=True,
     )
 
-    result = await application.run_async()
-    print(f"result: {result}")
+    await application.run_async(set_exception_handler=True)
 
 
 async def handle_from_server_queue(from_server_queue, mud_client):
@@ -126,21 +126,41 @@ async def handle_gmcp_queue(gmcp_queue, mud_client):
         gmcp_queue.task_done()
 
 
-def main():
+async def shutdown(signal, loop, shutdown_event):
+    print("In shutdown")
+    logging.info(f"Received exit signal {signal.name}...")
+
+    shutdown_event.set()
+
+    #c.from_server_queue.remove_receiver("main")
+
+    # let the client close up connections/file handles
+    c.close()
+
+    # Let's also cancel all running tasks:
+    event_loop = asyncio.get_event_loop()
+    tasks = [t for t in asyncio.all_tasks() if t is not
+                asyncio.current_task()]
+
+    for task in tasks:
+        task.cancel()
+
+    logging.info("Cancelling outstanding tasks")
+    await asyncio.gather(*tasks, return_exceptions=True)
+    logging.info("Stopping loop")
+    loop.stop()
+
+
+def main(shutdown_event):
 
     event_loop = asyncio.get_event_loop()
 
     mud_client = Brain(c)
 
-    # handle reading stdin
-    asyncio.ensure_future(handle_input(mud_client))
-
     host = "127.0.0.1"
     port = 8888
 
     c.from_server_queue = MultiQueue()
-    asyncio.ensure_future(handle_telnet(host, port,
-                                        c.from_server_queue, c.send_queue))
 
     server_reader = c.from_server_queue.get_receiver("main")
     asyncio.ensure_future(handle_from_server_queue(server_reader, mud_client))
@@ -151,35 +171,36 @@ def main():
     log = logging.getLogger("achaea")
 
     log.debug('waiting for client to complete')
+
     try:
-        event_loop.run_forever()
-    except KeyboardInterrupt:
-        print("main: Got a Keyboard Interrupt!!")
-    except Exception as e:
-        print(f"Other exception! {e}")
-    finally:
-        log.debug('closing event loop')
+        event_loop.create_task(handle_telnet(host, port,
+                                        c.from_server_queue, c.send_queue))
+    except asyncio.CancelledError:
+        log.info("Connection with the server is still running!")
 
-        c.from_server_queue.remove_receiver("main")
-
-        # let the client close up connections/file handles
-        c.close()
-
-        # Let's also cancel all running tasks:
-        event_loop = asyncio.get_event_loop()
-        pending = asyncio.Task.all_tasks()
-        for task in pending:
-            task.cancel()
-            # Now we should await task to execute it's cancellation.
-            # Cancelled task raises asyncio.CancelledError suppress it
-            with suppress(asyncio.CancelledError):
-                event_loop.run_until_complete(task)
-
-        event_loop.close()
+    # handle reading stdin
+    try:
+        event_loop.run_until_complete(handle_input(mud_client))
+    except asyncio.CancelledError:
+        print("main:handle_input cancelled")
 
 
 if __name__ == "__main__":
+    loop = asyncio.get_event_loop()
+
+    shutdown_event = asyncio.Event()
+
+    signals = (signal.SIGHUP, signal.SIGTERM, signal.SIGINT)
+    for sig in signals:
+        loop.add_signal_handler(
+                    sig,
+                    lambda sig=sig: asyncio.ensure_future(shutdown(sig,
+                                                                   loop,
+                                                                   shutdown_event
+                                                                  )
+                                                         )
+                               )
     try:
-        main()
-    except KeyboardInterrupt:
-        print("__main__: Got a Keyboard Interrupt!!")
+        main(shutdown_event)
+    finally:
+        logging.info("Successfully closed mud client.")

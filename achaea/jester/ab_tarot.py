@@ -11,7 +11,7 @@ tarot_aliases = [
     ),
     (   "^emp(?: (.+))?$",
         "fling emperor at []/t",
-        lambda matches: eqbal(f"fling magician at {matches[0] or s.target}")
+        lambda matches: eqbal(f"fling emperor at {matches[0] or s.target}")
     ),
     (   "^magi(?: (.+))?$",
         "fling magician at []/me",
@@ -45,6 +45,10 @@ tarot_aliases = [
         "activate hermit [tag]",
         lambda matches: eqbal(f"outd hermit;activate hermit {matches[0] or ''}")
     ),
+    (   "^empress(?: (.+))?$",
+        "fling empress at []/t",
+        lambda matches: eqbal(f"fling empress at {matches[0] or s.target}")
+    ),
     (   "^hang(?: (.+))?$",
         "fling hangedman at []/t",
         lambda matches: eqbal(f"fling hangedman at {matches[0] or s.target}")
@@ -69,17 +73,25 @@ tarot_aliases = [
         "fling lust at []/t",
         lambda matches: eqbal(f"fling lust at {matches[0] or s.target}")
     ),
+    (   "^univ(?: (.+))?$",
+        "fling universe at ground",
+        lambda matches: eqbal("fling universe at ground")
+    ),
     (   "^moon(?: (.+))?$",
         "fling moon at []/t",
         lambda matches: eqbal(f"fling moon at {matches[0] or s.target}")
     ),
-    (   "^devil(?: (.+))?$",
+    (   "^devil$",
         "fling devil at ground",
         lambda matches: eqbal("fling devil at ground")
     ),
-    (   "^univ(?: (.+))?$",
-        "fling universe at ground",
-        lambda matches: eqbal("fling universe at ground")
+    (   "^rde(?: (.+))?$",
+        "rub death on []/t",
+        lambda matches: eqbal(f"rub death on {matches[0] or s.target}")
+    ),
+    (   "^fde(?: (.+))?$",
+        "fling death at []/t",
+        lambda matches: eqbal(f"fling death at {matches[0] or s.target}")
     ),
 ]
 c.add_aliases("ab_tarot", tarot_aliases)

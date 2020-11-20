@@ -62,32 +62,27 @@ def _throw_bomb(bomb_type, direction=""):
     return f"stand;unwield left;wield {bomb_type} left;throw {bomb_type} {direction}"
 
 
-def parse_throw_direction(matches):
-    try:
-        bomb_type, direction = matches.split(" ")
-    except ValueError:
+def throw_bomb(bomb_type, direction):
+
+    if direction == "":
         direction = "at ground"
-    return direction
 
+    c.echo(f"throw_bomb type: {bomb_type} dir: {direction}")
 
-def throw_bomb(matches):
-
-    direction = parse_throw_direction(matches)
-
-    if matches == "":
+    if bomb_type == "":
         c.echo(THROW_BOMB_HELP)
-    elif matches.startswith("c"):
+    elif bomb_type.startswith("c"):
         eqbal(_throw_bomb("concussionbomb", direction))
-    elif matches.startswith("b"):
+    elif bomb_type.startswith("b"):
         eqbal(_throw_bomb("butterflybomb", direction))
-    elif matches.startswith("s"):
+    elif bomb_type.startswith("s"):
         eqbal(_throw_bomb("smokebomb", direction))
-    elif matches.startswith("w"):
+    elif bomb_type.startswith("w"):
         eqbal(_throw_bomb("webbomb", direction))
-    elif matches.startswith("d"):
+    elif bomb_type.startswith("d"):
         eqbal(_throw_bomb("dustbomb", direction))
     else:
-        send(f"b{matches}")
+        c.echo(f"HMMMMM???? throw_bomb type: {bomb_type} dir: {direction}")
 
 
 bomb_triggers = [

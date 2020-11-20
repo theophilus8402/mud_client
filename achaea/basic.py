@@ -53,8 +53,12 @@ def handle_login_info(gmcp_data):
         # jester modules
         from achaea.jester import ab_pranks
         from achaea.jester import ab_tarot
+        from achaea.jester import ab_puppetry
         from achaea.jester import ab_battlerage
         from achaea.jester import misc
+        from achaea.jester import run_away
+        from achaea.jester import throw_dagger
+        from achaea.jester import jester_actions
 
 c.add_gmcp_handler("Char.Name", handle_login_info)
 
@@ -75,13 +79,16 @@ base_aliases = [
 c.add_aliases("base", base_aliases)
 
 
-def eqbal(msg):
+def eqbal(msg, prepend=False):
 
     # TODO: is this even necessary any more?
     s.eqbal_queue.append(msg)
 
     for msg in s.eqbal_queue:
-        send(f"queue add eqbal {msg}")
+        if prepend:
+            send(f"queue prepend eqbal {msg}")
+        else:
+            send(f"queue add eqbal {msg}")
     s.eqbal_queue.clear()
 
 

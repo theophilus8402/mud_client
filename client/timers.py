@@ -3,7 +3,6 @@ import asyncio
 
 from client import echo
 
-#TODO: move to client/
 
 class Timers():
 
@@ -18,7 +17,7 @@ class Timers():
             task = self.timers[name]
             task.cancel()
 
-        # create a new async function that would  handle the timer
+        # create a new async function that would handle the timer
         if recurring:
             async_func = self.create_recurring_timer
         else:

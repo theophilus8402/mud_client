@@ -43,9 +43,12 @@ def parse_map(current_line):
     for i, line in enumerate(chunk_lines):
         if line == current_line:
             start_index = i
+            end_index = start_index
             stuff = chunk_lines[i:i+5]
         elif (line.count(":") >= 2) and (line.count("-") >= 6):
             end_index = i
+            break
+    
     stuff = chunk_lines[start_index:end_index+1]
     c.delete_lines(stuff)
     echo("\n".join(stuff))

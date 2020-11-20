@@ -3,10 +3,10 @@ import re
 
 from datetime import datetime, timedelta
 
-from .basic import eqbal
+from achaea.basic import eqbal
+from achaea.state import s
 from client import c, send, echo
-from .state import s
-from .timers import timers
+from client.timers import timers
 
 
 def ratting_move_on(client):

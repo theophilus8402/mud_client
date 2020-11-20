@@ -2,11 +2,11 @@
 import random
 
 from client import send, c
-from ..state import s
-from ..basic import eqbal
-from ..defences import basic_defs
-from ..jester.throw_dagger import throw_dagger
-from .bombs import throw_bomb, make_bomb
+from achaea.state import s
+from achaea.basic import eqbal
+from achaea.defences import basic_defs
+from achaea.jester.throw_dagger import throw_dagger
+from achaea.jester.bombs import throw_bomb, make_bomb
 
 
 pranks_basic_defs = {"slippery"}
@@ -63,17 +63,37 @@ pranks_aliases = [
         "wish for 10 itchpowder",
         lambda matches: wish("itchpowder")
     ),
-    (   "^fly$",
-        "inflate balloon",
-        lambda matches: eqbal(f"stand;inflate balloon")
-    ),
+    #(   "^fly$",
+    #    "inflate balloon",
+    #    lambda matches: eqbal(f"stand;inflate balloon")
+    #),
     (   "^bf(?: (.+))?$",
         "backflip dir",
         lambda matches: backflip(matches[0] or "")
     ),
-    (   "^b(?!ad|f|hs|al|an)(.*)$",
+    (   "^b$",
         "throw bombs!",
-        lambda matches: throw_bomb(matches[0])
+        lambda matches: throw_bomb("", "")
+    ),
+    (   "^bc(?: (.*))?$",
+        "throw bombs!",
+        lambda matches: throw_bomb("concussion", matches[0] or "")
+    ),
+    (   "^bb(?: (.*))?$",
+        "throw bombs!",
+        lambda matches: throw_bomb("butterfly", matches[0] or "")
+    ),
+    (   "^bs(?: (.*))?$",
+        "throw bombs!",
+        lambda matches: throw_bomb("smoke", matches[0] or "")
+    ),
+    (   "^bw(?: (.*))?$",
+        "throw bombs!",
+        lambda matches: throw_bomb("web", matches[0] or "")
+    ),
+    (   "^bd(?: (.*))?$",
+        "throw bombs!",
+        lambda matches: throw_bomb("dust", matches[0] or "")
     ),
     (   "^mb(?: (.+))?$",
         "make bombs!",

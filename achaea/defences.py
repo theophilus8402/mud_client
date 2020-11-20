@@ -1,10 +1,10 @@
 
 import asyncio
 
-from .basic import eqbal, curebal
+from achaea.basic import eqbal, curebal
+from achaea.state import s
 from client import c, send, echo
-from .state import s
-from .timers import timers
+from client.timers import timers
 
 def gmcp_defences(gmcp_data):
     s.defences = tuple(defence["name"] for defence in gmcp_data)

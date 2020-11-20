@@ -1,5 +1,6 @@
 
 from client import c, send, echo
+from achaea.basic import handle_login_info
 from .state import s
 
 """
@@ -28,6 +29,10 @@ s.char_status = CharStatus()
 
 def gmcp_char_status(gmcp_data):
     for key, value in gmcp_data.items():
+        if key == "class" and getattr(s.char_status, "class", "") != value:
+            # we've changed class and need to load the appropriate modules
+            #TODO: fix this hack way of loading class modules
+            handle_login_info({"name": "sarmenti"})
         setattr(s.char_status, key, value)
 c.add_gmcp_handler("Char.Status", gmcp_char_status)
 
@@ -45,3 +50,7 @@ char_status_aliases = [
     ),
 ]
 c.add_aliases("char_status", char_status_aliases)
+
+"""
+Char.Status { "name": "Sarmenti", "fullname": "Sarmenti, Aspirant of Elocution", "age": "23", "race": "Human", "specialisation": "Rogue", "level": "79 (77%)", "xp": "77%", "xprank": "888", "class": "Jester", "city": "Mhaldor (1)", "house": "The Dread Legates(3)", "order": "(None)", "boundcredits": "0", "unboundcredits": "0", "lessons": "11", "explorerrank": "a Rambler", "mayancrowns": "0", "boundmayancrowns": "0", "gold": "3557", "bank": "14100", "unread_news": "13", "unread_msgs": "9", "target": "None", "gender": "male" }
+"""

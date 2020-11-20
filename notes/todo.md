@@ -26,18 +26,14 @@
         without having to restart the program
 * trigger off tumble and walk in that direction
 * sarmenti
-    * <x> finish tasks
     * <x> learning
-        * < > tarot aeon
-    * < > pranks
-        * < > make aliases
+        * < > vision - alertness (325 lessons)
+        * < > puppetry - trans (1108 lessons)
+    * < > get better at wielding
+    * < > get better at throwing daggers
     * < > hr4
-        * < > go to another plane with open pk
-        * < > work as a team with someone for combat
-    * < > get
-        * < > aconite, slike, vernalius
-    * < > resolves
-        * < > 10 seamonsters?
+        * < > spar seven heathens
+        * < > write a report on a new hunting ground
 * < > redirecting map
     * <x> capture the map lines and don't delete the lines
     * < > actually redirect the map to a file?
@@ -46,28 +42,40 @@
 * < > fix up tab completing
     * < > prioritize targets at least a lil better
 * < > ui
-    * < > show people in the room
-        * < > people in the room get cleared when
+    * <x> show people in the room
+        * <x> people in the room get cleared when
                 someone leaves
     * < > show people/mobs by priorities
     * < > show afflictions
     * < > integrate the main screen into the ui
     * < > make it so pageup/down will scroll the main screen
-* < > need to fix this:
-  File "/home/veredus/mud_client/achaea/room_info/room_info.py", line 37, in get_room_info
-    s.room_info = StateRoomInfo(**gmcp_data)
-TypeError: __new__() got an unexpected keyword argument 'ohmap'
 * state
     * < > s.enemies -> tuple
     * < > s.new_afflictions -> tuple
     * < > s.cured_afflictions -> tuple
     * < > s.current_afflictions -> tuple
         * might be able to get rid of new and cured with this tuple stuff
-* meropis
-    * mirror caves (walk to mirrorcaves... awesome money! not that hard)
-    * chaghut
-    * orilla
-    * outside sirocco fortress
-    * ulsyndar
-    * help geography
 
+
+Vinceres fashions a sphere of crackling electricity and arms it.
+
+*******************************************************************************
+The sphere of crackling electricity suddenly flares with brilliant incandescence, before detonating with a thunderous roar.
+*******************************************************************************
+fumology?
+
+
+history deathsight
+
+can tell if there's a mono with a perception stone (talisman) or veilglance (dragon)
+
+remember to priest when getting worldburned
+
+msg syndra about my "spar" with Namino
+
+
+hangedman aeon aeon
+
+hangedman itchpowder mickey
+* < > try out lust/empress
+* < > try out fp (fashion)

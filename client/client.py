@@ -6,8 +6,6 @@ import re
 from collections import defaultdict
 from datetime import datetime
 
-import achaea.mud_logging
-
 
 class Client():
 
@@ -132,7 +130,7 @@ class Client():
         self.to_send.clear()
 
     def gmcp_send(self, msg):
-        self.send(msg.encode("iso-8859-1"))
+        self.send_queue.put_nowait(msg.encode("iso-8859-1"))
     
     def echo(self, msg):
         # TODO: move this functionality somewhere else
@@ -149,5 +147,5 @@ class Client():
         self._delete_lines.update(set(lines))
 
     def add_gmcp_handler(self, gmcp_type, action):
-        self.echo(f"adding handler: {gmcp_type} {action}")
+        #self.echo(f"adding handler: {gmcp_type} {action}")
         self._gmcp_handlers[gmcp_type].append(action)

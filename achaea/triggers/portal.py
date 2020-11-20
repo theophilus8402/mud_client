@@ -1,7 +1,7 @@
 
 from client import c, send, echo
-from ..timers import timers
-from ..room_info.room_info import monolith_in_room
+from client.timers import timers
+from achaea.room_info.room_info import monolith_in_room
 
 """
 # leave the room immediately, stay out for more than 15 seconds!
@@ -27,7 +27,8 @@ A gateway of light blazes into existence before your eyes.
 def incoming_prism():
     echo("### Someone PRISMING in!!!  Leave the room!! ###")
     timers.add(f"prism_wait",
-        lambda: echo("It's been 15 seconds, should be safe now."), 15)
+               lambda: echo("It's been 15 seconds, should be safe now."),
+               15)
 
 
 def incoming_portal(portal_type):

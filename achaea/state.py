@@ -54,6 +54,7 @@ class State():
         self.bal = "1"
         self.eq = "1"
         self.show_balance_times = False
+        self.room_items = tuple()
 
         # from afflictions.py
         self.new_afflictions = set()
