@@ -1,13 +1,12 @@
-
-from achaea import *
-from client import c, Brain
-from telnet_manager import strip_ansi
 import json
 
-
 import achaea.basic
+from achaea import *
+from client import Brain, c
+from telnet_manager import strip_ansi
 
 achaea.basic.handle_login_info({"name": "sarmenti"})
+
 
 def handle_server_text(msg):
     client = Brain(c)

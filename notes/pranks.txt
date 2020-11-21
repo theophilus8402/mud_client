@@ -36,4 +36,3 @@ Timers               Give your bombs a delayed effect.
 Gallowshumour        A tough crowd, this one.
 Suicidemice          Brainwash mice to carry bombs on their backs.
 Liberate             They weren't using it anyway.
-

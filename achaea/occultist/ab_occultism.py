@@ -1,7 +1,7 @@
+from client import add_aliases, add_triggers, echo, send
 
-from client import send, add_aliases, add_triggers, echo
-from ..state import s
 from ..basic import eqbal
+from ..state import s
 
 
 def instill(target):
@@ -9,167 +9,173 @@ def instill(target):
 
 
 occultism_aliases = [
-    (   "^ague(?: (.+))?$",
+    (
+        "^ague(?: (.+))?$",
         "ague []/t",
-        lambda matches: eqbal(f"ague {matches[0] or v.target}")
+        lambda matches: eqbal(f"ague {matches[0] or v.target}"),
     ),
-    (   "^agl(?: (.+))?$",
+    (
+        "^agl(?: (.+))?$",
         "auraglance []/t",
-        lambda matches: eqbal(f"auraglance {matches[0] or v.target}")
+        lambda matches: eqbal(f"auraglance {matches[0] or v.target}"),
     ),
-    (   "^m(?: (.+))?$",
+    (
+        "^m(?: (.+))?$",
         "warp []/t",
         lambda matches: eqbal(f"stand;warp {matches[0] or v.target}"),
     ),
-    (   "^night$",
+    (
+        "^night$",
         "night",
         lambda _: eqbal("night"),
     ),
-    (   "^shroud$",
+    (
+        "^shroud$",
         "shroud",
         lambda _: eqbal("shroud"),
     ),
-    (   "^bwarp$",
+    (
+        "^bwarp$",
         "bodywarp",
         lambda _: eqbal("bodywarp"),
     ),
-    (   "^mist$",
+    (
+        "^mist$",
         "eldritchmists",
         lambda _: eqbal("eldritchmists"),
     ),
-    (   "^mask$",
+    (
+        "^mask$",
         "mask",
         lambda _: eqbal("mask"),
     ),
-    (   "^att(?: (.+))?$",
+    (
+        "^att(?: (.+))?$",
         "attend []/t",
-        lambda matches: eqbal(f"attend {matches[0] or v.target}")
+        lambda matches: eqbal(f"attend {matches[0] or v.target}"),
     ),
-    (   "^ene(?: (.+))?$",
+    (
+        "^ene(?: (.+))?$",
         "enervate []/t",
         lambda matches: eqbal(f"enervate {matches[0] or v.target}"),
     ),
-    (   "^qui(?: (.+))?$",
+    (
+        "^qui(?: (.+))?$",
         "quicken []/t",
-        lambda matches: eqbal(f"quicken {matches[0] or v.target}")
+        lambda matches: eqbal(f"quicken {matches[0] or v.target}"),
     ),
-    (   "^astralvision$",
+    (
+        "^astralvision$",
         "astralvision",
         lambda _: eqbal("astralvision"),
     ),
-    (   "^sarm(?: (.+))?$",
+    (
+        "^sarm(?: (.+))?$",
         "shrivel arms []/t",
-        lambda matches: eqbal(f"shrivel arms {matches[0] or v.target}")
+        lambda matches: eqbal(f"shrivel arms {matches[0] or v.target}"),
     ),
-    (   "^sleg(?: (.+))?$",
+    (
+        "^sleg(?: (.+))?$",
         "shrivel legs []/t",
-        lambda matches: eqbal(f"shrivel legs {matches[0] or v.target}")
+        lambda matches: eqbal(f"shrivel legs {matches[0] or v.target}"),
     ),
-    (   "^ra(?: (.+))?$",
+    (
+        "^ra(?: (.+))?$",
         "readaura []/t",
-        lambda matches: eqbal(f"readaura {matches[0] or v.target}")
+        lambda matches: eqbal(f"readaura {matches[0] or v.target}"),
     ),
-    (   "^heartstone$",
-        "heartstone",
-        lambda _: eqbal("heartstone")
-    ),
-    (   "^simulacrum$",
-        "simulacrum",
-        lambda _: eqbal("simulacrum")
-    ),
-    (   "^twarp$",
-        "timewarp",
-        lambda _: eqbal("timewarp")
-    ),
-    (   "^daura",
-        "distortaura",
-        lambda _: eqbal("distortaura")
-    ),
-    (   "^pclk(?: (.+))?$",
+    ("^heartstone$", "heartstone", lambda _: eqbal("heartstone")),
+    ("^simulacrum$", "simulacrum", lambda _: eqbal("simulacrum")),
+    ("^twarp$", "timewarp", lambda _: eqbal("timewarp")),
+    ("^daura", "distortaura", lambda _: eqbal("distortaura")),
+    (
+        "^pclk(?: (.+))?$",
         "pinchaura []/t cloak",
-        lambda matches: eqbal(f"pinchaura {matches[0] or v.target} cloak")
+        lambda matches: eqbal(f"pinchaura {matches[0] or v.target} cloak"),
     ),
-    (   "^pspe(?: (.+))?$",
+    (
+        "^pspe(?: (.+))?$",
         "pinchaura []/t speed",
-        lambda matches: eqbal(f"pinchaura {matches[0] or v.target} speed")
+        lambda matches: eqbal(f"pinchaura {matches[0] or v.target} speed"),
     ),
-    (   "^pcalor(?: (.+))?$",
+    (
+        "^pcalor(?: (.+))?$",
         "pinchaura []/t caloric",
-        lambda matches: eqbal(f"pinchaura {matches[0] or v.target} caloric")
+        lambda matches: eqbal(f"pinchaura {matches[0] or v.target} caloric"),
     ),
-    (   "^pfrost(?: (.+))?$",
+    (
+        "^pfrost(?: (.+))?$",
         "pinchaura []/t frost",
-        lambda matches: eqbal(f"pinchaura {matches[0] or v.target} frost")
+        lambda matches: eqbal(f"pinchaura {matches[0] or v.target} frost"),
     ),
-    (   "^plevi(?: (.+))?$",
+    (
+        "^plevi(?: (.+))?$",
         "pinchaura []/t levitation",
-        lambda matches: eqbal(f"pinchaura {matches[0] or v.target} levitation")
+        lambda matches: eqbal(f"pinchaura {matches[0] or v.target} levitation"),
     ),
-    (   "^pinsom(?: (.+))?$",
+    (
+        "^pinsom(?: (.+))?$",
         "pinchaura []/t insomnia",
-        lambda matches: eqbal(f"pinchaura {matches[0] or v.target} insomnia")
+        lambda matches: eqbal(f"pinchaura {matches[0] or v.target} insomnia"),
     ),
-    (   "^pkola(?: (.+))?$",
+    (
+        "^pkola(?: (.+))?$",
         "pinchaura []/t kola",
-        lambda matches: eqbal(f"pinchaura {matches[0] or v.target} kola")
+        lambda matches: eqbal(f"pinchaura {matches[0] or v.target} kola"),
     ),
-    (   "^spe(?: (.+))?$",
+    (
+        "^spe(?: (.+))?$",
         "unnamable speak",
         lambda _: eqbal("unnamable speak"),
     ),
-    (   "^vis(?: (.+))?$",
+    (
+        "^vis(?: (.+))?$",
         "unnamable vision",
         lambda _: eqbal("unnamable vision"),
     ),
-    (   "^devo(?: (.+))?$",
+    (
+        "^devo(?: (.+))?$",
         "devolve []/t",
-        lambda matches: eqbal(f"devolve {matches[0] or v.target}")
+        lambda matches: eqbal(f"devolve {matches[0] or v.target}"),
     ),
-    (   "^caura(?: (.+))?$",
+    (
+        "^caura(?: (.+))?$",
         "devolve []/t",
-        lambda matches: eqbal(f"cleanseaura {matches[0] or v.target}")
+        lambda matches: eqbal(f"cleanseaura {matches[0] or v.target}"),
     ),
-    (   "^tent$",
-        "tentacles",
-        lambda _: eqbal("tentacles")
-    ),
-    (   "^rays$",
-        "chaosrays",
-        lambda _: eqbal("chaosrays")
-    ),
-    (   "^inst(?: (.+))?$",
+    ("^tent$", "tentacles", lambda _: eqbal("tentacles")),
+    ("^rays$", "chaosrays", lambda _: eqbal("chaosrays")),
+    (
+        "^inst(?: (.+))?$",
         "instill []/t",
         lambda matches: instill(matches[0] or v.target),
     ),
-    (   "^whisp$",
+    (
+        "^whisp$",
         "whisperingmadness t",
-        lambda matches: eqbal(f"whisperingmadness {v.target}")
+        lambda matches: eqbal(f"whisperingmadness {v.target}"),
     ),
-    (   "^dev$",
+    (
+        "^dev$",
         "devilmark",
         lambda _: eqbal("devilmark"),
     ),
-    (   "^trc$",
-        "truename corpse",
-        lambda matches: eqbal(f"truename corpse")
-    ),
-    (   "^utr$",
-        "utter truename t",
-        lambda matches: eqbal(f"utter truename {v.target}")
-    ),
-    (   "^ast$",
+    ("^trc$", "truename corpse", lambda matches: eqbal(f"truename corpse")),
+    ("^utr$", "utter truename t", lambda matches: eqbal(f"utter truename {v.target}")),
+    (
+        "^ast$",
         "astralform",
         lambda _: eqbal(f"astralform"),
     ),
-    (   "^enl$",
+    (
+        "^enl$",
         "enlighten []/t",
-        lambda matches: eqbal(f"enlighten {matches[0] or v.target}")
+        lambda matches: eqbal(f"enlighten {matches[0] or v.target}"),
     ),
-    (   "^unr$",
+    (
+        "^unr$",
         "unravel mind of t",
-        lambda matches: eqbal(f"unravel mind of {v.target}")
+        lambda matches: eqbal(f"unravel mind of {v.target}"),
     ),
 ]
 add_aliases("ab_occultism", occultism_aliases)
-
-

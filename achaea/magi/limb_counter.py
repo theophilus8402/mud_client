@@ -1,8 +1,7 @@
+from client import c, echo, send
 
-from client import c, send, echo
-from ..state import s
 from ..basic import eqbal
-
+from ..state import s
 
 """
 ["2020/03/26 23:21:39.392648", "data_sent", "stand;staffstrike kog with water left arm;golem smash kog legs"]
@@ -13,7 +12,7 @@ from ..basic import eqbal
 ["2020/03/26 23:21:41.119817", "server_text", "Kog takes some salve from a vial and rubs it on his skin.\r"]
 
 ["2020/03/26 23:15:20.037502", "server_text", "You call upon Kkractle and unleash a forceful blow towards Kog with your trusty staff.\r"]
-You call upon Whiirh and unleash a forceful blow towards (\w+)'s (\w+) with your trusty staff.
+You call upon Whiirh and unleash a forceful blow towards (\\w+)'s (\\w+) with your trusty staff.
 You call upon Garash and unleash a forceful blow towards Kog's left arm with your trusty staff.
 
 
@@ -22,10 +21,10 @@ You call upon Garash and unleash a forceful blow towards Kog's left arm with you
 """
 
 strike_map = {
-    "Whiirh"   : "air",
-    "Garash"   : "earth",
-    "Sllshya"  : "water",
-    "Kkractle" : "fire",
+    "Whiirh": "air",
+    "Garash": "earth",
+    "Sllshya": "water",
+    "Kkractle": "fire",
 }
 
 """
@@ -35,6 +34,7 @@ class LimbCounter():
         self._strikes = []
 """
 
+
 def count_strike(matches):
     echo("Calling count_strike")
     strike_type = strike_map[matches[0]]
@@ -43,12 +43,13 @@ def count_strike(matches):
     echo(f"{strike_type} strike to {person_hit}'s {limb}")
 
     # need to check to see if I rebounded!
-    #echo(f"current_chunk: '{c.current_chunk}'")
+    # echo(f"current_chunk: '{c.current_chunk}'")
     if "The attack rebounds back onto you!" in c.current_chunk:
         echo("You fool!  You rebounded!")
 
+
 # end of timeflux:
-#Limea appears far less sluggish all of a sudden.
+# Limea appears far less sluggish all of a sudden.
 
 """
 You call upon Garash and unleash a forceful blow towards Limea's left leg with your trusty staff.
@@ -58,10 +59,11 @@ The element of earth shakes you to the core, breaking your left arm.
 
 
 limb_counter_triggers = [
-    (   r"^You call upon (\w+) and unleash a forceful blow towards (\w+)'s (.*) with your trusty staff.$",
+    (
+        r"^You call upon (\w+) and unleash a forceful blow towards (\w+)'s (.*) with your trusty staff.$",
         # staffstrike to limb
-        #lambda m:echo("limb_counter")
-        lambda m: count_strike(m)
+        # lambda m:echo("limb_counter")
+        lambda m: count_strike(m),
     ),
 ]
 c.add_triggers(limb_counter_triggers)

@@ -1,27 +1,22 @@
-
 import asyncio
 import json
 import logging
 import signal
 import sys
 import traceback
-
 from contextlib import suppress
-
-
-from achaea import initialize_logging
-from achaea.tab_complete import TargetCompleter
-from client import send, c, Brain
-from achaea.state import s
-from achaea.afflictions import summarize_afflictions
-from multi_queue import MultiQueue
-from telnet_manager import handle_telnet, strip_ansi, gmcp_queue
 
 from prompt_toolkit.application import Application
 from prompt_toolkit.layout.layout import Layout
 
 import ui.core
-
+from achaea import initialize_logging
+from achaea.afflictions import summarize_afflictions
+from achaea.state import s
+from achaea.tab_complete import TargetCompleter
+from client import Brain, c, send
+from multi_queue import MultiQueue
+from telnet_manager import gmcp_queue, handle_telnet, strip_ansi
 
 initialize_logging()
 
@@ -132,15 +127,14 @@ async def shutdown(signal, loop, shutdown_event):
 
     shutdown_event.set()
 
-    #c.from_server_queue.remove_receiver("main")
+    # c.from_server_queue.remove_receiver("main")
 
     # let the client close up connections/file handles
     c.close()
 
     # Let's also cancel all running tasks:
     event_loop = asyncio.get_event_loop()
-    tasks = [t for t in asyncio.all_tasks() if t is not
-                asyncio.current_task()]
+    tasks = [t for t in asyncio.all_tasks() if t is not asyncio.current_task()]
 
     for task in tasks:
         task.cancel()
@@ -170,11 +164,12 @@ def main(shutdown_event):
 
     log = logging.getLogger("achaea")
 
-    log.debug('waiting for client to complete')
+    log.debug("waiting for client to complete")
 
     try:
-        event_loop.create_task(handle_telnet(host, port,
-                                        c.from_server_queue, c.send_queue))
+        event_loop.create_task(
+            handle_telnet(host, port, c.from_server_queue, c.send_queue)
+        )
     except asyncio.CancelledError:
         log.info("Connection with the server is still running!")
 
@@ -193,13 +188,9 @@ if __name__ == "__main__":
     signals = (signal.SIGHUP, signal.SIGTERM, signal.SIGINT)
     for sig in signals:
         loop.add_signal_handler(
-                    sig,
-                    lambda sig=sig: asyncio.ensure_future(shutdown(sig,
-                                                                   loop,
-                                                                   shutdown_event
-                                                                  )
-                                                         )
-                               )
+            sig,
+            lambda sig=sig: asyncio.ensure_future(shutdown(sig, loop, shutdown_event)),
+        )
     try:
         main(shutdown_event)
     finally:

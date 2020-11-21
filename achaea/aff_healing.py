@@ -1,94 +1,115 @@
-
 from client import c, send
-from .basic import eqbal, eat_herb
 
+from .basic import eat_herb, eqbal
 
 aff_healing_aliases = [
-    (   "^dh$",
+    (
+        "^dh$",
         "drink health",
         lambda m: send("drink health"),
     ),
-    (   "^dm$",
+    (
+        "^dm$",
         "drink mana",
         lambda m: send("drink mana"),
     ),
-    (   "^conc$",
+    (
+        "^conc$",
         "concentrate",
         lambda m: send("concentrate"),
     ),
-    (   "^moss$",
+    (
+        "^moss$",
         "eat moss",
         lambda m: eat_herb("moss"),
     ),
-    (   "^broot$",
+    (
+        "^broot$",
         "eat bloodroot",
         lambda m: eat_herb("bloodroot"),
     ),
-    (   "^coh$",
+    (
+        "^coh$",
         "eat cohosh",
         lambda m: eat_herb("cohosh"),
     ),
-    (   "^kelp$",
+    (
+        "^kelp$",
         "eat kelp",
         lambda m: eat_herb("kelp"),
     ),
-    (   "^pear$",
+    (
+        "^pear$",
         "eat pear",
         lambda m: eat_herb("pear"),
     ),
-    (   "^pot$",
+    (
+        "^pot$",
         "eat potash",
         lambda m: eat_herb("potash"),
     ),
-    (   "^bay$",
+    (
+        "^bay$",
         "eat bayberry",
         lambda m: eat_herb("bayberry"),
     ),
-    (   "^gin$",
+    (
+        "^gin$",
         "eat ginseng",
         lambda m: eat_herb("ginseng"),
     ),
-    (   "^gold$",
+    (
+        "^gold$",
         "eat goldenseal",
         lambda m: eat_herb("goldenseal"),
     ),
-    (   "^kola$",
+    (
+        "^kola$",
         "eat kola",
         lambda m: eat_herb("kola"),
     ),
-    (   "^ash$",
+    (
+        "^ash$",
         "eat ash",
         lambda m: eat_herb("ash"),
     ),
-    (   "^bell$",
+    (
+        "^bell$",
         "eat bellwort",
         lambda m: eat_herb("bellwort"),
     ),
-    (   "^ech$",
+    (
+        "^ech$",
         "eat echinacea",
         lambda m: eat_herb("echinacea"),
     ),
-    (   "^haw$",
+    (
+        "^haw$",
         "eat hawthorn",
         lambda m: eat_herb("hawthorn"),
     ),
-    (   "^lob$",
+    (
+        "^lob$",
         "eat lobelia",
         lambda m: eat_herb("lobelia"),
     ),
-    (   "^ging$",
+    (
+        "^ging$",
         "eat ginger",
         lambda m: eat_herb("ginger"),
     ),
-    (   "^eskull$",
+    (
+        "^eskull$",
         "eat skullcap",
         lambda m: eat_herb("skullcap"),
     ),
-    (   "^sil$",
+    (
+        "^sil$",
         "apply sileris",
         lambda m: send("outr sileris;apply sileris"),
     ),
-    (   "^cal$",
+    (
+        "^cal$",
         "eat calcite",
         lambda m: eat_herb("calcite"),
     ),
@@ -97,23 +118,28 @@ c.add_aliases("healing", aff_healing_aliases)
 
 
 elixirs_aliases = {
-    (   "^speed$",
+    (
+        "^speed$",
         "drink speed",
         lambda m: send("drink speed"),
     ),
-    (   "^frost$",
+    (
+        "^frost$",
         "drink frost",
         lambda m: send("drink frost"),
     ),
-    (   "^imm$",
+    (
+        "^imm$",
         "drink immunity",
         lambda m: send("drink immunity"),
     ),
-    (   "^levi$",
+    (
+        "^levi$",
         "drink levitation",
         lambda m: send("drink levitation"),
     ),
-    (   "^venom$",
+    (
+        "^venom$",
         "drink venom",
         lambda m: send("drink venom"),
     ),
@@ -121,39 +147,48 @@ elixirs_aliases = {
 c.add_aliases("elixirs", elixirs_aliases)
 
 salves_aliases = {
-    (   "^calor$",
+    (
+        "^calor$",
         "apply caloric",
         lambda m: send("apply caloric"),
     ),
-    (   "^epi$",
+    (
+        "^epi$",
         "apply epidermal to torso",
         lambda m: send("apply epidermal to torso"),
     ),
-    (   "^mass$",
+    (
+        "^mass$",
         "apply mass",
         lambda m: send("apply mass"),
     ),
-    (   "^mend$",
+    (
+        "^mend$",
         "apply mending",
         lambda m: send("apply mending"),
     ),
-    (   "^mendl$",
+    (
+        "^mendl$",
         "apply mending to legs",
         lambda m: send("apply caloric"),
     ),
-    (   "^menda$",
+    (
+        "^menda$",
         "apply mending to arms",
         lambda m: send("apply mending to arms"),
     ),
-    (   "^resto$",
+    (
+        "^resto$",
         "apply restoration",
         lambda m: send("apply restoration"),
     ),
-    (   "^restol$",
+    (
+        "^restol$",
         "apply restoration to legs",
         lambda m: send("apply restoration to legs"),
     ),
-    (   "^restoa$",
+    (
+        "^restoa$",
         "apply restoration to arms",
         lambda m: send("apply restoration to arms"),
     ),
@@ -161,22 +196,25 @@ salves_aliases = {
 c.add_aliases("salves", salves_aliases)
 
 pipes_aliases = {
-    (   "^lp$",
+    (
+        "^lp$",
         "light pipes",
         lambda m: send("light pipes"),
     ),
-    (   "^sp$",
+    (
+        "^sp$",
         "smoke pipe with skullcap",
         lambda m: send("light pipes;smoke pipe with skullcap"),
     ),
-    (   "^val$",
+    (
+        "^val$",
         "smoke pipe with valerian",
         lambda m: send("light pipes;smoke pipe with valerian"),
     ),
-    (   "^elm$",
+    (
+        "^elm$",
         "smoke pipe with elm",
         lambda m: send("light pipes;smoke pipe with elm"),
     ),
 }
 c.add_aliases("pipes", pipes_aliases)
-

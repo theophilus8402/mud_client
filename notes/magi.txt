@@ -144,7 +144,7 @@ staffstrike water gives level 1 freeze
 **********************************************************
 You have been defeated and are thrown out of the Arena.
 **********************************************************
-unenemy all ? 
+unenemy all ?
 
 # lose the depthswalker when they make me follow
 # find out what litany is
@@ -161,7 +161,7 @@ house creditsale show
 
 
 ================
-= fighting 
+= fighting
 ================
 staffstrike only uses balance, so I can combine it with golem things
 targeting will be helpful with trying to mangle limbs
@@ -170,5 +170,3 @@ dehydrate and timeflux heal just over time
     maybe 30 - 45 seconds?
 caloric -> freezing -> deepfrozen -> hypothermia -> pummel
 oooh, I might be able to staffstrike and immediately shield
-
-

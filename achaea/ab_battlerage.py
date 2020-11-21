@@ -1,32 +1,36 @@
-
-from .state import s
-from .basic import eqbal
 from client import c, send
 
-#cleric battlerage
+from .basic import eqbal
+from .state import s
+
+# cleric battlerage
 battlerage_aliases = [
-    (   "^at(?: (.+))?$",
+    (
+        "^at(?: (.+))?$",
         "angel torment t/[]",
-        lambda matches: send("angel torment {matches[0] or '&tar'}")
+        lambda matches: send("angel torment {matches[0] or '&tar'}"),
     ),
-    (   "^cr(?: (.+))?$",
+    (
+        "^cr(?: (.+))?$",
         "crack t/[]",
-        lambda matches: send("crack {matches[0] or '&tar'}")
+        lambda matches: send("crack {matches[0] or '&tar'}"),
     ),
-    (   "^deso(?: (.+))?$",
+    (
+        "^deso(?: (.+))?$",
         "perform rite of desolation on t/[]",
-        lambda matches: send("perform rite of desolation on {matches[0] or '&tar'}")
+        lambda matches: send("perform rite of desolation on {matches[0] or '&tar'}"),
     ),
-    (   "^ham(?: (.+))?$",
+    (
+        "^ham(?: (.+))?$",
         "hammer t/[]",
-        lambda matches: send("hammer {matches[0] or '&tar'}")
+        lambda matches: send("hammer {matches[0] or '&tar'}"),
     ),
 ]
 c.add_aliases("ab_battlerage", battlerage_aliases)
 """
 """
 
-#occultist battlerage
+# occultist battlerage
 """
 battlerage_aliases = [
     (   "^har(?: (.+))?$",

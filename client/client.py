@@ -1,14 +1,11 @@
-
 import asyncio
 import json
 import re
-
 from collections import defaultdict
 from datetime import datetime
 
 
-class Client():
-
+class Client:
     def __init__(self):
         # it's a little weird, but to_send is going to be a "prequeue"
         # I'll use self.send_flush() to actuall send the traffic
@@ -47,10 +44,13 @@ class Client():
 
     def add_aliases(self, group_name, new_aliases):
         if group_name in self.help_info.keys():
-            self.echo(f"{group_name} already exists!",
-                  file=self.current_out_handle, flush=True)
+            self.echo(
+                f"{group_name} already exists!",
+                file=self.current_out_handle,
+                flush=True,
+            )
             return False
-    
+
         self.help_info[group_name] = []
         for pattern, desc, func in new_aliases:
             self._aliases.append((re.compile(pattern), func))
@@ -72,29 +72,31 @@ class Client():
 
     def main_log(self, msg, msg_type):
         try:
-            timestamp = datetime.now().strftime('%Y/%m/%d %H:%M:%S.%f')
+            timestamp = datetime.now().strftime("%Y/%m/%d %H:%M:%S.%f")
             str_json = json.dumps((timestamp, msg_type, msg)).strip()
             print(f"{str_json}", file=self.log, flush=True)
-            #self.log.write(f"{str_json}\n")
+            # self.log.write(f"{str_json}\n")
         except Exception as e:
             print(f"Exception: {e}")
 
     def add_temp_trigger(self, name, trigger, flags=0):
         if name in self._temp_triggers:
-            self.echo(f"trigger: {name} already exists... removing it before adding new one...")
+            self.echo(
+                f"trigger: {name} already exists... removing it before adding new one..."
+            )
             self.remove_temp_trigger(name)
         self._temp_triggers[name] = self.add_trigger(trigger, flags=flags)
-    
+
     def remove_temp_trigger(self, name):
         if name in self._temp_triggers:
             self.remove_trigger(self._temp_triggers.get(name))
-            del(self._temp_triggers[name])
+            del self._temp_triggers[name]
 
     def add_triggers(self, new_triggers, flags=0):
         for new_trig in new_triggers:
             self.add_trigger(new_trig, flags=flags)
         return True
-    
+
     def add_trigger(self, new_trigger, flags=0):
         pattern, action = new_trigger
         try:
@@ -107,7 +109,7 @@ class Client():
             search_method = compiled_pattern.search
         self._triggers.append((search_method, action))
         return self._triggers[-1]
-    
+
     def remove_trigger(self, trigger):
         try:
             self._triggers.remove(trigger)
@@ -124,21 +126,21 @@ class Client():
             if isinstance(msg_blob, str) and not msg_blob.endswith("\n"):
                 msg_blob = f"{msg_blob}\n"
                 self.main_log(msg_blob.strip(), "data_sent")
-            #echo(f"to_send: {self.to_send} sending: {msg_blob}")
+            # echo(f"to_send: {self.to_send} sending: {msg_blob}")
             self.send_queue.put_nowait(msg_blob)
             #
         self.to_send.clear()
 
     def gmcp_send(self, msg):
         self.send_queue.put_nowait(msg.encode("iso-8859-1"))
-    
+
     def echo(self, msg):
         # TODO: move this functionality somewhere else
         print(msg, file=self.current_out_handle, flush=True)
 
     def set_line(self, new_line):
         self.modified_current_line = new_line
-    
+
     def delete_line(self):
         self._delete_line = True
 
@@ -147,5 +149,5 @@ class Client():
         self._delete_lines.update(set(lines))
 
     def add_gmcp_handler(self, gmcp_type, action):
-        #self.echo(f"adding handler: {gmcp_type} {action}")
+        # self.echo(f"adding handler: {gmcp_type} {action}")
         self._gmcp_handlers[gmcp_type].append(action)

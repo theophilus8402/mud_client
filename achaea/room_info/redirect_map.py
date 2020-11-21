@@ -1,7 +1,6 @@
-
 from client import c, echo
-from ..state import s
 
+from ..state import s
 
 """
     def tmp_trig(matches):
@@ -44,24 +43,26 @@ def parse_map(current_line):
         if line == current_line:
             start_index = i
             end_index = start_index
-            stuff = chunk_lines[i:i+5]
+            stuff = chunk_lines[i : i + 5]
         elif (line.count(":") >= 2) and (line.count("-") >= 6):
             end_index = i
             break
-    
-    stuff = chunk_lines[start_index:end_index+1]
+
+    stuff = chunk_lines[start_index : end_index + 1]
     c.delete_lines(stuff)
     echo("\n".join(stuff))
 
 
 map_triggers = [
-    (   r"^--- (.*) -*---$",
+    (
+        r"^--- (.*) -*---$",
         # beginning of map
-        lambda m: parse_map(c.current_line)
+        lambda m: parse_map(c.current_line),
     ),
-    (   r"^----+ (.*) -*---$",
+    (
+        r"^----+ (.*) -*---$",
         # beginning of map
-        lambda m: echo(f"end of map: {m[0]}")
+        lambda m: echo(f"end of map: {m[0]}"),
     ),
 ]
 c.add_triggers(map_triggers)

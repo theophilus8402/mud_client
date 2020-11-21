@@ -1,7 +1,7 @@
-
-from ..state import s
-from ..basic import eqbal
 from client import c
+
+from ..basic import eqbal
+from ..state import s
 
 
 def pilgrimage(matches):
@@ -10,75 +10,88 @@ def pilgrimage(matches):
     else:
         eqbal("perform rite of pilgrimage")
 
+
 devotion_aliases = [
-    (   "^hh(?: (.+))?$",
+    (
+        "^hh(?: (.+))?$",
         "perform hands []",
-        lambda matches: eqbal(f"perform hands {matches[0] or ''}")
+        lambda matches: eqbal(f"perform hands {matches[0] or ''}"),
     ),
-    (   "^part (.+)$",
+    (
+        "^part (.+)$",
         "perform truth",
         lambda m: eqbal(f"perform parting {m[0]}"),
     ),
-    (   "^truth$",
+    (
+        "^truth$",
         "perform truth",
         lambda _: eqbal("perform truth"),
     ),
-    (   "^bliss(?: (.+))?$",
+    (
+        "^bliss(?: (.+))?$",
         "perform bliss []/me",
-        lambda matches: eqbal(f"perform bliss {matches[0] or 'me'}")
+        lambda matches: eqbal(f"perform bliss {matches[0] or 'me'}"),
     ),
-    (   "^insp$",
-        "perform inspiration",
-        lambda matches: eqbal("perform inspiration")
-    ),
-    (   "^pilg(?: (.+))?$",
+    ("^insp$", "perform inspiration", lambda matches: eqbal("perform inspiration")),
+    (
+        "^pilg(?: (.+))?$",
         "perform pilg [] / perf right of pilg",
-        lambda matches: pilgrimage(matches)
+        lambda matches: pilgrimage(matches),
     ),
-    (   "^pur(?: (.+))?$",
+    (
+        "^pur(?: (.+))?$",
         "perform purity []/t",
-        lambda matches: eqbal(f"perform purity {matches[0] or '&tar'}")
+        lambda matches: eqbal(f"perform purity {matches[0] or '&tar'}"),
     ),
-    (   "^vis(?: (.+))?$",
+    (
+        "^vis(?: (.+))?$",
         "perform visions []/t",
-        lambda matches: eqbal(f"perform visions {matches[0] or '&tar'}")
+        lambda matches: eqbal(f"perform visions {matches[0] or '&tar'}"),
     ),
-    (   "^pward$",
+    (
+        "^pward$",
         "perform rite of warding",
-        lambda matches: eqbal("perform rite of warding")
+        lambda matches: eqbal("perform rite of warding"),
     ),
-    (   "^force (.+)$",
+    (
+        "^force (.+)$",
         "perform force stuff",
-        lambda matches: eqbal("perform force matches[0]")
+        lambda matches: eqbal("perform force matches[0]"),
     ),
-    (   "^piety$",
+    (
+        "^piety$",
         "perform right of piety",
-        lambda matches: eqbal("perform rite of piety")
+        lambda matches: eqbal("perform rite of piety"),
     ),
-    (   "^daz(?: (.+))?$",
+    (
+        "^daz(?: (.+))?$",
         "perform dazzle t",
-        lambda matches: eqbal(f"perform dazzle {matches[0] or '&tar'}")
+        lambda matches: eqbal(f"perform dazzle {matches[0] or '&tar'}"),
     ),
-    (   "^demons$",
+    (
+        "^demons$",
         "perform right of demons",
-        lambda matches: eqbal("perform rite of demons")
+        lambda matches: eqbal("perform rite of demons"),
     ),
-    (   "^slo(?: (.+))?$",
+    (
+        "^slo(?: (.+))?$",
         "perform sloth t",
-        lambda matches: eqbal(f"perform sloth {matches[0] or '&tar'}")
+        lambda matches: eqbal(f"perform sloth {matches[0] or '&tar'}"),
     ),
-    (   "^alls$",
+    (
+        "^alls$",
         "perform rite of allsight",
-        lambda matches: eqbal("perform rite of allsight")
+        lambda matches: eqbal("perform rite of allsight"),
     ),
-    (   "^pheal$",
+    (
+        "^pheal$",
         "perform rite of healing",
-        lambda matches: eqbal("perform rite of healing")
+        lambda matches: eqbal("perform rite of healing"),
     ),
-    (   "^pen(?: (.+))?$",
+    (
+        "^pen(?: (.+))?$",
         "perform penitence []/t",
-        lambda matches: eqbal(f"perform penitence {matches[0] or '&tar'}")
+        lambda matches: eqbal(f"perform penitence {matches[0] or '&tar'}"),
     ),
 ]
 c.add_aliases("ab_devotion", devotion_aliases)
-

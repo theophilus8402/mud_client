@@ -74,6 +74,3 @@ Epidermal     Cure associated with outer organs, like the eyes and ears.
 Mass          Prevents various forms of moving you against your will.
 Mending       Cures broken or shrivelled limbs as well as some other things.
 Restoration   Heals damage done to body parts. (see HELP BODY PART DAMAGE)
-
-
-

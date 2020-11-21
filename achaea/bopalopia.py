@@ -1,5 +1,5 @@
+from client import c, echo, send
 
-from client import c, send, echo
 
 def bopalopia_mult(matches):
     echo("mult")
@@ -26,25 +26,30 @@ def bopalopia_sub(matches):
 
 
 bopalopia_triggers = [
-    (   "^(Fernando|Junior) Moo",
+    (
+        "^(Fernando|Junior) Moo",
         # multiply stuff
-        lambda m: echo(f"bop {m[0]}")
+        lambda m: echo(f"bop {m[0]}"),
     ),
-    (   r"^(Fernando Moo|Junior Moo|Clarence Cudchew) says, \"If (.*) eggs were lain each by (.*) chickens, how many eggs would that make total?",
+    (
+        r"^(Fernando Moo|Junior Moo|Clarence Cudchew) says, \"If (.*) eggs were lain each by (.*) chickens, how many eggs would that make total?",
         # multiply stuff
-        bopalopia_mult
+        bopalopia_mult,
     ),
-    (   r"^(Fernando Moo|Junior Moo|Clarence Cudchew) says, \"If (.*) nuts were saved for winter storage and (.*) squirrels had to share, how many nuts would that be per squirrel?",
+    (
+        r"^(Fernando Moo|Junior Moo|Clarence Cudchew) says, \"If (.*) nuts were saved for winter storage and (.*) squirrels had to share, how many nuts would that be per squirrel?",
         # divide stuff
-        bopalopia_div
+        bopalopia_div,
     ),
-    (   r"^(Fernando Moo|Junior Moo|Clarence Cudchew) says, \"If (.*) beavers and (.*) beavers got together with (.*) beavers, how many beavers would that be total?",
+    (
+        r"^(Fernando Moo|Junior Moo|Clarence Cudchew) says, \"If (.*) beavers and (.*) beavers got together with (.*) beavers, how many beavers would that be total?",
         # add stuff
-        bopalopia_add
+        bopalopia_add,
     ),
-    (   r"^(Fernando Moo|Junior Moo|Clarence Cudchew) says, \"If (\d+) cows jumped into Runaway River and (\d+) drowned, how many cows would be left?",
+    (
+        r"^(Fernando Moo|Junior Moo|Clarence Cudchew) says, \"If (\d+) cows jumped into Runaway River and (\d+) drowned, how many cows would be left?",
         # subtract stuff
-        bopalopia_sub
+        bopalopia_sub,
     ),
 ]
 c.add_triggers(bopalopia_triggers)

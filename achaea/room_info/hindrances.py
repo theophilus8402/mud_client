@@ -1,8 +1,6 @@
-
 from collections import namedtuple
 
-from client import c, send, echo
-
+from client import c, echo, send
 
 """
 Char.Items.Remove {"location": "room", "item": {"id": "54532", "name": "a large wall of ice"}}
@@ -49,7 +47,7 @@ def add_room_hindrance(gmcp_data):
     if name in ROOM_HINDRANCE_NAMES:
         new_hindrance = RoomHindrance(name=name,
                                       short_name=SHORT_NAMES[name],
-                                      id=item.get("id", "")
+                                      id=item.get("id", ""),
                                       direction="?"
                                     )
 

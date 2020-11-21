@@ -1,12 +1,11 @@
-
 import logging
 
 from colorama import Fore
 
-from ..basic import highlight_current_line
-from client import c, send, echo
-from ..state import s
+from client import c, echo, send
 
+from ..basic import highlight_current_line
+from ..state import s
 
 logger = logging.getLogger("achaea")
 
@@ -56,48 +55,59 @@ def rakia():
     echo("STOP STOP STOP!!")
     echo("STOP STOP STOP!!")
 
-#["2020/03/24 22:47:47.882336", "server_text", "You suddenly perceive the vague outline of an aura of rebounding around Iocun.\r"]
+
+# ["2020/03/24 22:47:47.882336", "server_text", "You suddenly perceive the vague outline of an aura of rebounding around Iocun.\r"]
 
 generic_triggers = [
-    (   r"^A nearly invisible magical shield forms around (.*?).$",
+    (
+        r"^A nearly invisible magical shield forms around (.*?).$",
         # someone just shielded!
-        someone_shielded
+        someone_shielded,
     ),
-    (   r"^A dizzying beam of energy strikes you as your attack rebounds off of (.*)'s shield.$",
+    (
+        r"^A dizzying beam of energy strikes you as your attack rebounds off of (.*)'s shield.$",
         # someone (probably my target) is shielded!
-        someone_shielded
+        someone_shielded,
     ),
-    (   r"^You suddenly perceive the vague outline of an aura of rebounding around (\w+?).$",
+    (
+        r"^You suddenly perceive the vague outline of an aura of rebounding around (\w+?).$",
         # someone (probably my target) is shielded!
-        someone_rebounding
+        someone_rebounding,
     ),
-    (   r"^You call upon Whiirh to empower your staff and strike (\w+), the power of air dispersing \w+ aura of rebounding.$",
+    (
+        r"^You call upon Whiirh to empower your staff and strike (\w+), the power of air dispersing \w+ aura of rebounding.$",
         # someone (probably my target) is shielded!
-        someone_stopped_rebounding
+        someone_stopped_rebounding,
     ),
-    (   r"^(.*)'s aura of weapons rebounding disappears.$",
+    (
+        r"^(.*)'s aura of weapons rebounding disappears.$",
         # someone (probably my target) is shielded!
-        someone_stopped_rebounding
+        someone_stopped_rebounding,
     ),
-    (   r"exhales loudly.$",
+    (
+        r"exhales loudly.$",
         # don't need to see this!
-        lambda m: c.delete_line()
+        lambda m: c.delete_line(),
     ),
-    (   r"inhales and begins holding (\w+) breath.$",
+    (
+        r"inhales and begins holding (\w+) breath.$",
         # don't need to see this!
-        lambda m: c.delete_line()
+        lambda m: c.delete_line(),
     ),
-    (   r"(.*) has been slain by (.*).$",
+    (
+        r"(.*) has been slain by (.*).$",
         # don't need to see this!
-        lambda m: someone_died
+        lambda m: someone_died,
     ),
-    (   r"You begin to tumble agilely to the (.*).$",
+    (
+        r"You begin to tumble agilely to the (.*).$",
         # tumbling!
-        lambda m: logger.fighting(f"tumbling {m[0]}")
+        lambda m: logger.fighting(f"tumbling {m[0]}"),
     ),
-    (   r"The barrier around Torrid Rakia, the magma wyvern melts through the ground, and she rushes through to attack.$",
+    (
+        r"The barrier around Torrid Rakia, the magma wyvern melts through the ground, and she rushes through to attack.$",
         # tumbling!
-        lambda m: rakia()
+        lambda m: rakia(),
     ),
 ]
 c.add_triggers(generic_triggers)

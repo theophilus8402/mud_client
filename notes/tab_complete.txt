@@ -22,4 +22,3 @@
     * see if there are area specific priorities
         * certain mobs over others?
             * orc child > orc soldier > knight
-

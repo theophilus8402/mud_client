@@ -1,5 +1,4 @@
-
-from client import c, send, echo
+from client import c, echo, send
 
 # shimmering orb?
 # selfishness
@@ -37,47 +36,57 @@ You get 100 gold sovereigns from a canvas backpack.
 You put 100 gold sovereigns in a canvas backpack.
 """
 
+
 def ive_been_snapped(matches):
     echo("EEEP!!!")
     send("inr all;inr all;inr all;put coins in pouch;put gold in pack;selfishness")
 
 
 anti_theft_triggers = [
-    (   r"^(\w+) snaps \w+ fingers in front of you.$",
+    (
+        r"^(\w+) snaps \w+ fingers in front of you.$",
         # eep!
-        ive_been_snapped
+        ive_been_snapped,
     ),
-    (   r"^You remove a canvas backpack.$",
+    (
+        r"^You remove a canvas backpack.$",
         # rewear it!
-        lambda m: send("wear pack;put pack in pack;put coins in pouch;selfishness")
+        lambda m: send("wear pack;put pack in pack;put coins in pouch;selfishness"),
     ),
-    (   r"^You remove a gour-hide pouch.$",
+    (
+        r"^You remove a gour-hide pouch.$",
         # rewear it!
-        lambda m: send("wear pouch;put pouch in pouch;put coins in pouch;selfishness")
+        lambda m: send("wear pouch;put pouch in pouch;put coins in pouch;selfishness"),
     ),
-    (   r"^You remove a suit of Mhaldorian scale mail.$",
+    (
+        r"^You remove a suit of Mhaldorian scale mail.$",
         # rewear it!
-        lambda m: send("wear scalemail;put scalemail in pack;put coins in pack;selfishness")
+        lambda m: send(
+            "wear scalemail;put scalemail in pack;put coins in pack;selfishness"
+        ),
     ),
-    (   r"^You remove a suit of scale mail.$",
+    (
+        r"^You remove a suit of scale mail.$",
         # rewear it!
-        lambda m: send("wear scalemail;put scalemail in pack;put coins in pack;selfishness")
+        lambda m: send(
+            "wear scalemail;put scalemail in pack;put coins in pack;selfishness"
+        ),
     ),
-    #(   r"^You cease wielding a small blackjack",
+    # (   r"^You cease wielding a small blackjack",
     #    # rewear it!
     #    lambda m: send("wield blackjack;selfishness")
-    #),
-    #(   r"^You cease wielding a lightweight barbed banded shield",
+    # ),
+    # (   r"^You cease wielding a lightweight barbed banded shield",
     #    # rewear it!
     #    lambda m: send("wield shield;put shield in pack;selfishness")
-    #),
-    #(   r"^You cease wielding a Mhaldorian banded shield",
+    # ),
+    # (   r"^You cease wielding a Mhaldorian banded shield",
     #    # rewear it!
     #    lambda m: send("wield shield;put shield in pack;selfishness")
-    #),
-    #(   r"^You remove a simple suit of lightweight field plate.$",
+    # ),
+    # (   r"^You remove a simple suit of lightweight field plate.$",
     #    # rewear it!
     #    lambda m: send("wear fieldplate;put fieldplate in pack;put coins in pouch;selfishness")
-    #),
+    # ),
 ]
 c.add_triggers(anti_theft_triggers)

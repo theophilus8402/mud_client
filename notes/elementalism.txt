@@ -661,4 +661,3 @@ elapsed (specified by you), will violently explode. The flying stone has
 a chance to break the limbs of any in the current location in addition
 to the significant damage that it will always deal.
 -------------------------------------------------------------------------------
-

@@ -1,18 +1,18 @@
-
 import logging
 
-from client import c, send, echo
-from .name import figure_out_unknown_mobs, long_short_name_map
-from ..state import s
 from achaea.room_info.room_info import create_frenemies_text
+from client import c, echo, send
 from ui.core import update_frenemies_info
+
+from ..state import s
+from .name import figure_out_unknown_mobs, long_short_name_map
 
 logger = logging.getLogger("achaea")
 
 
 def find_mobs_in_room(gmcp_data):
-    #Char.Items.List {"location": "room", "items": [{"id": "113519", "name": "a runic totem", "icon": "rune"}, {"id": "293949", "name": "Jodri, Shepherd of the Devout", "icon": "humanoid", "attrib": "m"}, {"id": "544262", "name": "a monolith sigil", "icon": "rune", "attrib": "t"}]}
-    #echo(gmcp_data)
+    # Char.Items.List {"location": "room", "items": [{"id": "113519", "name": "a runic totem", "icon": "rune"}, {"id": "293949", "name": "Jodri, Shepherd of the Devout", "icon": "humanoid", "attrib": "m"}, {"id": "544262", "name": "a monolith sigil", "icon": "rune", "attrib": "t"}]}
+    # echo(gmcp_data)
 
     # make sure we're getting room info
     if gmcp_data["location"] != "room":
@@ -33,16 +33,19 @@ def find_mobs_in_room(gmcp_data):
     # push to the ui
     frenemies_text = create_frenemies_text()
     update_frenemies_info(frenemies_text)
+
+
 c.add_gmcp_handler("Char.Items.List", find_mobs_in_room)
 
 
 def mob_entered_room(gmcp_data):
-    #Char.Items.Add { "location": "room", "item": { "id": "118764", "name": "a young rat", "icon": "animal", "attrib": "m" } }
+    # Char.Items.Add { "location": "room", "item": { "id": "118764", "name": "a young rat", "icon": "animal", "attrib": "m" } }
 
-    #Char.Items.Add {"location": "room", "item": {"id": "31722", "name": "a stirge's egg"}}
+    # Char.Items.Add {"location": "room", "item": {"id": "31722", "name": "a stirge's egg"}}
 
-    if (gmcp_data["location"] == "room" and
-        "m" in gmcp_data.get("item", {}).get("attrib", [])):
+    if gmcp_data["location"] == "room" and "m" in gmcp_data.get("item", {}).get(
+        "attrib", []
+    ):
         item = gmcp_data["item"]
         mob_id = get_mob_id(item)
         s.mobs_in_room = (*s.mobs_in_room, (mob_id, item))
@@ -50,12 +53,14 @@ def mob_entered_room(gmcp_data):
     # push to the ui
     frenemies_text = create_frenemies_text()
     update_frenemies_info(frenemies_text)
+
+
 c.add_gmcp_handler("Char.Items.Add", mob_entered_room)
 
 
 def mob_left_room(gmcp_data):
     # Char.Items.Remove { "location": "room", "item": { "id": "118764", "name": "a young rat" } }
-    #echo(gmcp_data)
+    # echo(gmcp_data)
 
     # make sure we're getting room info
     if gmcp_data["location"] != "room":
@@ -72,6 +77,8 @@ def mob_left_room(gmcp_data):
     # push to the ui
     frenemies_text = create_frenemies_text()
     update_frenemies_info(frenemies_text)
+
+
 c.add_gmcp_handler("Char.Items.Remove", mob_left_room)
 
 
@@ -88,8 +95,7 @@ def get_mob_id(gmcp_data):
 
 def is_alive_mob(gmcp_data):
     # "d" in attrib means it's dead so we don't care
-    return ("m" in gmcp_data.get("attrib", "")
-            and "d" not in gmcp_data.get("attrib", ""))
+    return "m" in gmcp_data.get("attrib", "") and "d" not in gmcp_data.get("attrib", "")
 
 
 def get_mobs_from_items(items):

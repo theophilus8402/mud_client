@@ -1,21 +1,17 @@
-
 import json
 import logging
 import re
 import time
 
-from client import c, send, echo
-from .state import s
+from client import c, echo, send
 
+from .state import s
 
 logger = logging.getLogger("achaea")
 
 
 aff_aliases = [
-    (   "get_all_aff",
-        "get_all_aff",
-        lambda m: get_all_aff_info()
-    ),
+    ("get_all_aff", "get_all_aff", lambda m: get_all_aff_info()),
 ]
 c.add_aliases("aff", aff_aliases)
 
@@ -27,7 +23,7 @@ def get_all_aff_info():
             send(f"affliction show {aff}")
             if (index % 5) == 0:
                 c.send_flush()
-                time.sleep(.5)
+                time.sleep(0.5)
 
 
 def summarize_afflictions():
@@ -51,11 +47,13 @@ def summarize_afflictions():
 
 
 def gained_aff(gmcp_data):
-    new_aff = gmcp_data['name']
+    new_aff = gmcp_data["name"]
     echo(f"Gained {new_aff}!")
     s.new_afflictions.add(new_aff)
     s.current_afflictions.add(new_aff)
     logger.fighting(f"Affs: {' '.join(summarize_afflictions())}")
+
+
 c.add_gmcp_handler("Char.Afflictions.Add", gained_aff)
 
 
@@ -65,10 +63,14 @@ def cured_aff(gmcp_data):
     s.cured_afflictions.update(cured_affs)
     s.current_afflictions.difference_update(set(cured_affs))
     logger.fighting(f"Affs: {' '.join(summarize_afflictions())}")
+
+
 c.add_gmcp_handler("Char.Afflictions.Remove", cured_aff)
 
 
 AFFLICTION_DETAILS_JSON = "achaea/affliction_details.json"
+
+
 def parse_affliction_details():
     affliction_details_path = "notes/affliction_details.txt"
     with open(affliction_details_path) as f:
@@ -77,7 +79,7 @@ def parse_affliction_details():
     affs = []
     for aff in aff_details_blob.split("\n\n"):
         detail = {}
-        #import pdb;pdb.set_trace()
+        # import pdb;pdb.set_trace()
         for line in aff.split("\n"):
             try:
                 key, value = line.split(":")
@@ -90,7 +92,9 @@ def parse_affliction_details():
 
     with open(AFFLICTION_DETAILS_JSON, "w") as f:
         json.dump(affs, f, indent=2)
-#parse_affliction_details()
+
+
+# parse_affliction_details()
 
 
 def get_cure_msg(affliction):
@@ -102,16 +106,20 @@ def get_aff_msg(affliction):
 
 
 def setup_suppress_afflictions():
-    with open(AFFLICTION_DETAILS_JSON, "r") as f:
+    with open(AFFLICTION_DETAILS_JSON) as f:
         aff_details = json.load(f)
 
     triggers = []
     for aff in aff_details:
         cure_msg = get_cure_msg(aff)
-        triggers.append((r"^{}$".format(re.escape(cure_msg)), lambda m: c.delete_line()))
+        triggers.append(
+            (r"^{}$".format(re.escape(cure_msg)), lambda m: c.delete_line())
+        )
 
         aff_msg = get_aff_msg(aff)
         triggers.append((r"^{}$".format(re.escape(aff_msg)), lambda m: c.delete_line()))
 
     c.add_triggers(triggers)
+
+
 setup_suppress_afflictions()

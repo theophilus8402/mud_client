@@ -1,7 +1,7 @@
+from client import c, echo, send
 
-from client import c, send, echo
-from ..state import s
 from ..basic import eqbal
+from ..state import s
 
 """
 ["2020/03/26 23:21:39.392648", "data_sent", "stand;staffstrike kog with water left arm;golem smash kog legs"]
@@ -11,4 +11,3 @@ from ..basic import eqbal
 ["2020/03/26 23:21:39.602900", "server_text", "Kog takes some salve from a vial and rubs it on his legs.\r"]
 ["2020/03/26 23:21:41.119817", "server_text", "Kog takes some salve from a vial and rubs it on his skin.\r"]
 """
-

@@ -1,6 +1,7 @@
+from sqlalchemy import Column, Integer, String
 
 from .db import Base
-from sqlalchemy import Column, Integer, String
+
 
 class RoomInfo(Base):
 
@@ -18,4 +19,3 @@ class RoomInfo(Base):
 
     def __repr__(self):
         return f"<RoomInfo(num={self.num}, name={self.name}, exits='{self.exits}')>"
-

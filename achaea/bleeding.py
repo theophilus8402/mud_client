@@ -1,5 +1,5 @@
+from client import c, echo, send
 
-from client import c, send, echo
 from .state import s
 
 
@@ -22,9 +22,10 @@ def stop_bleeding(matches):
 
 
 bleeding_triggers = [
-    (   r"^You bleed (\d+) health.$",
+    (
+        r"^You bleed (\d+) health.$",
         # bleeding!
-        stop_bleeding
+        stop_bleeding,
     ),
 ]
 c.add_triggers(bleeding_triggers)

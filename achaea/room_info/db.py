@@ -1,4 +1,3 @@
-
 import os
 
 from sqlalchemy import create_engine
@@ -9,4 +8,3 @@ base_path = os.path.dirname(__file__)
 engine = create_engine(f"sqlite:///{base_path}/rooms.db", echo=False)
 Base = declarative_base()
 Session = sessionmaker(bind=engine)
-

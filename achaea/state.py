@@ -1,8 +1,7 @@
-
 import re
-
 from datetime import datetime
 from enum import Enum
+
 
 class QueueStates(Enum):
     nothing_queued = 0
@@ -13,6 +12,7 @@ class QueueStates(Enum):
 def name_exists(state, name):
     return name in object.__getattribute__(state, "__dict__")
 
+
 def value_type_unchanged(state, name, value):
     old_type = type(object.__getattribute__(state, name))
     new_type = type(value)
@@ -22,15 +22,17 @@ def value_type_unchanged(state, name, value):
     else:
         raise AttributeError(f"{name} changing type from {old_type} to {new_type}!")
 
+
 def is_immutable(value):
     mutable_attributes = ["__setitem__", "__delitem__", "insert", "add", "discard"]
     return not any(map(lambda attr: hasattr(value, attr), mutable_attributes))
 
+
 def get_state_changes(state, last_index):
-    return object.__getattribute__(state, "_changes")[last_index-1:]
+    return object.__getattribute__(state, "_changes")[last_index - 1 :]
 
 
-class State():
+class State:
 
     _changes_max_size = 10
 
@@ -73,7 +75,7 @@ class State():
             value_type_unchanged(self, name, value)
 
         # make sure the new value is immutable
-        #if not is_immutable(value):
+        # if not is_immutable(value):
         #    raise ValueError(f"{name} type: {type(value)} is mutable!")
 
         object.__setattr__(self, name, value)
@@ -90,4 +92,3 @@ class State():
 
 
 s = State()
-

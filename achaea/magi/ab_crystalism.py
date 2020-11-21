@@ -1,11 +1,11 @@
+from client import c, echo, send
 
-from client import c, send, echo
-from ..state import s
 from ..basic import eqbal
+from ..state import s
+
 
 def spin_crystals(crystals):
-    commands = [f"outr {crystal};spin {crystal}"
-                for crystal in crystals]
+    commands = [f"outr {crystal};spin {crystal}" for crystal in crystals]
     return ";".join(commands)
 
 
@@ -15,31 +15,42 @@ def spin_n_embed(vibration, extra_args=""):
 
 
 crystal_map = {
-    "dissipate" : ["pentagon"],
-    "palpitation" : ["cylinder"],
-    "heat" : ["pyramid"],
-    "alarm" : ["spiral"],
-    "tremors" : ["disc", "egg"],
-    "reverberation" : ["disc", "pentagon"],
-    "sonicportal" : ["sphere", "torus"],
-    "adduction" : ["disc", "polyhedron"],
-    "harmony" : ["egg", "sphere"],
-    "creeps" : ["torus"],
-    "silence" : ["egg"],
-    "revelation" : ["cube", "diamond"],
-    "grounding" : ["sphere"],
-    "oscillate" : ["diamond"],
-    "focus" : ["pyramid"],
-    "disorientation" : ["spiral"],
-    "energise" : ["polyhedron"],
-    "stridulation" : ["cylinder", "polyhedron"],
-    "gravity" : ["egg", "torus"],
-    "forest" : ["diamond", "pyramid"],
-    "dissonance" : ["cylinder", "sphere", "spiral"],
-    "lullaby" : ["pyramid"],
-    "retardation" : ["disc"],
-    "cataclysm" : ["cylinder", "cube", "diamond", "disc", "egg", "pentagon",
-                    "polyhedron", "pyramid", "spiral", "sphere", "torus"],
+    "dissipate": ["pentagon"],
+    "palpitation": ["cylinder"],
+    "heat": ["pyramid"],
+    "alarm": ["spiral"],
+    "tremors": ["disc", "egg"],
+    "reverberation": ["disc", "pentagon"],
+    "sonicportal": ["sphere", "torus"],
+    "adduction": ["disc", "polyhedron"],
+    "harmony": ["egg", "sphere"],
+    "creeps": ["torus"],
+    "silence": ["egg"],
+    "revelation": ["cube", "diamond"],
+    "grounding": ["sphere"],
+    "oscillate": ["diamond"],
+    "focus": ["pyramid"],
+    "disorientation": ["spiral"],
+    "energise": ["polyhedron"],
+    "stridulation": ["cylinder", "polyhedron"],
+    "gravity": ["egg", "torus"],
+    "forest": ["diamond", "pyramid"],
+    "dissonance": ["cylinder", "sphere", "spiral"],
+    "lullaby": ["pyramid"],
+    "retardation": ["disc"],
+    "cataclysm": [
+        "cylinder",
+        "cube",
+        "diamond",
+        "disc",
+        "egg",
+        "pentagon",
+        "polyhedron",
+        "pyramid",
+        "spiral",
+        "sphere",
+        "torus",
+    ],
 }
 
 
@@ -54,138 +65,167 @@ def next_vibration(matches):
         "stridulation",
     ]
     if matches:
-        vibes = vibes[int(matches[0]):]
+        vibes = vibes[int(matches[0]) :]
 
     for vibe in vibes:
         yield spin_n_embed(vibe)
 
 
 crystalism_aliases = [
-    (   "^diss$",
+    (
+        "^diss$",
         "dissipate - attack mana",
         lambda matches: spin_n_embed("dissipate"),
     ),
-    (   "^palp$",
+    (
+        "^palp$",
         "palpitation - dmg",
         lambda matches: spin_n_embed("palpitation"),
     ),
-    (   "^heat$",
+    (
+        "^heat$",
         "heat - counteract cold weather",
         lambda matches: spin_n_embed("heat"),
     ),
-    (   "^alarm$",
+    (
+        "^alarm$",
         "alarm",
         lambda matches: spin_n_embed("alarm"),
     ),
-    (   "^trem$",
+    (
+        "^trem$",
         "tremors - knockdown / strip levitation",
         lambda matches: spin_n_embed("tremors"),
     ),
-    (   "^reverb$",
+    (
+        "^reverb$",
         "reverberation - protect vibes",
         lambda matches: spin_n_embed("reverberation"),
     ),
-    (   "^portal(?: (.+))?$",
+    (
+        "^portal(?: (.+))?$",
         "portal []/t",
-        lambda matches: spin_n_embed("sonicportal", matches[0] or s.target)
+        lambda matches: spin_n_embed("sonicportal", matches[0] or s.target),
     ),
-    (   "^add$",
+    (
+        "^add$",
         "adduction - suck in people",
         lambda matches: spin_n_embed("adduction"),
     ),
-    (   "^crystalhome$",
+    (
+        "^crystalhome$",
         "crystalhome",
         lambda matches: eqbal("crystalhome"),
     ),
-    (   "^harm$",
+    (
+        "^harm$",
         "harmony - heal affs or health/mana",
         lambda matches: spin_n_embed("harmony"),
     ),
-    (   "^tharmh$",
+    (
+        "^tharmh$",
         "tune harmony healing",
         lambda matches: eqbal("tune harmony healing"),
     ),
-    (   "^tharmr$",
+    (
+        "^tharmr$",
         "tune harmony restoration",
         lambda matches: eqbal("tune harmony restoration"),
     ),
-    (   "^creeps$",
+    (
+        "^creeps$",
         "creeps - shyness",
         lambda matches: spin_n_embed("creeps"),
     ),
-    (   "^silence$",
+    (
+        "^silence$",
         "silence",
         lambda matches: spin_n_embed("silence"),
     ),
-    (   "^revel$",
+    (
+        "^revel$",
         "revelation - conceal peeps",
         lambda matches: spin_n_embed("revelation"),
     ),
-    (   "^ground$",
+    (
+        "^ground$",
         "grounding - make it difficult to be moved",
         lambda matches: spin_n_embed("grounding"),
     ),
-    (   "^osc$",
+    (
+        "^osc$",
         "oscillate - gives amnesia",
         lambda matches: spin_n_embed("oscillate"),
     ),
-    (   "^vibes$",
+    (
+        "^vibes$",
         "vibes all",
         lambda matches: eqbal("vibes all"),
     ),
-    (   "^foc$",
+    (
+        "^foc$",
         "focus - bring the pain or vibes",
         lambda matches: spin_n_embed("focus"),
     ),
-    (   "^dis$",
+    (
+        "^dis$",
         "disorientation - dizziness",
         lambda matches: spin_n_embed("disorientation"),
     ),
-    (   "^ener$",
+    (
+        "^ener$",
         "energise - drain health",
         lambda matches: spin_n_embed("energise"),
     ),
-    (   "^absorb$",
+    (
+        "^absorb$",
         "absorb energy",
         lambda matches: eqbal("absorb energy"),
     ),
-    (   "^strid$",
+    (
+        "^strid$",
         "stridulation - if not deaf, lose eq else may strip deaf",
         lambda matches: spin_n_embed("stridulation"),
     ),
-    (   "^grav$",
+    (
+        "^grav$",
         "gravity - pulls peeps out of trees and skies",
         lambda matches: spin_n_embed("gravity"),
     ),
-    (   "^forest$",
+    (
+        "^forest$",
         "forest - dmg",
         lambda matches: spin_n_embed("forest"),
     ),
-    (   "^disso$",
+    (
+        "^disso$",
         "dissonance - strip defs",
         lambda matches: spin_n_embed("dissonance"),
     ),
-    (   "^plague$",
+    (
+        "^plague$",
         "plague - affs",
         lambda matches: spin_n_embed("plague"),
     ),
-    (   "^lull$",
+    (
+        "^lull$",
         "lullaby - sleep!",
         lambda matches: spin_n_embed("lullaby"),
     ),
-    (   "^retard$",
+    (
+        "^retard$",
         "retardation - slow down!!",
         lambda matches: spin_n_embed("retardation"),
     ),
-    (   "^cataclysm$",
+    (
+        "^cataclysm$",
         "cataclysm - whoa",
         lambda matches: spin_n_embed("cataclysm"),
     ),
-    (   "^vib ?(\d+)?$",
+    (
+        r"^vib ?(\d+)?$",
         "next vibe",
         lambda matches: next_vibration(matches),
     ),
 ]
 c.add_aliases("ab_crystalism", crystalism_aliases)
-
-

@@ -1,7 +1,6 @@
-
 import logging
 
-from client import c, send, echo
+from client import c, echo, send
 
 logger = logging.getLogger("achaea")
 
@@ -114,6 +113,7 @@ You say, "Sounds... easy..."
 
 """
 
+
 def littany(matches):
     logger.fighting(f"Eek! {matches[0]} is !")
     echo(f"Eek! {matches[0]} is !")
@@ -121,13 +121,15 @@ def littany(matches):
 
 
 depthswalker_triggers = [
-    (   r"^You have been afflicted with timeloop.$",
+    (
+        r"^You have been afflicted with timeloop.$",
         # timeloop is bad!
-        lambda m: echo("Eek! Timeloop!")
+        lambda m: echo("Eek! Timeloop!"),
     ),
-    (   r"^The ominously haunting sound of (.*) suddenly fills your head, threatening to drown out all other sound.$",
+    (
+        r"^The ominously haunting sound of (.*) suddenly fills your head, threatening to drown out all other sound.$",
         # timeloop is bad!
-        lambda m: littany(m)
+        lambda m: littany(m),
     ),
 ]
 c.add_triggers(depthswalker_triggers)

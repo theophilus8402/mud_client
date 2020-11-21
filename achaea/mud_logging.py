@@ -1,4 +1,3 @@
-
 import logging
 
 """
@@ -39,8 +38,7 @@ main visual logger:
     some stuff will be filtered out / modified
 """
 
-from logging import getLoggerClass, addLevelName, setLoggerClass, NOTSET
-
+from logging import NOTSET, addLevelName, getLoggerClass, setLoggerClass
 
 FIGHTING = 5
 PARTY = 7
@@ -48,6 +46,7 @@ SAYS = 15
 MAIN = 25
 ECHO = 27
 NOTHING = 65
+
 
 class AchaeaLogger(getLoggerClass()):
     def __init__(self, name, level=NOTSET):
@@ -79,10 +78,11 @@ class AchaeaLogger(getLoggerClass()):
         if self.isEnabledFor(ECHO):
             self._log(ECHO, msg, args, **kwargs)
 
+
 setLoggerClass(AchaeaLogger)
 
-class SaysFilter(logging.Filter):
 
+class SaysFilter(logging.Filter):
     def filter(self, record):
         if record.levelno == SAYS:
             return True
@@ -108,13 +108,13 @@ def initialize_logging():
     says_handler.setLevel(SAYS)
     says_filter = SaysFilter()
     says_handler.addFilter(says_filter)
-    
+
     fighting_log_path = "fighting.log"
     fighting_handler = logging.FileHandler(fighting_log_path, mode="a")
     fighting_handler.setLevel(FIGHTING)
     fighting_filter = FightingFilter()
     fighting_handler.addFilter(fighting_filter)
-    
+
     log = logging.getLogger("achaea")
     log.setLevel(FIGHTING)
     log.addHandler(fighting_handler)

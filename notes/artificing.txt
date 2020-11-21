@@ -400,5 +400,3 @@ a short time.
 Retardation: afflicts everyone in the room with the curse of Aeon.
 
 -------------------------------------------------------------------------------
-
-

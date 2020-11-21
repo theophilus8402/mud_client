@@ -1,9 +1,7 @@
-
-from achaea.mud_logging import initialize_logging
-from achaea.another_logging_example import run_nothing
-
 import logging
 
+from achaea.another_logging_example import run_nothing
+from achaea.mud_logging import initialize_logging
 
 initialize_logging()
 

@@ -1,20 +1,18 @@
-
 import asyncio
 import functools
 import json
 import logging
 import re
-
 from select import select
-from telnetlib import IAC, SB, SE, Telnet, DO, TTYPE, BINARY, DONT, WILL
+from telnetlib import BINARY, DO, DONT, IAC, SB, SE, TTYPE, WILL, Telnet
 
-GMCP = b'\xc9'
-mud_encoding = 'iso-8859-1'
+GMCP = b"\xc9"
+mud_encoding = "iso-8859-1"
 
 
 def strip_ansi(line):
     # TODO compile this
-    return re.sub(r'(\x9B|\x1B\[)[0-?]*[ -\/]*[@-~]', '', line)
+    return re.sub(r"(\x9B|\x1B\[)[0-?]*[ -\/]*[@-~]", "", line)
 
 
 def gmcpOut(sock, msg):
@@ -26,23 +24,23 @@ def gmcpOut(sock, msg):
 
 
 supportables = [
-        'char 1',
-        'comm 1',
-        'comm.channel 1',
-        'char.base 1',
-        'char.maxstats 1',
-        'char.items 1',
-        'char.status 1',
-        'char.statusvars 1',
-        'char.vitals 1',
-        'char.worth 1',
-        'comm.tick 1',
-        'group 1',
-        'room 1',
-        'room.info 1',
-        'redirect.window 1',
-        'comm.channel.text 1',
-    ]
+    "char 1",
+    "comm 1",
+    "comm.channel 1",
+    "char.base 1",
+    "char.maxstats 1",
+    "char.items 1",
+    "char.status 1",
+    "char.statusvars 1",
+    "char.vitals 1",
+    "char.worth 1",
+    "comm.tick 1",
+    "group 1",
+    "room 1",
+    "room.info 1",
+    "redirect.window 1",
+    "comm.channel.text 1",
+]
 
 compiled_gmcp_pat = re.compile("([.A-Za-z]+) (.*)")
 
@@ -63,11 +61,21 @@ def iac_cb(telnet_session, sock, cmd, option):
             sock.sendall(IAC + DO + option)
             gmcpOut(sock, 'Core.Hello { "client": "Cizra", "version": "1" }')
             supportables_str = str(supportables).replace("'", '"')
-            gmcpOut(sock, 'Core.Supports.Set ' + supportables_str)
+            gmcpOut(sock, "Core.Supports.Set " + supportables_str)
         elif option == TTYPE:
             logging.debug("Sending terminal type 'PyMudClient'")
-            sock.sendall(IAC + DO + option +
-                         IAC + SB + TTYPE + BINARY + b'PyMudClient' + IAC + SE)
+            sock.sendall(
+                IAC
+                + DO
+                + option
+                + IAC
+                + SB
+                + TTYPE
+                + BINARY
+                + b"PyMudClient"
+                + IAC
+                + SE
+            )
 
         else:
             sock.sendall(IAC + DONT + option)
@@ -94,7 +102,7 @@ async def handle_telnet(host, port, from_server_queue, to_server_queue):
 
     try:
         while True:
-            fds, _, _ = select([telnet_socket], [], [], .01)
+            fds, _, _ = select([telnet_socket], [], [], 0.01)
 
             # handle reading things from the server
             for fd in fds:
@@ -118,6 +126,6 @@ async def handle_telnet(host, port, from_server_queue, to_server_queue):
                     gmcpOut(telnet_socket, data_to_send)
                 else:
                     session.write(data_to_send.encode(mud_encoding))
-            await asyncio.sleep(.05)
+            await asyncio.sleep(0.05)
     finally:
         session.close()

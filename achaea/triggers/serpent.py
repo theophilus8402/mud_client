@@ -1,7 +1,6 @@
+from client import c, echo, send
 
-from client import c, send, echo
 from ..state import s
-
 
 """
 for serpents, watch out for darkshade:
@@ -16,6 +15,5 @@ Sunlight shines down upon you mercilessly, rippling across your skin like fire.
 
 """
 
-serpent_triggers = [
-]
+serpent_triggers = []
 c.add_triggers(serpent_triggers)

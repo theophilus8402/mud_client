@@ -1,7 +1,6 @@
-
 from achaea.basic import eqbal
 from achaea.state import s
-from client import send, c
+from client import c, send
 
 THROW_DAGGER_HELP = """
 THROW DAGGERS!
@@ -14,6 +13,7 @@ ds  - throw dagger slike (anorexia - epidermal/focus)
 dv  - throw dagger vernalius (weariness - kelp/aurum)
 """
 
+
 def _throw_dagger(target, venom):
     eqbal(f"stand;get dagger;throw dagger at {target} {venom}")
 
@@ -23,7 +23,9 @@ def throw_dagger(matches):
     if matches == "d":
         c.echo(THROW_DAGGER_HELP)
     elif matches == "j":
-        eqbal(f"stand;get dagger;get dagger;get dagger;unwield left;juggle dagger dagger dagger;wield blackjack")
+        eqbal(
+            f"stand;get dagger;get dagger;get dagger;unwield left;juggle dagger dagger dagger;wield blackjack"
+        )
     elif matches == "c":
         _throw_dagger(s.target, "curare")
     elif matches == "k":
@@ -49,6 +51,7 @@ def begin_juggling(matches):
     juggled_items = list(matches)
     c.echo(f"juggling: {juggled_items}")
 
+
 def threw_something(matches):
     # You cock back your arm and throw an obsidian dagger at Parthenope.
     # You cock back your arm and throw an obsidian dagger southwest at Ellryn.
@@ -64,13 +67,15 @@ def threw_something(matches):
 
 
 juggling_triggers = [
-    (   r"^You begin to juggle (.+), (.+), and (.+) with your free hand.$",
+    (
+        r"^You begin to juggle (.+), (.+), and (.+) with your free hand.$",
         # starting to juggle something
-        lambda m: begin_juggling(m)
+        lambda m: begin_juggling(m),
     ),
-    (   r"^You cock back your arm and throw (.+) at (.+).$",
+    (
+        r"^You cock back your arm and throw (.+) at (.+).$",
         # threw something at someone
-        lambda m: threw_something(m)
+        lambda m: threw_something(m),
     ),
 ]
 c.add_triggers(juggling_triggers)

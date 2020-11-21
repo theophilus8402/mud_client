@@ -1,4 +1,3 @@
-
 from prompt_toolkit.document import Document
 from prompt_toolkit.filters import has_focus
 from prompt_toolkit.key_binding import KeyBindings
@@ -43,11 +42,13 @@ container = HSplit(
 # The key bindings.
 kb = KeyBindings()
 
+
 @kb.add("c-c")
 @kb.add("c-q")
 def _(event):
     " Pressing Ctrl-Q or Ctrl-C will exit the user interface. "
     event.app.exit()
+
 
 # Style.
 style = Style(

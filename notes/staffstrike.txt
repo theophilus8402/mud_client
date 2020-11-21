@@ -54,4 +54,3 @@ The crackle of snapping bone can be heard as a crystalline golem viciously twist
 ["2020/03/26 23:21:42.725292", "server_text", "You call upon Sllshya and unleash a forceful blow towards Kog's left arm with your trusty staff.\r"]
 ["2020/03/26 23:21:42.726433", "server_text", "You direct a crystalline golem to disrupt the flow of time around Kog.\r"]
 ["2020/03/26 23:21:42.727677", "server_text", "As a crystalline golem begins to pulse with a strange inner glow, Kog sways unsteadily.\r"]
-

@@ -1,11 +1,9 @@
-
 import re
-
 from datetime import datetime, timedelta
 
 from achaea.basic import eqbal
 from achaea.state import s
-from client import c, send, echo
+from client import c, echo, send
 from client.timers import timers
 
 
@@ -14,18 +12,22 @@ def ratting_move_on(client):
 
 
 def mob_entered_room(gmcp_data):
-    #Char.Items.Add { "location": "room", "item": { "id": "118764", "name": "a young rat", "icon": "animal", "attrib": "m" } }
+    # Char.Items.Add { "location": "room", "item": { "id": "118764", "name": "a young rat", "icon": "animal", "attrib": "m" } }
     # this is to check to see if a rat entered the room
-    #s.rat_last_seen
+    # s.rat_last_seen
     pass
+
+
 c.add_gmcp_handler("Char.Items.Add", mob_entered_room)
 
 
 def mob_left_room(gmcp_data):
     # Char.Items.Remove { "location": "room", "item": { "id": "118764", "name": "a young rat" } }
     # this is to check to see if a rat left the room
-    #s.rat_last_seen
+    # s.rat_last_seen
     pass
+
+
 c.add_gmcp_handler("Char.Items.Remove", mob_left_room)
 
 
@@ -34,6 +36,8 @@ def ratting_room_info(gmcp_data):
     if room_num != s.ratting_room:
         echo(f"We changed ratting rooms! old: {s.ratting_room} new: {room_num}")
         s.ratting_room = room_num
+
+
 c.add_gmcp_handler("Room.Info", ratting_room_info)
 
 
@@ -78,11 +82,11 @@ def rat(client, matches):
             rat_in_room = True
             break
     if not rat_in_room:
-        #echo("There's NOT a rat in the room!")
+        # echo("There's NOT a rat in the room!")
         return
 
     if not (s.bal and s.eq):
-        #echo("You DON'T have bal/eq!")
+        # echo("You DON'T have bal/eq!")
         return
     eqbal("stand;warp rat")
 
@@ -106,23 +110,17 @@ def rat_info(matches):
     echo("Showing rat info!")
     echo(f"mobs: {s.mobs_in_room}")
     echo(f"players: {s.players_in_room}")
-    #echo(f"rats killed: {s.rats_killed_in_room}")
-    #echo(f"now: {datetime.now()}, last_seen: {s.rat_last_seen}")
+    # echo(f"rats killed: {s.rats_killed_in_room}")
+    # echo(f"now: {datetime.now()}, last_seen: {s.rat_last_seen}")
+
 
 ratting_aliases = [
-    (   "^rls$",
+    (
+        "^rls$",
         "rat last seen",
-        lambda matches: echo(f"rat last seen: {s.rat_last_seen}")
+        lambda matches: echo(f"rat last seen: {s.rat_last_seen}"),
     ),
-    (   "^rat(?: (.+))?$",
-        "rat on/off//",
-        lambda matches: handle_rat_command(matches)
-    ),
-    (   "^ri$",
-        "rat info",
-        rat_info
-    ),
+    ("^rat(?: (.+))?$", "rat on/off//", lambda matches: handle_rat_command(matches)),
+    ("^ri$", "rat info", rat_info),
 ]
 c.add_aliases("ratting", ratting_aliases)
-
-

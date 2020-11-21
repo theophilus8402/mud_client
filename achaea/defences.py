@@ -1,20 +1,24 @@
-
 import asyncio
 
-from achaea.basic import eqbal, curebal
+from achaea.basic import curebal, eqbal
 from achaea.state import s
-from client import c, send, echo
+from client import c, echo, send
 from client.timers import timers
+
 
 def gmcp_defences(gmcp_data):
     s.defences = tuple(defence["name"] for defence in gmcp_data)
+
+
 c.add_gmcp_handler("Char.Defences.List", gmcp_defences)
 
 
 def gmcp_defences_add(gmcp_data):
     defence = gmcp_data["name"]
-    #echo(f"Woo!  We've gained {defence}!")
+    # echo(f"Woo!  We've gained {defence}!")
     s.defences = (*s.defences, defence)
+
+
 c.add_gmcp_handler("Char.Defences.Add", gmcp_defences_add)
 
 
@@ -22,7 +26,9 @@ def gmcp_defences_remove(gmcp_data):
     lost_defences = set(gmcp_data)
     echo(f"Egads!  We've lost {lost_defences}!")
     s.defences = tuple(set(s.defences).difference(lost_defences))
-    #defences("")
+    # defences("")
+
+
 c.add_gmcp_handler("Char.Defences.Remove", gmcp_defences_remove)
 
 
@@ -72,10 +78,11 @@ def defences(matches, fighting=False):
     c.remove_temp_trigger("defences_trigger")
 
 
-defences_trigger = ("^You have the following defences:$",
-                    # list of defences
-                    defences,
-                    )
+defences_trigger = (
+    "^You have the following defences:$",
+    # list of defences
+    defences,
+)
 
 
 def check_defences(matches):
@@ -98,35 +105,43 @@ auto_defs = ["mass"]
 
 
 defence_aliases = [
-    (   "^cdef$",
+    (
+        "^cdef$",
         "list of defences",
         check_defences,
     ),
-    (   "^fdef(?: (.+))?$",
+    (
+        "^fdef(?: (.+))?$",
         "fighting defences",
         lambda matches: fighting_defences(matches[0] or "on"),
     ),
-    (   "^sdef_basic$",
+    (
+        "^sdef_basic$",
         "set basic defences to 25",
         lambda _: [set_defence(bdef, 25, state=s) for bdef in basic_defs],
     ),
-    (   "^adef on$",
+    (
+        "^adef on$",
         "auto defences",
         lambda matches: auto_defences(auto_defs, "on"),
     ),
-    (   "^adef off$",
+    (
+        "^adef off$",
         "auto defences",
         lambda matches: auto_defences(auto_defs, "off"),
     ),
-    (   "^adef (.+) (.+)$",
+    (
+        "^adef (.+) (.+)$",
         "auto defences",
         lambda matches: auto_defences([matches[0]], matches[1]),
     ),
-    (   "^relax (\w+)$",
+    (
+        r"^relax (\w+)$",
         "relax defence 5",
         lambda matches: relax(matches[0], "5"),
     ),
-    (   "^relax (\w+) (\d+)$",
+    (
+        r"^relax (\w+) (\d+)$",
         "relax defence #sec",
         lambda matches: relax(matches[0], matches[1]),
     ),
@@ -142,11 +157,11 @@ bliss_defs = {"constitution", "toughness", "resistance"}
 
 # these will be defs we keep on all the time
 basic_defs = {
-    #"boartattoo",
+    # "boartattoo",
     "mosstattoo",
     "deathsight",
     "insomnia",
-    #"lifevision",
+    # "lifevision",
     "mindseye",
     "selfishness",
     "cloak",
@@ -154,7 +169,7 @@ basic_defs = {
     "blindness",
     "thirdeye",
     "nightsight",
-    #"shroud",
+    # "shroud",
 }
 s.wanted_defences = tuple(basic_defs)
 
@@ -179,31 +194,31 @@ fighting_defs = {
 
 
 defence_info = {
-    "preachblessing" : lambda: do_nothing,
-    "boartattoo" : lambda: eqbal("touch boar"),
-    "mosstattoo" : lambda: eqbal("touch moss"),
-    "deathsight" : lambda: send("outr skullcap;eat skullcap"),
-    #"deathsight" : lambda: eqbal("astralvision"),
-    #"lifevision" : lambda: eqbal("astralvision"),
-    "constitution" : lambda: echo("Missing CONSTITUTION"),
-    "toughness" : lambda: echo("Missing TOUGHNESS"),
-    "resistance" : lambda: echo("Missing RESISTANCE"),
-    "mindseye" : lambda: eqbal("touch mindseye"),
-    "deafness" : lambda: curebal("hawthorn"),
-    "blindness" : lambda: curebal("bayberry"),
-    "kola" : lambda: curebal("kola"),
-    "temperance" : lambda: curebal("frost"),
-    "speed" : lambda: curebal("speed"),
-    "levitating" : lambda: curebal("levitation"),
-    "poisonresist" : lambda: curebal("venom"),
-    "insulation" : lambda: curebal("caloric"),
-    "thirdeye" : lambda: curebal("echinacea"),
-    "nightsight" : lambda: eqbal("nightsight"),
-    "selfishness" : lambda: eqbal("selfishness"),
-    "fangbarrier" : lambda: curebal("sileris"),
-    "insomnia" : lambda: curebal("insomnia"),
-    "cloak" : lambda: eqbal("touch cloak"),
-    "shroud" : lambda: eqbal("shroud"),
+    "preachblessing": lambda: do_nothing,
+    "boartattoo": lambda: eqbal("touch boar"),
+    "mosstattoo": lambda: eqbal("touch moss"),
+    "deathsight": lambda: send("outr skullcap;eat skullcap"),
+    # "deathsight" : lambda: eqbal("astralvision"),
+    # "lifevision" : lambda: eqbal("astralvision"),
+    "constitution": lambda: echo("Missing CONSTITUTION"),
+    "toughness": lambda: echo("Missing TOUGHNESS"),
+    "resistance": lambda: echo("Missing RESISTANCE"),
+    "mindseye": lambda: eqbal("touch mindseye"),
+    "deafness": lambda: curebal("hawthorn"),
+    "blindness": lambda: curebal("bayberry"),
+    "kola": lambda: curebal("kola"),
+    "temperance": lambda: curebal("frost"),
+    "speed": lambda: curebal("speed"),
+    "levitating": lambda: curebal("levitation"),
+    "poisonresist": lambda: curebal("venom"),
+    "insulation": lambda: curebal("caloric"),
+    "thirdeye": lambda: curebal("echinacea"),
+    "nightsight": lambda: eqbal("nightsight"),
+    "selfishness": lambda: eqbal("selfishness"),
+    "fangbarrier": lambda: curebal("sileris"),
+    "insomnia": lambda: curebal("insomnia"),
+    "cloak": lambda: eqbal("touch cloak"),
+    "shroud": lambda: eqbal("shroud"),
 }
 
 
@@ -265,4 +280,3 @@ sileris
 magic/cold/fire/electric resistances (if you have the enchantments)
 
 """
-

@@ -1,34 +1,31 @@
-
 import collections
 import itertools
 import json
 import logging
 import re
-
 from datetime import datetime
 
-from client import c, send, echo
-from ..state import s
-from ..room_info.mapping import store_room
+from client import c, echo, send
 from ui.core import update_frenemies_info
 
+from ..room_info.mapping import store_room
+from ..state import s
 
 logger = logging.getLogger("achaea")
 
 
-StateRoomInfo = collections.namedtuple("StateRoomInfo",
-                    "num name desc area environment coords map details exits")
+StateRoomInfo = collections.namedtuple(
+    "StateRoomInfo", "num name desc area environment coords map details exits"
+)
 
 
 room_aliases = [
-    (   "^cmono$",
+    (
+        "^cmono$",
         "check for monolith in room",
-        lambda matches: echo(f"Monolith in room: {monolith_in_room()}")
+        lambda matches: echo(f"Monolith in room: {monolith_in_room()}"),
     ),
-    (   "^cir$",
-        "Char.Items.Room",
-        lambda matches: c.gmcp_send("Char.Items.Room \"\"")
-    ),
+    ("^cir$", "Char.Items.Room", lambda matches: c.gmcp_send('Char.Items.Room ""')),
 ]
 c.add_aliases("room_info", room_aliases)
 
@@ -38,12 +35,14 @@ def room_items(gmcp_data):
         return
 
     s.room_items = tuple(gmcp_data.get("items", []))
+
+
 c.add_gmcp_handler("Char.Items.List", room_items)
 
 
 def monolith_in_room():
     """
-    s.room_items = ( 
+    s.room_items = (
         { "id": "12027", "name": "a bloody cross" },
         { "id": "22082", "name": "a runic totem", "icon": "rune" },
         { "id": "58874", "name": "a Khaal Theurgist", "icon": "guard", "attrib": "mx" },
@@ -68,18 +67,22 @@ def get_room_info(gmcp_data):
 
     # store it in the state
     s.room_info = StateRoomInfo(**gmcp_data)
+
+
 c.add_gmcp_handler("Room.Info", get_room_info)
 
 # set default room info for when we first load up
-s.room_info = StateRoomInfo(num="???",
-                            name="???",
-                            desc="???",
-                            area="???",
-                            environment="???",
-                            coords="???",
-                            map="???",
-                            details="???",
-                            exits={})
+s.room_info = StateRoomInfo(
+    num="???",
+    name="???",
+    desc="???",
+    area="???",
+    environment="???",
+    coords="???",
+    map="???",
+    details="???",
+    exits={},
+)
 
 
 def create_frenemies_text():
@@ -100,6 +103,8 @@ def add_player(gmcp_data):
     logger.fighting(f"+{player}")
     s.players_in_room = (*s.players_in_room, player)
     update_frenemies()
+
+
 c.add_gmcp_handler("Room.AddPlayer", add_player)
 
 
@@ -114,6 +119,8 @@ def remove_player(gmcp_data):
     else:
         s.players_in_room = tuple()
     update_frenemies()
+
+
 c.add_gmcp_handler("Room.RemovePlayer", remove_player)
 
 
@@ -125,4 +132,6 @@ def room_players(gmcp_data):
     echo(f"+{', '.join(players)}")
     s.players_in_room = tuple(players)
     update_frenemies()
+
+
 c.add_gmcp_handler("Room.Players", room_players)

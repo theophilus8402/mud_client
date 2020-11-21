@@ -1,4 +1,3 @@
-
 from copy import copy
 
 from .db import Session
@@ -6,7 +5,8 @@ from .models import RoomInfo
 
 session = Session()
 
-#q.filter(models.RoomInfo.name.ilike("%stone%"), models.RoomInfo.area.ilike("cyrene")).all()
+# q.filter(models.RoomInfo.name.ilike("%stone%"), models.RoomInfo.area.ilike("cyrene")).all()
+
 
 def find_rooms(parameters, ilike=True):
     filter_terms = []

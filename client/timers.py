@@ -1,11 +1,9 @@
-
 import asyncio
 
 from client import echo
 
 
-class Timers():
-
+class Timers:
     def __init__(self):
         self.timers = {}
 
@@ -42,7 +40,7 @@ class Timers():
 
         # once the action is done, remove it from the timers dict
         echo(f"removing {name}!")
-        del(self.timers[name])
+        del self.timers[name]
 
     async def create_recurring_timer(self, name, action, wait_time):
 
@@ -55,7 +53,7 @@ class Timers():
         finally:
             echo(f"removing {name}!")
             # once the action is done, remove it from the timers dict
-            del(self.timers[name])
+            del self.timers[name]
 
 
 timers = Timers()
@@ -73,4 +71,3 @@ if __name__ == "__main__":
     timers.add("kill_hello", lambda: kill(hello_task), 7, recurring=False)
     timers.add("kill_loop", lambda: loop.stop(), 10, recurring=False)
     loop.run_forever()
-

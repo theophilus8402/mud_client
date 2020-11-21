@@ -1,6 +1,6 @@
-from client import send, c
-from ..basic import eqbal
+from client import c, send
 
+from ..basic import eqbal
 
 """
 Syntax:            TIE CHEESE TO ROPE
@@ -58,6 +58,7 @@ bw  - throw webbomb dir/at ground
 bd  - throw dustbomb dir/at ground
 """
 
+
 def _throw_bomb(bomb_type, direction=""):
     return f"stand;unwield left;wield {bomb_type} left;throw {bomb_type} {direction}"
 
@@ -86,9 +87,10 @@ def throw_bomb(bomb_type, direction):
 
 
 bomb_triggers = [
-    (   "^The mouse sees the cheese and cautiously approaches it, taking a little nibble at first, but increasingly taking larger bites.$",
+    (
+        "^The mouse sees the cheese and cautiously approaches it, taking a little nibble at first, but increasingly taking larger bites.$",
         # get that mouse!
-        lambda m: send("reel in mouse;educate mouse")
+        lambda m: send("reel in mouse;educate mouse"),
     ),
 ]
 c.add_triggers(bomb_triggers)

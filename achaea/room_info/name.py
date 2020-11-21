@@ -1,10 +1,7 @@
-
+import json
 from functools import partial
 
-import json
-
-from client import c, send, echo
-
+from client import c, echo, send
 
 DEFAULT_NAME_MAP_PATH = "achaea/room_info/long_short_name_map.json"
 
@@ -44,16 +41,13 @@ def figure_out_unknown_mobs(mobs):
         echo(f"creating trig for: {mob_id} / {long_name}")
 
         update_func = partial(update_name_map, long_name)
-        mob_trigger = (
-            f"^(.+){mob_id}\s+{long_name}$",
-            update_func
-            )
+        mob_trigger = (fr"^(.+){mob_id}\s+{long_name}$", update_func)
         c.add_temp_trigger(trigger_name, mob_trigger)
 
     send("ih")
     trigger_names.append("info_here")
     info_here_trigger = (
-        f"^Number of objects: \d+$",
-        lambda m: [c.remove_temp_trigger(tn) for tn in trigger_names]
-        )
+        fr"^Number of objects: \d+$",
+        lambda m: [c.remove_temp_trigger(tn) for tn in trigger_names],
+    )
     c.add_temp_trigger("info_here", info_here_trigger)

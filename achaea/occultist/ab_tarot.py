@@ -1,79 +1,81 @@
+from client import add_aliases, add_triggers, send
 
-from client import send, add_aliases, add_triggers
-from ..state import s
 from ..basic import eqbal
-
+from ..state import s
 
 tarot_aliases = [
-    (   "^sun$",
-        "fling sun at ground",
-        lambda _: eqbal("fling sun at ground")
-    ),
-    (   "^magi(?: (.+))?$",
+    ("^sun$", "fling sun at ground", lambda _: eqbal("fling sun at ground")),
+    (
+        "^magi(?: (.+))?$",
         "fling magician at []/me",
-        lambda matches: eqbal(f"fling magician at {matches[0] or 'me'}")
+        lambda matches: eqbal(f"fling magician at {matches[0] or 'me'}"),
     ),
-    (   "^priest(?: (.+))?$",
+    (
+        "^priest(?: (.+))?$",
         "fling priestess at []/me",
-        lambda matches: eqbal(f"fling priestess at {matches[0] or 'me'}")
+        lambda matches: eqbal(f"fling priestess at {matches[0] or 'me'}"),
     ),
-    (   "^fool(?: (.+))?$",
+    (
+        "^fool(?: (.+))?$",
         "fling fool at []/me",
-        lambda matches: eqbal(f"fling fool at {matches[0] or 'me'}")
+        lambda matches: eqbal(f"fling fool at {matches[0] or 'me'}"),
     ),
-    (   "^fchar$",
+    (
+        "^fchar$",
         "fling chariot at ground",
-        lambda matches: eqbal(f"fling chariot at ground")
+        lambda matches: eqbal(f"fling chariot at ground"),
     ),
-    (   "^bchar$",
-        "board chariot",
-        lambda matches: eqbal(f"board chariot")
-    ),
-    (   "^fly$",
-        "spur chariot skywards",
-        lambda matches: eqbal(f"spur chariot skywards")
-    ),
-    (   "^fher(?: (.+))?$",
+    ("^bchar$", "board chariot", lambda matches: eqbal(f"board chariot")),
+    ("^fly$", "spur chariot skywards", lambda matches: eqbal(f"spur chariot skywards")),
+    (
+        "^fher(?: (.+))?$",
         "fling hermit at ground [tag]",
-        lambda matches: eqbal(f"fling hermit at ground {matches[0] or ''}")
+        lambda matches: eqbal(f"fling hermit at ground {matches[0] or ''}"),
     ),
-    (   "^aher(?: (.+))?$",
+    (
+        "^aher(?: (.+))?$",
         "activate hermit [tag]",
-        lambda matches: eqbal(f"outd hermit;activate hermit {matches[0] or ''}")
+        lambda matches: eqbal(f"outd hermit;activate hermit {matches[0] or ''}"),
     ),
-    (   "^hang(?: (.+))?$",
+    (
+        "^hang(?: (.+))?$",
         "fling hangedman at []/t",
-        lambda matches: eqbal(f"fling hangedman at {matches[0] or v.target}")
+        lambda matches: eqbal(f"fling hangedman at {matches[0] or v.target}"),
     ),
-    (   "^star(?: (.+))?$",
+    (
+        "^star(?: (.+))?$",
         "fling star at []/t",
-        lambda matches: eqbal(f"fling star at {matches[0] or v.target}")
+        lambda matches: eqbal(f"fling star at {matches[0] or v.target}"),
     ),
-    (   "^just(?: (.+))?$",
+    (
+        "^just(?: (.+))?$",
         "fling justice at []/t",
-        lambda matches: eqbal(f"fling justice at {matches[0] or v.target}")
+        lambda matches: eqbal(f"fling justice at {matches[0] or v.target}"),
     ),
-    (   "^aeon(?: (.+))?$",
+    (
+        "^aeon(?: (.+))?$",
         "fling aeon at []/t",
-        lambda matches: eqbal(f"fling aeon at {matches[0] or v.target}")
+        lambda matches: eqbal(f"fling aeon at {matches[0] or v.target}"),
     ),
-    (   "^lust(?: (.+))?$",
+    (
+        "^lust(?: (.+))?$",
         "fling lust at []/t",
-        lambda matches: eqbal(f"fling lust at {matches[0] or v.target}")
+        lambda matches: eqbal(f"fling lust at {matches[0] or v.target}"),
     ),
-    (   "^moon(?: (.+))?$",
+    (
+        "^moon(?: (.+))?$",
         "fling moon at []/t",
-        lambda matches: eqbal(f"fling moon at {matches[0] or v.target}")
+        lambda matches: eqbal(f"fling moon at {matches[0] or v.target}"),
     ),
-    (   "^devil(?: (.+))?$",
+    (
+        "^devil(?: (.+))?$",
         "fling devil at ground",
-        lambda matches: eqbal("fling devil at ground")
+        lambda matches: eqbal("fling devil at ground"),
     ),
-    (   "^univ(?: (.+))?$",
+    (
+        "^univ(?: (.+))?$",
         "fling universe at ground",
-        lambda matches: eqbal("fling universe at ground")
+        lambda matches: eqbal("fling universe at ground"),
     ),
 ]
 add_aliases("ab_tarot", tarot_aliases)
-
-

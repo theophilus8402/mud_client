@@ -1,5 +1,5 @@
+from client import c, echo, send
 
-from client import c, send, echo
 from ..state import s
 
 """
@@ -92,9 +92,6 @@ def parse_number_attack(matches):
 
 
 fancy_attack_aliases = [
-    (   "^(\d)(\d)(\d)?$",
-        "(staffstrike)(limb)(golem)",
-        parse_number_attack
-    ),
+    (r"^(\d)(\d)(\d)?$", "(staffstrike)(limb)(golem)", parse_number_attack),
 ]
 c.add_aliases("fancy_attacks", fancy_attack_aliases)

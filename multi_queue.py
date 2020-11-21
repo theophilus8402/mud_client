@@ -1,9 +1,7 @@
-
 import asyncio
 
 
-class MultiQueue():
-
+class MultiQueue:
     def __init__(self):
         self.main_queue = asyncio.Queue()
 
@@ -24,7 +22,7 @@ class MultiQueue():
         return new_queue
 
     def remove_receiver(self, name):
-        del(self.receivers[name])
+        del self.receivers[name]
 
 
 if __name__ == "__main__":
