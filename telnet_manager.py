@@ -44,7 +44,7 @@ supportables = [
 
 compiled_gmcp_pat = re.compile("([.A-Za-z]+) (.*)")
 
-gmcp_queue = asyncio.Queue()
+gmcp_queue = asyncio.Queue()  # type: ignore
 
 
 def handle_gmcp(data):

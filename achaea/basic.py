@@ -1,7 +1,7 @@
 import logging
 import re
 
-from colorama import *
+from colorama import Fore
 
 from client import c, echo, send
 
@@ -59,6 +59,18 @@ def handle_login_info(gmcp_data):
             misc,
             run_away,
             throw_dagger,
+        )
+
+    elif name.lower() == "veredus":
+        echo("Loading modules for veredus!")
+        # monk modules
+        from achaea.monk import (
+            ab_kaido,
+            ab_tekura,
+            ab_telepathy,
+            monk_battlerage,
+            monk_misc,
+            monk_moves,
         )
 
 
@@ -186,7 +198,13 @@ def target(matches):
 
 basic_aliases = [
     ("^t (.*)$", "target", target),
-    ("^gg$", "get sovereigns", lambda m: eqbal("get sovereigns")),
+    (
+        "^gg$",
+        "get sovereigns",
+        lambda m: eqbal(
+            "get sovereigns;put sovereigns in pouch;put sovereigns in pack"
+        ),
+    ),
     (
         "^pg$",
         "put sovereigns in pouch",

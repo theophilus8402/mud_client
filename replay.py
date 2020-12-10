@@ -5,11 +5,10 @@ from achaea import *
 from client import Brain, c
 from telnet_manager import strip_ansi
 
-achaea.basic.handle_login_info({"name": "sarmenti"})
+achaea.basic.handle_login_info({"name": "veredus"})
 
 
-def handle_server_text(msg):
-    client = Brain(c)
+def handle_server_text(client, msg):
     c.current_chunk = msg
     for msg_line in msg.split("\n"):
         c.current_line = msg_line
@@ -20,7 +19,7 @@ def handle_server_text(msg):
 
 def replay(log_path):
 
-    achaea = Achaea()
+    client = Brain(c)
 
     with open(log_path) as f:
         for line in f:
@@ -31,7 +30,7 @@ def replay(log_path):
 
             try:
                 if msg_type == "server_text" and msg.strip() != "":
-                    handle_server_text(msg)
+                    handle_server_text(client, msg)
                 elif msg_type == "server_text" and msg.strip() == "":
                     pass
                 elif msg_type == "gmcp_data":
@@ -39,10 +38,10 @@ def replay(log_path):
                     gmcp_blob = json.loads(msg)
                     gmcp_type = gmcp_blob["type"]
                     gmcp_data = gmcp_blob["data"]
-                    yield achaea.handle_gmcp(gmcp_type, gmcp_data)
+                    yield client.handle_gmcp(gmcp_type, gmcp_data)
                 elif msg_type in ["data_sent", "user_input"]:
                     # print(f"< {msg}")
-                    yield achaea.handle_aliases(msg)
+                    yield client.handle_aliases(msg)
                 else:
                     print(f"Don't know what this msg type is: {msg_type}.")
                     print(f"? {msg}")
@@ -61,8 +60,9 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if args.l:
-        player = replay(args.log_path)
+        player = replay(args.l)
         for i in player:
             pass
     elif args.t:
-        handle_server_text(args.t)
+        client = Brain(c)
+        handle_server_text(client, args.t)

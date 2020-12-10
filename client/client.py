@@ -15,7 +15,7 @@ class Client:
         self._delete_line = False
         self._delete_lines = set()
 
-        self.line = None
+        self.current_line = None
         self.modified_current_line = None
         self.last_command = ""
 
@@ -126,7 +126,7 @@ class Client:
             if isinstance(msg_blob, str) and not msg_blob.endswith("\n"):
                 msg_blob = f"{msg_blob}\n"
                 self.main_log(msg_blob.strip(), "data_sent")
-            # echo(f"to_send: {self.to_send} sending: {msg_blob}")
+            # self.echo(f"to_send: {self.to_send} sending: {msg_blob}")
             self.send_queue.put_nowait(msg_blob)
             #
         self.to_send.clear()

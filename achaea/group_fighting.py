@@ -1,12 +1,12 @@
 import re
 from copy import copy
 
-from colorama import *
+from colorama import Fore
 
+from achaea.basic import eqbal, highlight_current_line
+from achaea.state import s
 from client import c, echo, send
-
-from .basic import eqbal, highlight_current_line
-from .state import s
+from telnet_manager import strip_ansi
 
 
 def pton():
@@ -50,14 +50,53 @@ def unenemy_person(person):
         c.remove_temp_trigger(f"enemy_trigger_{person}")
 
 
+def ally_person(person):
+    send(f"ally {person}")
+
+
 def multiple_ally(matches):
     for person in matches[0].replace(",", "").split(" "):
-        send(f"ally {person}")
+        ally_person(person)
 
 
 def multiple_enemy(matches):
     for person in matches[0].replace(",", "").split(" "):
         enemy_person(person)
+
+
+def find_and_ally_party(matches):
+    first_dash = False
+    members = []
+    for line in c.current_chunk.split("\r\n"):
+        line = strip_ansi(line)
+        if line == "Your party has the following members:":
+            continue
+        elif line == "-------------------------------------------------":
+            if not first_dash:
+                first_dash = True
+            else:
+                # should be at the end
+                break
+        else:
+            line = line.rstrip(".")
+            line = line.rstrip(",")
+            echo(line)
+            members.extend(line.split(", "))
+            echo(members)
+    [ally_person(m) for m in members]
+    c.remove_temp_trigger("party_member_trigger")
+
+
+def ally_party(matches):
+    send("party members")
+    # set the enemy trigger
+    party_member_trigger = (
+        "^Your party has the following members:$",
+        find_and_ally_party,
+    )
+    c.add_temp_trigger(
+        f"party_member_trigger", party_member_trigger, flags=re.IGNORECASE
+    )
 
 
 group_fighting_aliases = [
@@ -72,5 +111,10 @@ group_fighting_aliases = [
     ("^unenemy (.+)$", "unenemy []", lambda matches: unenemy_person(matches[0])),
     ("^unemall$", "unenemy all", lambda matches: unenemy_person("all")),
     ("^mall (.+)$", "multiple ally", lambda matches: multiple_ally(matches)),
+    (
+        "^pally$",
+        "ally party",
+        ally_party,
+    ),
 ]
 c.add_aliases("group_fighting", group_fighting_aliases)

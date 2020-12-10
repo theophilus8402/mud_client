@@ -2,26 +2,6 @@ from achaea.room_info.room_info import monolith_in_room
 from client import c, echo, send
 from client.timers import timers
 
-"""
-# leave the room immediately, stay out for more than 15 seconds!
-A beam of prismatic light suddenly shoots into the room.
-
-
-# wand of portals, drop mono if one isn't there
-The beginnings of a fiery portal appear before you.
-A fiery portal opens in the air before you.
-
-
-# Sonicportal, Magi only, drop mono if one isn't there
-A piercing sound cleaves through the air.
-A sonic portal opens in the air, edges vibrating slightly.
-
-
-# Forestal gate/portal, Druid and Sylvan only
-A gateway of light blazes into existence before your eyes.
-
-"""
-
 
 def incoming_prism():
     echo("### Someone PRISMING in!!!  Leave the room!! ###")

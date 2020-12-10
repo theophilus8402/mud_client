@@ -3,9 +3,7 @@ from client import c, echo, send
 
 from .state import s
 
-"""
-Char.Vitals { "hp": "4050", "maxhp": "4050", "mp": "5445", "maxmp": "5445", "ep": "15400", "maxep": "15400", "wp": "18734", "maxwp": "19900", "nl": "81", "bal": "1", "eq": "1", "vote": "1", "string": "H:4050/4050 M:5445/5445 E:15400/15400 W:18734/19900 NL:81/100 ", "charstats": [ "Bleed: 0", "Rage: 0", "Channels: F W A E " ] }
-"""
+# Char.Vitals { "hp": "4050", "maxhp": "4050", "mp": "5445", "maxmp": "5445", "ep": "15400", "maxep": "15400", "wp": "18734", "maxwp": "19900", "nl": "81", "bal": "1", "eq": "1", "vote": "1", "string": "H:4050/4050 M:5445/5445 E:15400/15400 W:18734/19900 NL:81/100 ", "charstats": [ "Bleed: 0", "Rage: 0", "Channels: F W A E " ] }
 
 
 def gmcp_bal_eq(gmcp_data):
@@ -36,7 +34,10 @@ def gmcp_char_status(gmcp_data):
         if key == "class" and getattr(s.char_status, "class", "") != value:
             # we've changed class and need to load the appropriate modules
             # TODO: fix this hack way of loading class modules
-            handle_login_info({"name": "sarmenti"})
+            if value.lower() == "jester":
+                handle_login_info({"name": "sarmenti"})
+            elif value.lower() == "monk":
+                handle_login_info({"name": "veredus"})
         setattr(s.char_status, key, value)
 
 
@@ -54,6 +55,4 @@ char_status_aliases = [
 ]
 c.add_aliases("char_status", char_status_aliases)
 
-"""
-Char.Status { "name": "Sarmenti", "fullname": "Sarmenti, Aspirant of Elocution", "age": "23", "race": "Human", "specialisation": "Rogue", "level": "79 (77%)", "xp": "77%", "xprank": "888", "class": "Jester", "city": "Mhaldor (1)", "house": "The Dread Legates(3)", "order": "(None)", "boundcredits": "0", "unboundcredits": "0", "lessons": "11", "explorerrank": "a Rambler", "mayancrowns": "0", "boundmayancrowns": "0", "gold": "3557", "bank": "14100", "unread_news": "13", "unread_msgs": "9", "target": "None", "gender": "male" }
-"""
+# Char.Status { "name": "Sarmenti", "fullname": "Sarmenti, Aspirant of Elocution", "age": "23", "race": "Human", "specialisation": "Rogue", "level": "79 (77%)", "xp": "77%", "xprank": "888", "class": "Jester", "city": "Mhaldor (1)", "house": "The Dread Legates(3)", "order": "(None)", "boundcredits": "0", "unboundcredits": "0", "lessons": "11", "explorerrank": "a Rambler", "mayancrowns": "0", "boundmayancrowns": "0", "gold": "3557", "bank": "14100", "unread_news": "13", "unread_msgs": "9", "target": "None", "gender": "male" }

@@ -8,75 +8,12 @@ from .state import s
 
 logger = logging.getLogger("achaea")
 
-"""
-You remove 1 echinacea, bringing the total in the rift to 173.
-You eat an echinacea root.
-You now possess the gift of the third eye.
-4000h, 4801m, 15200e, 19640w exdb-
 
-You have recovered balance on all limbs.
-4000h, 4801m, 15200e, 19640w exdb-
-
-You eat a hawthorn berry.
-4000h, 4801m, 15200e, 19640w exb-
-You remove 1 hawthorn berry, bringing the total in the rift to 174.
-4000h, 4801m, 15200e, 19640w exb-
-You eat a hawthorn berry.
-The plant has no effect.
-4000h, 4801m, 15200e, 19640w exb-
-You may eat another plant or mineral.
-4000h, 4801m, 15200e, 19640w exb-
-Woo!  We've gained deafness!
-You have been afflicted with deafness.
-The aural world fades to silence.
-
-
-You take a drink from a pinewood vial.
-The elixir heals and soothes you.
-4000h, 4651m, 15200e, 19640w exdb-
-You may drink another health or mana elixir.
-
-
-You have no pipes that require lighting.
-You take a long drag of skullcap off your pipe.
-4000h, 4651m, 15200e, 19640w exdb-
-Your lungs have recovered enough to smoke another mineral or plant.
-4000h, 4651m, 15200e, 19640w exdb-
-
-
-Lost HERB: a black cohosh root?
-You remove 1 black cohosh, bringing the total in the rift to 188.
-You eat a black cohosh root.
-You have been afflicted with insomnia.
-You suddenly feel incapable of falling asleep.
-4000h, 4651m, 15200e, 19640w exdb-
-Woo!  We've gained kola!
-Lost HERB: a kola nut?
-You remove 1 kola nut, bringing the total in the rift to 136.
-You eat a kola nut.
-An instant feeling of excitement and edginess overcomes you.
-4000h, 4651m, 15200e, 19640w exkdb-
-Woo!  We've gained deathsight!
-Lost HERB: a skullcap flower?
-
-
-Herbs which do not remove herb balance:
-    echinacea
-    kola
-    cohosh
-    skullcap
-
-
-You take out some salve and quickly rub it on your skin.
-You messily spread the salve over your body, to no effect.
-
-You take out some salve and quickly rub it on your skin.
-The salve dissolves and quickly disappears after you apply it.
-
-You may apply another salve to yourself.
-
-
-"""
+# Herbs which do not remove herb balance:
+#     echinacea
+#     kola
+#     cohosh
+#     skullcap
 
 
 def set_display_balance_timer(matches):

@@ -104,6 +104,12 @@ def auto_defences(defs, state):
 auto_defs = ["mass"]
 
 
+def set_basic_defs(matches):
+    global basic_defs
+    for bdef in basic_defs:
+        set_defence(bdef, 25, state=s)
+
+
 defence_aliases = [
     (
         "^cdef$",
@@ -118,7 +124,7 @@ defence_aliases = [
     (
         "^sdef_basic$",
         "set basic defences to 25",
-        lambda _: [set_defence(bdef, 25, state=s) for bdef in basic_defs],
+        set_basic_defs,
     ),
     (
         "^adef on$",
@@ -220,63 +226,3 @@ defence_info = {
     "cloak": lambda: eqbal("touch cloak"),
     "shroud": lambda: eqbal("shroud"),
 }
-
-
-"""
-['preachblessing', 'boartattoo', 'mosstattoo', 'deathsight', 'constitution', 'resistance', 'toughness', 'mindseye', 'deafness', 'blindness', 'kola', 'temperance', 'speed', 'levitating', 'poisonresist', 'insulation', 'thirdeye', 'nightsight', 'selfishness', 'fangbarrier', 'insomnia', 'cloak']
-"""
-
-"""
-You have the following defences:
-preachblessing
-boartattoo
-mosstattoo
-deathsight
-constitution
-resistance
-toughness
-mindseye
-deafness
-blindness
-insomnia
-kola
-temperance
-speed
-levitating
-poisonresist
-insulation
-thirdeye
-nightsight
-selfishness
-fangbarrier
-You are benefitting from a 10% bonus to experience gain.
-You are protected by 21 defences.
-"""
-
-"""
-bliss:
-    constitution to prevent nausea
-    toughness
-channels?
-Curseward
-Deathsight
-Mindseye
-Cloak
-insomnia
-blind
-deaf
-speed
-levitation
-kola
-frost
-caloric
-mass
-thirdeye
-nightsight
-selfishness
-rebounding
-venom
-sileris
-magic/cold/fire/electric resistances (if you have the enchantments)
-
-"""

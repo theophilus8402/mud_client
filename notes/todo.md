@@ -79,3 +79,26 @@ hangedman aeon aeon
 hangedman itchpowder mickey
 * < > try out lust/empress
 * < > try out fp (fashion)
+
+house charge history mercer
+
+evb
+bdb
+pnb
+rhk to break shield
+
+figure out why my attacks were all over the place!
+
+jumpkick attack, palmstrike palmstrike?
+sweep attack
+
+
+Pani drops to the floor and sweeps her legs round at you.
+Pani knocks your legs out from under you and sends you sprawling to the floor.
+Pani expertly jabs her fingers into the nerve cluster behind one of your ears.
+Pani balls up one fist and hammerfists you.
+She connects to the left leg!
+Pani eases herself out of the Scorpion stance.
+A look of total calm comes over Pani as she comes to land in a menacing stance.
+You feel irresistibly compelled to apply restoration to arms.
+You take out some salve and quickly rub it on your arms.

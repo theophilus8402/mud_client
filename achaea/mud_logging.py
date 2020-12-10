@@ -1,44 +1,42 @@
 import logging
+from logging import NOTSET, Logger, addLevelName, setLoggerClass
 
-"""
-verbose logger:
-    this is a very different beast
-    format is different:
-        json.dump the stuff so it's in a good format for me to parse
-    want extra context to know from where we got the message
-    want the time the msg was received
-    this is unmodified data... this helps with running through the triggers/aliases
-        later to test things
-says logger:
-    just says... very simple
-fighting logger:
-    says (so this would be an example of sending a feed to another logger or another level...)
-        maybe I could filter it even more (at times) to just the party channel
-    fighting stuff
-    deaths
-    movement
-    afflictions
-    echos/reminders
-    should try to color things appropriately
-party logger:
-    this will be a level and a handler
-    announce things to the party channel
-    I can have an alias that turns this on and off
-    targetting
-    target movement
-    different affs I give
-    this gets fed to the fighting/brief logger
-    party handler:
-        set to NOTHING initially
-        alias can change on and off to PARTY
-        filter will only let PARTY level logs go to the handler
-        will send stuff to the party
-main visual logger:
-    this has all the normal text
-    some stuff will be filtered out / modified
-"""
+# verbose logger:
+#     this is a very different beast
+#     format is different:
+#         json.dump the stuff so it's in a good format for me to parse
+#     want extra context to know from where we got the message
+#     want the time the msg was received
+#     this is unmodified data... this helps with running through the triggers/aliases
+#         later to test things
+# says logger:
+#     just says... very simple
+# fighting logger:
+#     says (so this would be an example of sending a feed to another logger or another level...)
+#         maybe I could filter it even more (at times) to just the party channel
+#     fighting stuff
+#     deaths
+#     movement
+#     afflictions
+#     echos/reminders
+#     should try to color things appropriately
+# party logger:
+#     this will be a level and a handler
+#     announce things to the party channel
+#     I can have an alias that turns this on and off
+#     targetting
+#     target movement
+#     different affs I give
+#     this gets fed to the fighting/brief logger
+#     party handler:
+#         set to NOTHING initially
+#         alias can change on and off to PARTY
+#         filter will only let PARTY level logs go to the handler
+#         will send stuff to the party
+# main visual logger:
+#     this has all the normal text
+#     some stuff will be filtered out / modified
 
-from logging import NOTSET, addLevelName, getLoggerClass, setLoggerClass
 
 FIGHTING = 5
 PARTY = 7
@@ -48,7 +46,7 @@ ECHO = 27
 NOTHING = 65
 
 
-class AchaeaLogger(getLoggerClass()):
+class AchaeaLogger(Logger):
     def __init__(self, name, level=NOTSET):
         super().__init__(name, level)
 
@@ -131,9 +129,10 @@ def switch_from_fighting_log():
 
 if __name__ == "__main__":
 
-    log.says("Billy said something.")
-    log.fighting("Tim hit Tom!")
-    log.main("Something normal.")
+    log = logging.getLogger("achaea")
+    # log.says("Billy said something.")
+    # log.fighting("Tim hit Tom!")
+    # log.main("Something normal.")
 
     """
     logging.addLevelName(60, SAYS)

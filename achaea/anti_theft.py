@@ -10,31 +10,29 @@ from client import c, echo, send
 # A feeling of generosity spreads throughout you.
 # You rub your hands together greedily.
 
-"""
 
-Profit snaps his fingers in front of you.
-inr all;inr all;inr all;pg
-
-A soft tug upon your apparel grabs at your attention, and in an instant you realise that your inventory is lighter.
-
-As Profit rubs one hand over a petite ceramic urn, the air in front of him warps and changes as a giant spectral owl coalesces.
-Profit easily vaults onto the back of a giant spectral owl.
-Profit hunches his shoulders and lets out a soft hiss.
-Profit gives a sharp whistle to a giant spectral owl, and is carried away in a mad dash.
-
-You suddenly realise that you have been mesmerised!
-
-
-You already are a selfish bastard.
-
-You remove a canvas backpack.
-
-You are now wearing a canvas backpack.
-
-You get 100 gold sovereigns from a canvas backpack.
-
-You put 100 gold sovereigns in a canvas backpack.
-"""
+# Profit snaps his fingers in front of you.
+# inr all;inr all;inr all;pg
+#
+# A soft tug upon your apparel grabs at your attention, and in an instant you realise that your inventory is lighter.
+#
+# As Profit rubs one hand over a petite ceramic urn, the air in front of him warps and changes as a giant spectral owl coalesces.
+# Profit easily vaults onto the back of a giant spectral owl.
+# Profit hunches his shoulders and lets out a soft hiss.
+# Profit gives a sharp whistle to a giant spectral owl, and is carried away in a mad dash.
+#
+# You suddenly realise that you have been mesmerised!
+#
+#
+# You already are a selfish bastard.
+#
+# You remove a canvas backpack.
+#
+# You are now wearing a canvas backpack.
+#
+# You get 100 gold sovereigns from a canvas backpack.
+#
+# You put 100 gold sovereigns in a canvas backpack.
 
 
 def ive_been_snapped(matches):
