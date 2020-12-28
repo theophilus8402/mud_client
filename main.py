@@ -21,7 +21,7 @@ from telnet_manager import gmcp_queue, handle_telnet, strip_ansi
 initialize_logging()
 
 
-async def handle_input(mud_client):
+async def handle_input():
 
     # Attach accept handler to the input field. We do this by assigning the
     # handler to the `TextArea` that we created earlier. it is also possible to
@@ -43,7 +43,7 @@ async def handle_input(mud_client):
 
         # handle user input
         for cmd in data.split(";"):
-            if not mud_client.handle_aliases(cmd):
+            if not c.handle_aliases(cmd):
                 send(cmd)
             # else assume msgs are sent as needed
 
@@ -65,7 +65,7 @@ async def handle_input(mud_client):
     await application.run_async(set_exception_handler=True)
 
 
-async def handle_from_server_queue(from_server_queue, mud_client):
+async def handle_from_server_queue(from_server_queue):
 
     while True:
         data = await from_server_queue.get()
@@ -78,7 +78,7 @@ async def handle_from_server_queue(from_server_queue, mud_client):
                 c.modified_current_line = None
                 c.current_line = line
                 stripped_line = strip_ansi(line)
-                mud_client.handle_triggers(stripped_line.strip())
+                c.handle_triggers(stripped_line.strip())
 
                 if c._delete_line is True or line in c._delete_lines:
                     # "delete" the line by not appending it to the output
@@ -90,6 +90,8 @@ async def handle_from_server_queue(from_server_queue, mud_client):
 
             # clear the delete_lines
             c._delete_lines.clear()
+
+            c.processed_tekura_combo = False
 
             # some triggers have probably queued stuff to send, so send it
             if c.to_send:
@@ -105,7 +107,7 @@ async def handle_from_server_queue(from_server_queue, mud_client):
             traceback.print_exc(file=sys.stdout)
 
 
-async def handle_gmcp_queue(gmcp_queue, mud_client):
+async def handle_gmcp_queue(gmcp_queue):
 
     while True:
         gmcp_type, gmcp_data = await gmcp_queue.get()
@@ -114,7 +116,7 @@ async def handle_gmcp_queue(gmcp_queue, mud_client):
         c.main_log(gmcp_msg, "gmcp_data")
 
         try:
-            mud_client.handle_gmcp(gmcp_type, gmcp_data)
+            c.handle_gmcp(gmcp_type, gmcp_data)
         except Exception as e:
             print(f"handle_gmcp_queue ERROR! {e}")
 
@@ -123,7 +125,8 @@ async def handle_gmcp_queue(gmcp_queue, mud_client):
 
 async def shutdown(signal, loop, shutdown_event):
     print("In shutdown")
-    logging.info(f"Received exit signal {signal.name}...")
+    logger = logging.getLogger("achaea")
+    logger.info(f"Received exit signal {signal.name}...")
 
     shutdown_event.set()
 
@@ -139,9 +142,9 @@ async def shutdown(signal, loop, shutdown_event):
     for task in tasks:
         task.cancel()
 
-    logging.info("Cancelling outstanding tasks")
+    logger.info("Cancelling outstanding tasks")
     await asyncio.gather(*tasks, return_exceptions=True)
-    logging.info("Stopping loop")
+    logger.info("Stopping loop")
     loop.stop()
 
 
@@ -149,18 +152,16 @@ def main(shutdown_event):
 
     event_loop = asyncio.get_event_loop()
 
-    mud_client = Brain(c)
-
     host = "127.0.0.1"
     port = 8888
 
     c.from_server_queue = MultiQueue()
 
     server_reader = c.from_server_queue.get_receiver("main")
-    asyncio.ensure_future(handle_from_server_queue(server_reader, mud_client))
+    asyncio.ensure_future(handle_from_server_queue(server_reader))
 
     # handle gmcp data
-    asyncio.ensure_future(handle_gmcp_queue(gmcp_queue, mud_client))
+    asyncio.ensure_future(handle_gmcp_queue(gmcp_queue))
 
     log = logging.getLogger("achaea")
 
@@ -175,7 +176,7 @@ def main(shutdown_event):
 
     # handle reading stdin
     try:
-        event_loop.run_until_complete(handle_input(mud_client))
+        event_loop.run_until_complete(handle_input())
     except asyncio.CancelledError:
         print("main:handle_input cancelled")
 
@@ -194,4 +195,5 @@ if __name__ == "__main__":
     try:
         main(shutdown_event)
     finally:
-        logging.info("Successfully closed mud client.")
+        logger = logging.getLogger("achaea")
+        logger.info("Successfully closed mud client.")

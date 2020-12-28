@@ -19,6 +19,8 @@ class Client:
         self.modified_current_line = None
         self.last_command = ""
 
+        self.processed_tekura_combo = False
+
         # handles
         self.handles = {}
         self.open_handle("default", "achaea.log")
@@ -41,6 +43,46 @@ class Client:
 
         # help_info[group_name] = [(pattern, desc)]
         self.help_info = {}
+
+    def handle_aliases(self, msg):
+
+        alias_handled = False
+        # for compiled_pattern, action in self.aliases:
+        for compiled_pattern, action in self._aliases:
+            match = compiled_pattern.match(msg)
+            if match:
+                action(match.groups())
+                alias_handled = True
+                break
+
+        return alias_handled
+
+    def handle_triggers(self, msg):
+
+        trig_handled = False
+
+        # for compiled_pattern, action in self.triggers:
+        for search_method, action in self._triggers:
+            # match = compiled_pattern.match(msg)
+            match = search_method(msg)
+            if match:
+                # c.echo(match.re.pattern)
+                try:
+                    action(match.groups())
+                    trig_handled = True
+                except Exception as e:
+                    print(f"handle_triggers: {e}")
+
+        return trig_handled
+
+    def handle_gmcp(self, gmcp_type, gmcp_data):
+        try:
+            for gmcp_handler in self._gmcp_handlers.get(gmcp_type, []):
+                gmcp_handler(gmcp_data)
+            # basic.echo(f"{gmcp_type} : {gmcp_data}")
+        except Exception as e:
+            print(f"problem with __init__.handle_gmcp {e}")
+            traceback.print_exc(file=sys.stdout)
 
     def add_aliases(self, group_name, new_aliases):
         if group_name in self.help_info.keys():
@@ -128,14 +170,12 @@ class Client:
                 self.main_log(msg_blob.strip(), "data_sent")
             # self.echo(f"to_send: {self.to_send} sending: {msg_blob}")
             self.send_queue.put_nowait(msg_blob)
-            #
         self.to_send.clear()
 
     def gmcp_send(self, msg):
         self.send_queue.put_nowait(msg.encode("iso-8859-1"))
 
     def echo(self, msg):
-        # TODO: move this functionality somewhere else
         print(msg, file=self.current_out_handle, flush=True)
 
     def set_line(self, new_line):

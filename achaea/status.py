@@ -38,6 +38,10 @@ def gmcp_char_status(gmcp_data):
                 handle_login_info({"name": "sarmenti"})
             elif value.lower() == "monk":
                 handle_login_info({"name": "veredus"})
+        elif key == "charstats":
+            for stat in value:
+                char_stat, stat_value = value.split(": ")
+                setattr(s.char_status, char_stat.lower(), int(stat_value))
         setattr(s.char_status, key, value)
 
 

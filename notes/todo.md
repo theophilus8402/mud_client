@@ -71,8 +71,6 @@ can tell if there's a mono with a perception stone (talisman) or veilglance (dra
 
 remember to priest when getting worldburned
 
-msg syndra about my "spar" with Namino
-
 
 hangedman aeon aeon
 
@@ -87,10 +85,7 @@ bdb
 pnb
 rhk to break shield
 
-figure out why my attacks were all over the place!
 
-jumpkick attack, palmstrike palmstrike?
-sweep attack
 
 
 Pani drops to the floor and sweeps her legs round at you.
@@ -102,3 +97,11 @@ Pani eases herself out of the Scorpion stance.
 A look of total calm comes over Pani as she comes to land in a menacing stance.
 You feel irresistibly compelled to apply restoration to arms.
 You take out some salve and quickly rub it on your arms.
+
+
+pull receptionist
+
+break mirror
+
+artefact tophat tradein
+say glomshaul

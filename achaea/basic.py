@@ -1,7 +1,7 @@
 import logging
 import re
 
-from colorama import Fore
+from colorama import Fore, Style
 
 from client import c, echo, send
 

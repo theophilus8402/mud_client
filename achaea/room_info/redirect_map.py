@@ -2,35 +2,23 @@ from client import c, echo
 
 from ..state import s
 
-"""
-    def tmp_trig(matches):
-        total = time.time() - start_time
-        echo(f"{timer_type}: {total:0.2}s")
-        c.remove_temp_trigger(timer_type)
-    timer_trig = (end_msg, tmp_trig)
-    c.add_temp_trigger(timer_type, timer_trig)
-
-
---- Area 121: Mhaldor -------
-
-                         [_]
-
-     [ ]-[_]-[ ]         [=]
-
-         [=]             [^]
-          |             / | \
-     [ ]-[ ]-[+]      /  [$]
-          |         /
-         [ ]- - -[ ]
-                /
-             [_]
-            /
-          /
-        /
----------- -3:10:1 ----------
-
-
-"""
+# --- Area 121: Mhaldor -------
+#
+#                         [_]
+#
+#     [ ]-[_]-[ ]         [=]
+#
+#         [=]             [^]
+#          |             / | \
+#     [ ]-[ ]-[+]      /  [$]
+#          |         /
+#         [ ]- - -[ ]
+#                /
+#             [_]
+#            /
+#          /
+#        /
+# ---------- -3:10:1 ----------
 
 
 def parse_map(current_line):
@@ -38,6 +26,7 @@ def parse_map(current_line):
         # probably not the beginning line
         return
 
+    start_index = 0
     chunk_lines = c.current_chunk.split("\n")
     for i, line in enumerate(chunk_lines):
         if line == current_line:
