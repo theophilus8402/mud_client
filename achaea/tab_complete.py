@@ -2,6 +2,8 @@ import itertools
 
 from prompt_toolkit.completion import Completer, Completion
 
+from achaea.state import s
+
 
 class TargetCompleter(Completer):
     def __init__(self, state):
@@ -22,3 +24,7 @@ class TargetCompleter(Completer):
                     ent,
                     start_position=-len(word),
                 )
+
+
+def get_tab_completer():
+    return TargetCompleter(s)

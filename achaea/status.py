@@ -12,6 +12,16 @@ def gmcp_bal_eq(gmcp_data):
     # sometimes, like with blackout, we won't get the hp/mp use the prev vals
     s.hp = int(gmcp_data.get("hp", s.hp))
     s.mp = int(gmcp_data.get("mp", s.mp))
+    char_stats = gmcp_data.get("charstats")
+    if char_stats:
+        for stat in char_stats:
+            char_stat, stat_value = stat.split(": ")
+            if char_stat == "Kai":
+                stat_value = stat_value.rstrip("%")
+            elif char_stat == "Stance":
+                setattr(s, char_stat.lower(), stat_value)
+                continue
+            setattr(s, char_stat.lower(), int(stat_value))
 
 
 c.add_gmcp_handler("Char.Vitals", gmcp_bal_eq)
@@ -23,7 +33,7 @@ class CharStatus:
         # when we get a Char.Status, we never know what all
         # will come in (as far as info goes)
         # so this will just get updated as the info comes in
-        pass
+        self.rage = 0
 
 
 s.char_status = CharStatus()
@@ -38,10 +48,6 @@ def gmcp_char_status(gmcp_data):
                 handle_login_info({"name": "sarmenti"})
             elif value.lower() == "monk":
                 handle_login_info({"name": "veredus"})
-        elif key == "charstats":
-            for stat in value:
-                char_stat, stat_value = value.split(": ")
-                setattr(s.char_status, char_stat.lower(), int(stat_value))
         setattr(s.char_status, key, value)
 
 

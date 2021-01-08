@@ -1,0 +1,5 @@
+airfist negates parrying of limbs (probably guard as well)
+flamefist - no rebounding
+voidfist - drains mana
+icefist - no tattoos
+but, they can only have one "fist" up at a time

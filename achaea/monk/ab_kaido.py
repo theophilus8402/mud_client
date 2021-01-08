@@ -23,7 +23,7 @@ kaido_aliases = [
     (
         "^tr(?: (.+))?$",
         "transmute 300/#",
-        lambda matches: eqbal(f"transmute {matches[0] or '300'}"),
+        lambda matches: eqbal(f"transmute {matches[0] or '300'}", prepend=True),
     ),
     (
         "^nu$",

@@ -1,8 +1,12 @@
 import asyncio
 import json
 import re
+import sys
+import traceback
 from collections import defaultdict
 from datetime import datetime
+
+from telnet_manager import strip_ansi
 
 
 class Client:
@@ -19,7 +23,7 @@ class Client:
         self.modified_current_line = None
         self.last_command = ""
 
-        self.processed_tekura_combo = False
+        self._after_current_chunk_processes = []
 
         # handles
         self.handles = {}
@@ -43,6 +47,28 @@ class Client:
 
         # help_info[group_name] = [(pattern, desc)]
         self.help_info = {}
+
+    def handle_input(self, input_buffer):
+
+        data = input_buffer.text
+
+        # check to see if the user just hit enter
+        # if so, send the last command instead
+        if data == "":
+            data = self.last_command
+
+        self.main_log(data, "user_input")
+        self.last_command = data
+
+        # handle user input
+        for cmd in data.split(";"):
+            if not self.handle_aliases(cmd):
+                self.send(cmd)
+            # else assume msgs are sent as needed
+
+        # everything has been queued in self.to_send
+        # use self.send_flush() to actually send it
+        self.send_flush()
 
     def handle_aliases(self, msg):
 
@@ -158,6 +184,13 @@ class Client:
         except ValueError:
             self.echo("Trying to remove a trigger that doesn't exist!")
 
+    def add_after_current_chunk_process(self, process):
+        self._after_current_chunk_processes.append(process)
+
+    def run_after_current_chunk(self):
+        for process in self._after_current_chunk_processes:
+            process()
+
     def send(self, msg):
         self.to_send.append(msg)
 
@@ -185,8 +218,8 @@ class Client:
         self._delete_line = True
 
     def delete_lines(self, lines):
-        # these must be unstripped lines (i.e. lines from c.current_chunk)
-        self._delete_lines.update(set(lines))
+        for line in lines:
+            self._delete_lines.add(strip_ansi(line).rstrip("\r"))
 
     def add_gmcp_handler(self, gmcp_type, action):
         # self.echo(f"adding handler: {gmcp_type} {action}")

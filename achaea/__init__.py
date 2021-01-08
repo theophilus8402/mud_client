@@ -1,15 +1,4 @@
-from achaea.mud_logging import initialize_logging
-from achaea.triggers import (
-    depthswalker,
-    druid,
-    generic,
-    jester,
-    monk,
-    portal,
-    serpent,
-)
-
-from . import (
+from achaea import (
     ab_survival,
     ab_vision,
     aff_healing,
@@ -29,4 +18,15 @@ from . import (
     status,
     tattoos,
     vitals,
+)
+from achaea.mud_logging import initialize_logging
+from achaea.tab_complete import get_tab_completer
+from achaea.triggers import (
+    depthswalker,
+    druid,
+    generic,
+    jester,
+    monk,
+    portal,
+    serpent,
 )

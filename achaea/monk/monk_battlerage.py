@@ -4,7 +4,8 @@ from client import c, echo, send
 
 
 def spk_target():
-    if s.char_status.rage >= 17:
+    echo(f"rage: {s.rage}")
+    if s.rage >= 17:
         send("spk &tar")
 
 

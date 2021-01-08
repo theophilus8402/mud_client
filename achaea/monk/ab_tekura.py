@@ -15,8 +15,8 @@ tekura_aliases = [
     ),
     (
         "^ww(?: (.+))?$",
-        "wwk upc upc []/t",
-        lambda matches: eqbal(f"stand;combo {matches[0] or s.target} wwk upc upc"),
+        "wwk ucp ucp []/t",
+        lambda matches: eqbal(f"stand;combo {matches[0] or s.target} wwk ucp ucp"),
     ),
     (
         "^jk(?: (.+))?$",

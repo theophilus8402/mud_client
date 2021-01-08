@@ -105,3 +105,23 @@ break mirror
 
 artefact tophat tradein
 say glomshaul
+
+
+desiccate
+
+
+Leofrik says in a deep, cultured voice, "Anti-Psion strats? You mean spam
+shield, run a lot, slow prep us, cure the unweaves quick?"
+Namino says, "Only need the shield on ravage, really."
+Namino says, "That's enough to stop almost all psions."
+Namino says, "Paralysis if prone, impatience if standing, shield on headbreak if
+you're cautious, or on ravage if you're reckless."
+
+
+You feel a sudden jerk, and the air immediately surrounding you comes alight
+with pale, etheric fire as a strange hissing noise fills the air.
+# ether displace
+
+You feel a strong tug in the pit of your stomach. Your surroundings dissolve
+into the featureless swirl of the ether, resolving once more into a recognisable
+landscape as you land before Farrah.

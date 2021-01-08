@@ -14,45 +14,17 @@ from achaea import initialize_logging
 from achaea.afflictions import summarize_afflictions
 from achaea.state import s
 from achaea.tab_complete import TargetCompleter
-from client import Brain, c, send
+from client import c, send
 from multi_queue import MultiQueue
 from telnet_manager import gmcp_queue, handle_telnet, strip_ansi
 
 initialize_logging()
 
 
-async def handle_input():
+async def start_application(tab_completer):
 
-    # Attach accept handler to the input field. We do this by assigning the
-    # handler to the `TextArea` that we created earlier. it is also possible to
-    # pass it to the constructor of `TextArea`.
-    # NOTE: It's better to assign an `accept_handler`, rather then adding a
-    #       custom ENTER key binding. This will automatically reset the input
-    #       field and add the strings to the history.
-    def accept(input_buffer):
-
-        data = input_buffer.text
-
-        # check to see if the user just hit enter
-        # if so, send the last command instead
-        if data == "":
-            data = c.last_command
-
-        c.main_log(data, "user_input")
-        c.last_command = data
-
-        # handle user input
-        for cmd in data.split(";"):
-            if not c.handle_aliases(cmd):
-                send(cmd)
-            # else assume msgs are sent as needed
-
-        # everything has been queued in c.to_send
-        # use c.send_flush() to actually send it
-        c.send_flush()
-
-    ui.core.input_field.accept_handler = accept
-    ui.core.input_field.completer = TargetCompleter(s)
+    ui.core.input_field.accept_handler = c.handle_input
+    ui.core.input_field.completer = tab_completer
 
     application = Application(
         layout=Layout(ui.core.container, focused_element=ui.core.input_field),
@@ -77,10 +49,12 @@ async def handle_from_server_queue(from_server_queue):
 
                 c.modified_current_line = None
                 c.current_line = line
-                stripped_line = strip_ansi(line)
-                c.handle_triggers(stripped_line.strip())
+                stripped_line = strip_ansi(line).rstrip("\r")
+                c.handle_triggers(stripped_line)
 
-                if c._delete_line is True or line in c._delete_lines:
+                # c.echo(f"stripped_line: '{ascii(stripped_line)}'")
+                # c.echo(f"dl: {c._delete_lines}")
+                if c._delete_line is True or stripped_line in c._delete_lines:
                     # "delete" the line by not appending it to the output
                     c._delete_line = False
                 elif c.modified_current_line is None:
@@ -91,7 +65,7 @@ async def handle_from_server_queue(from_server_queue):
             # clear the delete_lines
             c._delete_lines.clear()
 
-            c.processed_tekura_combo = False
+            c.run_after_current_chunk()
 
             # some triggers have probably queued stuff to send, so send it
             if c.to_send:
@@ -148,12 +122,9 @@ async def shutdown(signal, loop, shutdown_event):
     loop.stop()
 
 
-def main(shutdown_event):
+def main(host, port, shutdown_event, mud_module):
 
     event_loop = asyncio.get_event_loop()
-
-    host = "127.0.0.1"
-    port = 8888
 
     c.from_server_queue = MultiQueue()
 
@@ -174,14 +145,33 @@ def main(shutdown_event):
     except asyncio.CancelledError:
         log.info("Connection with the server is still running!")
 
+    tab_completer = mud_module.get_tab_completer()
+
     # handle reading stdin
     try:
-        event_loop.run_until_complete(handle_input())
+        event_loop.run_until_complete(start_application(tab_completer))
     except asyncio.CancelledError:
-        print("main:handle_input cancelled")
+        print("main:start_application cancelled")
 
 
 if __name__ == "__main__":
+
+    import argparse
+    import importlib
+    import json
+
+    parser = argparse.ArgumentParser(description="Play a MUD!")
+    parser.add_argument("config", help="config to point to the mud")
+    args = parser.parse_args()
+
+    with open(args.config) as f:
+        config = json.load(f)
+
+    host = config.get("proxy_ip") or config.get("ip")
+    port = config.get("proxy_port") or config.get("port")
+
+    mud_module = importlib.import_module(config.get("module"))
+
     loop = asyncio.get_event_loop()
 
     shutdown_event = asyncio.Event()
@@ -193,7 +183,7 @@ if __name__ == "__main__":
             lambda sig=sig: asyncio.ensure_future(shutdown(sig, loop, shutdown_event)),
         )
     try:
-        main(shutdown_event)
+        main(host, port, shutdown_event, mud_module)
     finally:
         logger = logging.getLogger("achaea")
         logger.info("Successfully closed mud client.")

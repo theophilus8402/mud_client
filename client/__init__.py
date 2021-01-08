@@ -1,4 +1,3 @@
-from client.brain import Brain
 from client.client import Client
 
 c = Client()
