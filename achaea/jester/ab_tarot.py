@@ -1,7 +1,7 @@
 from client import c, send
 
-from ..basic import eqbal
-from ..state import s
+from achaea.basic import eqbal
+from achaea.state import s
 
 tarot_aliases = [
     ("^sun$", "fling sun at ground", lambda _: eqbal("fling sun at ground")),
@@ -30,8 +30,16 @@ tarot_aliases = [
         "fling chariot at ground",
         lambda matches: eqbal(f"fling chariot at ground"),
     ),
-    ("^bchar$", "board chariot", lambda matches: eqbal(f"board chariot")),
-    ("^fly$", "spur chariot skywards", lambda matches: eqbal(f"spur chariot skywards")),
+    (
+        "^bchar$",
+        "board chariot",
+        lambda matches: eqbal(f"board chariot"),
+    ),
+    (
+        "^fly$",
+        "spur chariot skywards",
+        lambda matches: eqbal(f"spur chariot skywards"),
+    ),
     (
         "^fher(?: (.+))?$",
         "fling hermit at ground [tag]",

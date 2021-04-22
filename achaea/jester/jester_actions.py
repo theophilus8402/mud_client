@@ -1,55 +1,69 @@
-import logging
-
 from achaea.basic import eqbal
+from achaea.fighting_log import fighting
+from achaea.group_fighting.party import party_announce, register_announce_type
 from achaea.state import s
 from client import c, echo, send
 
-logger = logging.getLogger("achaea")
+
+register_announce_type("jester")
 
 
-jester_action_triggers = [
+def fighting_pann(msg):
+    fighting(msg)
+    party_announce(msg, "jester")
+
+
+pranks_triggers = [
     (
         r"^You reach out and bop (.*) on the nose with your blackjack.$",
         # bop'd someone!
-        lambda m: logger.fighting(f"BOP'D {m[0]}"),
+        lambda m: fighting(f"BOP'D {m[0]}"),
+    ),
+    (
+        r"^You quickly slip (.*) a mickey.$",
+        lambda m: fighting_pann(f"MICKEY'd {m[0]}"),
     ),
 ]
-c.add_triggers(jester_action_triggers)
+c.add_triggers(pranks_triggers)
 
-"""
-Handspring           Leap at your foes in neighboring rooms.
-Props                Wish for the props that every good jester needs.
-Balloons             Take to the skies with balloons.
-Slipperiness         Slip out of that which would bind you.
-Giraffes             Twist a balloon into a giraffe.
-Backflip             Flip over obstructions.
-Hocuspocus           Cast coloured illusions to dazzle those about you.
-Runaway              Make a swift retreat.
-Concussionbomb       Momentarily stun everyone in the room.
-Butterflybomb        Blast people from the skies and trees.
-Balloonhandoff       Launch your foes to the clouds with a balloon.
-Backhandspring       Leap out of the room striking someone on the way out.
-Balancing            Maintain superior balance.
-Envenom              Coat a weapon in venoms.
-Smokebomb            Choke all in the room with a plume of smoke.
-Juggling             The ancient art of juggling.
-Webbomb              Explode strands of webbing to bind everyone in the room.
-Acrobatics           Masterful footwork to make yourself a difficult target.
-Vent                 Sometimes you have to just let it all out.
-Badjoke              Strip defences with your terrible jokes alone.
-Mickey               Slip someone a mickey.
-Traps                The ability to search for traps in your location.
-Disarm               Attempt to disarm a trap.
-Graffiti             Scrawl messages on walls.
-Somersault           Quickly somersault past obstructions.
-Arrowcatch           Pluck arrows from the air.
-Bananas              Litter the floor with banana peels.
-Firecracker          Construct festive firecrackers.
-Itchpowder           Employ the irritating itchpowder.
-Dustbomb             Numb the sense of your victims with a bomb.
-Jackinthebox         An innocent musical toy with a vicious bite!
-Timers               Give your bombs a delayed effect.
-Gallowshumour        A tough crowd, this one.
-Suicidemice          Brainwash mice to carry bombs on their backs.
-Liberate             They weren't using it anyway.
-"""
+
+tarot_triggers = [
+    (
+        r"^Standing the Aeon on your open palm, you blow it lightly at (.*) and watch as it seems to slow .* movement through the time stream.$",
+        lambda m: fighting_pann(f"AEON'd {m[0]}"),
+    ),
+]
+c.add_triggers(tarot_triggers)
+
+
+puppetry_triggers = [
+    (
+        r"^With a little laugh, you sink your fingers into the wood and shape it into the rough semblance of a humanoid.$",
+        lambda m: fighting(f"FASHION'd (1) {s.target}"),
+    ),
+    (
+        r"^While you hastily examine (.*), you mould the fledgling puppet a bit, further defining the arms and legs.$",
+        lambda m: fighting(f"FASHION'd (2-9) {m[0]}"),
+    ),
+    (
+        r"^Adding further detail to the puppet of (.*), you work on defining the nose, ears, eyes, and mouth.$",
+        lambda m: fighting(f"FASHION'd (10-19) {m[0]}"),
+    ),
+    (
+        r"^You examine the puppet carefully, and begin to form fingers and toes.$",
+        lambda m: fighting(f"FASHION'd (20-29) {s.target}"),
+    ),
+    (
+        r"^You fashion the eyes of your puppet to resemble those of (.*).$",
+        lambda m: fighting(f"FASHION'd (30-39) {m[0]}"),
+    ),
+    (
+        r"^With one hand pointed towards (.*), you rub your finger over the heart of your puppet.$",
+        lambda m: fighting(f"FASHION'd (40-49) {m[0]}"),
+    ),
+    (
+        r"^You laugh darkly and squint at (.*) as you add some final touches to your puppet of .*.$",
+        lambda m: fighting(f"FASHION'd (50+) {m[0]}"),
+    ),
+]
+c.add_triggers(puppetry_triggers)

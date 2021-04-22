@@ -1,12 +1,10 @@
 import asyncio
-import logging
 import time
 
 from client import c, echo
 
-from .state import s
-
-logger = logging.getLogger("achaea")
+from achaea.fighting_log import fighting
+from achaea.state import s
 
 
 # Herbs which do not remove herb balance:
@@ -49,12 +47,12 @@ def create_end_timer(timer_type, end_msg):
 
 def recovered_eq(matches):
     # echo("Got EQ back!")
-    logger.fighting("You have recovered equilibrium")
+    fighting("You have recovered equilibrium")
 
 
 def recovered_bal(matches):
     # echo("Got BAL back!")
-    logger.fighting("You have recovered balance on all limbs.")
+    fighting("You have recovered balance on all limbs.")
 
 
 def recovered_herb(matches):

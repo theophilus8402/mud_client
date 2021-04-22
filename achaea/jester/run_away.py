@@ -2,7 +2,6 @@ import random
 
 from achaea.basic import eqbal
 from achaea.jester.bombs import throw_bomb
-from achaea.jester.throw_dagger import throw_dagger
 from achaea.state import s
 from client import c, send
 from client.timers import timers

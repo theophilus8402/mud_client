@@ -1,5 +1,6 @@
 from achaea.basic import eqbal
 from achaea.state import s
+from achaea.group_fighting.party import party_announce, register_announce_type
 from client import c, send
 
 telepathy_aliases = [
@@ -36,7 +37,7 @@ telepathy_aliases = [
     (
         "^throw(?: (.+))?$",
         "mind throw dir",
-        lambda matches: eqbal(f"mind throw {matches[0] or 'n'}"),
+        lambda matches: eqbal(f"mind throw {matches[0] or 'n'};mind lock {s.target}"),
     ),
     (
         "^ter$",
@@ -89,7 +90,7 @@ telepathy_aliases = [
         lambda matches: eqbal(f"mind unisolate"),
     ),
     (
-        "^mdis(?: (.+))?$",
+        "^dis(?: (.+))?$",
         "mind disrupt []/t",
         lambda matches: eqbal(f"mind disrupt {matches[0] or s.target}"),
     ),
@@ -104,7 +105,7 @@ telepathy_aliases = [
         lambda matches: eqbal(f"mind epilepsy {matches[0] or s.target}"),
     ),
     (
-        "^mpac$",
+        "^pac$",
         "mind pacify",
         lambda matches: eqbal(f"mind pacify"),
     ),
@@ -151,7 +152,7 @@ telepathy_aliases = [
     (
         "^mdead(?: (.+))?$",
         "mind deadening []/t",
-        lambda matches: eqbal(f"mind deadening {matches[0] or s.target}"),
+        lambda matches: eqbal(f"mind deadening {matches[0] or s.target};mind unlock;mind lock {matches[0] or s.target}"),
     ),
     (
         "^mtrav$",
@@ -194,7 +195,7 @@ telepathy_aliases = [
         lambda matches: eqbal(f"mind unclamp"),
     ),
     (
-        "^mb$",
+        "^bl$",
         "mind blackout",
         lambda matches: eqbal(f"mind blackout"),
     ),
@@ -203,25 +204,62 @@ telepathy_aliases = [
         "mind scythe",
         lambda matches: eqbal(f"mind scythe"),
     ),
+    (
+        "^mb(?: (.+))?$",
+        "mind batter []/t",
+        lambda matches: eqbal(f"mind batter {matches[0] or s.target}"),
+    ),
+    (
+        "^srad$",
+        "mind radiance",
+        lambda matches: eqbal(f"mind radiance"),
+    ),
+    (
+        "^pr$",
+        "mind print",
+        lambda matches: eqbal(f"mind print"),
+    ),
 ]
 c.add_aliases("ab_telepathy", telepathy_aliases)
+
+
+register_announce_type("telepathy")
+
+def tannounce(msg):
+    c.echo(msg)
+    party_announce(msg, "telepathy")
 
 
 telepathy_triggers = [
     (
         r"^You focus your mind, and begin to concentrate on forming a mind lock with",
         # starting a mind lock
-        lambda m: c.echo("STARTING MIND LOCK\nSTARTING MIND LOCK\nSTARTING MIND LOCK"),
+        lambda m: tannounce("Starting mind lock"),
     ),
     (
         r"^Your telepathic efforts are successful, and the mind of (.*) is",
         # mind locked em!
-        lambda m: c.echo(f"MIND LOCKED {m[0]}\nMIND LOCKED {m[0]}\nMIND LOCKED {m[0]}"),
+        lambda m: tannounce(f"mind locked: {m[0]}"),
     ),
     (
         r"^Your mental lock on (.*) is shattered as",
         # lost lock!
         lambda m: c.echo(f"LOST LOCK {m[0]}\nLOST LOCK {m[0]}\nLOST LOCK {m[0]}"),
+    ),
+    (
+        r"^You summon up your will and throw a devastating shaft of telepathic energy into (\w+), causing \w+ to experience a total blackout.$",
+        # black out
+        lambda m: tannounce(f"blackout: {m[0]}")
+    ),
+    (
+        r"^You quickly attack (\w+)'s mind from multiple directions, upsetting \w+ equilibrium.$",
+        # disrupt
+        lambda m: tannounce(f"disrupt: {m[0]}")
+    ),
+    (
+        r"^You direct a powerful pulse of telepathic energy into (\w+), throwing \w+ mind into chaos and confusion.$",
+        # confusion
+        lambda m: tannounce(f"confusion: {m[0]}")
     ),
 ]
 c.add_triggers(telepathy_triggers)

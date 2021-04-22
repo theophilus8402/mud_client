@@ -10,15 +10,9 @@ from prompt_toolkit.application import Application
 from prompt_toolkit.layout.layout import Layout
 
 import ui.core
-from achaea import initialize_logging
-from achaea.afflictions import summarize_afflictions
-from achaea.state import s
-from achaea.tab_complete import TargetCompleter
 from client import c, send
 from multi_queue import MultiQueue
 from telnet_manager import gmcp_queue, handle_telnet, strip_ansi
-
-initialize_logging()
 
 
 async def start_application(tab_completer):
@@ -71,9 +65,6 @@ async def handle_from_server_queue(from_server_queue):
             if c.to_send:
                 c.send_flush()
             c.echo("\n".join(output).strip())
-            affs = summarize_afflictions()
-            if affs:
-                c.echo(f"Affs: {' '.join(affs)}")
 
             from_server_queue.task_done()
 
@@ -103,8 +94,6 @@ async def shutdown(signal, loop, shutdown_event):
     logger.info(f"Received exit signal {signal.name}...")
 
     shutdown_event.set()
-
-    # c.from_server_queue.remove_receiver("main")
 
     # let the client close up connections/file handles
     c.close()

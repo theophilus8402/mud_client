@@ -70,6 +70,13 @@ anti_theft_triggers = [
             "wear scalemail;put scalemail in pack;put coins in pack;selfishness"
         ),
     ),
+    (
+        r"^You remove a polished suit of Hashani splintmail.$",
+        # rewear it!
+        lambda m: send(
+            "wear splintmail;put splintmail in pack;put coins in pack;selfishness"
+        ),
+    ),
     # (   r"^You cease wielding a small blackjack",
     #    # rewear it!
     #    lambda m: send("wield blackjack;selfishness")

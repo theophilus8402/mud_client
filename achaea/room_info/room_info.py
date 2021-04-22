@@ -1,17 +1,11 @@
 import collections
 import itertools
-import json
-import logging
-import re
-from datetime import datetime
 
+from achaea.fighting_log import fighting
+from achaea.room_info.mapping import store_room
+from achaea.state import s
 from client import c, echo, send
 from ui.core import update_frenemies_info
-
-from ..room_info.mapping import store_room
-from ..state import s
-
-logger = logging.getLogger("achaea")
 
 
 StateRoomInfo = collections.namedtuple(
@@ -57,19 +51,37 @@ def monolith_in_room():
     return False
 
 
-def get_room_info(gmcp_data):
-    # store the info in the db
-    store_room(gmcp_data)
+class RoomWatcher():
 
-    if "ohmap" in gmcp_data.keys():
-        # this is a wilderness map/room
-        return
+    def __init__(self):
+        self._observers = []
 
-    # store it in the state
-    s.room_info = StateRoomInfo(**gmcp_data)
+    def attach(self, observer):
+        self._observers.append(observer)
 
+    def detach(self, observer):
+        self._observers.remove(observer)
 
-c.add_gmcp_handler("Room.Info", get_room_info)
+    def notify(self, room_info):
+        for observer in self._observers:
+            observer.update(room_info)
+
+    def get_room_info(self, gmcp_data):
+        # store the info in the db
+        store_room(gmcp_data)
+
+        if "ohmap" in gmcp_data.keys():
+            # this is a wilderness map/room
+            return
+
+        # store it in the state
+        room_info = StateRoomInfo(**gmcp_data)
+        s.room_info = room_info
+
+        self.notify(room_info)
+
+room_watcher = RoomWatcher()
+c.add_gmcp_handler("Room.Info", room_watcher.get_room_info)
 
 # set default room info for when we first load up
 s.room_info = StateRoomInfo(
@@ -100,7 +112,7 @@ def add_player(gmcp_data):
     # {"name": "Adrik", "fullname": "Adrik Bergson, the Crystalline Song"}
     player = gmcp_data["name"]
     echo(f"+{player}")
-    logger.fighting(f"+{player}")
+    fighting(f"+{player}")
     s.players_in_room = (*s.players_in_room, player)
     update_frenemies()
 
@@ -111,7 +123,7 @@ c.add_gmcp_handler("Room.AddPlayer", add_player)
 def remove_player(gmcp_data):
     # "Farrah"
     echo(f"-{gmcp_data}")
-    logger.fighting(f"-{gmcp_data}")
+    fighting(f"-{gmcp_data}")
     players = set(s.players_in_room)
     players.discard(gmcp_data)
     if players:
@@ -126,7 +138,7 @@ c.add_gmcp_handler("Room.RemovePlayer", remove_player)
 
 def room_players(gmcp_data):
     # [{"name": "Vhaith", "fullname": "Shield Curator Vhaith Rian-Moonshadow"}, {"name": "Vindiconis", "fullname": "Volunteer Vindiconis"}]
-    me = {"Vindiconis", "Dirus", "Palleo", "Sarmenti"}
+    me = {"Vindiconis", "Dirus", "Palleo", "Sarmenti", "Veredus"}
     players = {player["name"] for player in gmcp_data}
     players.difference_update(me)
     echo(f"+{', '.join(players)}")

@@ -1,7 +1,6 @@
+from achaea.basic import eqbal
+from achaea.state import s
 from client import c, send
-
-from ..basic import eqbal
-from ..state import s
 
 
 def sear(matches):
@@ -46,7 +45,7 @@ spirituality_aliases = [
     ),
     ("^call$", "call mace", lambda matches: eqbal("call mace")),
     (
-        "^shd(?: (.+))?$",
+        "^aur(?: (.+))?$",
         "angel aura 'me'/[]",
         lambda matches: eqbal(f"stand;angel aura {matches[0] or ''}"),
     ),
@@ -98,7 +97,11 @@ spirituality_aliases = [
         "angel strip t/[]",
         lambda matches: eqbal(f"angel strip {matches[0] or '&tar'}"),
     ),
-    ("^ripp$", "angel ripples", lambda matches: eqbal("angel ripples")),
+    (
+        "^ripp$",
+        "angel ripples",
+        lambda matches: eqbal("angel ripples")
+    ),
     ("^ward$", "angel ward", lambda _: eqbal("angel ward")),
     ("^pres$", "angel presences", lambda _: eqbal("angel presences")),
     (

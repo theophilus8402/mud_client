@@ -1,13 +1,11 @@
 import logging
 
+from achaea.room_info.name import figure_out_unknown_mobs, long_short_name_map
 from achaea.room_info.room_info import create_frenemies_text
+from achaea.state import s
 from client import c, echo, send
 from ui.core import update_frenemies_info
 
-from ..state import s
-from .name import figure_out_unknown_mobs, long_short_name_map
-
-logger = logging.getLogger("achaea")
 
 
 def find_mobs_in_room(gmcp_data):
@@ -47,7 +45,8 @@ def mob_entered_room(gmcp_data):
         "attrib", []
     ):
         item = gmcp_data["item"]
-        mob_id = get_mob_id(item)
+        short_name, mob_id = get_mob_id(item)
+        item["short_name"] = short_name
         s.mobs_in_room = (*s.mobs_in_room, (mob_id, item))
 
     # push to the ui
@@ -88,9 +87,8 @@ def get_mob_id(gmcp_data):
     mob_id = gmcp_data["id"]
     if long_name not in long_short_name_map:
         echo(f"didn't find: {long_name}")
-        return mob_id
-    short_name = long_short_name_map[long_name]
-    return f"{short_name}{mob_id}"
+    short_name = long_short_name_map.get(long_name, "")
+    return short_name, f"{short_name}{mob_id}"
 
 
 def is_alive_mob(gmcp_data):
@@ -106,7 +104,8 @@ def get_mobs_from_items(items):
         if not is_alive_mob(item):
             continue
 
-        mob_id = get_mob_id(item)
+        short_name, mob_id = get_mob_id(item)
+        item["short_name"] = short_name
         mobs.append((mob_id, item))
 
         if mob_id.isdigit():

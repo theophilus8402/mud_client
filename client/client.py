@@ -20,6 +20,7 @@ class Client:
         self._delete_lines = set()
 
         self.current_line = None
+        self.current_chunk = None
         self.modified_current_line = None
         self.last_command = ""
 

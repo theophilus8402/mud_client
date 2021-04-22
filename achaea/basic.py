@@ -1,13 +1,10 @@
-import logging
 import re
 
 from colorama import Fore, Style
 
 from client import c, echo, send
+from achaea.state import QueueStates, s
 
-from .state import QueueStates, s
-
-logger = logging.getLogger("achaea")
 
 # this will get gmcp info about which player just authenticated
 # it can be used to do a number of different things
@@ -37,9 +34,9 @@ def handle_login_info(gmcp_data):
         # occultist modules
         from achaea.occultist import ab_domination, ab_occultism, ab_tarot
 
-    elif name.lower() == "theophilus":
-        echo("Loading modules for theophilus!")
-        # occultist modules
+    elif name.lower() == "sylvus":
+        echo("Loading modules for sylvus!")
+        # runewarden modules
         from achaea.runewarden import (
             ab_battlerage,
             ab_chivalry,
@@ -51,7 +48,7 @@ def handle_login_info(gmcp_data):
         echo("Loading modules for sarmenti!")
         # jester modules
         from achaea.jester import (
-            ab_battlerage,
+            jester_battlerage,
             ab_pranks,
             ab_puppetry,
             ab_tarot,
@@ -73,7 +70,11 @@ def handle_login_info(gmcp_data):
             monk_moves,
         )
 
-
+    """
+    elif name.lower() == "sylvus":
+        echo("Loading modules for sylvus!")
+        from achaea import serpent
+    """
 c.add_gmcp_handler("Char.Name", handle_login_info)
 
 
@@ -176,44 +177,23 @@ def highlight_current_line(color, pattern=".*", flags=0):
     c.modified_current_line = line
 
 
-def target(matches):
-    # remove the previous target trigger
-    c.remove_temp_trigger("target_trigger")
-
-    # set the target
-    s.target = matches[0]
-
-    send(f"SETTARGET {s.target}")
-
-    # set the target trigger
-    target_trigger = (
-        s.target,
-        lambda m: highlight_current_line(Fore.RED, pattern=s.target, flags=re.I),
-    )
-    c.add_temp_trigger("target_trigger", target_trigger, flags=re.IGNORECASE)
-
-    if s.pt_announce:
-        send(f"pt Targeting: {s.target}")
-
-
 basic_aliases = [
-    ("^t (.*)$", "target", target),
     (
         "^gg$",
         "get sovereigns",
         lambda m: eqbal(
-            "get sovereigns;put sovereigns in pouch;put sovereigns in pack"
+            "get sovereigns;put sovereigns in kitbag;put sovereigns in pack"
         ),
     ),
     (
         "^pg$",
         "put sovereigns in pouch",
-        lambda m: eqbal("put sovereigns in pouch;put sovereigns in pack"),
+        lambda m: eqbal("put sovereigns in kitbag;put sovereigns in pack"),
     ),
     (
         r"^gp (\d+)$",
         "get # sovereigns from pouch",
-        lambda m: eqbal(f"get {m[0]} sovereigns from pack"),
+        lambda m: eqbal(f"get {m[0]} sovereigns from pack; get {m[0]} sovereigns from kitbag"),
     ),
 ]
 c.add_aliases("basic", basic_aliases)
@@ -231,12 +211,6 @@ def move(direction):
         s.path_to_remember.append(direction)
     send(f"queue prepend eqbal {direction}")
 
-
-def handle_says(gmcp_data):
-    logger.says(gmcp_data["text"])
-
-
-c.add_gmcp_handler("Comm.Channel.Text", handle_says)
 
 direction_aliases = [
     (
@@ -299,11 +273,11 @@ direction_aliases = [
         "in",
         lambda _: move("in"),
     ),
-    (
-        "^out$",
-        "out",
-        lambda _: move("out"),
-    ),
+    #(
+    #    "^out$",
+    #    "out",
+    #    lambda _: move("out"),
+    #),
     (
         "^sout$",
         "simple out",

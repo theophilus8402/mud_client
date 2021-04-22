@@ -2,13 +2,14 @@ import random
 
 from achaea.basic import eqbal
 from achaea.defences import basic_defs
-from achaea.jester.bombs import make_bomb, throw_bomb
-from achaea.jester.throw_dagger import throw_dagger
 from achaea.state import s
 from client import c, send
 
 pranks_basic_defs = {"slippery"}
 basic_defs.update(pranks_basic_defs)
+
+
+s.bashing_attack = lambda _: eqbal(f"stand;bop &tar")
 
 
 def balancing(state):
@@ -25,6 +26,10 @@ def backhandspring(direction):
 def backflip(direction):
     if direction == "":
         exits = list(s.room_info.exits.keys())
+        if len(exits) == 0:
+            c.echo("NO EXITS TO BACKFLIP!!!!")
+            c.echo("NO EXITS TO BACKFLIP!!!!")
+            return
         direction = random.choice(exits)
     eqbal(f"stand;backflip {direction}")
 
@@ -46,7 +51,7 @@ pranks_aliases = [
         "wield blackjack",
         lambda matches: eqbal(f"stand;unwield left;wield blackjack"),
     ),
-    ("^m$", "bop t", lambda matches: eqbal(f"stand;bop &tar")),
+    ("^m$", "bop t", lambda matches: eqbal(f"stand;wield left blackjack;bop &tar")),
     ("^wi bal$", "wish for 10 balloons", lambda matches: wish("balloon")),
     ("^wi mic$", "wish for 10 mickey", lambda matches: wish("mickey")),
     ("^wi it$", "wish for 10 itchpowder", lambda matches: wish("itchpowder")),
@@ -55,33 +60,6 @@ pranks_aliases = [
     #    lambda matches: eqbal(f"stand;inflate balloon")
     # ),
     ("^bf(?: (.+))?$", "backflip dir", lambda matches: backflip(matches[0] or "")),
-    ("^b$", "throw bombs!", lambda matches: throw_bomb("", "")),
-    (
-        "^bc(?: (.*))?$",
-        "throw bombs!",
-        lambda matches: throw_bomb("concussion", matches[0] or ""),
-    ),
-    (
-        "^bb(?: (.*))?$",
-        "throw bombs!",
-        lambda matches: throw_bomb("butterfly", matches[0] or ""),
-    ),
-    (
-        "^bs(?: (.*))?$",
-        "throw bombs!",
-        lambda matches: throw_bomb("smoke", matches[0] or ""),
-    ),
-    (
-        "^bw(?: (.*))?$",
-        "throw bombs!",
-        lambda matches: throw_bomb("web", matches[0] or ""),
-    ),
-    (
-        "^bd(?: (.*))?$",
-        "throw bombs!",
-        lambda matches: throw_bomb("dust", matches[0] or ""),
-    ),
-    ("^mb(?: (.+))?$", "make bombs!", lambda matches: make_bomb(matches[0] or "")),
     (
         "^bhs(?: (.+))?$",
         "backhandspring",
@@ -118,8 +96,6 @@ pranks_aliases = [
         "litter floor with peels",
         lambda matches: eqbal(f"stand;litter floor with peels"),
     ),
-    # TODO: pick up after banana peels
-    ("^d(?!h)(.+)$", "throw daggers!", lambda matches: throw_dagger(matches[0])),
     (
         "^it(?: (.+))?$",
         "slip t/[] itchpowder",
@@ -134,3 +110,13 @@ pranks_aliases = [
     ),
 ]
 c.add_aliases("ab_pranks", pranks_aliases)
+
+
+pranks_triggers = [
+    (
+        "^The mouse sees the cheese and cautiously approaches it, taking a little nibble at first, but increasingly taking larger bites.$",
+        # get that mouse!
+        lambda m: send("reel in mouse;educate mouse"),
+    ),
+]
+c.add_triggers(pranks_triggers)

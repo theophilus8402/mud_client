@@ -114,8 +114,6 @@ s.processed_tekura_combo = False
 
 def clear_processed_tekura_combo():
     s.processed_tekura_combo = False
-
-
 c.add_after_current_chunk_process(clear_processed_tekura_combo)
 
 

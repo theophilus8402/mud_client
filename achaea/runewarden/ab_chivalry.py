@@ -1,12 +1,17 @@
+from achaea.basic import eqbal
+from achaea.defences import basic_defs
+from achaea.state import s
 from client import c, send
 
-from ..basic import eqbal
-from ..state import s
+
+chivalry_basic_defs = {"weathering", "gripping"}
+basic_defs.update(chivalry_basic_defs)
+
 
 chivalry_aliases = [
-    # (   "^m$",
-    #    "dsl t",
-    #    lambda matches: eqbal(f"stand;dsl &tar")
-    # ),
+    (   "^bl (.*)$",
+       "block dir",
+       lambda m: eqbal(f"stand;block m[0]")
+    ),
 ]
 c.add_aliases("ab_chivalry", chivalry_aliases)

@@ -2,6 +2,8 @@ from achaea.basic import eqbal
 from achaea.state import s
 from client import c, echo, send
 
+s.bashing_attack = lambda _: eqbal(f"stand;combo {s.target} sdk ucp ucp")
+
 tekura_aliases = [
     (
         "^ma(?: (.+))?$",
@@ -11,7 +13,7 @@ tekura_aliases = [
     (
         "^m(?: (.+))?$",
         "sdk ucp ucp []/t",
-        lambda matches: eqbal(f"stand;combo {matches[0] or s.target} sdk ucp ucp"),
+        s.bashing_attack,
     ),
     (
         "^ww(?: (.+))?$",

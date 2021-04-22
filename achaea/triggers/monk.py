@@ -1,18 +1,15 @@
-import logging
-
 from colorama import Fore
 
 from achaea.basic import highlight_current_line
+from achaea.fighting_log import fighting
 from achaea.state import s
 from client import c, echo, send
-
-logger = logging.getLogger("achaea")
 
 
 def being_radianced(matches):
     highlight_current_line(Fore.RED)
     echo("YOU'RE BEING RADIANCED!! GET OUT OF HERE!!!")
-    logger.fighting(f"YOU'RE BEING RADIANCED!! GET OUT OF HERE!!!")
+    fighting(f"YOU'RE BEING RADIANCED!! GET OUT OF HERE!!!")
 
 
 def got_blackout(matches):

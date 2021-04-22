@@ -1,13 +1,10 @@
-import logging
-
 from colorama import Fore
 
 from client import c, echo, send
 
-from ..basic import highlight_current_line
-from ..state import s
-
-logger = logging.getLogger("achaea")
+from achaea.basic import highlight_current_line
+from achaea.fighting_log import fighting
+from achaea.state import s
 
 
 def someone_shielded(matches):
@@ -15,9 +12,9 @@ def someone_shielded(matches):
     if matches[0].lower() == s.target.lower():
         echo("TARGET SHIELDED!!")
         echo("TARGET SHIELDED!!")
-        logger.fighting(f"{s.target} SHIELDED!!")
+        fighting(f"{s.target} SHIELDED!!")
     else:
-        logger.fighting(f"{matches[0]} shielded!!")
+        fighting(f"{matches[0]} shielded!!")
 
 
 def someone_rebounding(matches):
@@ -25,9 +22,7 @@ def someone_rebounding(matches):
     if matches[0].lower() == s.target.lower():
         echo("TARGET REBOUNDING!!")
         echo("TARGET REBOUNDING!!")
-        logger.fighting(f"{s.target} REBOUNDING!!")
-    else:
-        logger.fighting(f"{matches[0]} rebounding!!")
+        fighting(f"{s.target} REBOUNDING!!")
 
 
 def someone_stopped_rebounding(matches):
@@ -35,9 +30,9 @@ def someone_stopped_rebounding(matches):
     if matches[0].lower() == s.target.lower():
         echo("TARGET STOPPED REBOUNDING!!")
         echo("TARGET STOPPED REBOUNDING!!")
-        logger.fighting(f"{s.target} STOPPED REBOUNDING!!")
+        fighting(f"{s.target} STOPPED REBOUNDING!!")
     else:
-        logger.fighting(f"{matches[0]} stopped rebounding!!")
+        fighting(f"{matches[0]} stopped rebounding!!")
 
 
 # ["2020/03/24 22:47:43.405603", "server_text", "Kog has been slain by Atalkez.\r"]
@@ -45,7 +40,7 @@ def someone_died(matches):
     victim = matches[0]
     killer = matches[1]
     echo(f"{killer} killed {victim}!")
-    echo(f"TODO: add this to the fighting log and have it affect targetting!!")
+    fighting(f"{killer} killed {victim}!")
     send("queue prepend eqbal grab body")
 
 
@@ -95,19 +90,23 @@ generic_triggers = [
         lambda m: c.delete_line(),
     ),
     (
-        r"(.*) has been slain by (.*).$",
+        r"has been slain by",
         # don't need to see this!
         lambda m: someone_died,
     ),
     (
         r"You begin to tumble agilely to the (.*).$",
         # tumbling!
-        lambda m: logger.fighting(f"tumbling {m[0]}"),
+        lambda m: fighting(f"tumbling {m[0]}"),
     ),
     (
         r"The barrier around Torrid Rakia, the magma wyvern melts through the ground, and she rushes through to attack.$",
         # tumbling!
         lambda m: rakia(),
+    ),
+    (
+        r"^You are already wielding that.$",
+        lambda m: c.delete_line(),
     ),
 ]
 c.add_triggers(generic_triggers)

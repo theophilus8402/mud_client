@@ -1,12 +1,9 @@
-import logging
-
 from colorama import Fore
 
 from achaea.basic import highlight_current_line
+from achaea.fighting_log import fighting
 from achaea.state import s
 from client import c, echo, send
-
-logger = logging.getLogger("achaea")
 
 
 def being_grove_summoned(matches):
@@ -14,10 +11,10 @@ def being_grove_summoned(matches):
 
     if matches:
         echo(f"{matches[0].upper()} IS BEING GROVE SUMMONED!!!!")
-        logger.fighting(f"{matches[0].upper()} IS BEING GROVE SUMMONED!!")
+        fighting(f"{matches[0].upper()} IS BEING GROVE SUMMONED!!")
     else:
         echo("YOU'RE BEING GROVE SUMMONED!!!! SHIELD!!!")
-        logger.fighting(f"YOU'RE BEING GROVE SUMMONED!! SHIELD!!!")
+        fighting(f"YOU'RE BEING GROVE SUMMONED!! SHIELD!!!")
 
 
 druid_triggers = [

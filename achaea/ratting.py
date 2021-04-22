@@ -1,3 +1,4 @@
+import asyncio
 import re
 from datetime import datetime, timedelta
 
@@ -7,120 +8,131 @@ from client import c, echo, send
 from client.timers import timers
 
 
-def ratting_move_on(client):
-    echo("need to fix ratting_move_on()")
+ratter = None
 
 
-def mob_entered_room(gmcp_data):
-    # Char.Items.Add { "location": "room", "item": { "id": "118764", "name": "a young rat", "icon": "animal", "attrib": "m" } }
-    # this is to check to see if a rat entered the room
-    # s.rat_last_seen
-    pass
+def rat_in_room():
+    for mob_id, mob in s.mobs_in_room:
+        if mob.get("short_name") == "rat":
+            return True
+    return False
 
 
-c.add_gmcp_handler("Char.Items.Add", mob_entered_room)
+def player_in_room():
+    return len(s.players_in_room) > 0
 
 
-def mob_left_room(gmcp_data):
-    # Char.Items.Remove { "location": "room", "item": { "id": "118764", "name": "a young rat" } }
-    # this is to check to see if a rat left the room
-    # s.rat_last_seen
-    pass
+def room_changed(last_room):
+    return last_room.num != s.room_info.num
 
 
-c.add_gmcp_handler("Char.Items.Remove", mob_left_room)
+class Ratter():
 
+    def __init__(self):
+        timers.add("ratting", lambda: self.tick(), 3, recurring=True)
+        self.last_room = s.room_info
+        self.rats_killed = 0
+        self.ticks_in_room = 0
+        self.max_ticks_in_room = 12
+        self.max_rats_in_room = 3
 
-def ratting_room_info(gmcp_data):
-    room_num = gmcp_data["num"]
-    if room_num != s.ratting_room:
-        echo(f"We changed ratting rooms! old: {s.ratting_room} new: {room_num}")
-        s.ratting_room = room_num
-
-
-c.add_gmcp_handler("Room.Info", ratting_room_info)
-
-
-def rat(client, matches):
-
-    if datetime.now() < s.last_rat_call + timedelta(seconds=1):
-        return
-
-    # if it looks like we've been ratting in the room before, move on
-    """
-    if s.room["num"] in s.rooms_ratted:
-        echo("It looks like we've ratted here before, moving on...")
-        ratting_move_on(client)
-        return
-    """
-
-    # if we've been waiting for 15 seconds with no sign of a rat, move on
-    if datetime.now() >= s.rat_last_seen + timedelta(seconds=15):
-        echo("We've been waiting for too long!  It's time to move on!")
-        ratting_move_on(client)
-        # move on
-        return
-
-    s.last_rat_call = datetime.now()
-    if len(s.players_in_room) >= 1:
-        echo("There ARE people in the room!")
-        # move on
-        ratting_move_on(client)
-        return
-
-    # check to see if we've killed all the rats in the room
-    if s.rats_killed_in_room >= 3:
-        echo(f"Killed {s.rats_killed_in_room} rats here!  Moving on...")
-        # move on
-        ratting_move_on(client)
-        return
-
-    rat_in_room = False
-    for mob in s.mobs_in_room:
-        echo(mob)
-        if "rat" in mob["name"]:
-            rat_in_room = True
-            break
-    if not rat_in_room:
-        # echo("There's NOT a rat in the room!")
-        return
-
-    if not (s.bal and s.eq):
-        # echo("You DON'T have bal/eq!")
-        return
-    eqbal("stand;warp rat")
-
-
-def handle_rat_command(matches):
-    if not matches[0]:
-        echo(f"handle_rat_command single rat")
-        rat(None, None)
-    elif matches[0] == "on":
-        timers.add("ratting", lambda: rat(None, None), 3, recurring=True)
-        echo(f"handle_rat_command turn on the rat machine!")
-    elif matches[0] == "off":
-        echo(timers.timers)
+    def stop(self):
+        echo("stopping ratter")
         timers.remove("ratting")
-        echo(f"handle_rat_command turn it off!!!")
-    else:
-        echo("handle_rat_command ehhh????")
+
+    def tick(self):
+
+        self.ticks_in_room += 1
+
+        try:
+            if room_changed(self.last_room):
+                echo("ratting room changed!")
+                self.last_room = s.room_info
+                self.rats_killed = 0
+                self.ticks_in_room = 0
+            echo(f"rats killed: {self.rats_killed}")
+
+            if self.ticks_in_room >= self.max_ticks_in_room:
+                echo(f"ratting ticks: {self.ticks_in_room}")
+                echo("ratting: time to move on")
+            elif self.rats_killed >= self.max_rats_in_room:
+                echo("killed all the rats!")
+            elif player_in_room():
+                echo(f"ratting ticks: {self.ticks_in_room}")
+                echo(f"players: {s.players_in_room}")
+            elif rat_in_room():
+                echo(f"ratting ticks: {self.ticks_in_room}")
+                echo("ratter: attacking")
+                self.ticks_in_room = 0
+                self.attack()
+            #else:
+            #    echo("no rats!")
+        except Exception as e:
+            echo(f"ERROR: {e}")
+
+    def attack(self):
+        s.bashing_attack("")
+        c.send_flush()
 
 
-def rat_info(matches):
-    echo("Showing rat info!")
-    echo(f"mobs: {s.mobs_in_room}")
-    echo(f"players: {s.players_in_room}")
-    # echo(f"rats killed: {s.rats_killed_in_room}")
-    # echo(f"now: {datetime.now()}, last_seen: {s.rat_last_seen}")
+def rat_on():
+    echo("creating ratter")
+    global ratter
+    ratter = Ratter()
+
+
+def rat_off():
+    echo("deleting ratter")
+    global ratter
+    ratter.stop()
+    ratter = None
+
+
+def dead_rat():
+    if ratter:
+        ratter.rats_killed += 1
 
 
 ratting_aliases = [
     (
-        "^rls$",
-        "rat last seen",
-        lambda matches: echo(f"rat last seen: {s.rat_last_seen}"),
+        "^rat on",
+        "rat on",
+        lambda _: rat_on(),
     ),
-    ("^rat(?: (.+))?$", "rat on/off//", lambda matches: handle_rat_command(matches)),
-    ("^ri$", "rat info", rat_info),
+    (
+        "^rat off",
+        "rat off",
+        lambda _: rat_off(),
+    ),
 ]
 c.add_aliases("ratting", ratting_aliases)
+
+
+ratting_triggers = [
+    (
+        r"^You have slain a baby rat, retrieving the corpse.$",
+        # killed a rat!
+        lambda _: dead_rat(),
+    ),
+    (
+        r"^You have slain a young rat, retrieving the corpse.$",
+        # killed a rat!
+        lambda _: dead_rat(),
+    ),
+    (
+        r"^You have slain a rat, retrieving the corpse.$",
+        # killed a rat!
+        lambda _: dead_rat(),
+    ),
+    (
+        r"^You have slain an old rat, retrieving the corpse.$",
+        # killed a rat!
+        lambda _: dead_rat(),
+    ),
+    (
+        r"^You have slain a black rat, retrieving the corpse.$",
+        # killed a rat!
+        lambda _: dead_rat(),
+    ),
+]
+c.add_triggers(ratting_triggers)

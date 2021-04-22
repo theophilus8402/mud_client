@@ -1,13 +1,7 @@
-import asyncio
-import logging
-import time
-
 import ui.core
 from client import c, echo
 
-from .state import s
-
-logger = logging.getLogger("achaea")
+from achaea.state import s
 
 
 # Char.Vitals:

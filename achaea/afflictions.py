@@ -1,13 +1,12 @@
 import json
-import logging
 import re
 import time
 
+from colorama import Fore, Style
+
+from achaea.fighting_log import fighting
+from achaea.state import s
 from client import c, echo, send
-
-from .state import s
-
-logger = logging.getLogger("achaea")
 
 
 aff_aliases = [
@@ -26,7 +25,7 @@ def get_all_aff_info():
                 time.sleep(0.5)
 
 
-def summarize_afflictions():
+def _summarize_afflictions():
 
     if not (s.new_afflictions or s.cured_afflictions):
         return []
@@ -46,24 +45,41 @@ def summarize_afflictions():
     return aff_strs
 
 
+def summarize_afflictions():
+    affs = _summarize_afflictions()
+    if affs:
+        c.echo(f"Affs: {' '.join(affs)}")
+c.add_after_current_chunk_process(summarize_afflictions)
+
+
 def gained_aff(gmcp_data):
     new_aff = gmcp_data["name"]
     echo(f"Gained {new_aff}!")
     s.new_afflictions.add(new_aff)
     s.current_afflictions.add(new_aff)
-    logger.fighting(f"Affs: {' '.join(summarize_afflictions())}")
+    fighting(f"Affs: {' '.join(_summarize_afflictions())}")
 
+    if new_aff in shield_affs:
+        echo(f"{Fore.YELLOW}{Style.BRIGHT}#### Gained {new_aff} ####")
+        echo(f"### May want to Shield ###{Style.RESET_ALL}")
 
 c.add_gmcp_handler("Char.Afflictions.Add", gained_aff)
 
+
+shield_affs = {
+    "damagedrightleg",
+    "damagedrightarm",
+    "damagedleftleg",
+    "damagedleftarm",
+    "prone",
+}
 
 def cured_aff(gmcp_data):
     cured_affs = set(gmcp_data)
     echo(f"Cured {', '.join(cured_affs)}!")
     s.cured_afflictions.update(cured_affs)
     s.current_afflictions.difference_update(set(cured_affs))
-    logger.fighting(f"Affs: {' '.join(summarize_afflictions())}")
-
+    fighting(f"Affs: {' '.join(_summarize_afflictions())}")
 
 c.add_gmcp_handler("Char.Afflictions.Remove", cured_aff)
 

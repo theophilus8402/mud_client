@@ -1,0 +1,50 @@
+Xentio              clumsiness
+Oleander            blindness
+Eurypteria          recklessness
+Kalmia              asthma
+Digitalis           shyness
+Darkshade           sun allergy
+Curare              paralysis
+Epteth              broken arms
+Prefarar            sensitivity
+Monkshood           disloyalty
+Euphorbia           vomiting
+Colocasia           blindness and deafness
+Oculus              cures blindness
+Vernalius           weariness
+Epseth              broken legs
+Larkspur            dizziness
+Slike               anorexia
+Voyria              voyria
+Delphinium          sleep
+Notechis            haemophilia (can't clot)
+Vardrax             addiction (eats all of the herb in one go, sips more)
+Aconite             stupidity
+Selarnia            lose form
+Gecko               slickness
+Scytherus           thin blood (causes afflictions to relapse)
+Nechamandra         A venom that chills the veins.
+
+
+Kalmia              asthma      kelp
+Slike               anorexia    epidermal/focus
+Gecko               slickness   bloodroot/smoke
+Aconite             stupidity   goldenseal/focus
+Curare              paralysis   bloodroot
+Xentio              clumsiness  kelp
+Prefarar            sensitivity kelp
+Digitalis           shyness     goldenseal/focus
+Epseth              broken legs mending
+Epteth              broken arms mending
+Vernalius           weariness   kelp
+
+
+
+-Naoma
+Egads!  29383 hasn't been stored!  Adding it now!
++Morthif, Naoma, Sylvus, Johlo, Faedwyn, Harenae, Indrosiril, Giddieon, Trendric, Moroa
+Water surges up from the ground, rising into the air as far as you can see.
+Then, with a roar like the fury of Ashaxei herself, it thunders inward.
+Naoma is picked up and carried away to the in by the raging tsunami.
+You are picked up and carried away by the raging tsunami.
+A hidden chamber. (indoors)

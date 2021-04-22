@@ -21,7 +21,10 @@ def gmcp_bal_eq(gmcp_data):
             elif char_stat == "Stance":
                 setattr(s, char_stat.lower(), stat_value)
                 continue
-            setattr(s, char_stat.lower(), int(stat_value))
+            try:
+                setattr(s, char_stat.lower(), int(stat_value))
+            except ValueError:
+                setattr(s, char_stat.lower(), stat_value)
 
 
 c.add_gmcp_handler("Char.Vitals", gmcp_bal_eq)
@@ -46,6 +49,8 @@ def gmcp_char_status(gmcp_data):
             # TODO: fix this hack way of loading class modules
             if value.lower() == "jester":
                 handle_login_info({"name": "sarmenti"})
+            elif value.lower() == "runewarden":
+                handle_login_info({"name": "sylvus"})
             elif value.lower() == "monk":
                 handle_login_info({"name": "veredus"})
         setattr(s.char_status, key, value)

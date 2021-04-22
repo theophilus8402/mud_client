@@ -8,6 +8,7 @@ colorama = "*"
 pytest = "*"
 prompt-toolkit = "*"
 SQLAlchemy = "*"
+pycodestyle = "*"
 
 [dev-packages]
 pre-commit = "*"

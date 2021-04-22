@@ -125,3 +125,120 @@ with pale, etheric fire as a strange hissing noise fills the air.
 You feel a strong tug in the pit of your stomach. Your surroundings dissolve
 into the featureless swirl of the ether, resolving once more into a recognisable
 landscape as you land before Farrah.
+
+
+make it easier to see who's in the room!!!!!
+
+
+Giddieon begins to tumble towards the east.
+
+talk with entaro about:
+    wood
+    mining
+
+
+Clean up room_info/
+    make room_info/players/
+    mv mobs_in_room to room_info/mobs.py
+        have triggers/gmcp update the
+        mob tracking object
+            subscriber/observer model
+                update_entities_display is a subscriber
+
+
+some how look for monks doing that instakill thing!!
+
+fighting log meteor
+
+
+# font stack
+weakened by the residual power of the Eye of Proteus (3).
+
+get better at throwing daggers into other rooms
+
+
+You strap a concussion bomb to the suicide mouse's back.
+
+You have recovered balance on all limbs.
+
+You are far too selfish to throw anything away like that.
+
+A feeling of generosity spreads throughout you.
+
+You have recovered equilibrium.
+
+You drop a suicide mouse.
+
+You have recovered balance on all limbs.
+
+You order a suicide mouse to kill Crixos.
+A suicide mouse does not see who you want killed.
+
+You give a mental salute as you hear the faint sound of your suicide mouse fulfilling its mission.
+
+
+hood of the sphinx helps with full sense
+
+
+Ellryn stops you from moving that way.
+The creeping shadows are unable to draw you from your location.
+
+
+
+Running queued eqbal command: STAND;GET DAGGER;THROW DAGGER AT RASAHI ACONITE\r\nYou are not fallen or kneeling.\r\nI see no \"dagger\" to take.\r\nYou rub some aconite on an obsidian dagger.\r\nYou cock back your arm and throw an obsidian dagger at Rasahi.
+
+
+Running queued eqbal command: STAND;GET DAGGER;THROW DAGGER AT RASAHI ACONITE\r\nYou are not fallen or kneeling.\r\nYou pick up an obsidian dagger.\r\nYou must have whatever you wish to throw wielded.
+
+
+Running queued eqbal command: STAND;GET DAGGER;GET DAGGER;GET DAGGER;UNWIELD LEFT;JUGGLE DAGGER DAGGER DAGGER;WIELD BLACKJACK\r\nYou are not fallen or kneeling.\r\nI see no \"dagger\" to take.\r\nI see no \"dagger\" to take.\r\nI see no \"dagger\" to take.\r\nYou cease wielding a small blackjack in your left hand.\r\nYou begin to juggle an obsidian dagger, an obsidian dagger, and an obsidian dagger with your free hand.
+
+
+Running queued eqbal command: STAND;GET DAGGER;GET DAGGER;GET DAGGER;UNWIELD LEFT;JUGGLE DAGGER DAGGER DAGGER;WIELD BLACKJACK\r\nYou must regain balance first.\r\nYou must regain balance first.\r\nYou must regain balance first.\r\nYou must regain balance first.\r\nYou must regain balance first.\r\nYou must have one empty hand to juggle.
+
+
+Running queued eqbal command: STAND;GET DAGGER;GET DAGGER;GET DAGGER;UNWIELD LEFT;JUGGLE DAGGER DAGGER DAGGER;WIELD BLACKJACK\r\nYou are not fallen or kneeling.\r\nYou pick up an obsidian dagger.\r\nI see no \"dagger\" to take.\r\nI see no \"dagger\" to take.\r\nYou cease wielding a small blackjack in your left hand.\r\nYou begin to juggle an obsidian dagger, an obsidian dagger, and an obsidian dagger with your free hand.
+
+
+Running queued eqbal command: STAND;GET DAGGER;GET DAGGER;GET DAGGER;UNWIELD LEFT;JUGGLE DAGGER DAGGER DAGGER;WIELD BLACKJACK\r\nYou are not fallen or kneeling.\r\nYou pick up an obsidian dagger.\r\nI see no \"dagger\" to take.\r\nI see no \"dagger\" to take.\r\nYou aren't wielding that.\r\nYou cannot juggle more than three things.\r\nYou start to wield a small blackjack in your left hand.
+
+
+
+# HIGHLIGHT THESE!!!!
+# TELL ME WHICH WAY TO RUN AN WHO/WHICH CLASS
+# depthswalker?
+You are dragged to the down by a vortex of shadows.
+
+# Angel beckon... can try guessing by who's in the room?
+# use gmcp tracking to say which way to run?
++Atalkez
+end of map: 0:-6:0
+You feel yourself compelled to leave the room, beckoned by the allure of a guardian angel.
+
+shield:
+drive - asthma
+concuss - helpless at feet -> blackout
+trip
+club (break a limb, impale) - stun
+shieldstrike high - stun
+             mid - sensitivity
+             low - prone
+
+venoms
+slickeness
+anorexia
+asthma (drive)/
+paralysis
+stupidity
+
+clhelp welcome
+clhelp survival
+clhelp orientation
+clhelp court
+
+hhelp novicetips
+chelp antitheft
+chelp edict
+chelp progress
+hhelp keystones
+hhelp darkness
