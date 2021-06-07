@@ -37,7 +37,7 @@ from client import c, echo, send
 
 def ive_been_snapped(matches):
     echo("EEEP!!!")
-    send("inr all;inr all;inr all;put coins in pouch;put gold in pack;selfishness")
+    send("inr all;inr all;inr all;put sovereigns in kitbag;put sovereigns in pack;selfishness")
 
 
 anti_theft_triggers = [
@@ -45,6 +45,11 @@ anti_theft_triggers = [
         r"^(\w+) snaps \w+ fingers in front of you.$",
         # eep!
         ive_been_snapped,
+    ),
+    (
+        r"^You remove a tribal leather kitbag.$",
+        # rewear it!
+        lambda m: send("wear kitbag;put kitbag in kitbag;put sovereigns in kitbag;selfishness"),
     ),
     (
         r"^You remove a canvas backpack.$",
@@ -75,6 +80,13 @@ anti_theft_triggers = [
         # rewear it!
         lambda m: send(
             "wear splintmail;put splintmail in pack;put coins in pack;selfishness"
+        ),
+    ),
+    (
+        r"^You remove a shimmering suit of full plate armour.$",
+        # rewear it!
+        lambda m: send(
+            "wear fullplate;put fullplate in kitbag;put sovereigns in kitbag;selfishness"
         ),
     ),
     # (   r"^You cease wielding a small blackjack",

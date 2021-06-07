@@ -40,6 +40,17 @@ def craft_combo(venom_attacks):
         yield alias, cmd
 
 
+def format_alias(alias, help_stmt, cmd):
+    pieces = [
+        '    (\n',
+        '        "{alias}",\n',
+        '        "{help_stmt}",\n',
+        '        "lambda m: {cmd}",\n',
+        '    ),\n',
+    ]
+    return "".join(pieces)
+
+
 def write_weaponmastery(file_path):
     with open(file_path, "w") as f:
         f.write("\n")
@@ -49,13 +60,17 @@ def write_weaponmastery(file_path):
         f.write("\n")
         f.write("weaponmastery_aliases = [\n")
 
+        f.write(
+            format_alias(
+                "^ra$",
+                "raze smash high",
+                "stand;combination &tar raze smash high"
+            )
+        )
+
         venom_attacks = ((v, s) for v in venoms for s in shield_cmds)
         for alias, cmd in craft_combo(venom_attacks):
-            f.write("   (\n")
-            f.write(f'       "{alias}",\n')
-            f.write(f'       "{cmd}"\n')
-            f.write(f'       lambda m: eqbal("{cmd}")\n')
-            f.write("   ),\n")
+            f.write(format_alias(alias, cmd, cmd))
 
         f.write("]\n")
         f.write('c.add_aliases("ab_weaponmastery", weaponmastery_aliases)\n')

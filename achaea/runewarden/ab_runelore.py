@@ -5,6 +5,11 @@ from achaea.state import s
 
 runelore_aliases = [
     (
+        "^uruz$",
+        "sketch uruz on ground",
+        lambda matches: eqbal(f"sketch uruz on ground"),
+    ),
+    (
         "^jera(?: (.+))?$",
         "sketch jera on me/*",
         lambda matches: eqbal(f"sketch jera on {matches[0] or 'me'}"),

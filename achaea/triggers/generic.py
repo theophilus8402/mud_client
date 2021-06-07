@@ -7,6 +7,14 @@ from achaea.fighting_log import fighting
 from achaea.state import s
 
 
+def run_from_room(matches):
+    highlight_current_line(Fore.YELLOW)
+    echo("RUN!!!")
+    echo("RUN!!!")
+    echo("RUN!!!")
+    echo("RUN!!!")
+
+
 def someone_shielded(matches):
     highlight_current_line(Fore.YELLOW)
     if matches[0].lower() == s.target.lower():
@@ -54,6 +62,11 @@ def rakia():
 # ["2020/03/24 22:47:47.882336", "server_text", "You suddenly perceive the vague outline of an aura of rebounding around Iocun.\r"]
 
 generic_triggers = [
+    (
+        r"^Ra'mah, the Corrupted trains its eyes upon you and begins to growl",
+        # room attack soon! run!!
+        run_from_room,
+    ),
     (
         r"^A nearly invisible magical shield forms around (.*?).$",
         # someone just shielded!

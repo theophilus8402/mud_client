@@ -223,6 +223,9 @@ club (break a limb, impale) - stun
 shieldstrike high - stun
              mid - sensitivity
              low - prone
+smash   high - mental aff
+        mid - paralysis
+        low - clumsy
 
 venoms
 slickeness
@@ -231,14 +234,72 @@ asthma (drive)/
 paralysis
 stupidity
 
-clhelp welcome
-clhelp survival
-clhelp orientation
 clhelp court
-
-hhelp novicetips
-chelp antitheft
 chelp edict
 chelp progress
+chelp hashan
+chelp foreignpolicy
+
+hhelp novicetips
 hhelp keystones
 hhelp darkness
+
+hashani navy
+legion of shadows, military
+iron legion - mining
+
+algiz - green ink
+jera - purple ink
+uruz - blue, yellow
+
+blue (40)   1500/50
+yellow (80) 3000/50
+green (160) 6000/50
+purple (250) 9000/50
+
+piraeus
+xhaiden dale
+bitterfork (can walk from hashan)
+
+ccl - curare (par/broot) / clumsy (kelp)
+cah - aconite (stupid/golden) / mental aff (golden?)
+cct - curare (para/broot) / trip
+csm - slike (anorexia) / para (broot)
+
+# kelp
+kalmia (asthma) (drive)
+xentio (clumsy) (smash low)
+vernalius (weary)
+prefarar (sensitive) (might strip deafness first?)
+
+# focus lock #
+# kelp stack (need 2 kelp affs including asthma)
+cpd (undeaf/asthma)
+cpl (sensitive/clumsy)
+cvd (weary/asthma)
+# gecko/smash mid
+cgm (slick/para)
+# slike/smash high
+csh (annorex/ment aff)
+# shieldstrike low (prone)/paralysis/smash high
+sl;cch (prone/para/ment aff)
+# mental aff venom/smash high
+cah (stupid/ment aff)
+
+
+Kalmia              asthma      kelp
+Slike               anorexia    epidermal/focus
+Gecko               slickness   bloodroot/smoke
+Aconite             stupidity   goldenseal/focus
+Curare              paralysis   bloodroot
+prefarar
+vernalius
+
+
+why hashan?
+vision for hashan and yourself?
+
+interviewed:
+ita
+gurklukke
+harenae - thought all the keystones build on each other

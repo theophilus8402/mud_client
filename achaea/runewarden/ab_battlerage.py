@@ -38,6 +38,10 @@ runewarden_battlerage_aliases = [
         "fragment t/[]",
         lambda matches: send("fragment {matches[0] or '&tar'}"),
     ),
-    ("^sg (.+)?$", "safeguard []", lambda matches: send("safeguard {matches[0]}")),
+    (
+        "^sf (.+)?$",
+        "safeguard []",
+        lambda matches: send("safeguard {matches[0]}")
+    ),
 ]
 c.add_aliases("ab_battlerage", runewarden_battlerage_aliases)

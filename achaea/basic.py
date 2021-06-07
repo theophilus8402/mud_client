@@ -186,6 +186,11 @@ basic_aliases = [
         ),
     ),
     (
+        "^ewi$",
+        "enter wilderness",
+        lambda m: eqbal("enter wilderness"),
+    ),
+    (
         "^pg$",
         "put sovereigns in pouch",
         lambda m: eqbal("put sovereigns in kitbag;put sovereigns in pack"),
