@@ -83,7 +83,7 @@ anti_theft_triggers = [
         ),
     ),
     (
-        r"^You remove a shimmering suit of full plate armour.$",
+        r"^You remove a blackened suit of Hashani full plate.$",
         # rewear it!
         lambda m: send(
             "wear fullplate;put fullplate in kitbag;put sovereigns in kitbag;selfishness"

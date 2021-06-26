@@ -27,7 +27,7 @@ def handle_login_info(gmcp_data):
     elif name.lower() == "palleo":
         echo("Loading modules for palleo!")
         # cleric modules
-        from achaea.cleric import ab_devotion, ab_spirituality, ab_zeal
+        from achaea.cleric import ab_devotion, ab_spirituality, ab_zeal, cleric_battlerage
 
     elif name.lower() == "dirus":
         echo("Loading modules for dirus!")

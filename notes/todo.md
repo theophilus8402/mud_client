@@ -297,9 +297,25 @@ vernalius
 
 
 why hashan?
-vision for hashan and yourself?
 
-interviewed:
-ita
-gurklukke
-harenae - thought all the keystones build on each other
+
+Gained slickness!
+Egads!  We've lost {'fangbarrier'}!
+Gained prone!
+#### Gained prone ####
+### May want to Shield ###
+Gained stupidity!
+Gained recklessness!
+As a particularly noticeable ripple crosses the surface of Trendric's form, you
+feel sweat break out across your entire body, coating your skin in a slick
+substance.
+The protective covering coating your skin sloughs off.
+You slip in the perspiration, falling to the ground.
+Trendric summons forth a spinning cyclone of water, trapping you within and
+repeatedly dashing you against the unforgiving ground.
+
+
+
+Trendric summons forth a spinning cyclone of water, trapping you within and
+repeatedly dashing you against the unforgiving ground.
+You have been slain by Trendric.

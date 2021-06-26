@@ -9,6 +9,11 @@ weaponmastery_aliases = [
        lambda m: eqbal("stand;combination &tar slice smash"),
    ),
    (
+       "^ra$",
+       "stand;combination &tar raze smash mid",
+       lambda m: eqbal("stand;combination &tar raze smash mid"),
+   ),
+   (
        "^cah$",
        "stand;combination &tar slice aconite smash high",
        lambda m: eqbal("stand;combination &tar slice aconite smash high"),
