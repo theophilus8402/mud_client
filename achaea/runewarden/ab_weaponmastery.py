@@ -2,6 +2,21 @@ from achaea.basic import eqbal
 from achaea.state import s
 from client import c, send
 
+ferocity = 0
+
+def gmcp_ferocity(gmcp_data):
+    #Char.Vitals { "hp": "4500", "maxhp": "4275", "mp": "4107", "maxmp": "4207", "ep": "16525", "maxep": "16525", "wp": "14275", "maxwp": "14275", "nl": "32", "bal": "1", "eq": "1", "vote": "1", "string": "H:4500/4275 M:4107/4207 E:16525/16525 W:14275/14275 NL:32/100 ", "charstats": [ "Bleed: 0", "Rage: 0", "Spec: Sword and Shield", "Ferocity: 0" ] }
+    global ferocity
+    char_stats = gmcp_data.get("charstats", [])
+    for stat in char_stats:
+        if stat.startswith("Ferocity: "):
+            _, str_ferocity = stat.split(" ")
+            ferocity = int(str_ferocity)
+    if ferocity > 0:
+        c.echo(f"Ferocity: {ferocity}")
+c.add_gmcp_handler("Char.Vitals", gmcp_ferocity)
+
+
 weaponmastery_aliases = [
    (
        "^m$",
@@ -12,6 +27,21 @@ weaponmastery_aliases = [
        "^ra$",
        "stand;combination &tar raze smash mid",
        lambda m: eqbal("stand;combination &tar raze smash mid"),
+   ),
+   (
+       "^sh$",
+       "stand;shieldstrike &tar high",
+       lambda m: eqbal("stand;shieldstrike &tar high"),
+   ),
+   (
+       "^sm$",
+       "stand;shieldstrike &tar mid",
+       lambda m: eqbal("stand;shieldstrike &tar mid"),
+   ),
+   (
+       "^sl$",
+       "stand;shieldstrike &tar low",
+       lambda m: eqbal("stand;shieldstrike &tar low"),
    ),
    (
        "^cah$",
