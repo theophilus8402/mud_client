@@ -44,7 +44,7 @@ class TestRoomInfo:
         assert s.mobs_in_room[0][0] == "jodri293949"
 
         frenemies = create_frenemies_text()
-        assert frenemies == "jodri293949 rat118764 "
+        assert frenemies == "jodri293949 rat118764"
 
         gmcp_data = {
             "location": "room",
@@ -54,4 +54,4 @@ class TestRoomInfo:
         assert len(s.mobs_in_room) == 1
 
         frenemies = create_frenemies_text()
-        assert frenemies == "jodri293949 "
+        assert frenemies == "jodri293949"

@@ -15,7 +15,7 @@ setup_session () {
     # make the right side
     # the proxy
     tmux split-window -h -l 5 -t $session:"client"
-    tmux send-keys -t $session:"client".2 "python3.8 proxy.py -L 127.0.0.1:8888:67.202.114.4:23"
+    tmux send-keys -t $session:"client".2 "python3.8 proxy.py -L 127.0.0.1:8888:achaea.com:23"
     # fighting log
     tmux split-window -v -l 80 -t $session:"client".2
     tmux send-keys -t $session:"client".3 "tail -f says.log" C-m
@@ -25,7 +25,7 @@ setup_session () {
 
     # make the prompt part
     tmux split-window -v -l 5 -t $session:"client".1
-    tmux send-keys -t $session:"client".2 "python3 main.py"
+    tmux send-keys -t $session:"client".2 "python3 main.py achaea.json"
 
 }
 

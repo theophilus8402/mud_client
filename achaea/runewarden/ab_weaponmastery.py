@@ -17,6 +17,41 @@ def gmcp_ferocity(gmcp_data):
 c.add_gmcp_handler("Char.Vitals", gmcp_ferocity)
 
 
+def raze_target(shielder):
+    if shielder == s.target:
+        eqbal(f"stand;raze {s.target}", prepend=True)
+
+
+def stop_raze(shielder):
+    if shielder == s.target:
+        c.echo(f"{s.target} stopped rebounding!  Stop razing!")
+
+
+shielding_triggers = [
+    (
+        r"^A nearly invisible magical shield forms around (.*?).$",
+        # someone just shielded!
+        lambda m: raze_target(m[0]),
+    ),
+    (
+        r"^A dizzying beam of energy strikes you as your attack rebounds off of (.*)'s shield.$",
+        # someone (probably my target) is shielded!
+        lambda m: raze_target(m[0]),
+    ),
+    (
+        r"^You suddenly perceive the vague outline of an aura of rebounding around (\w+?).$",
+        # someone (probably my target) is shielded!
+        lambda m: raze_target(m[0]),
+    ),
+    (
+        r"^(.*)'s aura of weapons rebounding disappears.$",
+        # someone (probably my target) is shielded!
+        lambda m: stop_raze(m[0]),
+    ),
+]
+c.add_triggers(shielding_triggers)
+
+
 weaponmastery_aliases = [
    (
        "^m$",

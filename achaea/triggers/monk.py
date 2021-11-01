@@ -18,7 +18,12 @@ def got_blackout(matches):
 
 monk_triggers = [
     (
-        r"^A shimmering image of the face of (.*) appears fleetingly before you, frowning in concentration.$",
+        r"^A shiver runs down your spine, and you feel an instinctive urge to run as far",
+        # you're being radianced!
+        being_radianced,
+    ),
+    (
+        r"^A shimmering image of the face of (.*) appears fleetingly before you",
         # you're being radianced!
         being_radianced,
     ),

@@ -26,8 +26,14 @@ def handle_login_info(gmcp_data):
 
     elif name.lower() == "palleo":
         echo("Loading modules for palleo!")
-        # cleric modules
-        from achaea.cleric import ab_devotion, ab_spirituality, ab_zeal, cleric_battlerage
+        # priest modules
+        from achaea.priest import (
+            ab_devotion,
+            ab_spirituality,
+            ab_zeal,
+            priest_battlerage,
+            priest_combos,
+        )
 
     elif name.lower() == "dirus":
         echo("Loading modules for dirus!")
@@ -106,6 +112,10 @@ def eqbal(msg, prepend=False):
     s.eqbal_queue.clear()
 
 
+def classbal(msg):
+    send(f"queue add class {msg}")
+
+
 def adding_eqbal_trig(matches):
     c.delete_line()
 
@@ -124,7 +134,8 @@ def no_eq_bal_trig(matches):
 
 
 def running_eqbal_trig(matches):
-    c.delete_line()
+    #c.delete_line()
+    pass
 
 
 queue_triggers = [

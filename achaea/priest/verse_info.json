@@ -1,0 +1,57 @@
+{
+    "ash" : {
+        "conviction" : 0,
+        "length" : 0,
+        "once_per_prayer" : false
+    },
+    "attend" : {
+        "conviction" : 0,
+        "length" : 0,
+        "once_per_prayer" : false
+    },
+    "burn" : {
+        "conviction" : 0,
+        "length" : 0,
+        "once_per_prayer" : false
+    },
+    "condemnation" : {
+        "conviction" : 0,
+        "length" : 0,
+        "once_per_prayer" : false
+    },
+    "fragility" : {
+        "conviction" : 0,
+        "length" : 0,
+        "once_per_prayer" : false
+    },
+    "guilt" : {
+        "conviction" : 0,
+        "length" : 0,
+        "once_per_prayer" : false
+    },
+    "light" : {
+        "conviction" : 0,
+        "length" : 0,
+        "once_per_prayer" : true
+    },
+    "penance" : {
+        "conviction" : 0,
+        "length" : 0,
+        "once_per_prayer" : false
+    },
+    "reflection" : {
+        "conviction" : 5,
+        "length" : 2,
+        "once_per_prayer" : true
+    },
+    "unflinching" : {
+        "conviction" : 0,
+        "length" : 0,
+        "once_per_prayer" : false
+    },
+    "ash" : {
+        "conviction" : 0,
+        "length" : 0,
+        "once_per_prayer" : false
+    }
+}

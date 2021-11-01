@@ -7,6 +7,7 @@ from achaea import (
     aff_healing,
     afflictions,
     anti_theft,
+    assist,
     balances,
     basic,
     bleeding,
@@ -30,6 +31,7 @@ from achaea import (
 from achaea.tab_complete import get_tab_completer
 from achaea.travelling import path
 from achaea.triggers import (
+    alchemist,
     depthswalker,
     druid,
     generic,

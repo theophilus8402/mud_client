@@ -296,8 +296,6 @@ prefarar
 vernalius
 
 
-why hashan?
-
 
 Gained slickness!
 Egads!  We've lost {'fangbarrier'}!
@@ -319,3 +317,41 @@ repeatedly dashing you against the unforgiving ground.
 Trendric summons forth a spinning cyclone of water, trapping you within and
 repeatedly dashing you against the unforgiving ground.
 You have been slain by Trendric.
+
+
+clhelp combatcert
+clhelp howtosurvive
+
+use dagaz more
+start keeping track of limb damage
+
+
+
+
+Farrah says, "If you have battlecry, it's always useful to do something like prefarar on the sword, smash mid and then battlecry and arc curare at the target."
+Farrah says, "Unsure if you do yet."
+Farrah says, "Otherwise, I'd say curare/drive, gecko/smash mid, and slike/smash high as your main attacks in combat."
+You say, "I just barely have battlecry."
+
+
+
+pchab
+chab
+cham
+
+
+piety
+pheal
+care
+emp
+
+her
+
+
+(Party): Vasher says, "You LISTEN and then you'll hear the sound of combat from a direction."
+(Party): Vasher says, "You go there and TOUCH MIRROR HERE, and that'll put you north of here."
+(Party): Vasher says, "And you just come back."
+
+
+
+sileris
